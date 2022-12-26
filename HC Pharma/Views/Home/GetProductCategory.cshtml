@@ -17,13 +17,13 @@
 }
 else
 {
-    <div class="col-12">
+    <div class="col-12 mt-3">
         <p class="alert alert-success small">Nội dung hiện chưa được cập nhật. Vui lòng quay lại sau !!!!</p>
     </div>
 }
 @if (Model.Products.PageCount > 1)
 {
     <div class="col-12 text-center">
-        @Html.PagedListPager(Model.Products, page => Url.Action("ProductCategory", new { page, url = Model.Url, catId = Model.CatId, sort = Model.Sort }))
+        @Html.PagedListPager(Model.Products, page => Url.Action("ProductCategory", new { page, url = Model.Url, catId = Model.CatId}))
     </div>
 }
