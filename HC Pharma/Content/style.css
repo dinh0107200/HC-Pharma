@@ -2139,3 +2139,7 @@ a:not([href]):not([class]) {
 .artilce-content ul {
   list-style: none;
 }
+
+.breadcrumb-item a {
+  color: #3B66FF;
+}

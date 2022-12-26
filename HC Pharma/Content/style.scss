@@ -2514,3 +2514,8 @@ a:not([href]):not([class]){
         list-style:none;
     }
 }
+.breadcrumb-item{
+    a{
+        color:$colorMain;
+    }
+}
