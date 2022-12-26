@@ -231,14 +231,13 @@
                 </div>
             </div>
         </div>
-
-        <div class="product-relate mt-3">
-            <div class="product-relate-title">
-                Sản phẩm liên quan
-            </div>
-            <div class="product-relate-item mt-4">
-                @if (Model.Products.Take(8).Any())
-                {
+        @if (Model.Products.Any())
+        {
+            <div class="product-relate mt-3">
+                <div class="product-relate-title">
+                    Sản phẩm liên quan
+                </div>
+                <div class="product-relate-item mt-4">
                     <div class="row">
                         @foreach (var item in Model.Products)
                         {
@@ -248,15 +247,17 @@
                         }
                     </div>
 
-                }
+                </div>
             </div>
-        </div>
+
+        }
+    </div>
 </section>
 <section class="form-model">
     @Html.Action("OrderForm")
 </section>
 @section scripts {
     <script>
-        DetailJS() ;
+        DetailJS();
     </script>
 }

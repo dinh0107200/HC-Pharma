@@ -57,12 +57,13 @@
     </div>
     <div class="header-menu">
         <div class="container">
-            <ul class="list-menu ul-reset ">
+            <ul class="list-menu ul-reset">
+                <li><a href="/">Trang chủ</a></li>
                 @if (Model.IntroduceCat.Any(a => a.ParentId == null))
                 {
                     foreach (var item in Model.IntroduceCat.Where(a => a.ParentId == null))
                     {
-                        <li><a href="@Url.Action("ArticleCategory" , new {url = item.Url})">@item.CategoryName</a></li>
+                        <li><a href="@Url.Action("ArticleCategory", new { url = item.Url })">@item.CategoryName</a></li>
                         if (Model.IntroduceCat.Any(a => a.ParentId == item.Id))
                         {
                             <i class="fas fa-caret-down"></i>
@@ -70,7 +71,7 @@
                                 <ul class="sub-menu ul-reset ">
                                     @foreach (var child in Model.IntroduceCat.Where(a => a.ParentId == null))
                                     {
-                                        <li><a href="@Url.Action("ArticleCategory" , new {url = child.Url})">@item.CategoryName</a></li>
+                                        <li><a href="@Url.Action("ArticleCategory", new { url = child.Url })">@item.CategoryName</a></li>
                                     }
                                 </ul>
                             </div>
@@ -86,7 +87,7 @@
                             <ul class="sub-menu ul-reset ">
                                 @foreach (var item in Model.ProductCategories.Where(a => a.ParentId == null))
                                 {
-                                    <li><a href="@Url.Action("ProductCategory" , new {url = item.Url})">@item.CategoryName</a></li>
+                                    <li><a href="@Url.Action("ProductCategory", new { url = item.Url })">@item.CategoryName</a></li>
                                 }
                             </ul>
                         </div>
@@ -98,7 +99,7 @@
                     foreach (var item in Model.ArticleCategories.Where(a => a.ParentId == null))
                     {
                         <li>
-                            <a href="@Url.Action("ArticleCategory" , new {url = item.Url})">@item.CategoryName</a>
+                            <a href="@Url.Action("ArticleCategory", new { url = item.Url })">@item.CategoryName</a>
                             @if (Model.ArticleCategories.Any(a => a.ParentId == item.Id))
                             {
                                 <i class="fas fa-caret-down"></i>
@@ -106,7 +107,7 @@
                                     <ul class="sub-menu ul-reset ">
                                         @foreach (var chil in Model.ArticleCategories.Where(a => a.ParentId == item.Id))
                                         {
-                                            <li><a href="@Url.Action("ArticleCategory" ,  new {url = chil.Url})">@chil.CategoryName</a></li>
+                                            <li><a href="@Url.Action("ArticleCategory", new { url = chil.Url })">@chil.CategoryName</a></li>
                                         }
                                     </ul>
                                 </div>
