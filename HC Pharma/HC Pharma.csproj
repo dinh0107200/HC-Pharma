@@ -249,12 +249,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datepicker.css" />
-    <Content Include="Content\images\img-main\base64.gif" />
-    <Content Include="Content\images\img-main\bg-customer %281%29.png" />
-    <Content Include="Content\images\img-main\bg-customer.png" />
     <Content Include="Content\images\img-main\bg-feed-back.png" />
-    <Content Include="Content\images\img-main\bg-product-hot.jpg" />
-    <Content Include="Content\images\img-main\bg-subcribe.png" />
     <Content Include="Content\images\img-main\facebook.png" />
     <Content Include="Content\images\img-main\google-plus %281%29 1.png" />
     <Content Include="Content\images\img-main\google-plus.png" />
@@ -266,12 +261,9 @@
     <Content Include="Content\images\img-main\logo-da-thong-bao-bo-cong-thuong-mau-xanh 1.png" />
     <Content Include="Content\images\img-main\logotype 1.png" />
     <Content Include="Content\images\img-main\mess.png" />
-    <Content Include="Content\images\img-main\notify.png" />
     <Content Include="Content\images\img-main\on-image.jpg" />
     <Content Include="Content\images\img-main\phone-circle.png" />
     <Content Include="Content\images\img-main\pinterest.png" />
-    <Content Include="Content\images\img-main\play.png" />
-    <Content Include="Content\images\img-main\shopping-cart.gif" />
     <Content Include="Content\images\img-main\skype.png" />
     <Content Include="Content\images\img-main\social-media %284%29 1.png" />
     <Content Include="Content\images\img-main\social-media %285%29 1.png" />
