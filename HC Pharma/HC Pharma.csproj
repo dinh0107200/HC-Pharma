@@ -229,6 +229,7 @@
     <Content Include="Content\admin\line_h.gif" />
     <Content Include="Content\admin\lock.png" />
     <Content Include="Content\admin\login\banner.jpg" />
+    <Content Include="Content\admin\login\bg-login.jpg" />
     <Content Include="Content\admin\login\call-center-agent.svg" />
     <Content Include="Content\admin\login\check.svg" />
     <Content Include="Content\admin\login\checklist.svg" />
