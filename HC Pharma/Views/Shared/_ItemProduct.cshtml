@@ -1,0 +1,31 @@
+﻿@model HC_Pharma.Models.Product
+<div class="product-item mt-0">
+    <div class="product-thumail">
+        <a href="@Url.Action("ProductDetail", new {url = Model.Url})">
+            @if (Model.ListImage != null)
+            {
+                <img src="@Path.Combine("/images/products/", Model.ListImage.Split(',')[0])" alt="@Model.Name">
+            }
+            else
+            {
+                <img src="~/Content/images/img-main/on-image.jpg" alt="@Model.Name">
+            }
+        </a>
+    </div>
+    <div class="prouduct-infor">
+        <div class="product-name">
+            <a href="@Url.Action("ProductDetail", new {url = Model.Url})" class="name">
+               @Model.Name
+            </a>
+            <a href="@Url.Action("ProductCategory", new {url = Model.ProductCategory.Url})" class="category">(@Model.ProductCategory.CategoryName)</a>
+        </div>
+        <div class="product-price">
+            @Html.DisplayFor(a => a.Price)
+        </div>
+        <div class="product-description truncate">
+           @Model.Description
+        </div>
+    </div>
+
+</div>
+

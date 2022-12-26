@@ -1,0 +1,95 @@
+﻿@model HC_Pharma.Models.Contact
+@using HC_Pharma.Models
+@{
+    var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
+    ViewBag.Title = "Liên hệ";
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("Contact");
+}
+<section>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index")"><i class="fas fa-home-lg-alt"></i>Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="#">Liên hệ</a></li>
+            </ol>
+        </nav>
+    </div>
+
+</section>
+<section class="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="contact-form">
+                    <div class="contact-title">
+                        Liên hệ với chúng tôi
+                    </div>
+                    <form id="contact-form">
+                        @Html.ValidationSummary(true)
+                        @Html.AntiForgeryToken()
+                        <div class="contact-item">
+                            @Html.LabelFor(a => a.FullName)
+                            @Html.TextBoxFor(a => a.FullName, new { @required = "required", @placeholder = "Họ và tên" })
+                            @Html.ValidationMessageFor(model => model.FullName)
+
+                        </div>
+                        <div class="contact-item">
+                            @Html.LabelFor(a => a.Mobile)
+                            @Html.TextBoxFor(a => a.Mobile, new { @required = "required", @placeholder = "Số điện thoại" })
+                            @Html.ValidationMessageFor(model => model.Mobile)
+
+                        </div>
+                        <div class="contact-item">
+                            @Html.LabelFor(a => a.Email)
+                            @Html.TextBoxFor(a => a.Email, new { @required = "required", @placeholder = "Email của bạn" })
+                            @Html.ValidationMessageFor(model => model.Email)
+
+                        </div>
+                        <div class="contact-item">
+                            @Html.LabelFor(model => model.Body)
+                            @Html.TextAreaFor(model => model.Body, new { rows = 3, @placeholder = "Lời nhắn" })
+                            @Html.ValidationMessageFor(model => model.Body)
+                        </div>
+                        <button type="submit">
+                            Liên hệ
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="color-base">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Địa chỉ:
+                </div>
+                <div class="contact-info">
+                    @config.Place
+                </div>
+                <div class="color-base">
+                    <i class="fas fa-phone-alt"></i>
+                    Số điện thoại:
+                </div>
+                <div class="contact-info">
+                    <a href="tel:@config.Hotline">
+                        @config.Hotline
+                    </a>
+                </div>
+                <div class="color-base">
+                    <i class="fas fa-envelope"></i>
+                    Email
+                </div>
+                <div class="contact-info">
+                    <a href="mailto:@config.Email">
+                        @config.Email
+                    </a>
+                </div>
+                @if (config.GoogleMap != null)
+                {
+                    <div class="embed-responsive embed-responsive-16by9 map">
+                        @Html.Raw(config.GoogleMap)
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+

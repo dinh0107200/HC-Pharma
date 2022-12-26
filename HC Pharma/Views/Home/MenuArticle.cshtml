@@ -1,0 +1,29 @@
+﻿@model HC_Pharma.ViewModel.MenuArticleViewModel
+
+@foreach (var item in Model.Articles)
+{
+    <div class="artilce-nav__item">
+        <div class="artilce-nav_thumnail">
+            <a href="@Url.Action("ArticleDetail", new {url = item.Url})">
+                @if (item.Url != null)
+                {
+                    <img src="@Path.Combine("/images/articles/", item.Image)" alt="@item.Subject">
+                }
+                else
+                {
+                    <img src="~/Content/images/img-main/on-image.jpg" alt="@item.Subject">
+                }
+            </a>
+        </div>
+        <div class="artilce-nav_infor ">
+            <a href="@Url.Action("ArticleDetail" , new {url =   item.Url})" class="truncate">
+                @item.Subject
+            </a>
+            <div class="date">
+                <i class="fal fa-calendar-alt"></i>
+                @String.Format("{0:d/M/yyyy}", item.CreateDate)
+            </div>
+        </div>
+    </div>
+
+}

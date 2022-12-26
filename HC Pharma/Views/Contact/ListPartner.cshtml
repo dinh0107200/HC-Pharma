@@ -1,0 +1,98 @@
+﻿@model HC_Pharma.ViewModel.ListPartnerViewModel
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Danh sách đối tác";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .img-border {
+        width: 100px;
+    }
+</style>
+
+@if (ViewBag.Result == "success")
+{
+    <div id="AlertBox" class="alert alert-success"><strong>Thêm mới phản hồi thành công</strong></div>
+}
+@if (ViewBag.Result == "update")
+{
+    <div id="AlertBox" class="alert alert-success"><strong>Cập nhật phản hồi thành công</strong></div>
+}
+<a class="btn quick-link" href="@Url.Action("Partner")"><i class="fal fa-plus-circle mr-1"></i>Thêm phản hồi</a>
+<div class="box_content">
+    <div class="form-search-list">
+        <form action="@Url.Action("ListPartner")" method="get" style="margin-left: 0;">
+            <p>
+                Tìm tên @Html.TextBoxFor(a => a.Name, new { @class = "w300" })
+                <button type="submit" class="btn-search">Tìm kiếm</button>
+            </p>
+        </form>
+    </div>
+    <p>Có tổng số <strong>@Model.Partners.TotalItemCount</strong> phản hồi</p>
+    <table class="list_table tablecenter table-striped">
+        <tbody>
+            <tr>
+                <th style="width: 50px">STT</th>
+                <th style="width: 200px">Hình ảnh</th>
+                <th style="width: 100px">Tên</th>
+                <th style="width: 100px">Hoạt động</th>
+                <th style="width: 150px"></th>
+            </tr>
+            @foreach (var partners in Model.Partners)
+            {
+                <tr data-id="@partners.Id">
+                    <td>@Html.DisplayFor(model => partners.Sort)</td>
+                    <td>
+                        @if (partners.Image != null)
+                        {
+                            <img class="img-border" src="@Path.Combine("/images/partner/", partners.Image)" alt="" /> }
+                        else
+                        {
+                            @:NO PICTURE
+                        }
+                    </td>
+                    <td>
+                        <p>
+                            <a href="@Url.Action("UpdatePartner", new {feedbackId = partners.Id})"><strong>@partners.Name</strong></a>
+                        </p>
+                    </td>
+                    <td>@Html.DisplayFor(model => partners.Active)</td>
+                    <td>
+                        @Html.ActionLink("Sửa", "UpdatePartner", new { partnerId = partners.Id })
+                        - <a href="javascript:;" onclick="deleteService('@partners.Id')" style="color: red;">Xóa</a>
+                    </td>
+                </tr>
+            }
+            @if (Model.Partners.PageCount > 1)
+            {
+                <tr>
+                    <td colspan="8">@Html.PagedListPager(Model.Partners, page => Url.Action("ListPartner", new { page, name = Model.Name }))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        function deleteService(id) {
+            if (confirm("Bạn có chắc chắn xóa bài viết này không?")) {
+                $.post("/Contact/DeletePartner", { partnerId: id }, function (data) {
+                    if (data) {
+                        $.toast({
+                            text: 'Xóa banner thành công',
+                            position: 'bottom-right',
+                            icon: 'success',
+                        })
+                        $("tr[data-id='" + id + "']").fadeOut();
+                    } else {
+                        $.toast({
+                            text: 'Quá trình thực hiện không thành công. Hãy thử lại',
+                            icon: 'error',
+                        })
+                    }
+                });
+            }
+        }
+    </script>
+}

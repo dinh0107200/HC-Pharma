@@ -1,0 +1,172 @@
+﻿@model HC_Pharma.ViewModel.HeaderViewModel
+@using HC_Pharma.Models
+@{
+    var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
+}
+<section class="header">
+    <div class="container">
+        <div class="header-top">
+            <div class="hamburger" id="hamburger-1">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+            <div class="header-logo">
+                <a href="@Url.Action("Index")">
+                    @if (config.Image != null)
+                    {
+                        <img src="@Path.Combine("/images/configs/", config.Image)" alt="">
+                    }
+                </a>
+            </div>
+            <div class="header-search">
+                <form action="@Url.Action("SearchProduct")">
+                    <div class="form-input">
+                        <select name="catId" id="">
+                            <option selected disabled>Theo danh mục</option>
+                            @foreach (var item in Model.FilterCategories)
+                            {
+                                <option value="@item.Id">@item.CategoryName</option>
+                            }
+                        </select>
+                        <input type="text" name="keywords" placeholder="Tìm sản phẩm , danh mục mong muốn">
+                    </div>
+                    <button type="submit">
+                        <i class="far fa-search"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="search-icon_mb">
+                <i class="far fa-search"></i>
+            </div>
+            <a href="tel:@config.Hotline" class="header-hotline">
+                <i class="fas fa-phone-alt"></i> Hotline :
+                @config.Hotline
+            </a>
+            <div class="form-search__mb">
+                <div class="close-form">
+                    <i class="fas fa-times"></i>
+                </div>
+                <form action="@Url.Action("SearchProduct")">
+                    <button type="submit"><i class="far fa-search"></i></button>
+                    <input type="text" name="keywords" value="" placeholder="Tìm kiếm sản phẩm">
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="header-menu">
+        <div class="container">
+            <ul class="list-menu ul-reset ">
+                @if (Model.IntroduceCat.Any(a => a.ParentId == null))
+                {
+                    foreach (var item in Model.IntroduceCat.Where(a => a.ParentId == null))
+                    {
+                        <li><a href="@Url.Action("ArticleCategory" , new {url = item.Url})">@item.CategoryName</a></li>
+                        if (Model.IntroduceCat.Any(a => a.ParentId == item.Id))
+                        {
+                            <i class="fas fa-caret-down"></i>
+                            <div class="drop">
+                                <ul class="sub-menu ul-reset ">
+                                    @foreach (var child in Model.IntroduceCat.Where(a => a.ParentId == null))
+                                    {
+                                        <li><a href="@Url.Action("ArticleCategory" , new {url = child.Url})">@item.CategoryName</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    }
+                }
+                <li>
+                    <a href="@Url.Action("AllProduct")">Sản phẩm</a>
+                    <i class="fas fa-caret-down"></i>
+                    @if (Model.ProductCategories.Any())
+                    {
+                        <div class="drop">
+                            <ul class="sub-menu ul-reset ">
+                                @foreach (var item in Model.ProductCategories.Where(a => a.ParentId == null))
+                                {
+                                    <li><a href="@Url.Action("ProductCategory" , new {url = item.Url})">@item.CategoryName</a></li>
+                                }
+                            </ul>
+                        </div>
+                    }
+
+                </li>
+                @if (Model.ArticleCategories.Any(a => a.ParentId == null))
+                {
+                    foreach (var item in Model.ArticleCategories.Where(a => a.ParentId == null))
+                    {
+                        <li>
+                            <a href="@Url.Action("ArticleCategory" , new {url = item.Url})">@item.CategoryName</a>
+                            @if (Model.ArticleCategories.Any(a => a.ParentId == item.Id))
+                            {
+                                <i class="fas fa-caret-down"></i>
+                                <div class="drop">
+                                    <ul class="sub-menu ul-reset ">
+                                        @foreach (var chil in Model.ArticleCategories.Where(a => a.ParentId == item.Id))
+                                        {
+                                            <li><a href="@Url.Action("ArticleCategory" ,  new {url = chil.Url})">@chil.CategoryName</a></li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+
+                        </li>
+                    }
+
+                }
+                <li><a href="@Url.Action("Contact")">Liên hệ đặt hàng</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<div class="header-menu__mb">
+    <ul class="list-menu ul-reset ">
+        @if (Model.IntroduceCat.Any())
+        {
+            foreach (var item in Model.IntroduceCat)
+            {
+                <li><a href="@Url.Action("ArticleCategory", new {url = item.Url})">@item.CategoryName</a></li>
+            }
+        }
+
+
+        <li>
+            <a href="@Url.Action("AllProduct")">Sản phẩm</a>
+            <i class="fas fa-caret-down"></i>
+            @if (Model.ProductCategories.Any())
+            {
+                <div class="drop">
+                    <ul class="sub-menu ul-reset ">
+                        @foreach (var item in Model.ProductCategories)
+                        {
+                            <li><a href="@Url.Action("ProductCategory", new {url = item.Url})">@item.CategoryName</a></li>
+                        }
+                    </ul>
+                </div>
+            }
+        </li>
+        @if (Model.ArticleCategories.Any(a => a.ParentId == null))
+        {
+            foreach (var item in Model.ArticleCategories.Where(a => a.ParentId == null))
+            {
+                <li><a href="@Url.Action("ArticleCategory", new {url = item.Url})">@item.CategoryName</a></li>
+                if (Model.ArticleCategories.Any(a => a.ParentId == item.Id))
+                {
+                    <i class="fas fa-caret-down"></i>
+                    <div class="drop">
+                        <ul class="sub-menu ul-reset ">
+                            @foreach (var chil in Model.ArticleCategories.Where(a => a.ParentId == item.Id))
+                            {
+                                <li><a href="@Url.Action("ArticleCategory" ,  new {url = chil.Url})">@chil.CategoryName</a></li>
+                            }
+                        </ul>
+                    </div>
+                }
+            }
+        }
+        <li><a href="@Url.Action("Contact")">Liên hệ đặt hàng</a></li>
+    </ul>
+</div>
+<section class="overlay"></section>

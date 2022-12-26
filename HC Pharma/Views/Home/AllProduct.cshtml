@@ -1,0 +1,65 @@
+﻿@model HC_Pharma.ViewModel.CategoryProductViewModel
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Sản phẩm";
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("AllProduct");
+    ViewBag.Robots = "noindex";
+}
+<section>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index")"><i class="fas fa-home-lg-alt"></i>Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
+            </ol>
+        </nav>
+    </div>
+
+</section>
+<section class="product">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 order-lg-0 order-1">
+                <div class="product-filter">
+                    <input type="hidden" name="currentUrl" value="@Url.Action("AllProduct", "Home")" />
+                    <div class="filter-title">
+                        Bộ lọc sản phẩm
+                    </div>
+                    <div class="filter-search">
+                        <form action="@Url.Action("SearchProduct")">
+                            <input type="text" name="keywords" id="" placeholder="Tìm kiếm phẩm">
+                            <button type="submit"><i class="far fa-search"></i></button>
+                        </form>
+                    </div>
+                    <div class="filter-title">
+                        Sản phẩm
+                    </div>
+                    <div class="list-filter">
+                        <div class="filter-item mb-3">
+                            <input data-filter="" type="radio" checked="checked" name="catId" value="0">
+                            <label for="">Tất cả sản phẩm</label>
+                        </div>
+                        @foreach (var item in Model.Categories)
+                        {
+                            <div class="filter-item mb-3">
+                                <input data-filter="" type="radio" @if (Model.CatId == item.Id) { @Html.Raw("checked='checked'") } name="catId" value="@item.Id" id="@item.Id">
+                                <label for="@item.Id">@item.CategoryName</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 order-lg-1 order-0">
+                <div id="list-item-sort">
+                    @Html.Action("GetProduct")
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script>
+        Sort("/Home/GetProduct");
+    </script>
+}

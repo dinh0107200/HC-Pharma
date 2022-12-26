@@ -1,0 +1,112 @@
+﻿@model HC_Pharma.ViewModel.ListReviewViewModel
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Danh sách đánh giá";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Danh sách đánh giá</h2>
+<a class="btn quick-link" href="@Url.Action("Index","Vcms")"><i class="fal fa-home mr-1"></i>Về trang chính</a>
+<div class="box_content">
+    
+    <p>Có tổng số <strong>@Model.Reviews.TotalItemCount</strong> số đánh giá</p>
+    <table class="list_table tablecenter table-striped">
+        <tbody>
+            <tr>
+                <th style="width: 150px">Họ tên</th>
+                <th style="width: 150px">Email</th>
+                <th>Nội dung</th>
+                <th>Sản phẩm</th>
+                <th>Phê duyệt</th>
+                <th style="width: 160px"></th>
+
+            </tr>
+            @foreach (var quote in Model.Reviews)
+            {
+                <tr data-id="@quote.Id">
+                    <td>
+                        <strong>@quote.Customer</strong>
+                    </td>
+                    <td>@quote.Email</td>
+                    <td>@quote.Coment</td>
+                    <td class="text-left">
+                        @foreach (var item in Model.Products.Where(l => l.Id == quote.ProductId))
+                        {
+                            <strong>Tên sản phẩm: </strong>@item.Name;<br />
+                            if (quote.Rate > 0)
+                            {
+                                <strong>Số sao: </strong>
+                                <ul class="list-unstyled d-flex mt-2">
+                                    @for (int a = 0; a < quote.Rate; a++)
+                                    {
+                                        <li class="text-warning"><i class="fas fa-star"></i></li>
+                                    }
+                                </ul>
+                                <br />
+                            }
+                            <strong><a href="@Url.Action("ProductDetail","Home", new { url = item.Url})">Đường dẫn đến trang sản phẩm</a></strong>
+                        }
+                    </td>
+                    <td>@Html.EditorFor(a => quote.Active, new { htmlAttributes = new { id = "Active" } })</td>
+                    <td>
+                        <a href="javascript:;" onclick="updateReview('@quote.Id')">Cập nhật - </a>
+                        <a href="javascript:;" onclick="deleteReview('@quote.Id')" style="color: red">Xóa</a>
+                    </td>
+                </tr>
+            }
+            @if (Model.Reviews.PageCount > 1)
+            {
+                <tr>
+                    <td colspan="7">@Html.PagedListPager(Model.Reviews, page => Url.Action("ListReview", new { page, name = Model.Name }))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        function deleteReview(id) {
+            if (confirm("Bạn có chắc chắn xóa liên hệ này không?")) {
+                $.post("/ProductVcms/deleteReview", { id: id }, function (data) {
+                    if (data) {
+                        $.toast({
+                            text: 'Xóa đánh giá thành công   ',
+                            position: 'bottom-right',
+                            icon: 'success',
+                        })
+                        $("tr[data-id='" + id + "']").fadeOut();
+                    }
+                    else {
+                        $.toast({
+                            text: 'Quá trình thực hiện không thành công. Hãy thử lại',
+                            icon: 'error',
+                        })
+                    }
+                });
+            }
+            
+        }
+
+
+        function updateReview(id) {
+            var divId = $("tr[data-id='" + id + "']");
+            var active = divId.find("input#Active").prop("checked");
+
+            $.post("/ProductVcms/UpdateReview", { id: id, active }, function (data) {
+                if (data) {
+                    $.toast({
+                        text: 'Phê duyệt thành công',
+                        position: 'bottom-right',
+                        icon: 'success',
+                    })
+                } else {
+                    $.toast({
+                        text: 'Quá trình thực hiện không thành công. Hãy thử lại',
+                        icon: 'error',
+                    })
+                }
+            });
+        }
+    </script>
+}

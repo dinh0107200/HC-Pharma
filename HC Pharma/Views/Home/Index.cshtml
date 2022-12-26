@@ -1,0 +1,317 @@
+﻿@model HC_Pharma.ViewModel.HomeViewModel
+@using HC_Pharma.Models
+@using Helpers
+@{
+    var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
+    ViewBag.Title = config.Title;
+    ViewBag.Description = config.Description;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("Index");
+
+    var fb = Model.Banner.FirstOrDefault(b => b.Image != null);
+    if (fb != null)
+    {
+        ViewBag.ImageShare = Request.Url?.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/banners/", fb.Image);
+    }
+}
+
+@if (Model.Banner.Any())
+{
+    <section class="banner">
+        @foreach (var item in Model.Banner)
+        {
+            <div class="banner-item">
+                @if (item.Image != null)
+                {
+                    <img src="@Path.Combine("/images/banners/" , item.Image)" alt="">
+                }
+            </div>
+        }
+    </section>
+}
+
+<section class="introduct">
+    <div class="intrducts">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-6">
+                    <div class="introduct-img">
+                        <img src="~/Content/images/img-main/Layer 2.png" alt="">
+                        <div class="introduct-name">
+                            <h3>
+                                Đã qua kiển duyệt
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-6">
+                    <div class="introduct-img">
+                        <img src="~/Content/images/img-main/Group 36767.png" alt="">
+                        <div class="introduct-name">
+                            <h3>
+                                Vì sức khỏe cộng đồng
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-6">
+                    <div class="introduct-img">
+                        <img src="~/Content/images/img-main/Group 36748.png" alt="">
+                        <div class="introduct-name">
+                            <h3>
+                                sản phẩm chính hãng
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-6">
+                    <div class="introduct-img">
+                        <img src="~/Content/images/img-main/Group 36749.png" alt="">
+                        <div class="introduct-name">
+                            <h3>
+                                Hỗ trợ tư vấn 24/7
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-lg-5 col-md-5">
+                <div class="introduct-item">
+                    <img src="@Path.Combine("/images/configs/", config.AboutImage)" alt="@config.Title">
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7">
+                <div class="introduct-infor">
+                    <div class="introduct-content">
+                        <h3>
+                            Giới thiệu về HC Pharma
+                        </h3>
+                        <div class="introduct-description">
+                            @Html.Raw(config.AboutText)
+                        </div>
+                        <a class="introducy-btn" href="@config.AboutUrl">Xem thêm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="product-category">
+    <div class="product-category-title">
+        <h3>Sản phẩm của chúng tôi</h3>
+    </div>
+    <div class="container">
+        @if (Model.Categories.Any())
+        {
+            var delay = 200;
+            <div class="row row-cols-lg-5 ">
+                @foreach (var item in Model.Categories)
+                {
+                    <div class="col-lg col-md col-12" data-aos-duration="700" data-aos-delay="@delay" data-aos="fade-right">
+                        <a href="@Url.Action("ProductCategory" , new {url = item.Url})">
+                            <div class="category-item">
+                                @if (item.Image != null)
+                                {
+                                    <img src="@Path.Combine("/images/productCategory/", item.Image)" alt="@item.CategoryName">
+                                }
+                                else
+                                {
+                                    <img src="~/Content/images/img-main/on-image.jpg" alt="@item.CategoryName">
+                                }
+                                <h3>@item.CategoryName</h3>
+                            </div>
+                        </a>
+                    </div>
+                    delay += 100;
+                }
+            </div>
+        }
+    </div>
+</section>
+@if (Model.Products.Any())
+{
+    var delay = 200;
+    <section class="new-proudct text-center pb-5">
+        <div class="new-proudct-title">
+            <h3>Sản phẩm mới</h3>
+            <p>Chúng tôi cung cấp sản phẩm tốt nhất đến khách hàng</p>
+        </div>
+        <div class="container">
+            <div class="row">
+                @foreach (var item in Model.Products)
+                {
+                    var arr = item.ListImage.Split(',')[0];
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="product-item" data-aos-duration="700" data-aos-delay="@delay" data-aos="fade-up">
+                            <div class="product-thumail">
+                                <a href="@Url.Action("ProductDetail" , new {url = item.Url})">
+                                    @if (item.ListImage != null)
+                                    {
+                                        <img src="@Path.Combine("/images/products/", arr)" alt="@item.Name">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Content/images/img-main/on-image.jpg" alt="@item.Name">
+
+                                    }
+                                </a>
+                            </div>
+                            <div class="prouduct-infor">
+                                <div class="product-name">
+                                    <a href="@Url.Action("ProductDetail" , new {url = item.Url})" class="name">
+                                        @item.Name
+                                    </a>
+                                    <a href="@Url.Action("ProductCategory", item.ProductCategory.Url)" class="category">(@item.ProductCategory.CategoryName)</a>
+                                </div>
+                                <div class="product-price">
+                                    @String.Format("{0:#,##0.##}", item.Price) đ
+                                    
+                                </div>
+                                <div class="product-description truncate">
+                                    @item.Description
+                                </div>
+                                <div class="product-btn">
+                                    <a href="@Url.Action("ProductDetail" , new {url = item.Url})" class="more">Xem thêm</a>
+                                    <a href="@Url.Action("Contact")" class="contact">Liên hệ</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    delay += 100;
+
+                }
+
+            </div>
+            <a href="@Url.Action("AllProduct")" class="see-more">Xem thêm</a>
+        </div>
+    </section>
+
+}
+@if (Model.Articles.Any())
+{
+    var delay = 200;
+    <section class="artilce">
+        <div class="container">
+            <div class="artilce-title">
+                <div class="artilce-title-item">
+                    <p>Kiến thức ý khoa</p>
+                    <h3>Xem tất cả tin tức mới nhất</h3>
+                </div>
+                <div class="artilce-title-item">
+                    <a href="@Url.Action("AllArticle")">Xem thêm</a>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (var item in Model.Articles)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="artilce-item" data-aos-duration="700" data-aos-delay="@delay" data-aos="fade-up">
+                            <div class="artilce-thumail">
+                                <a href="@Url.Action()">
+                                    @if (item.Image != null)
+                                    {
+                                        <img src="@Path.Combine("/images/articles/", item.Image)" alt="@item.Subject">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Content/images/img-main/on-image.jpg" alt="@item.Subject">
+                                    }
+                                </a>
+                            </div>
+                            <div class="artilce-infor">
+                                <div class="date">
+                                    <i class="fal fa-calendar-alt"></i>
+                                    @item.CreateDate.ToString("dd/MM/yyyy")
+                                </div>
+                                <div class="name truncate mt-1">
+                                    <a href="@Url.Action("ArticleDetail", new {url = item.Url})">@item.Subject</a>
+                                </div>
+                                <div class="description truncate mt-3">
+                                    @item.Description
+                                </div>
+                                <a href="@Url.Action("ArticleDetail", new {url = item.Url})" class="see-artilce">
+                                    Xem thêm <i class="fas fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    delay += 100;
+
+                }
+            </div>
+        </div>
+    </section>
+
+}
+@if (Model.Feedbacks.Any())
+{
+    <section class="feed-back">
+        <div class="container">
+            <div class="feed-back__title">
+                Khách hàng nói gì về chúng tôi
+            </div>
+            <div class="list-feed-back">
+                @foreach (var item in Model.Feedbacks)
+                {
+                    <div class="feed-back-item">
+                        <div class="feed-back-content">
+                            <div class="feed-bg">
+                                <img src="~/Content/images/img-main/Union.png" alt="">
+                            </div>
+                            <img class="fb-dot" src="~/Content/images/img-main/”.png" alt="">
+                            <p class="truncate">
+                               @item.Content
+                            </p>
+                        </div>
+                        <div class="cutomer">
+                            <div class="customer-avt">
+                                @if (item.Image != null)
+                                {
+                                    <img src="@Path.Combine("/images/feedbacks/", item.Image)" alt="">
+                                }
+                                else
+                                {
+                                    <img src="~/Content/images/img-main/on-image.jpg" alt="">
+                                }
+                            </div>
+                            <div class="customer-name">
+                                <p>@item.Name</p>
+                                <span>Khách hàng</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+@if (Model.Partners.Any())
+{
+    <section class="partner">
+        <div class="container">
+            <div class="partner-title">
+                Đối tác của chúng tôi
+            </div>
+            <div class="list-partner">
+                @foreach (var item in Model.Partners)
+                {
+                    <div class="partner-item">
+                        @if (item.Image != null)
+                        {
+                            <img src="@Path.Combine("/images/partner/", item.Image)" alt="@item.Name">
+                        }
+                        else
+                        {
+                            <img src="~/Content/images/img-main/on-image.jpg" alt="@item.Name">
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}

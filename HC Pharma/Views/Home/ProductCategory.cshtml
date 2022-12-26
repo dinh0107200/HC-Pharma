@@ -1,0 +1,61 @@
+﻿@model HC_Pharma.ViewModel.CategoryProductViewModel
+@using PagedList.Mvc
+@{
+    ViewBag.Title = Model.Category.TitleMeta ?? Model.Category.CategoryName;
+    ViewBag.Description = Model.Category.DescriptionMeta ?? Model.Category.Description;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("ProductCategory", "Home", new { url = Model.Category.Url });
+}
+<section>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index")"><i class="fas fa-home-lg-alt"></i>Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="#">@Model.Category.CategoryName</a></li>
+            </ol>
+        </nav>
+    </div>
+</section>
+<section class="product">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 order-lg-0 order-1">
+                <div class="product-filter">
+                    <div class="filter-title">
+                        Bộ lọc sản phẩm
+                    </div>
+                    <div class="sidebar-nav mt-3 mb-5">
+                        @if (Model.Categories.Any())
+                        {
+                            <div class="nav">
+                                <ul>
+                                    @foreach (var item in Model.Categories.Where(a => a.ParentId == null))
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("ProductCategory" , new {url = item.Url})">@item.CategoryName</a>
+                                            @if (Model.Categories.Any(a => a.ParentId == item.Id))
+                                            {
+                                                <a class="menu-toggle" href="#"></a>
+                                                <ul class="sub-menu">
+                                                    @foreach (var child in Model.Categories.Where(a => a.ParentId == item.Id))
+                                                    {
+                                                        <li><a href="@Url.Action("ProductCategory" , new {url = child.Url})">@child.CategoryName</a></li>
+                                                    }
+                                                </ul>
+                                            }
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 order-lg-1 order-0">
+                <div id="list-item-sort">
+                    @Html.Action("GetProductCategory")
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

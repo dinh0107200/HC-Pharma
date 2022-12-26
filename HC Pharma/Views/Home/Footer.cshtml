@@ -1,0 +1,108 @@
+﻿@model HC_Pharma.ViewModel.FooterViewModel
+@using HC_Pharma.Models
+@{
+    var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
+}
+<section class="footer">
+    <div class="container">
+        <div class="row row-cols-4">
+            <div class="col-lg-3 col-md-4 mb-lg-0 col-12 mb-4">
+                <div class="logo-footer">
+                    <a href="">
+                        @if (config.Image != null)
+                        {
+                            <img src="@Path.Combine("/images/configs/", config.Image)" alt="@config.Title" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/images/img-main/on-image.jpg" alt="@config.Title" />
+                        }
+                    </a>
+                </div>
+                <div class="footer-title">
+                    công ty tnhh hc pharma
+                </div>
+                <div class="InfoFooter">
+                    @Html.Raw(config.InfoFooter)
+                </div>
+                <div class="footer-logo">
+                    <a href="@config.Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="@config.Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="@config.Youtube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 mb-lg-0 col-12 mb-4">
+                <div class="footer-title mb-1">
+                    Thông tin
+                </div>
+                <ul class="footer-item ul-reset">
+                    <li class="mb-2"><a href="@Url.Action("Index")">Trang chủ</a></li>
+                    @if (Model.Introduct.Any())
+                    {
+                        foreach (var item in Model.Introduct)
+                        {
+                            <li class="mb-2"><a href="@Url.Action("ArticleCategory", new {url = item.Url})">@item.CategoryName</a></li>
+                        }
+                    }
+                    <li class="mb-2"><a href="@Url.Action("AllProduct")">Sản phẩm</a></li>
+                    @if (Model.ArticleCat.Any(a => a.ParentId == null))
+                    {
+                        foreach (var item in Model.ArticleCat.Where(a => a.ParentId == null))
+                        {
+                            <li class="mb-2"><a href="@Url.Action("ArticleCategory", new {url = item.Url})">@item.CategoryName</a></li>
+                        }
+                    }
+                    <li class="mb-2"><a href="@Url.Action("AllProduct")">Tư vấn hỗ trợ</a></li>
+                    <li class="mb-2"><a href="@Url.Action("Contact")">Liên hệ đặt hàng</a></li>
+
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-4 mb-lg-0 col-12 mb-4">
+                <div class="footer-title mb-1">
+                    Chính sách
+                </div>
+                <ul class="footer-item ul-reset">
+                    @if (Model.Policy.Any())
+                    {
+                        foreach (var item in Model.Policy)
+                        {
+                            <li class="mb-2"><a href="@Url.Action("ArticleCategory", new {url = item.Url})">@item.CategoryName</a></li>
+                        }
+                    }
+                </ul>
+                <div>
+                    <img src="~/Content/images/img-main/logo-da-thong-bao-bo-cong-thuong-mau-xanh 1.png" />
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 mb-lg-0 col-12 mb-4">
+                <div class="footer-title">
+                    Fanpage
+                </div>
+                @if (config.Facebook != null)
+                {
+                    <div class="embed-responsive mt-2">
+                        <div class="fb-page" data-href="@config.Facebook" data-tabs="" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                            <blockquote cite="@config.Facebook" class="fb-xfbml-parse-ignore">
+                                <a href="@config.Facebook">@config.Title</a>
+                            </blockquote>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<section class="copyright">
+    HC Pharma 2022. All rights reserved. Design by vicogroup
+</section>
+<section class="back-top">
+    <i class="fas fa-arrow-up"></i>
+</section>
+
+@if (config.Zalo != null)
+{
+    <a href="https://zalo.me/@config.Hotline" target="_blank" class="zalo">
+        <img src="~/Content/images/img-main/zalo-logo.png" alt="Zalo" />
+    </a>
+}
+<a href="tel:@config.Hotline" class="suntory-alo-phone suntory-alo-green" id="suntory-alo-phoneIcon" style="left: 0; bottom: 0;"><div class="suntory-alo-ph-circle"></div><div class="suntory-alo-ph-circle-fill"></div><div class="suntory-alo-ph-img-circle"><i class="fal fa-phone-alt"></i></div><div class="tel"><p class="fone">@config.Hotline</p></div> </a>

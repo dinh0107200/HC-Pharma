@@ -1,0 +1,64 @@
+﻿@model HC_Pharma.ViewModel.ArticleDetailsViewModel
+@{
+    ViewBag.Title = Model.Article.TitleMeta ?? Model.Article.Subject;
+    ViewBag.Description = Model.Article.DescriptionMeta ?? Model.Article.Description;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("ArticleDetail", new { url = Model.Article.Url });
+    if (Model.Article.Image != null)
+    {
+        ViewBag.ImageShare = Request.Url?.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/articles/", Model.Article.Image);
+    }
+}
+
+<section>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index")"><i class="fas fa-home-lg-alt"></i>Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="#">@Model.Article.Subject</a></li>
+            </ol>
+        </nav>
+    </div>
+
+</section>
+<section class="artilce-detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="artilce-content">
+                    <div class="artilce-detail-title">
+                        @Model.Article.Subject
+                    </div>
+                    <div class="date pb-3   ">
+                        <i class="fal fa-calendar-alt"></i>
+                        @String.Format("{0:d/M/yyyy}", Model.Article.CreateDate)
+                    </div>
+                    <div class="artilce-content">
+                        @Html.Raw(Model.Article.Body)
+                    </div>
+                    <hr>
+                    <div class="share">
+                        <ul class="d-flex align-items-center ul-reset">
+                            <li class="mr-3">Chia sẻ:</li>
+                            <li><button class="facebook" onclick="window.open('https://www.facebook.com/sharer.php?u='+encodeURIComponent(location.href)+'&amp;t='+encodeURIComponent(document.title));return false"><i class="fab fa-facebook-f"></i></button></li>
+                            <li><button class="instagram" onclick="window.open('https://www.instagram.com/?url='+encodeURIComponent(location.href)+'&amp;t='+encodeURIComponent(document.title));return false"><i class="fab fa-instagram"></i></button></li>
+                            <li><button class="twitter" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&amp;text='+encodeURIComponent(document.title));return false"><i class="fab fa-twitter"></i></button></li>
+                            <li><button class="linkedin" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href)+'&amp;t='+encodeURIComponent(document.title));return false"><i class="fab fa-linkedin-in"></i></button></li>
+                        </ul>
+                    </div>
+                    <hr />
+                    <div class="fb-comments" data-href="@ViewBag.Canonical" data-numposts="10" data-width="100%"></div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="artilce-nav mb-4">
+                    <div class="artilce-nav-title">
+                        Bài viết mới nhất
+                    </div>
+                    @Html.Action("MenuArticle", "Home")
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

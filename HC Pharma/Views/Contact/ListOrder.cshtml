@@ -1,0 +1,96 @@
+﻿@model HC_Pharma.ViewModel.ListOrderViewModel
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Danh sách nhận báo giá";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Danh sách nhận báo giá</h2>
+<a class="btn quick-link" href="@Url.Action("Index","Vcms")"><i class="fal fa-home mr-1"></i>Về trang chính</a>
+<div class="box_content">
+    <div class="form-search-list">
+        <form action="@Url.Action("ListOrder")" method="get" class="ml-0">
+            <p>
+                Tìm theo tên @Html.TextBoxFor(a => a.Name, new { @class = "w300" })
+                <button type="submit" class="btn-search">Tìm kiếm</button>
+            </p>
+        </form>
+    </div>
+    <p>Có tổng số <strong>@Model.Orders.TotalItemCount</strong> số khách hàng liên hệ</p>
+    <table class="list_table tablecenter table-striped">
+        <tbody>
+            <tr>
+                <th style="width: 100px">Ngày gửi</th>
+                <th style="width: 150px">Khách hàng</th>
+                <th style="width: 150px">Điện thoại</th>
+                <th style="width: 150px">Email</th>
+                <th>Nội dung</th>
+                <th>Sản phẩm</th>
+                <th style="width: 60px"></th>
+            </tr>
+            @foreach (var quote in Model.Orders)
+            {
+                <tr data-id="@quote.Id">
+                    <td>@quote.CreateDate.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>
+                        <strong>@quote.CustomerInfo.FullName</strong>
+                    </td>
+                    <td>@quote.CustomerInfo.Mobile</td>
+                    <td>@quote.CustomerInfo.Email</td>
+                    <td>@quote.CustomerInfo.Body</td>
+                    <td class="text-left">
+                        @foreach (var item in Model.Products.Where(l => l.Id == quote.ProductId))
+                        {
+                            <strong>Tên sản phẩm: </strong>@item.Name;<br />
+                            if (item.Price != null)
+                            {
+                                <strong>Giá bán: </strong>@Html.DisplayFor(m => item.Price) <br />
+                            }
+                            if (item.PriceSale > 0)
+                            {
+                                <strong>Giá khuyến mãi: </strong>@Html.DisplayFor(m => item.PriceSale) <br />
+                            }
+                            if (item.ListImage != null)
+                            {
+                                <a href="@Url.Action("ProductDetail", "Home", new {url = item.Url})" target="_blank"><img class="img-border" src="@Path.Combine("/images/products/", item.ListImage.Split(',')[0])?w=100&h=100" alt="" /></a>
+                            }
+                            <br />
+                            <strong><a href="@Url.Action("PrductDetail","Home", new { url = item.Url})">Đường dẫn đến trang sản phẩm</a></strong>
+                        }
+                    </td>
+                    <td><a href="javascript:;" onclick="deleteOrder('@quote.Id')">Xóa</a></td>
+                </tr>
+            }
+            @if (Model.Orders.PageCount > 1)
+            {
+                <tr>
+                    <td colspan="7">@Html.PagedListPager(Model.Orders, page => Url.Action("ListOrder", new { page, name = Model.Name }))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        function deleteOrder(id) {
+            if (confirm("Bạn có chắc chắn xóa liên hệ này không?")) {
+                $.post("/Contact/DeleteOrder", { orderId: id }, function (data) {
+                    if (data) {
+                        $.toast({
+                            text: 'Xóa liên hệ đặt hàng thành công',
+                            position: 'bottom-right',
+                            icon: 'success',
+                        })
+                        $("tr[data-id='" + id + "']").fadeOut();
+                    }
+                    else {
+                        $.toast({
+                            text: 'Quá trình thực hiện không thành công. Hãy thử lại',
+                            icon: 'error',
+                        })
+                    }
+                });
+            }
+        }</script>
+}

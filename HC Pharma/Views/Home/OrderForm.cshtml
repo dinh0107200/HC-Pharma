@@ -1,0 +1,53 @@
+﻿@model HC_Pharma.ViewModel.OrderFormViewModel
+<div class="model-form">
+    <div class="close-model">
+        <i class="fas fa-times"></i>
+    </div>
+    <div class="model-form-title">
+        Đặt hàng
+    </div>
+    <hr>
+    <div class="order-name">
+        <p>Sản phẩm :</p>
+        <strong>@Model.Product.Name</strong>
+    </div>
+    <hr>
+    <form id="orderForm">
+
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="Order.ProductPrice" value="@if(Model.Product.PriceSale != null) { @Model.Product.PriceSale}else { @Model.Product.Price} " />
+        <input type="hidden" name="Order.ProductId" value="@Model.Product.Id" />
+        <input type="hidden" name="Order.ProductName" value="@Model.Product.Name" />
+        <input type="hidden" name="Order.ProductUrl" value="@Model.Product.Url" />
+        <input type="hidden" name="Order.ProductImg" value="@Model.Product.ListImage.Split(',')[0]" />
+        @if (Model.Product.Price > 0)
+        {
+            <div class="numberForm">
+                Số lượng:
+                <input type="number" class="quantity" name="Order.Quantity" value="1" min="1" max="999" />
+            </div>
+        }
+        <h3>Thông tin của bạn</h3>
+        <div class="model-input">
+            @Html.TextBoxFor(model => model.Order.CustomerInfo.FullName, new { @class = "form-control", @placeholder = "Họ và tên" })
+            @Html.ValidationMessageFor(model => model.Order.CustomerInfo.FullName)
+        </div>
+        <div class="model-input">
+            @Html.TextBoxFor(model => model.Order.CustomerInfo.Address, new { @class = "form-control", @placeholder = "Địa chỉ" })
+            @Html.ValidationMessageFor(model => model.Order.CustomerInfo.Address)
+        </div>
+        <div class="model-input">
+            @Html.TextBoxFor(model => model.Order.CustomerInfo.Mobile, new { @class = "form-control", @placeholder = "Số điện thoại" })
+            @Html.ValidationMessageFor(model => model.Order.CustomerInfo.Mobile)
+        </div>
+        <div class="model-input">
+            @Html.TextBoxFor(model => model.Order.CustomerInfo.Email, new { @class = "form-control", @placeholder = "Email của bạn" })
+            @Html.ValidationMessageFor(model => model.Order.CustomerInfo.Email)
+        </div>
+        <div class="model-input">
+            @Html.EditorFor(model => model.Order.CustomerInfo.Body, new { @class = "form-control", @placeholder = "Ghi chú, lời nhắn" })
+        </div>
+        <button type="submit">Gửi yêu cầu</button>
+    </form>
+</div>

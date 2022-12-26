@@ -1,0 +1,31 @@
+﻿@model HC_Pharma.Models.Article
+
+<div class="artilce-item mb-4">
+    <div class="artilce-thumail mt-0">
+        <a href="@Url.Action("ArticleDetail", new {url = Model.Url})">
+            @if (Model.Image != null)
+            {
+                <img src="@Path.Combine("/images/articles/", Model.Image)" alt="@Model.Subject">
+            }
+            else
+            {
+                <img src="~/Content/images/img-main/on-image.jpg" alt="@Model.Subject">
+            }
+        </a>
+    </div>
+    <div class="artilce-infor">
+        <div class="date">
+            <i class="fal fa-calendar-alt"></i>
+            @String.Format("{0:d/M/yyyy}",Model.CreateDate)
+        </div>
+        <div class="name truncate">
+            <a href="@Url.Action("ArticleDetail", new {url = Model.Url})">@Model.Subject</a>
+        </div>
+        <div class="description truncate mt-2">
+            @Model.Description
+        </div>
+        <a href="@Url.Action("ArticleDetail", new {url = Model.Url})" class="see-artilce">
+            Xem thêm <i class="fas fa-arrow-circle-right"></i>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+﻿@model HC_Pharma.ViewModel.ReviewFormViewModel
+
+<form id="review-form">
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="Review.ProductId" value="@Model.Product.Id" />
+    <div class="product-vote__title">
+        Đánh giá: <span>@Model.Product.Name</span>
+    </div>
+    <div class="star-title">
+        Đánh giá của bạn
+    </div>
+    <fieldset class="rating">
+        <input type="radio" id="star5" name="Review.Rate" value="5" /><label class="full"
+                                                                      for="star5" title="Awesome - 5 stars"></label>
+
+        <input type="radio" id="star4" name="Review.Rate" value="4" /><label class="full"
+                                                                      for="star4" title="Pretty good - 4 stars"></label>
+
+        <input type="radio" id="star3" name="Review.Rate" value="3" /><label class="full"
+                                                                      for="star3" title="Meh - 3 stars"></label>
+
+        <input type="radio" id="star2" name="Review.Rate" value="2" /><label class="full"
+                                                                      for="star2" title="Kinda bad - 2 stars"></label>
+
+        <input type="radio" id="star1" name="Review.Rate" value="1" /><label class="full"
+                                                                      for="star1" title="Sucks big time - 1 star"></label>
+    </fieldset>
+    <div class="form-vote-input">
+        @Html.EditorFor(a => a.Review.Coment)
+    </div>
+    <div class="form-row">
+        <div class="col review-form">
+            @Html.LabelFor(a => a.Review.Customer)
+            @Html.EditorFor(a => a.Review.Customer, new { @class = "form-control ", @placeholder = "Họ tên" })
+        </div>
+        <div class="col review-form">
+            @Html.LabelFor(a => a.Review.Email)
+            @Html.EditorFor(a => a.Review.Email, new { @class = "form-control", @placeholder = "Email của bạn" })
+        </div>
+    </div>
+    <button type="submit">
+        Đánh giá
+    </button>
+</form>
+

@@ -1,0 +1,262 @@
+﻿@model HC_Pharma.ViewModel.ProductDetailViewModel
+@using HC_Pharma.Models
+@using Helpers
+@{
+    var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
+    ViewBag.Title = Model.Product.TitleMeta ?? Model.Product.Name;
+    ViewBag.Description = Model.Product.DescriptionMeta ?? Model.Product.Description;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("ProductDetail", new { url = Model.Product.Url });
+    if (Model.Product.ListImage != null)
+    {
+        ViewBag.ImgShare = Request.Url?.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/products/", Model.Product.ListImage.Split(',')[0]);
+    }
+}
+
+
+
+<section>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index")"><i class="fas fa-home-lg-alt"></i>Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="#">@Model.Product.Name</a></li>
+            </ol>
+        </nav>
+    </div>
+
+</section>
+<section class="product-detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                @if (Model.Product.ListImage != null)
+                {
+                    var arr = Model.Product.ListImage.Split(',');
+                    <div class="product-thumnail">
+                        @foreach (var item in arr)
+                        {
+                            <div class="product-thumnail__item">
+                                <img src="@Path.Combine("/images/products/", item)" alt="@Model.Product.Name">
+                            </div>
+                        }
+                    </div>
+                }
+                @if (Model.Product.ListImage != null)
+                {
+                    var arr = Model.Product.ListImage.Split(',');
+                    <div class="product-nav">
+                        @foreach (var item in arr)
+                        {
+                            <div class="product-nav__item">
+                                <img src="@Path.Combine("/images/products/", item)" alt="@Model.Product.Name">
+                            </div>
+                        }
+                    </div>
+                }
+
+            </div>
+            <div class="col-lg-8">
+                <div class="produc-detail_infor">
+                    <div class="name-product">
+                        @Model.Product.Name
+                    </div>
+                    <div class="ratting">
+                        @for (int i = 0; i < Model.Product.Star; i++)
+                        {
+                            <i class="fas fa-star"></i>
+                        }
+                    </div>
+                    <div class="product-prices">
+                        <div class="price-title">
+                            Giá :
+                        </div>
+                        @if (Model.Product.PriceSale > 0)
+                        {
+                            var percent = (decimal)Model.Product.PriceSale / (decimal)Model.Product.Price;
+                            var discount = 100 - Math.Truncate(percent * 100);
+                            <div class="price-item">
+                                <p>
+                                    @Html.DisplayFor(m => Model.Product.PriceSale)
+                                </p>
+                                <div class="price-sale">
+                                    <strike>
+                                        @Html.DisplayFor(m => Model.Product.Price)
+                                    </strike>
+                                    <span>@discount% giảm</span>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="price-item">
+                                <p>
+                                    @Html.DisplayFor(m => Model.Product.Price)
+                                </p>
+                            </div>
+                        }
+
+                    </div>
+                    <div class="product-descriptions">
+                        <div class="product-description_title mb-3">
+                            Mô tả
+                        </div>
+                        @if (Model.Product.Description != null)
+                        {
+                            <div class="description-item">
+                                @Model.Product.Description
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="description-item">
+                                <div class="col-12">
+                                    <p class="alert alert-success small">Nội dung hiện chưa được cập nhật. Vui lòng quay lại sau !!!!</p>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+                <div class="detail-btn">
+                    <span>
+                        <i class="fas fa-comments-alt"></i> Liên hệ
+                    </span>
+                    <a href="tel:@config.Hotline">
+                        <i class="fas fa-phone-alt"></i>Gọi ngay
+                    </a>
+                </div>
+                <div class="share">
+                    <ul class="d-flex align-items-center ul-reset">
+                        <li class="mr-3">Chia sẻ:</li>
+                        <li><button class="facebook rounded-circle" onclick="window.open('https://www.facebook.com/sharer.php?u='+encodeURIComponent(location.href)+'&amp;t='+encodeURIComponent(document.title));return false"><i class="fab fa-facebook-f"></i></button></li>
+                        <li><button class="instagram rounded-circle" onclick="window.open('https://www.instagram.com/?url='+encodeURIComponent(location.href)+'&amp;t='+encodeURIComponent(document.title));return false"><i class="fab fa-instagram"></i></button></li>
+                        <li><button class="twitter rounded-circle" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&amp;text='+encodeURIComponent(document.title));return false"><i class="fab fa-twitter"></i></button></li>
+                        <li><button class="linkedin rounded-circle" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href)+'&amp;t='+encodeURIComponent(document.title));return false"><i class="fab fa-linkedin-in"></i></button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Công dụng</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Thành phần</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Hướng dẫn sử dụng</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">Đánh giá</a>
+            </li>
+        </ul><!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                @if (Model.Product.Uses != null)
+                {
+                    @Html.Raw(Model.Product.Uses)
+                }
+                else
+                {
+                    <div class="description-item">
+                        <div class="col-12">
+                            <p class="alert alert-success small">Nội dung hiện chưa được cập nhật. Vui lòng quay lại sau !!!!</p>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="tab-pane" id="tabs-2" role="tabpanel">
+                @if (Model.Product.Body != null)
+                {
+                    @Html.Raw(Model.Product.Body)
+
+                }
+                else
+                {
+                    <div class="description-item">
+                        <div class="col-12">
+                            <p class="alert alert-success small">Nội dung hiện chưa được cập nhật. Vui lòng quay lại sau !!!!</p>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="tab-pane" id="tabs-3" role="tabpanel">
+                @if (Model.Product.Usermanual != null)
+                {
+                    @Html.Raw(Model.Product.Usermanual)
+                }
+                else
+                {
+                    <div class="description-item">
+                        <div class="col-12">
+                            <p class="alert alert-success small">Nội dung hiện chưa được cập nhật. Vui lòng quay lại sau !!!!</p>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="tab-pane" id="tabs-4" role="tabpanel">
+                <div class="row">
+                    <div class="col-lg-6">
+                        @if (Model.Reviews.Any())
+                        {
+                            foreach (var item in Model.Reviews.Where(a => a.ProductId == Model.Product.Id))
+                            {
+                                <div class="review-item">
+                                    <div class="customer-review">
+                                        @item.Customer
+                                    </div>
+                                    <div class="review-star">
+                                        <div class="ratting">
+                                            @for (int a = 0; a < item.Rate; a++)
+                                            {
+                                                <i class="fas fa-star"></i>
+                                            }
+
+
+                                        </div>
+                                    </div>
+                                    <div class="review-content">
+                                        @item.Coment
+                                    </div>
+                                </div>
+                                <hr>
+                            }
+                        }
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-vote">
+                            @Html.Action("ReviewForm")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-relate mt-3">
+            <div class="product-relate-title">
+                Sản phẩm liên quan
+            </div>
+            <div class="product-relate-item mt-4">
+                @if (Model.Products.Take(8).Any())
+                {
+                    <div class="row">
+                        @foreach (var item in Model.Products)
+                        {
+                            <div class="col-lg-3 col-md-4 col-lg2">
+                                @Html.Partial("_ItemProduct", item)
+                            </div>
+                        }
+                    </div>
+
+                }
+            </div>
+        </div>
+</section>
+<section class="form-model">
+    @Html.Action("OrderForm")
+</section>
+@section scripts {
+    <script>
+        DetailJS() ;
+    </script>
+}
