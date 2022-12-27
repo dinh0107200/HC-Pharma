@@ -4,6 +4,7 @@ $('.banner').slick({
     nextArrow: "<button class='next-btn'><i class='fas fa-chevron-right'></i></button>",
     autoplay: true,
     autoplaySpeed: 3000,
+    speed: 1000,
 });
 
 $('.list-feed-back').slick({
