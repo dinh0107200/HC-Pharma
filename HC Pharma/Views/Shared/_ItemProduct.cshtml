@@ -20,7 +20,14 @@
             <a href="@Url.Action("ProductCategory", new {url = Model.ProductCategory.Url})" class="category">(@Model.ProductCategory.CategoryName)</a>
         </div>
         <div class="product-price">
-            @Html.DisplayFor(a => a.Price)
+            @if (Model.PriceSale != null)
+            {
+                @Html.DisplayFor(a => a.PriceSale)
+            }
+            else
+            {
+                @Html.DisplayFor(a => a.Price)
+            }
         </div>
         <div class="product-description truncate">
            @Model.Description
