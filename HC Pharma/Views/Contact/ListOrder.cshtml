@@ -55,7 +55,7 @@
                                 <a href="@Url.Action("ProductDetail", "Home", new {url = item.Url})" target="_blank"><img class="img-border" src="@Path.Combine("/images/products/", item.ListImage.Split(',')[0])?w=100&h=100" alt="" /></a>
                             }
                             <br />
-                            <strong><a href="@Url.Action("PrductDetail","Home", new { url = item.Url})">Đường dẫn đến trang sản phẩm</a></strong>
+                            <strong><a href="@Url.Action("ProductDetail","Home", new { url = item.Url})">Đường dẫn đến trang sản phẩm</a></strong>
                         }
                     </td>
                     <td><a href="javascript:;" onclick="deleteOrder('@quote.Id')">Xóa</a></td>

@@ -208,7 +208,7 @@ h6 {
 }
 
 .header-top {
-    height: 80px;
+    height: 96px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -216,9 +216,9 @@ h6 {
 
 .header-logo {
     img {
-        width: 150px;
+        width: 100%;
         object-fit: cover;
-        height: auto;
+        aspect-ratio: 7/3;
     }
 }
 
@@ -411,16 +411,13 @@ h6 {
         @include Quicksand-Bold;
     }
 
-    p {
-        margin-top: 30px;
-    }
-
     .introduct-description {
+        -webkit-line-clamp: 8;
         margin-top: 30px;
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
-        line-height: 24px;
+        line-height: 35px;
         text-align: justify;
         @include Quicksand-Regular;
         color: #333333;
@@ -831,6 +828,7 @@ h6 {
 .feed-back-item {
     padding: 10px;
     margin: 5px;
+    transition:all 1s;
 }
 
 .feed-back-content {
@@ -1019,6 +1017,7 @@ h6 {
     background: $colorMain;
     @include flex-item(center, center)
 }
+
 
 .hamburger {
     display: none;
@@ -1705,8 +1704,72 @@ h1 {
 
 
 
+@include maxWidth(1024px) {
+    .form-input {
+        input {
+            width: 250px;
+        }
 
+        select {
+            width: 150px;
+        }
+    }
 
+    .introduct-item {
+        img {
+            width: 100%;
+            object-fit: cover;
+            aspect-ratio: 1.2;
+            border-radius: 5px;
+        }
+    }
+
+    .introduct-content {
+        .introduct-description {
+            margin-top: 10px !important;
+            margin-bottom: 20px;
+            line-height: 26px;
+        }
+    }
+
+    .feed-back-content {
+        width: 300px;
+
+        .feed-bg {
+            width: 100%;
+
+            img {
+                width: 100%;
+                position: absolute;
+            }
+        }
+
+        p {
+            padding: 22px;
+            height: 122px;
+        }
+    }
+
+    .list-partner {
+        .partner-item {
+            width: 130px !important;
+
+            img {
+                padding: 10px;
+            }
+        }
+    }
+
+    .introduct-img {
+        h3 {
+            font-size: 18px;
+        }
+    }
+
+    .cutomer{
+        margin-top:0;
+    }
+}
 @include maxWidth(820px) {
 
 
@@ -1951,8 +2014,8 @@ h1 {
             text-align: center;
         }
 
-        .ratting{
-            text-align:center;
+        .ratting {
+            text-align: center;
         }
     }
 }

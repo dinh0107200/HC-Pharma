@@ -12,7 +12,7 @@ $('.list-feed-back').slick({
     slidesToScroll: 3,
     arrows: false,
     dots: true,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 3000,
     responsive: [
         {
@@ -20,8 +20,6 @@ $('.list-feed-back').slick({
             settings: {
                 slidesToShow: 1,
                 slidesToScroll: 1,
-                infinite: true,
-                dots: true
             }
         },
         {
@@ -45,13 +43,19 @@ $('.list-feed-back').slick({
 $('.list-partner').slick({
     infinite: true,
     slidesToShow: 6,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
     arrows: false,
     dots: true,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 3000,
     responsive: [
-
+        {
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 5,
+                slidesToScroll: 3,
+            }
+        },
         {
             breakpoint: 600,
             settings: {
