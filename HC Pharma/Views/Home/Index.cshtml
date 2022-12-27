@@ -168,8 +168,15 @@
                                     <a href="@Url.Action("ProductCategory", item.ProductCategory.Url)" class="category">(@item.ProductCategory.CategoryName)</a>
                                 </div>
                                 <div class="product-price">
-                                    @String.Format("{0:#,##0.##}", item.Price) đ
-                                    
+                                    @if (item.PriceSale != null)
+                                    {
+                                        @String.Format("{0:#,##0.##}", item.PriceSale)
+                                                    }
+                                    else
+                                    {
+                                        @String.Format("{0:#,##0.##}", item.Price)
+
+                                    }đ
                                 </div>
                                 <div class="product-description truncate">
                                     @item.Description
