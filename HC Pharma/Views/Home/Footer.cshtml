@@ -97,68 +97,75 @@
 <section class="back-top">
     <i class="fas fa-arrow-up"></i>
 </section>
-<section class="list-social mt-3">
-    <ul class="ul-reset">
+<div class="show-social show-last">
+    <i class="far fa-angle-left"></i>
+</div>
+<section class="nav-social">
+    <div class="list-social">
+        <div class="show-social hiden-soci mr-2">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+        <ul class="ul-reset">
+            @if (config.Zalo != null)
+            {
+                <li>
+                    <a href="https://zalo.me/@config.Hotline" target="_blank">
+                        <img src="~/Content/images/img-main/zalo-logo.png" alt="Zalo" />
+                    </a>
+                </li>
+            }
+            @if (config.Youtube != null)
+            {
+                <li>
+                    <a href="@config.Youtube" target="_blank">
+                        <img src="~/Content/images/img-main/youtube-logo-png-2067.png" alt="Youtube" />
+                    </a>
+                </li>
 
-        @if (config.Zalo != null)
-        {
-            <li>
-                <a href="https://zalo.me/@config.Hotline" target="_blank">
-                    <img src="~/Content/images/img-main/zalo-logo.png" alt="Zalo" />
-                </a>
-            </li>
-        }
-        @if (config.Youtube != null)
-        {
-            <li>
-                <a href="@config.Youtube" target="_blank">
-                    <img src="~/Content/images/img-main/youtube-logo-png-2067.png" alt="Youtube" />
-                </a>
-            </li>
+            }
+            @if (config.Twitter != null)
+            {
+                <li>
+                    <a href="@config.Twitter" target="_blank">
+                        <img src="~/Content/images/img-main/logo-twitter-png-5860.png" alt="Twitter" />
+                    </a>
+                </li>
+            }
+            @if (config.Tiki != null)
+            {
+                <li>
+                    <a href="@config.Tiki" target="_blank">
+                        <img src="~/Content/images/img-main/tiki.png" alt="Tiki" />
+                    </a>
+                </li>
+            }
 
-        }
-        @if (config.Twitter != null)
-        {
-            <li>
-                <a href="@config.Twitter" target="_blank">
-                    <img src="~/Content/images/img-main/logo-twitter-png-5860.png" alt="Twitter" />
-                </a>
-            </li>
-        }
-        @if (config.Tiki != null)
-        {
-            <li>
-                <a href="@config.Tiki" target="_blank">
-                    <img src="~/Content/images/img-main/tiki.png" alt="Tiki" />
-                </a>
-            </li>
-        }
+            @if (config.Tiktok != null)
+            {
+                <li>
+                    <a href="@config.Tiktok" target="_blank">
+                        <img src="~/Content/images/img-main/pngimg.com - tiktok_PNG26.png" alt="TikTok" />
+                    </a>
+                </li>
+            }
+            @if (config.Shopee != null)
+            {
+                <li>
+                    <a href="@config.Shopee" target="_blank">
+                        <img src="~/Content/images/img-main/shopee-logo-40476.png" alt="Shopee" />
+                    </a>
+                </li>
+            }
+            @if (config.Lazada != null)
+            {
+                <li>
+                    <a href="@config.Lazada" target="_blank">
+                        <img src="~/Content/images/img-main/lazada.png" alt="Lazada" />
+                    </a>
+                </li>
+            }
 
-        @if (config.Tiktok != null)
-        {
-            <li>
-                <a href="@config.Tiktok" target="_blank">
-                    <img src="~/Content/images/img-main/pngimg.com - tiktok_PNG26.png" alt="TikTok" />
-                </a>
-            </li>
-        }
-        @if (config.Shopee != null)
-        {
-            <li>
-                <a href="@config.Shopee" target="_blank">
-                    <img src="~/Content/images/img-main/shopee-logo-40476.png" alt="Shopee" />
-                </a>
-            </li>
-        }
-        @if (config.Lazada != null)
-        {
-            <li>
-                <a href="@config.Lazada" target="_blank">
-                    <img src="~/Content/images/img-main/lazada.png" alt="Lazada" />
-                </a>
-            </li>
-        }
-
-    </ul>
+        </ul>
+    </div>
 </section>
 <a href="tel:@config.Hotline" class="suntory-alo-phone suntory-alo-green" id="suntory-alo-phoneIcon" style="left: 0; bottom: 0;"><div class="suntory-alo-ph-circle"></div><div class="suntory-alo-ph-circle-fill"></div><div class="suntory-alo-ph-img-circle"><i class="fal fa-phone-alt"></i></div><div class="tel"><p class="fone">@config.Hotline</p></div> </a>

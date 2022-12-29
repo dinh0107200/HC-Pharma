@@ -285,3 +285,12 @@ $(".quantity").change(function () {
     $(".total-price").text(output);
     $("input[name='TotalPrice'][type=hidden]").val(number);
 });
+$('.show-last').click(function () {
+    $('.list-social').addClass('active')
+    $('.show-last').hide()
+})
+$('.hiden-soci').click(function () {
+    $('.list-social').removeClass('active')
+    $('.show-last').show()
+
+})

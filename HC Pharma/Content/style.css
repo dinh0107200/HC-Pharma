@@ -1505,6 +1505,38 @@ h1 {
   outline: none;
 }
 
+.list-social {
+  right: -100% !important;
+  transition: all 0.8s;
+}
+
+.list-social.active {
+  right: 0 !important;
+}
+
+.show-social {
+  background: #2CDEB4;
+  padding: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.list-social {
+  display: flex;
+  align-items: center;
+}
+
+.show-last {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  cursor: pointer;
+  padding: 15px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  z-index: 10;
+}
+
 @media (max-width: 1024px) {
   .form-input input {
     width: 250px;

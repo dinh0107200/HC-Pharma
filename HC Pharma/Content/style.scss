@@ -1716,11 +1716,38 @@ h1 {
     }
 }
 
+.list-social {
+    right: -100% !important;
+    transition:all .8s;
+}
+
+.list-social.active {
+    right: 0 !important;
+}
+.show-social {
+    background: $colorMain2;
+    padding: 10px;
+    color: $white;
+    cursor:pointer;
+
+}
+
+.list-social {
+    display: flex;
+    align-items: center;
+}
 
 
-
-
-
+.show-last {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    cursor: pointer;
+    padding:15px;
+    border-top-left-radius:10px;
+    border-bottom-left-radius:10px;
+    z-index:10;
+}
 
 
 
@@ -1814,10 +1841,13 @@ h1 {
     }
 }
 @include maxWidth(820px) {
-    .back-top{
-        width:40px;
-        height:40px;
-    } 
+    
+
+    .back-top {
+        width: 40px;
+        height: 40px;
+    }
+
     .model-form {
         width: 80%;
     }
@@ -2072,6 +2102,8 @@ h1 {
     .introduct-content .introduct-description {
         -webkit-line-clamp: 4;
     }
+
+    
 }
 
 @include maxWidth(468px) {
