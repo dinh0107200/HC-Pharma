@@ -201,6 +201,10 @@
     <Compile Include="Migrations\202212290844249_config.designer.cs">
       <DependentUpon>202212290844249_config.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212290910438_update-cfig.cs" />
+    <Compile Include="Migrations\202212290910438_update-cfig.designer.cs">
+      <DependentUpon>202212290910438_update-cfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Article.cs" />
@@ -697,6 +701,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212290844249_config.resx">
       <DependentUpon>202212290844249_config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212290910438_update-cfig.resx">
+      <DependentUpon>202212290910438_update-cfig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -56,17 +56,22 @@ namespace HC_Pharma.Models
         public string Description { get; set; }
         [Display(Name = "Hotline"), StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), UIHint("TextBox")]
         public string Hotline { get; set; }
-        [Display(Name = "Tài khoản Zalo"), StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), UIHint("TextBox")]
+        [StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), Display(Name = "Tài khoản Zalo"),
+       Url(ErrorMessage = "Đường dẫn không chính xác"), UIHint("TextBox")]
         public string Zalo { get; set; }
         [Display(Name = "Chat Messenger"), StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), UIHint("TextBox")]
         public string Mess { get; set; }
-        [Display(Name = "Đường dẫn Tiki"), StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), UIHint("TextBox")]
+        [StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), Display(Name = "Đường dẫn Tiki"),
+        Url(ErrorMessage = "Đường dẫn không chính xác"), UIHint("TextBox")]
         public string Tiki { get; set; }
-        [Display(Name = "Đường dẫn Tik Tok"), StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), UIHint("TextBox")]
+        [StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), Display(Name = "Đường dẫn Tik Tok"),
+        Url(ErrorMessage = "Đường dẫn không chính xác"), UIHint("TextBox")]
         public string Tiktok { get; set; }
-        [Display(Name = "Đường dẫn Shopee"), StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), UIHint("TextBox")]
+        [StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), Display(Name = "Đường dẫn Shopee"),
+        Url(ErrorMessage = "Đường dẫn không chính xác"), UIHint("TextBox")]
         public string Shopee { get; set; }
-        [Display(Name = "Đường dẫn Lazada"), StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), UIHint("TextBox")]
+        [StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), Display(Name = "Đường dẫn Lazada"),
+       Url(ErrorMessage = "Đường dẫn không chính xác"), UIHint("TextBox")]
         public string Lazada { get; set; }
         [StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), Display(Name = "Email"), UIHint("TextBox")]
         public string Email { get; set; }
