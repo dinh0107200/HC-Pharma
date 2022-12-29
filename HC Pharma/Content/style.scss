@@ -2216,8 +2216,18 @@ h1 {
         display: block;
     }
 
-    .introduct-name{
-        text-align:center !important;
+    .introduct-name {
+        text-align: center !important;
+    }
+
+    .introduct-img {
+        i {
+            font-size: 30px;
+        }
+    }
+
+    .artilce{
+        padding-bottom:30px;
     }
 }
 .logo-footer {
