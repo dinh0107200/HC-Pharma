@@ -41,8 +41,8 @@
                         </div>
                         @foreach (var item in Model.Categories)
                         {
-                            <div class="filter-item mb-3">
-                                <input data-filter="" type="radio" @if (Model.CatId == item.Id) { @Html.Raw("checked='checked'") } name="catId" value="@item.Id" id="@item.Id">
+                            <div class="filter-item mb-3 d-flex">
+                                <input data-filter="" class="mr-2" type="radio" @if (Model.CatId == item.Id) { @Html.Raw("checked='checked'") } name="catId" value="@item.Id" id="@item.Id">
                                 <label for="@item.Id">@item.CategoryName</label>
                             </div>
                         }

@@ -21,10 +21,11 @@
         <div class="row">
             <div class="col-lg-3 order-lg-0 order-1">
                 <div class="product-filter">
-                    <div class="filter-title">
-                       Danh mục sản phẩm
-                    </div>
-                    <div class="sidebar-nav mt-3 mb-5">
+                    
+                    <div class="sidebar-nav  mb-5">
+                        <div class="filter-title">
+                            Danh mục sản phẩm
+                        </div>
                         <div class="nav">
                             <ul>
                                 @foreach (var item in Model.Categories.Where(a => a.ParentId == null))

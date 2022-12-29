@@ -675,7 +675,7 @@ h6 {
   font-family: "Quicksand-Bold";
 }
 .artilce-infor .description {
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   line-height: 18px;
   height: 66px;
   font-style: normal;
@@ -1562,6 +1562,9 @@ h1 {
   .introduct-img i {
     font-size: 40px;
   }
+  .artilce-thumail img {
+    height: 220px;
+  }
 }
 @media (max-width: 820px) {
   .model-form {
@@ -1751,6 +1754,9 @@ h1 {
   .produc-detail_infor .ratting {
     text-align: center;
   }
+  .introduct-content .introduct-description {
+    -webkit-line-clamp: 4;
+  }
 }
 @media (max-width: 468px) {
   .breadcrumb {
@@ -1829,6 +1835,20 @@ h1 {
   }
   .product-thumnail__item img {
     aspect-ratio: 7/6;
+  }
+  .artilce-infor {
+    padding: 15px;
+  }
+  .artilce-thumail img {
+    border-bottom-left-radius: 0;
+    aspect-ratio: 7/6;
+    border-top-right-radius: 10px;
+  }
+  .introduct-img {
+    display: block;
+  }
+  .introduct-name {
+    text-align: center !important;
   }
 }
 .logo-footer {

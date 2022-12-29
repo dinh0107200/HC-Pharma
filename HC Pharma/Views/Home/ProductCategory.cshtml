@@ -11,6 +11,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="@Url.Action("Index")"><i class="fas fa-home-lg-alt"></i>Trang chủ</a></li>
                 <li class="breadcrumb-item"><a href="#">@Model.Category.CategoryName</a></li>
+
             </ol>
         </nav>
     </div>
@@ -40,8 +41,8 @@
                         </div>
                         @foreach (var item in Model.Categories)
                         {
-                            <div class="filter-item mb-3">
-                                <input data-filter="" type="radio" @if (Model.Url == item.Url) { @Html.Raw("checked='checked'") } name="catId" value="@item.Id" id="@item.Id">
+                            <div class="filter-item d-flex mb-3">
+                                <input data-filter="" class="mr-2" type="radio" @if (Model.Url == item.Url) { @Html.Raw("checked='checked'") } name="catId" value="@item.Id" id="@item.Id">
                                 <label for="@item.Id">@item.CategoryName</label>
                             </div>
                         }
