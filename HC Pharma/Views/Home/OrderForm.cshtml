@@ -21,13 +21,10 @@
         <input type="hidden" name="Order.ProductName" value="@Model.Product.Name" />
         <input type="hidden" name="Order.ProductUrl" value="@Model.Product.Url" />
         <input type="hidden" name="Order.ProductImg" value="@Model.Product.ListImage.Split(',')[0]" />
-        @if (Model.Product.Price > 0)
-        {
-            <div class="numberForm">
-                Số lượng:
-                <input type="number" class="quantity" name="Order.Quantity" value="1" min="1" max="999" />
-            </div>
-        }
+        <div class="numberForm">
+            Nhập số lượng:
+            <input type="number" class="quantity" name="Order.Quantity" value="1" min="1" max="999" />
+        </div>
         <h3>Thông tin của bạn</h3>
         <div class="model-input">
             @Html.TextBoxFor(model => model.Order.CustomerInfo.FullName, new { @class = "form-control", @placeholder = "Họ và tên" })

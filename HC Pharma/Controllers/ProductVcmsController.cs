@@ -351,6 +351,9 @@ namespace HC_Pharma.Controllers
                 product.DescriptionMeta = model.Product.DescriptionMeta;
                 product.Sort = model.Product.Sort;
                 product.Star = model.Product.Star;
+                product.Origin = model.Product.Origin;
+                product.Producer = model.Product.Producer;
+                product.Specifications= model.Product.Specifications;
 
                 _unitOfWork.Save();
 

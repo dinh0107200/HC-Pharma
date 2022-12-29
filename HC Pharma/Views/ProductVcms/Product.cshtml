@@ -58,6 +58,18 @@
                         <td class="form_text">@Html.EditorFor(model => model.PriceSale)</td>
                     </tr>
                     <tr>
+                        <td class="form_name">@Html.LabelFor(model => model.Product.Producer)</td>
+                        <td class="form_text">@Html.EditorFor(model => model.Product.Producer)</td>
+                    </tr>
+                    <tr>
+                        <td class="form_name">@Html.LabelFor(model => model.Product.Origin)</td>
+                        <td class="form_text">@Html.EditorFor(model => model.Product.Origin)</td>
+                    </tr>
+                    <tr>
+                        <td class="form_name">@Html.LabelFor(model => model.Product.Specifications)</td>
+                        <td class="form_text">@Html.EditorFor(model => model.Product.Specifications)</td>
+                    </tr>
+                    <tr>
                         <td class="form_name">@Html.LabelFor(model => model.Product.Star)</td>
                         <td class="form_text">@Html.EditorFor(model => model.Product.Star)</td>
                     </tr>

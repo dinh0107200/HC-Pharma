@@ -28,8 +28,12 @@
             {
                 @Html.DisplayFor(a => a.Price)
             }
+            @if (Model.Price == null && Model.PriceSale == null)
+            {
+                <p>Liên hệ</p>
+            }
         </div>
-        <div class="product-description truncate">
+        <div class="product-description truncate mt-2">
            @Model.Description
         </div>
     </div>

@@ -20,31 +20,29 @@
         <div class="row">
             <div class="col-lg-3 order-lg-0 order-1">
                 <div class="product-filter">
-                    <div class="filter-title">
-                       Danh mục sản phẩm
+                    <input type="hidden" name="currentUrl" value="@Url.Action("AllProduct", "Home")" />
+                    <div class="filter-title text-sm-left text-primary p-0">
+                        Bộ lọc sản phẩm
                     </div>
-                    <div class="sidebar-nav mt-3 mb-5">
-                        @if (Model.Categories.Any())
+                    <div class="filter-search ">
+                        <form action="@Url.Action("SearchProduct")">
+                            <input type="text" name="keywords" id="" placeholder="Tìm kiếm phẩm">
+                            <button type="submit"><i class="far fa-search"></i></button>
+                        </form>
+                    </div>
+                    <div class="filter-title text-sm-left text-primary p-0">
+                        Sản phẩm
+                    </div>
+                    <div class="list-filter">
+                        <div class="filter-item mb-3">
+                            <input data-filter="" type="radio" id="all" checked="checked" name="catId" value="0">
+                            <label for="all">Tất cả sản phẩm</label>
+                        </div>
+                        @foreach (var item in Model.Categories)
                         {
-                            <div class="nav">
-                                <ul>
-                                    @foreach (var item in Model.Categories.Where(a => a.ParentId == null))
-                                    {
-                                        <li>
-                                            <a href="@Url.Action("ProductCategory" , new {url = item.Url})">@item.CategoryName</a>
-                                            @if (Model.Categories.Any(a => a.ParentId == item.Id))
-                                            {
-                                                <a class="menu-toggle" href="#"></a>
-                                                <ul class="sub-menu">
-                                                    @foreach (var child in Model.Categories.Where(a => a.ParentId == item.Id))
-                                                    {
-                                                        <li><a href="@Url.Action("ProductCategory" , new {url = child.Url})">@child.CategoryName</a></li>
-                                                    }
-                                                </ul>
-                                            }
-                                        </li>
-                                    }
-                                </ul>
+                            <div class="filter-item mb-3">
+                                <input data-filter="" type="radio" @if (Model.Url == item.Url) { @Html.Raw("checked='checked'") } name="catId" value="@item.Id" id="@item.Id">
+                                <label for="@item.Id">@item.CategoryName</label>
                             </div>
                         }
                     </div>
@@ -59,3 +57,8 @@
     </div>
 </section>
 
+@section scripts {
+    <script>
+        Sort("/Home/GetProduct");
+    </script>
+}

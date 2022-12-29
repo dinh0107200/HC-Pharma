@@ -50,6 +50,8 @@
                             {
                                 <strong>Giá khuyến mãi: </strong>@Html.DisplayFor(m => item.PriceSale) <br />
                             }
+                            <strong>Số lượng: </strong>@Html.DisplayFor(m => quote.Quantity) <br />
+
                             if (item.ListImage != null)
                             {
                                 <a href="@Url.Action("ProductDetail", "Home", new {url = item.Url})" target="_blank"><img class="img-border" src="@Path.Combine("/images/products/", item.ListImage.Split(',')[0])?w=100&h=100" alt="" /></a>

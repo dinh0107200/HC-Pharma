@@ -28,204 +28,326 @@
 <section class="product-detail">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4">
-                @if (Model.Product.ListImage != null)
-                {
-                    var arr = Model.Product.ListImage.Split(',');
-                    <div class="product-thumnail">
-                        @foreach (var item in arr)
-                        {
-                            <div class="product-thumnail__item">
-                                <img src="@Path.Combine("/images/products/", item)" alt="@Model.Product.Name">
-                            </div>
-                        }
-                    </div>
-                }
-                @if (Model.Product.ListImage != null)
-                {
-                    var arr = Model.Product.ListImage.Split(',');
-                    <div class="product-nav">
-                        @foreach (var item in arr)
-                        {
-                            <div class="product-nav__item">
-                                <img src="@Path.Combine("/images/products/", item)" alt="@Model.Product.Name">
-                            </div>
-                        }
-                    </div>
-                }
-
-            </div>
-            <div class="col-lg-8">
-                <div class="produc-detail_infor">
-                    <div class="name-product">
-                        @Model.Product.Name
-                    </div>
-                    <div class="ratting">
-                        @for (int i = 0; i < Model.Product.Star; i++)
-                        {
-                            <i class="fas fa-star"></i>
-                        }
-                    </div>
-                    <div class="product-prices">
-                        <div class="price-title">
-                            Giá :
+            <div class="col-lg-3 d-lg-block d-none" >
+                <div class="product-filter">
+                    <div class="sidebar-nav mb-4">
+                        <div class="filter-title">
+                            Danh mục sản phẩm
                         </div>
-                        @if (Model.Product.PriceSale > 0)
+                        @if (Model.Categories.Any())
                         {
-                            var percent = (decimal)Model.Product.PriceSale / (decimal)Model.Product.Price;
-                            var discount = 100 - Math.Truncate(percent * 100);
-                            <div class="price-item">
-                                <p>
-                                    @Html.DisplayFor(m => Model.Product.PriceSale)
-                                </p>
-                                <div class="price-sale">
-                                    <strike>
-                                        @Html.DisplayFor(m => Model.Product.Price)
-                                    </strike>
-                                    <span>@discount% giảm</span>
+                            <div class="nav">
+                                <ul>
+                                    @foreach (var item in Model.Categories.Where(a => a.ParentId == null))
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("ProductCategory" , new {url = item.Url})">@item.CategoryName</a>
+                                            @if (Model.Categories.Any(a => a.ParentId == item.Id))
+                                            {
+                                                <a class="menu-toggle" href="#"></a>
+                                                <ul class="sub-menu">
+                                                    @foreach (var child in Model.Categories.Where(a => a.ParentId == item.Id))
+                                                    {
+                                                        <li><a href="@Url.Action("ProductCategory" , new {url = child.Url})">@child.CategoryName</a></li>
+                                                    }
+                                                </ul>
+                                            }
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="product-new mb-5">
+                    <div class="product-new-title">
+                        Sản phẩm đăng gần đây
+                    </div>
+                    <hr />
+                    @foreach (var item in Model.NewProduct)
+                    {
+                        <div class="media mb-3">
+                            <div class="media-thuml mr-3">
+                                <a href="@Url.Action("ProductDetail" , new {url = item.Url})">
+                                    @if (item.ListImage != null)
+                                    {
+                                        <img src="@Path.Combine("/images/products/", item.ListImage.Split(',')[0])" title="@item.Name" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Content/images/img-main/on-image.jpg" title="@item.Name" />
+                                    }
+                                </a>
+                            </div>
+                            <div class="media-infor">
+                                <a href="@Url.Action("ProductDetail" , new {url = item.Url})" class="truncate">@item.Name</a>
+                                <div class="media-price">
+                                    @if (item.PriceSale > 0)
+                                    {
+                                        @Html.DisplayFor(m => item.PriceSale)
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(m => item.Price)
+                                    }
+                                    @if (item.Price == null && item.PriceSale == null)
+                                    {
+                                        <p>Liên hệ</p>
+                                    }
                                 </div>
                             </div>
-                        }
-                        else
-                        {
-                            <div class="price-item">
-                                <p>
-                                    @Html.DisplayFor(m => Model.Product.Price)
-                                </p>
-                            </div>
-                        }
-
-                    </div>
-                    <div class="product-descriptions">
-                        <div class="product-description_title mb-3">
-                            Mô tả
                         </div>
-                        @if (Model.Product.Description != null)
-                        {
-                            <div class="description-item">
-                                @Model.Product.Description
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="description-item">
-                                <div class="col-12">
-                                    <p class="alert alert-success small">Nội dung hiện chưa được cập nhật. Vui lòng quay lại sau !!!!</p>
-                                </div>
-                            </div>
-                        }
+                    }
 
-                    </div>
-                </div>
-                <div class="detail-btn">
-                    <span>
-                        <i class="fas fa-comments-alt"></i> Liên hệ
-                    </span>
-                    <a href="tel:@config.Hotline">
-                        <i class="fas fa-phone-alt"></i>Gọi ngay
-                    </a>
-                </div>
-                <div class="share">
-                    <ul class="d-flex align-items-center ul-reset">
-                        <li class="mr-3">Chia sẻ:</li>
-                        <li><button class="facebook rounded-circle" onclick="window.open('https://www.facebook.com/sharer.php?u='+encodeURIComponent(location.href)+'&amp;t='+encodeURIComponent(document.title));return false"><i class="fab fa-facebook-f"></i></button></li>
-                        <li><button class="instagram rounded-circle" onclick="window.open('https://www.instagram.com/?url='+encodeURIComponent(location.href)+'&amp;t='+encodeURIComponent(document.title));return false"><i class="fab fa-instagram"></i></button></li>
-                        <li><button class="twitter rounded-circle" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&amp;text='+encodeURIComponent(document.title));return false"><i class="fab fa-twitter"></i></button></li>
-                        <li><button class="linkedin rounded-circle" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href)+'&amp;t='+encodeURIComponent(document.title));return false"><i class="fab fa-linkedin-in"></i></button></li>
-                    </ul>
                 </div>
             </div>
-        </div>
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Công dụng</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Thành phần</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Hướng dẫn sử dụng</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">Đánh giá</a>
-            </li>
-        </ul><!-- Tab panes -->
-        <div class="tab-content">
-            <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                @if (Model.Product.Uses != null)
-                {
-                    @Html.Raw(Model.Product.Uses)
-                }
-                else
-                {
-                    <div class="description-item">
-                        <div class="col-12">
-                            <p class="alert alert-success small">Nội dung hiện chưa được cập nhật. Vui lòng quay lại sau !!!!</p>
-                        </div>
-                    </div>
-                }
-            </div>
-            <div class="tab-pane" id="tabs-2" role="tabpanel">
-                @if (Model.Product.Body != null)
-                {
-                    @Html.Raw(Model.Product.Body)
-
-                }
-                else
-                {
-                    <div class="description-item">
-                        <div class="col-12">
-                            <p class="alert alert-success small">Nội dung hiện chưa được cập nhật. Vui lòng quay lại sau !!!!</p>
-                        </div>
-                    </div>
-                }
-            </div>
-            <div class="tab-pane" id="tabs-3" role="tabpanel">
-                @if (Model.Product.Usermanual != null)
-                {
-                    @Html.Raw(Model.Product.Usermanual)
-                }
-                else
-                {
-                    <div class="description-item">
-                        <div class="col-12">
-                            <p class="alert alert-success small">Nội dung hiện chưa được cập nhật. Vui lòng quay lại sau !!!!</p>
-                        </div>
-                    </div>
-                }
-            </div>
-            <div class="tab-pane" id="tabs-4" role="tabpanel">
+            <div class="col-lg-9">
                 <div class="row">
                     <div class="col-lg-6">
-                        @if (Model.Reviews.Any())
+                        @if (Model.Product.ListImage != null)
                         {
-                            foreach (var item in Model.Reviews.Where(a => a.ProductId == Model.Product.Id))
-                            {
-                                <div class="review-item">
-                                    <div class="customer-review">
-                                        @item.Customer
+                            var arr = Model.Product.ListImage.Split(',');
+                            <div class="product-thumnail">
+                                @foreach (var item in arr)
+                                {
+                                    <div class="product-thumnail__item pt-0 pl-lg-0">
+                                        <img src="@Path.Combine("/images/products/", item)" alt="@Model.Product.Name">
                                     </div>
-                                    <div class="review-star">
-                                        <div class="ratting">
-                                            @for (int a = 0; a < item.Rate; a++)
-                                            {
-                                                <i class="fas fa-star"></i>
-                                            }
-
-
-                                        </div>
-                                    </div>
-                                    <div class="review-content">
-                                        @item.Coment
-                                    </div>
-                                </div>
-                                <hr>
-                            }
+                                }
+                            </div>
                         }
+                        @if (Model.Product.ListImage != null)
+                        {
+                            var arr = Model.Product.ListImage.Split(',');
+                            <div class="product-nav">
+                                @foreach (var item in arr)
+                                {
+                                    <div class="product-nav__item">
+                                        <img src="@Path.Combine("/images/products/", item)" alt="@Model.Product.Name">
+                                    </div>
+                                }
+                            </div>
+                        }
+
                     </div>
                     <div class="col-lg-6">
-                        <div class="form-vote">
-                            @Html.Action("ReviewForm")
+                        <div class="produc-detail_infor">
+                            <div class="name-product">
+                                @Model.Product.Name
+                            </div>
+                            <div class="ratting">
+                                @for (int i = 0; i < Model.Product.Star; i++)
+                                {
+                                    <i class="fas fa-star"></i>
+                                }
+                            </div>
+                            <div class="product-prices">
+                                <div class="price-title">
+                                    Giá :
+                                </div>
+                                @if (Model.Product.PriceSale > 0)
+                                {
+                                    var percent = (decimal)Model.Product.PriceSale / (decimal)Model.Product.Price;
+                                    var discount = 100 - Math.Truncate(percent * 100);
+                                    <div class="price-item">
+                                        <p>
+                                            @Html.DisplayFor(m => Model.Product.PriceSale)
+                                        </p>
+                                        <div class="price-sale">
+                                            <strike>
+                                                @Html.DisplayFor(m => Model.Product.Price)
+                                            </strike>
+                                            <span>@discount% giảm</span>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="price-item">
+                                        <p>
+                                            @Html.DisplayFor(m => Model.Product.Price)
+                                        </p>
+                                    </div>
+                                }
+                                @if (Model.Product.Price == null && Model.Product.PriceSale == null)
+                                {
+                                    <div class="price-item">
+                                        <p>
+                                           Liên hệ
+                                        </p>
+                                    </div>
+                                }
+                            </div>
+                            <div class="ul-block mb-3">
+                                @if (Model.Product.Producer != null)
+                                {
+                                    <div class="price-title p-2">
+                                        <strong>
+                                            Nhà sản xuất:
+                                        </strong>
+                                        @Model.Product.Producer
+                                    </div>
+                                }
+
+                                @if (Model.Product.Origin != null)
+                                {
+                                    <div class="price-title p-2">
+                                        <strong>
+                                            Xuất xứ:
+                                        </strong>
+                                        @Model.Product.Origin
+                                    </div>
+                                }
+
+                                @if (Model.Product.Specifications != null)
+                                {
+                                    <div class="price-title  p-2">
+                                        <strong>
+                                            Quy cách:
+                                        </strong>
+                                        @Model.Product.Specifications
+                                    </div>
+                                }
+                            </div>
+                            <div class="product-descriptions">
+                                @if (Model.Product.Description != null)
+                                {
+                                    <div class="description-item">
+                                        @Model.Product.Description
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="description-item">
+                                        <div class="col-12">
+                                            <p class="alert alert-success small">Nội dung hiện chưa được cập nhật. Vui lòng quay lại sau !!!!</p>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                        <div class="detail-btn">
+                            <span>
+                                <i class="fas fa-comments-alt"></i> Liên hệ
+                            </span>
+                            <a href="tel:@config.Hotline">
+                                <i class="fas fa-phone-alt"></i>Gọi ngay
+                            </a>
+                        </div>
+                        <div class="share mb-3">
+                            <ul class="d-flex align-items-center ul-reset">
+                                <li class="mr-3">Chia sẻ:</li>
+                                <li><button class="facebook rounded-circle" onclick="window.open('https://www.facebook.com/sharer.php?u='+encodeURIComponent(location.href)+'&amp;t='+encodeURIComponent(document.title));return false"><i class="fab fa-facebook-f"></i></button></li>
+                                <li><button class="instagram rounded-circle" onclick="window.open('https://www.instagram.com/?url='+encodeURIComponent(location.href)+'&amp;t='+encodeURIComponent(document.title));return false"><i class="fab fa-instagram"></i></button></li>
+                                <li><button class="twitter rounded-circle" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&amp;text='+encodeURIComponent(document.title));return false"><i class="fab fa-twitter"></i></button></li>
+                                <li><button class="linkedin rounded-circle" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href)+'&amp;t='+encodeURIComponent(document.title));return false"><i class="fab fa-linkedin-in"></i></button></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 rounded mt-3">
+                        <div class="border p-3">
+                            <ul class="nav nav-tabs mt-1" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Công dụng</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Thành phần</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Hướng dẫn sử dụng</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">Đánh giá</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                    @if (Model.Product.Uses != null)
+                                    {
+                                        @Html.Raw(Model.Product.Uses)
+                                    }
+                                    else
+                                    {
+                                        <div class="description-item">
+                                            <div class="col-12">
+                                                <p class="alert alert-success small">Nội dung hiện chưa được cập nhật. Vui lòng quay lại sau !!!!</p>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="tab-pane" id="tabs-2" role="tabpanel">
+                                    @if (Model.Product.Body != null)
+                                    {
+                                        @Html.Raw(Model.Product.Body)
+
+                                    }
+                                    else
+                                    {
+                                        <div class="description-item">
+                                            <div class="col-12">
+                                                <p class="alert alert-success small">Nội dung hiện chưa được cập nhật. Vui lòng quay lại sau !!!!</p>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="tab-pane" id="tabs-3" role="tabpanel">
+                                    @if (Model.Product.Usermanual != null)
+                                    {
+                                        @Html.Raw(Model.Product.Usermanual)
+                                    }
+                                    else
+                                    {
+                                        <div class="description-item">
+                                            <div class="col-12">
+                                                <p class="alert alert-success small">Nội dung hiện chưa được cập nhật. Vui lòng quay lại sau !!!!</p>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="tab-pane" id="tabs-4" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-lg-6 order-lg-0 order-1">
+                                            <div class="form-vote">
+                                                @Html.Action("ReviewForm")
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 order-lg-1 order-0">
+                                            @if (Model.Reviews.Any())
+                                            {
+                                                foreach (var item in Model.Reviews.Where(a => a.ProductId == Model.Product.Id))
+                                                {
+                                                    <div class="review-item">
+                                                        <div class="customer-review">
+                                                            @item.Customer
+                                                        </div>
+                                                        <div class="review-star">
+                                                            <div class="ratting">
+                                                                @for (int a = 0; a < item.Rate; a++)
+                                                                {
+                                                                    <i class="fas fa-star"></i>
+                                                                }
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="review-content">
+                                                            @item.Coment
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <div class="col-12">
+                                                    <p class="alert alert-success small">Nội dung hiện chưa được cập nhật. Vui lòng quay lại sau !!!!</p>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

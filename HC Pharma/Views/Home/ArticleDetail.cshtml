@@ -28,9 +28,12 @@
                     <div class="artilce-detail-title">
                         @Model.Article.Subject
                     </div>
-                    <div class="date pb-3   ">
+                    <div class="date pb-3">
                         <i class="fal fa-calendar-alt"></i>
                         @String.Format("{0:d/M/yyyy}", Model.Article.CreateDate)
+                    </div>
+                    <div class="box-des">
+                        @Model.Article.Description
                     </div>
                     <div class="artilce-content">
                         @Html.Raw(Model.Article.Body)

@@ -366,13 +366,16 @@ h6 {
         }
     }
 }
-
+.banner{
+    height:100vh;
+}
 .banner-item {
     img {
         transition: all 1s;
         width: 100%;
         aspect-ratio: 3;
-        object-fit:cover;
+        object-fit: cover;
+        height: 100vh;
     }
 }
 
@@ -388,9 +391,17 @@ h6 {
 .introduct-img {
     margin-top: 30px;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+        font-size: 50px;
+        color: $colorMain2;
+        margin-right: 10px;
+    }
 
     h3 {
-        margin-top: 20px;
         @include Quicksand-SemiBold;
         font-style: normal;
         font-weight: 600;
@@ -398,6 +409,15 @@ h6 {
         line-height: 23px;
         text-align: center;
         text-transform: uppercase;
+    }
+
+    .introduct-name{
+        text-align:start;
+        h5{
+            margin-bottom:3px;
+            font-weight:600;
+            font-size:18px;
+        }
     }
 }
 
@@ -526,7 +546,7 @@ h6 {
     cursor: pointer;
     margin-bottom: 30px;
     padding-bottom: 30px;
-    transition: all .6s;
+    transition: all 1s;
     border-radius: 10px;
     margin-top: 30px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -728,19 +748,29 @@ h6 {
     }
 }
 
-.artilce-thumail {
-    margin-top: 30px;
-    overflow: hidden;
+.article-thuml {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 
     img {
+        aspect-ratio: 7/4 !important;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
+        border-bottom-left-radius: 0 !important;
+    }
+}
+.artilce-thumail {
+    margin-top: 30px;
+    overflow: hidden;
+
+
+    img {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
         transition: all 1s;
         width: 100%;
         object-fit: cover;
-        aspect-ratio: 7/4;
+        aspect-ratio: 7/6;
 
         &:hover {
             transform: scale(1.1);
@@ -749,7 +779,7 @@ h6 {
 }
 
 .artilce-infor {
-    padding: 15px;
+    padding: 15px 15px 15px 0;
 
     .date {
         font-style: normal;
@@ -761,6 +791,8 @@ h6 {
     }
 
     .name {
+        display:flex;
+        align-items:center;
         -webkit-line-clamp: 2;
         height: 50px;
         margin-top: 10px;
@@ -773,7 +805,7 @@ h6 {
     }
 
     .description {
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 4;
         line-height: 18px;
         height: 66px;
         font-style: normal;
@@ -1106,11 +1138,14 @@ h6 {
 }
 
 .filter-title {
+    padding:10px;
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
     line-height: 22px;
-    color: $colorMain;
+    color:$white;
+
+    text-align:center;
     @include Quicksand-SemiBold;
 }
 
@@ -1164,7 +1199,7 @@ h6 {
     img {
         width: 100%;
         object-fit: cover;
-        aspect-ratio: 5/5;
+        aspect-ratio: 7/6;
         border: 1px solid #EEEEEE;
         border-radius: 5px;
     }
@@ -1450,7 +1485,7 @@ h6 {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
     margin-bottom: 30px;
-    padding: 10px;
+    padding: 20px;
 
     button {
         outline: none;
@@ -1510,7 +1545,7 @@ h6 {
 }
 
 .model-form {
-    padding: 10px;
+    padding: 20px;
     background: $white;
     border-radius: 5px;
     width: 40%;
@@ -1699,9 +1734,6 @@ h1 {
 
 
 
-
-
-
 @include maxWidth(1024px) {
     .form-input {
         input {
@@ -1764,8 +1796,20 @@ h1 {
         }
     }
 
-    .cutomer{
-        margin-top:0;
+    .cutomer {
+        margin-top: 0;
+    }
+
+    .product-thumnail__item img {
+        aspect-ratio: 6/7
+    }
+
+    .introduct-img .introduct-name h5 {
+        font-size: 14px;
+    }
+
+    .introduct-img i{
+        font-size:40px;
     }
 }
 @include maxWidth(820px) {
@@ -1905,9 +1949,14 @@ h1 {
         }
     }
 
+    .banner {
+        height: auto;
+    }
+
     .banner-item {
         img {
             aspect-ratio: 7/3;
+            height: auto;
         }
     }
 
@@ -2019,9 +2068,10 @@ h1 {
 }
 
 @include maxWidth(468px) {
-    .breadcrumb{
-        font-size:14px;
-    } 
+    .breadcrumb {
+        font-size: 14px;
+    }
+
     .artilce-content {
         h1, h2, h3, h4, h5, h6 {
             font-size: 18px;
@@ -2137,6 +2187,10 @@ h1 {
     .artilce-detail-title {
         font-size: 18px;
     }
+
+    .product-thumnail__item img{
+        aspect-ratio:7/6
+    }
 }
 .logo-footer {
     width: 189px;
@@ -2186,7 +2240,8 @@ a:not([href]):not([class]){
 }
 .sidebar-nav {
     background-color: $colorMain;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius:5px;
 
     ul {
         list-style-type: none;
@@ -2194,7 +2249,7 @@ a:not([href]):not([class]){
         margin-bottom: 0;
 
         li {
-            border-bottom: 1px solid $white;
+            border-top: 1px solid $white;
             position: relative;
             width: 100%;
             user-select: none;
@@ -2249,8 +2304,6 @@ a:not([href]):not([class]){
                     /* right: 1px; */
                 }
             }
-
-          
         }
     }
 
@@ -2579,4 +2632,81 @@ a:not([href]):not([class]){
     a{
         color:$colorMain;   
     }
+}
+.media-item {
+    display: flex;
+    .media-content{
+        h5{
+            @include Quicksand-Regular;
+            font-weight:600;
+        }
+    }
+}
+.content-detail {
+    h2 {
+        width: max-content;
+        font-size: 18px;
+        @include Quicksand-Bold;
+        position: relative;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 3px;
+            border-radius:5px;
+            background: $colorMain;
+        }
+    }
+}
+.product-new {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 5px;
+    padding: 10px;
+}
+.media-thuml{
+    width:120px;
+    img{
+        width:100%;
+        object-fit:cover;
+        aspect-ratio:4/3;
+    }
+}
+.product-new-title{
+    text-align:center;
+    text-transform:uppercase;
+    color:$colorMain;
+    margin-bottom:10px;
+    @include Quicksand-Bold;
+}
+.media-infor {
+    a {
+        -webkit-line-clamp: 2;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 25px;
+        text-align: justify;
+        font-family: "Quicksand-SemiBold";
+        color: #000;
+    }
+
+    .media-price {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 30px;
+        font-family: "Quicksand-SemiBold";
+        color: #EA3D30;
+        margin-bottom: 5px;
+    }
+}
+.box-des {
+    border: 2px dashed rgba(99, 99, 99, 0.2);
+    padding: 10px;
+    background: #edf8ff;
+    margin-bottom: 10px;
 }

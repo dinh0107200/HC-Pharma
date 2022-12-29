@@ -14,6 +14,12 @@ namespace HC_Pharma.Models
 
         [Display(Name = "Mô tả sản phẩm"), UIHint("TextArea")]
         public string Description { get; set; }
+        [Display(Name = "Nhà sản xuất"), UIHint("TextBox")]
+        public string Producer { get; set; }
+        [Display(Name = "Xuất xứ"), UIHint("TextBox")]
+        public string Origin { get; set; }
+        [Display(Name = "Quy cách"), UIHint("TextBox")]
+        public string Specifications { get; set; }
         [Display(Name = "Công dụng"), UIHint("EditorBox")]
         public string Uses { get; set; }
 

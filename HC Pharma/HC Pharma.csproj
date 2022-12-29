@@ -189,6 +189,10 @@
     <Compile Include="Migrations\202212260252291_footer.designer.cs">
       <DependentUpon>202212260252291_footer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212280622439_update-product.cs" />
+    <Compile Include="Migrations\202212280622439_update-product.designer.cs">
+      <DependentUpon>202212280622439_update-product.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Article.cs" />
@@ -246,12 +250,16 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\images\img-main\bg-feed-back.png" />
+    <Content Include="Content\images\img-main\box-iso-svgrepo-com.svg" />
     <Content Include="Content\images\img-main\facebook.png" />
     <Content Include="Content\images\img-main\google-plus %281%29 1.png" />
     <Content Include="Content\images\img-main\google-plus.png" />
     <Content Include="Content\images\img-main\Group 36748.png" />
     <Content Include="Content\images\img-main\Group 36749.png" />
     <Content Include="Content\images\img-main\Group 36767.png" />
+    <Content Include="Content\images\img-main\high-quality %281%29 1.png" />
+    <Content Include="Content\images\img-main\icon-banner-1-131.png" />
+    <Content Include="Content\images\img-main\icon-banner-2-875.png" />
     <Content Include="Content\images\img-main\icon-feedback.png" />
     <Content Include="Content\images\img-main\Layer 2.png" />
     <Content Include="Content\images\img-main\logo-da-thong-bao-bo-cong-thuong-mau-xanh 1.png" />
@@ -259,6 +267,7 @@
     <Content Include="Content\images\img-main\mess.png" />
     <Content Include="Content\images\img-main\on-image.jpg" />
     <Content Include="Content\images\img-main\phone-circle.png" />
+    <Content Include="Content\images\img-main\pill-capsule-svgrepo-com.svg" />
     <Content Include="Content\images\img-main\pinterest.png" />
     <Content Include="Content\images\img-main\skype.png" />
     <Content Include="Content\images\img-main\social-media %284%29 1.png" />
@@ -269,10 +278,13 @@
     <Content Include="Content\images\img-main\youtube.png" />
     <Content Include="Content\images\img-main\zalo-logo.png" />
     <Content Include="Content\images\img-main\”.png" />
+    <Content Include="Content\images\svg-contact\dichvu.svg" />
     <Content Include="Content\images\svg-contact\earth.svg" />
     <Content Include="Content\images\svg-contact\email.svg" />
+    <Content Include="Content\images\svg-contact\heart.svg" />
     <Content Include="Content\images\svg-contact\map.svg" />
     <Content Include="Content\images\svg-contact\phone.svg" />
+    <Content Include="Content\images\svg-contact\tuvan.svg" />
     <Content Include="Content\jquery.fancybox.css" />
     <Content Include="Content\jquery.nice-number.css" />
     <Content Include="Content\jquery.toast.css" />
@@ -661,6 +673,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212260252291_footer.resx">
       <DependentUpon>202212260252291_footer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212280622439_update-product.resx">
+      <DependentUpon>202212280622439_update-product.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -58,7 +58,7 @@
     <div class="header-menu">
         <div class="container">
             <ul class="list-menu ul-reset">
-                <li><a href="/">Trang chủ</a></li>
+                <li><a href="/"><i class="fas fa-home-alt"></i></a></li>
                 @if (Model.IntroduceCat.Any(a => a.ParentId == null))
                 {
                     foreach (var item in Model.IntroduceCat.Where(a => a.ParentId == null))

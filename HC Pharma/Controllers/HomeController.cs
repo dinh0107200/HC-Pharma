@@ -156,6 +156,8 @@ namespace HC_Pharma.Controllers
         [Route("{url}.html", Order = 1)]
         public ActionResult ProductDetail (string url)
         {
+            var newproduct = _unitOfWork.ProductRepository.GetQuery(
+                p => p.Active, c => c.OrderByDescending(p => p.CreateDate), 4);
             var product = _unitOfWork.ProductRepository.GetQuery(p => p.Url == url).FirstOrDefault();
             var products = _unitOfWork.ProductRepository.GetQuery(
                     p => p.Id != product.Id && p.Active && (p.ProductCategoryId == product.ProductCategoryId || p.ProductCategory.ParentId == product.ProductCategoryId),
@@ -170,6 +172,8 @@ namespace HC_Pharma.Controllers
                 Reviews = review,
                 Product = product,
                 Products = products,
+                Categories = ProductCategories,
+                NewProduct = newproduct,
             };
             return View(model);
         }
@@ -313,7 +317,7 @@ namespace HC_Pharma.Controllers
             var model = new AllArticleViewModel()
             {
                 Articles = article.ToPagedList(pageNumber, 12),
-                Categories = ArticleCategories,
+                Categories = ArticleCategories.Where(a=> a.TypePost == TypePost.Article || a.TypePost == TypePost.Introduce),
             };
             return View(model);
         }
@@ -369,7 +373,7 @@ namespace HC_Pharma.Controllers
             {
                 Category = category,
                 Articles = articles.ToPagedList(pageNumber, 12),
-                Categories = ArticleCategories,
+                Categories = ArticleCategories.Where(a => a.TypePost == TypePost.Article || a.TypePost == TypePost.Introduce),
             };
 
             if (category.ParentId != null)

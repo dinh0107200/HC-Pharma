@@ -50,6 +50,10 @@ namespace HC_Pharma.ViewModel
         public Product Product { get; set; }
         public IEnumerable<Review> Reviews { get; set; }
         public Review Review { get; set; }
+        public ProductCategory Category { get; set; }
+        public IEnumerable<ProductCategory> Categories { get; set; }
+        public IEnumerable<Product> NewProduct { get; set; }
+
 
     }
     public class OrderFormViewModel
