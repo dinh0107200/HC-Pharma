@@ -1506,7 +1506,6 @@ h1 {
 }
 
 .list-social {
-  right: -100% !important;
   transition: all 0.8s;
 }
 
@@ -1515,10 +1514,12 @@ h1 {
 }
 
 .show-social {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   background: #2CDEB4;
   padding: 10px;
   color: #fff;
   cursor: pointer;
+  display: none;
 }
 
 .list-social {
@@ -1531,10 +1532,15 @@ h1 {
   top: 50%;
   right: 0;
   cursor: pointer;
-  padding: 15px;
+  padding: 10px;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   z-index: 10;
+}
+
+.hiden-soci {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
 @media (max-width: 1024px) {
@@ -1595,6 +1601,12 @@ h1 {
   }
 }
 @media (max-width: 820px) {
+  .list-social {
+    right: -100% !important;
+  }
+  .show-social {
+    display: block;
+  }
   .back-top {
     width: 40px;
     height: 40px;

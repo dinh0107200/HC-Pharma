@@ -1717,7 +1717,6 @@ h1 {
 }
 
 .list-social {
-    right: -100% !important;
     transition:all .8s;
 }
 
@@ -1725,11 +1724,12 @@ h1 {
     right: 0 !important;
 }
 .show-social {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     background: $colorMain2;
     padding: 10px;
     color: $white;
-    cursor:pointer;
-
+    cursor: pointer;
+    display: none;
 }
 
 .list-social {
@@ -1743,14 +1743,17 @@ h1 {
     top: 50%;
     right: 0;
     cursor: pointer;
-    padding:15px;
+    padding:10px;
     border-top-left-radius:10px;
     border-bottom-left-radius:10px;
     z-index:10;
 }
 
 
-
+.hiden-soci {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
 
 
 
@@ -1841,9 +1844,13 @@ h1 {
     }
 }
 @include maxWidth(820px) {
-    
+    .list-social {
+        right: -100% !important;
+    }
 
-    .back-top {
+    .show-social{
+        display:block;
+    } .back-top {
         width: 40px;
         height: 40px;
     }
@@ -2102,8 +2109,6 @@ h1 {
     .introduct-content .introduct-description {
         -webkit-line-clamp: 4;
     }
-
-    
 }
 
 @include maxWidth(468px) {
