@@ -66,6 +66,8 @@ namespace HC_Pharma.Models
         public string Tiktok { get; set; }
         [Display(Name = "Đường dẫn Shopee"), StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), UIHint("TextBox")]
         public string Shopee { get; set; }
+        [Display(Name = "Đường dẫn Lazada"), StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), UIHint("TextBox")]
+        public string Lazada { get; set; }
         [StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), Display(Name = "Email"), UIHint("TextBox")]
         public string Email { get; set; }
         [Display(Name = "Thông tin liên hệ"), UIHint("EditorBox")]

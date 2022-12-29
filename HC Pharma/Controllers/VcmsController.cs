@@ -266,7 +266,7 @@ namespace HC_Pharma.Controllers
                 config.Skype = model.Skype;
                 config.GooglePlus = model.GooglePlus;
                 config.Pinterest = model.Pinterest;
-                //config.Mess = model.Mess;
+                config.Lazada = model.Lazada;
                 config.Tiki = model.Tiki;
                 config.Tiktok = model.Tiktok;
                 config.Shopee = model.Shopee;

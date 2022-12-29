@@ -197,6 +197,10 @@
     <Compile Include="Migrations\202212290804055_update config.designer.cs">
       <DependentUpon>202212290804055_update config.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212290844249_config.cs" />
+    <Compile Include="Migrations\202212290844249_config.designer.cs">
+      <DependentUpon>202212290844249_config.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Article.cs" />
@@ -266,6 +270,7 @@
     <Content Include="Content\images\img-main\icon-banner-2-875.png" />
     <Content Include="Content\images\img-main\icon-feedback.png" />
     <Content Include="Content\images\img-main\Layer 2.png" />
+    <Content Include="Content\images\img-main\lazada.png" />
     <Content Include="Content\images\img-main\logo-da-thong-bao-bo-cong-thuong-mau-xanh 1.png" />
     <Content Include="Content\images\img-main\logo-twitter-png-5860.png" />
     <Content Include="Content\images\img-main\logotype 1.png" />
@@ -689,6 +694,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212290804055_update config.resx">
       <DependentUpon>202212290804055_update config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212290844249_config.resx">
+      <DependentUpon>202212290844249_config.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
