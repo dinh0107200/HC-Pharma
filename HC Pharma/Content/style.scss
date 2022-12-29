@@ -366,16 +366,14 @@ h6 {
         }
     }
 }
-.banner{
-    height:100vh;
-}
+
 .banner-item {
     img {
         transition: all 1s;
         width: 100%;
         aspect-ratio: 3;
         object-fit: cover;
-        height: 100vh;
+        height: calc(100vh - 140px);
     }
 }
 

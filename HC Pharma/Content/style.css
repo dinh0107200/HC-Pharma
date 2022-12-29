@@ -279,16 +279,12 @@ h6 {
   font-size: 0.875rem;
 }
 
-.banner {
-  height: 100vh;
-}
-
 .banner-item img {
   transition: all 1s;
   width: 100%;
   aspect-ratio: 3;
   object-fit: cover;
-  height: 100vh;
+  height: calc(100vh - 140px);
 }
 
 .introduct {
