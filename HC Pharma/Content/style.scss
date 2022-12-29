@@ -410,6 +410,7 @@ h6 {
         margin-left:10px;
         text-align:start;
         h5{
+            text-transform:uppercase;
             margin-bottom:3px;
             font-weight:600;
             font-size:18px;
@@ -2074,9 +2075,11 @@ h1 {
 }
 
 @include maxWidth(468px) {
-    .introduct-img .introduct-name{
-        margin-left:0;
-    } .breadcrumb {
+    .introduct-img .introduct-name {
+        margin-left: 0;
+    }
+
+    .breadcrumb {
         font-size: 14px;
     }
 
@@ -2139,6 +2142,7 @@ h1 {
 
     .artilce-title-item {
         a {
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
             padding: 7px 14px;
             font-size: 14px;
         }
