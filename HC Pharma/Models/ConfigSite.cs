@@ -58,6 +58,14 @@ namespace HC_Pharma.Models
         public string Hotline { get; set; }
         [Display(Name = "Tài khoản Zalo"), StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), UIHint("TextBox")]
         public string Zalo { get; set; }
+        [Display(Name = "Chat Messenger"), StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), UIHint("TextBox")]
+        public string Mess { get; set; }
+        [Display(Name = "Đường dẫn Tiki"), StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), UIHint("TextBox")]
+        public string Tiki { get; set; }
+        [Display(Name = "Đường dẫn Tik Tok"), StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), UIHint("TextBox")]
+        public string Tiktok { get; set; }
+        [Display(Name = "Đường dẫn Shopee"), StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), UIHint("TextBox")]
+        public string Shopee { get; set; }
         [StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), Display(Name = "Email"), UIHint("TextBox")]
         public string Email { get; set; }
         [Display(Name = "Thông tin liên hệ"), UIHint("EditorBox")]

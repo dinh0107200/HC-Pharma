@@ -193,6 +193,10 @@
     <Compile Include="Migrations\202212280622439_update-product.designer.cs">
       <DependentUpon>202212280622439_update-product.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212290804055_update config.cs" />
+    <Compile Include="Migrations\202212290804055_update config.designer.cs">
+      <DependentUpon>202212290804055_update config.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Article.cs" />
@@ -263,18 +267,24 @@
     <Content Include="Content\images\img-main\icon-feedback.png" />
     <Content Include="Content\images\img-main\Layer 2.png" />
     <Content Include="Content\images\img-main\logo-da-thong-bao-bo-cong-thuong-mau-xanh 1.png" />
+    <Content Include="Content\images\img-main\logo-twitter-png-5860.png" />
     <Content Include="Content\images\img-main\logotype 1.png" />
     <Content Include="Content\images\img-main\mess.png" />
     <Content Include="Content\images\img-main\on-image.jpg" />
     <Content Include="Content\images\img-main\phone-circle.png" />
     <Content Include="Content\images\img-main\pill-capsule-svgrepo-com.svg" />
     <Content Include="Content\images\img-main\pinterest.png" />
+    <Content Include="Content\images\img-main\pngimg.com - tiktok_PNG26.png" />
+    <Content Include="Content\images\img-main\shopee-logo-40476.png" />
     <Content Include="Content\images\img-main\skype.png" />
     <Content Include="Content\images\img-main\social-media %284%29 1.png" />
     <Content Include="Content\images\img-main\social-media %285%29 1.png" />
+    <Content Include="Content\images\img-main\tiki.png" />
     <Content Include="Content\images\img-main\twitter 1.png" />
     <Content Include="Content\images\img-main\twitter.png" />
     <Content Include="Content\images\img-main\Union.png" />
+    <Content Include="Content\images\img-main\youtube-logo-hd-8.png" />
+    <Content Include="Content\images\img-main\youtube-logo-png-2067.png" />
     <Content Include="Content\images\img-main\youtube.png" />
     <Content Include="Content\images\img-main\zalo-logo.png" />
     <Content Include="Content\images\img-main\”.png" />
@@ -676,6 +686,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212280622439_update-product.resx">
       <DependentUpon>202212280622439_update-product.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212290804055_update config.resx">
+      <DependentUpon>202212290804055_update config.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

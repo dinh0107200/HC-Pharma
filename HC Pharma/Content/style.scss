@@ -393,12 +393,9 @@ h6 {
     align-items: center;
     justify-content: center;
 
-    i {
-        font-size: 50px;
-        color: $colorMain2;
-        margin-right: 10px;
-    }
-
+   img{
+       width:55px;
+   }
     h3 {
         @include Quicksand-SemiBold;
         font-style: normal;
@@ -410,6 +407,7 @@ h6 {
     }
 
     .introduct-name{
+        margin-left:10px;
         text-align:start;
         h5{
             margin-bottom:3px;
@@ -1100,8 +1098,8 @@ h6 {
     color: $white;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 50%;
-    bottom: 30px;
-    right: 10px;
+    bottom: 85px;
+    left: 27px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1815,8 +1813,10 @@ h1 {
     }
 }
 @include maxWidth(820px) {
-
-
+    .back-top{
+        width:40px;
+        height:40px;
+    } 
     .model-form {
         width: 80%;
     }
@@ -2069,12 +2069,14 @@ h1 {
     }
 
     .introduct-content .introduct-description {
-        -webkit-line-clamp:4;
+        -webkit-line-clamp: 4;
     }
 }
 
 @include maxWidth(468px) {
-    .breadcrumb {
+    .introduct-img .introduct-name{
+        margin-left:0;
+    } .breadcrumb {
         font-size: 14px;
     }
 
@@ -2215,6 +2217,7 @@ h1 {
     }
 
     .introduct-name {
+        margin-top: 5px;
         text-align: center !important;
     }
 
@@ -2224,8 +2227,8 @@ h1 {
         }
     }
 
-    .artilce{
-        padding-bottom:30px;
+    .artilce {
+        padding-bottom: 30px;
     }
 }
 .logo-footer {
@@ -2745,4 +2748,30 @@ a:not([href]):not([class]){
     padding: 10px;
     background: #edf8ff;
     margin-bottom: 10px;
+}
+.list-social {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    z-index: 10;
+    transform: translateY(-50%);
+
+    ul {
+        li {
+            background: $white;
+            margin: 10px 0;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px;
+
+            a {
+                img {
+                    padding: 10px;
+                    width: 50px;
+                    height: 50px;
+                    object-fit: contain;
+                }
+            }
+        }
+    }
 }
