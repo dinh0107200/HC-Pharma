@@ -161,11 +161,11 @@
                                 <div class="product-price">
                                     @if (item.PriceSale != null)
                                     {
-                                        @Html.DisplayFor(a => item.Price)
+                                        @Html.DisplayFor(a => item.PriceSale)
                                     }
                                     else
                                     {
-                                        @Html.DisplayFor(a => item.PriceSale)
+                                        @Html.DisplayFor(a => item.Price)
                                     }
                                     @if (item.Price == null && item.PriceSale == null)
                                     {
