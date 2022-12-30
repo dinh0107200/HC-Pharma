@@ -59,6 +59,7 @@ namespace HC_Pharma.Controllers
             var banner = _unitOfWork.BannerRepository.GetQuery(a => a.Active);
             var feedback = _unitOfWork.FeedbackRepository.GetQuery(a => a.Active);
             var partner = _unitOfWork.PartnerRepository.GetQuery(a => a.Active);
+            var intro = _unitOfWork._IntroductRepository.GetQuery(a => a.Active , o => o.OrderBy(a => a.Sort),3);
             var model = new HomeViewModel
             {
                 Categories = category,
@@ -67,6 +68,7 @@ namespace HC_Pharma.Controllers
                 Banner = banner,
                 Feedbacks = feedback,
                 Partners = partner,
+                Introducts = intro,
             };
             return View(model);
         }

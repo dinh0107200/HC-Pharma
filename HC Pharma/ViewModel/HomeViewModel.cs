@@ -15,7 +15,7 @@ namespace HC_Pharma.ViewModel
         public IEnumerable<Article> Articles { get; set;}
         public IEnumerable<Banner> Banner { get; set;}
         public IEnumerable<Feedback> Feedbacks { get; set; }
-
+        public IEnumerable<Introduct> Introducts { get; set; }
         public  IEnumerable<Partner> Partners { get; set; }
     }
     public class HeaderViewModel

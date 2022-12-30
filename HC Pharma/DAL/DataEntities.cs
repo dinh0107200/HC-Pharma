@@ -22,5 +22,6 @@ namespace HC_Pharma.DAL
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Partner> Partners { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Introduct> Introducts { get; set; }
     }
 }

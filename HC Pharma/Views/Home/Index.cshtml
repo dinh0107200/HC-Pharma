@@ -29,42 +29,40 @@
     </section>
 }
 
+
+
 <section class="introduct">
     <div class="intrducts">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-4">
-                    <div class="introduct-img">
-                        <img src="~/Content/images/img-main/Layer 2.png" />
-                        <div class="introduct-name">
-                            <h5>
-                                Đã qua kiểm duyệt
-                            </h5>
+            @if (Model.Introducts.Any())
+            {
+                <div class="row">
+                    @foreach (var item in Model.Introducts)
+                    {
+                        <div class="col-lg-4 col-md-4 col-4">
+                            <div class="introduct-img">
+                                @if (item.Image != null)
+                                {
+                                    <img src="@Path.Combine("/images/intro/", item.Image)" />
+                                }
+                                else
+                                {
+                                    <img src="~/Content/images/img-main/on-image.jpg" />
+                                }
+                                <div class="introduct-name">
+                                    <h5>
+                                        @item.Slogan
+                                    </h5>
 
+                                </div>
+                            </div>
                         </div>
-                    </div>
+
+                    }
+
                 </div>
-                <div class="col-lg-4 col-md-4 col-4">
-                    <div class="introduct-img">
-                        <img  src="~/Content/images/img-main/Group 36767.png" />
-                        <div class="introduct-name">
-                            <h5>
-                                Vì sức khỏe cộng đồng
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-4">
-                    <div class="introduct-img">
-                        <img src="~/Content/images/img-main/Group 36748.png" />
-                        <div class="introduct-name">
-                            <h5>
-                                Sản phẩm chính hãng
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
+
         </div>
     </div>
 

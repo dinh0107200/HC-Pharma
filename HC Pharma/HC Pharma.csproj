@@ -152,6 +152,7 @@
     <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IntroductController.cs" />
     <Compile Include="Controllers\ProductVcmsController.cs" />
     <Compile Include="Controllers\UploaderController.cs" />
     <Compile Include="Controllers\VcmsController.cs" />
@@ -205,6 +206,10 @@
     <Compile Include="Migrations\202212290910438_update-cfig.designer.cs">
       <DependentUpon>202212290910438_update-cfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212300317279_intro.cs" />
+    <Compile Include="Migrations\202212300317279_intro.designer.cs">
+      <DependentUpon>202212300317279_intro.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Article.cs" />
@@ -213,6 +218,7 @@
     <Compile Include="Models\ConfigSite.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Feedback.cs" />
+    <Compile Include="Models\Introduct.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Partner.cs" />
     <Compile Include="Models\Product.cs" />
@@ -224,6 +230,7 @@
     <Compile Include="ViewModel\BannerViewModel.cs" />
     <Compile Include="ViewModel\ContactViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
+    <Compile Include="ViewModel\IntroViewModel.cs" />
     <Compile Include="ViewModel\ProductViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -656,6 +663,9 @@
     <Content Include="Views\Home\GetSearchProduct.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Contact\ListOrder.cshtml" />
+    <Content Include="Views\Banner\ListIntro.cshtml" />
+    <Content Include="Views\Banner\Intro.cshtml" />
+    <Content Include="Views\Banner\EditIntro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -704,6 +714,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212290910438_update-cfig.resx">
       <DependentUpon>202212290910438_update-cfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212300317279_intro.resx">
+      <DependentUpon>202212300317279_intro.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

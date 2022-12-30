@@ -1,0 +1,107 @@
+﻿@model HC_Pharma.ViewModel.ListIntroViewModel
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Danh sách giới thiệu ";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h2>Danh sách giới thiệu</h2>
+@if (ViewBag.Banner == "success")
+{
+    <div id="AlertBox" class="alert alert-success"><strong>Thêm mới giới thiệu thành công</strong></div>
+}
+@if (ViewBag.Banner == "update")
+{
+    <div id="AlertBox" class="alert alert-success"><strong>Cập nhật giới thiệu thành công</strong></div>
+}
+<a class="btn quick-link" href="@Url.Action("Intro","Banner")"><i class="fal fa-plus-circle mr-1"></i> Thêm mới giới thiệu</a>
+<div class="box_content">
+    <table class="list_table tablecenter table-striped">
+        <tr>
+            <th style="width: 50px">STT</th>
+            <th style="width: 150px">Hình ảnh</th>
+            <th>Tên quảng cáo</th>
+            <th>Hoạt động</th>
+            <th style="width: 80px"></th>
+        </tr>
+        @foreach (var intro in Model.Introducts)
+        {
+            <tr data-id="@intro.Id">
+                <td style="width: 100px;">
+                    <input type="number" name="Sort" value="@intro.Sort" class="form_control w100" />
+                </td>
+                <td>
+                    @if (intro.Image != null)
+                    {
+                        <img class="img-border" src="@Path.Combine("/images/intro/", intro.Image)" /> }
+                    else
+                    {
+                        @:NO PICTURE
+                    }
+                </td>
+                <td>
+                    @intro.Slogan
+                </td>
+                <td>@Html.EditorFor(a => intro.Active, new { htmlAttributes = new { id = "Active" } })</td>
+                <td style="width: 160px;">
+                    <a href="javascript:;" onclick="updateBanner('@intro.Id')">Cập nhật - </a>
+                    @Html.ActionLink("Sửa", "EditIntro", new { id = intro.Id }) - <a href="javascript:;" onclick="deleteBanner('@intro.Id')">Xóa</a>
+                </td>
+            </tr>
+        }
+        @if (Model.Introducts.PageCount > 1)
+        {
+            <tr>
+                <td colspan="8">@Html.PagedListPager(Model.Introducts, page => Url.Action("ListBanner", new { page }))</td>
+            </tr>
+        }
+    </table>
+</div>
+@section Scripts
+{
+    <script type="text/javascript">
+        function deleteBanner(id) {
+            if (confirm("Bạn có chắc chắn xóa giới thiệu này không?")) {
+                $.post("/Banner/DeleteIntro", { id: id }, function (data) {
+                    if (data) {
+                        $.toast({
+                            text: 'Xóa giới thiệu thành công',
+                            position: 'bottom-right',
+                            icon: 'success',
+                        })
+                        $("tr[data-id='" + id + "']").fadeOut();
+                    } else {
+                        $.toast({
+                            text: 'Quá trình thực hiện không thành công. Hãy thử lại',
+                            icon: 'error',
+                        })
+                    }
+                });
+            }
+        }
+
+        function updateBanner(id) {
+            var divId = $("tr[data-id='" + id + "']");
+            var sort = divId.find("input[name=Sort]").val();
+            var active = divId.find("input#Active").prop("checked");
+
+            if (sort == "") {
+                alert("Bạn hãy nhập số thứ tự");
+            }
+
+            $.post("/Banner/UpdateBanneIntroQuick", { id: id, sort, active }, function (data) {
+                if (data) {
+                    $.toast({
+                        text: 'Cập nhật thành công',
+                        position: 'bottom-right',   
+                        icon: 'success',
+                    })
+                } else {
+                    $.toast({
+                        text: 'Quá trình thực hiện không thành công. Hãy thử lại',
+                        icon: 'error',
+                    })
+                }
+            });
+        }
+    </script>
+}

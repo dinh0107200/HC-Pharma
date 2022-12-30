@@ -1,0 +1,42 @@
+﻿@model HC_Pharma.ViewModel.IntroViewModel
+@{
+    ViewBag.Title = "Thêm giới thiệu";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .form_name {
+        width: 150px;
+    }
+</style>
+<h2>Thêm mới giới thiệu</h2>
+<a class="btn quick-link" href="@Url.Action("ListIntro","Banner")"><i class="far fa-list mr-1"></i> Danh sách giới thiệu</a>
+<div class="box_content px-300">
+    @using (Html.BeginForm("Intro", "Banner", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+        <table class="form_table">
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Introduct.Slogan)</td>
+                <td class="form_text">@Html.TextBoxFor(model => model.Introduct.Slogan)</td>
+            </tr>
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Introduct.Image)</td>
+                <td class="form_text">@Html.TextBoxFor(model => model.Introduct.Image, new { type = "file" }) <span class="red-warring">Chấp nhận ảnh jpg, png, gif, jpeg, mp4 < 150MB</span></td>
+            </tr>
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Introduct.Sort)</td>
+                <td class="form_text">@Html.EditorFor(model => model.Introduct.Sort)</td>
+            </tr>
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Introduct.Active)</td>
+                <td class="form_text">@Html.CheckBoxFor(model => model.Introduct.Active, new { @checked = "checked" })</td>
+            </tr>
+            <tr>
+                <td class="form_name"></td>
+                <td class="form_text">
+                    <input type="submit" class="btn quick-link" value="Thêm mới" />
+                </td>
+            </tr>
+        </table>
+    }
+</div>

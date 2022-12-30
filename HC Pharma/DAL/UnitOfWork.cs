@@ -21,7 +21,10 @@ namespace HC_Pharma.DAL
         private GenericRepository<Review> _reviewRepository;
         private GenericRepository<Feedback> _feedbackRepository;
         private GenericRepository<Partner> _partnerRepository;
+        private GenericRepository<Introduct> _introductRepository;
 
+        public GenericRepository<Introduct> _IntroductRepository =>
+            _introductRepository ?? (_introductRepository = new GenericRepository<Introduct>(_context));
         public GenericRepository<Partner> PartnerRepository =>
            _partnerRepository ?? (_partnerRepository = new GenericRepository<Partner>(_context));
         public GenericRepository<Review> ReviewRepository =>
