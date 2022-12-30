@@ -371,7 +371,6 @@ h6 {
     img {
         transition: all 1s;
         width: 100%;
-        aspect-ratio: 3;
         object-fit: cover;
         height: calc(100vh - 140px);
     }
@@ -1987,10 +1986,6 @@ h1 {
                 }
             }
         }
-    }
-
-    .banner {
-        height: auto;
     }
 
     .banner-item {
