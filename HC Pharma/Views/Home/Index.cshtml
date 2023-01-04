@@ -1,6 +1,5 @@
 ﻿@model HC_Pharma.ViewModel.HomeViewModel
 @using HC_Pharma.Models
-@using Helpers
 @{
     var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
     ViewBag.Title = config.Title;
@@ -22,15 +21,12 @@
             <div class="banner-item">
                 @if (item.Image != null)
                 {
-                    <img src="@Path.Combine("/images/banners/" , item.Image)" alt="">
+                    <img src="@Path.Combine("/images/banners/" , item.Image)" alt="@item.BannerName">
                 }
             </div>
         }
     </section>
 }
-
-
-
 <section class="introduct">
     <div class="intrducts">
         <div class="container">
