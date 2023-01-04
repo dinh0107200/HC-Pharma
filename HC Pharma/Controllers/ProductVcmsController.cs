@@ -354,6 +354,8 @@ namespace HC_Pharma.Controllers
                 product.Origin = model.Product.Origin;
                 product.Producer = model.Product.Producer;
                 product.Specifications= model.Product.Specifications;
+                product.Uses = model.Product.Uses;
+                product.Usermanual = model.Product.Usermanual;
 
                 _unitOfWork.Save();
 
