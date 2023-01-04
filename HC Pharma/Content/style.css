@@ -279,6 +279,10 @@ h6 {
   font-size: 0.875rem;
 }
 
+.banner > .banner-item:not(:first-child) {
+  display: none;
+}
+
 .banner-item img {
   transition: all 1s;
   width: 100%;
@@ -719,6 +723,10 @@ h6 {
   font-family: "Quicksand-Bold";
 }
 
+.list-feed-back > .feed-back-item:not(:first-child) {
+  display: none;
+}
+
 .feed-back-item {
   padding: 10px;
   margin: 5px;
@@ -803,7 +811,6 @@ h6 {
   padding: 0;
   border: none;
   border-radius: 100%;
-  background-color: #fff;
   text-indent: -9999px;
 }
 .slick-dots li.slick-active button {
@@ -829,21 +836,25 @@ h6 {
 .list-partner {
   margin-top: 30px;
 }
+.list-partner > .partner-item:not(:first-child) {
+  display: none;
+}
+.list-partner .slick-list {
+  margin-left: -30px;
+}
+.list-partner .slick-slide {
+  padding-left: 30px;
+}
 .list-partner .partner-item {
-  width: 172px !important;
-  height: 108px;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  margin: 20px;
   padding: 10px;
   border: 1px solid #D2D2D2;
   border-radius: 5px;
+  max-width: 100%/6;
 }
 .list-partner .partner-item img {
   object-fit: contain;
   width: 100%;
-  padding: 30px;
+  aspect-ratio: 2;
 }
 
 .footer {

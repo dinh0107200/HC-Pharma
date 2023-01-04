@@ -1,23 +1,21 @@
-﻿using Helpers;
+﻿using HC_Pharma.DAL;
+using HC_Pharma.Models;
+using HC_Pharma.ViewModel;
+using Helpers;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using System.Drawing;
-using HC_Pharma.DAL;
-using HC_Pharma.Models;
-using HC_Pharma.ViewModel;
-using PagedList;
-using System.Data.Entity;
 
 namespace HC_Pharma.Controllers
 {
     [Authorize]
     public class VcmsController : Controller
     {
-        public readonly UnitOfWork _unitOfWork = new UnitOfWork();
+        private readonly UnitOfWork _unitOfWork = new UnitOfWork();
 
         #region Login
         [AllowAnonymous]
@@ -116,7 +114,7 @@ namespace HC_Pharma.Controllers
             {
                 Id = admin.Id,
                 Username = admin.Username,
-                Active = admin.Active,
+                Active = admin.Active
             };
 
             return View(model);
