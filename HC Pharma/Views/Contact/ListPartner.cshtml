@@ -12,13 +12,13 @@
 
 @if (ViewBag.Result == "success")
 {
-    <div id="AlertBox" class="alert alert-success"><strong>Thêm mới phản hồi thành công</strong></div>
+    <div id="AlertBox" class="alert alert-success"><strong>Thêm mới đối tác thành công</strong></div>
 }
 @if (ViewBag.Result == "update")
 {
-    <div id="AlertBox" class="alert alert-success"><strong>Cập nhật phản hồi thành công</strong></div>
+    <div id="AlertBox" class="alert alert-success"><strong>Cập nhật đối tác thành công</strong></div>
 }
-<a class="btn quick-link" href="@Url.Action("Partner")"><i class="fal fa-plus-circle mr-1"></i>Thêm phản hồi</a>
+<a class="btn quick-link" href="@Url.Action("Partner")"><i class="fal fa-plus-circle mr-1"></i>Thêm đối tác</a>
 <div class="box_content">
     <div class="form-search-list">
         <form action="@Url.Action("ListPartner")" method="get" style="margin-left: 0;">
@@ -28,7 +28,7 @@
             </p>
         </form>
     </div>
-    <p>Có tổng số <strong>@Model.Partners.TotalItemCount</strong> phản hồi</p>
+    <p>Có tổng số <strong>@Model.Partners.TotalItemCount</strong> đối tác</p>
     <table class="list_table tablecenter table-striped">
         <tbody>
             <tr>
@@ -76,7 +76,7 @@
 {
     <script type="text/javascript">
         function deleteService(id) {
-            if (confirm("Bạn có chắc chắn xóa bài viết này không?")) {
+            if (confirm("Bạn có chắc chắn xóa đối tác này không?")) {
                 $.post("/Contact/DeletePartner", { partnerId: id }, function (data) {
                     if (data) {
                         $.toast({

@@ -21,6 +21,13 @@
         @Html.HiddenFor(model => model.Banner.Id)
         <table class="form_table">
             <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Banner.GroupId)</td>
+                <td class="form_text">
+                    @Html.DropDownListFor(model => model.Banner.GroupId, Model.SelectGroup, "Hãy chọn vị trí", new { @class = "form_control" })
+                    @Html.ValidationMessageFor(a => a.Banner.GroupId)
+                </td>
+            </tr>
+            <tr>
                 <td class="form_name">@Html.LabelFor(model => model.Banner.BannerName)</td>
                 <td class="form_text">@Html.EditorFor(model => model.Banner.BannerName)</td>
             </tr>
@@ -36,7 +43,7 @@
             {
                 <tr>
                     <td class="form_name"></td>
-                    <td class="form_text"><img class="img-border" src="@Path.Combine("/images/banners/",  Model.Banner.Image)" /></td>
+                    <td class="form_text"><img class="img-border" src="@Path.Combine("/images/banners/", Model.Banner.Image)"/></td>
                 </tr>
             }
             <tr>
@@ -58,7 +65,7 @@
             <tr>
                 <td class="form_name"></td>
                 <td class="form_text">
-                    <input type="submit" class="btn quick-link" value="Cập nhật" />
+                    <input type="submit" class="btn quick-link" value="Cập nhật"/>
                 </td>
             </tr>
         </table>

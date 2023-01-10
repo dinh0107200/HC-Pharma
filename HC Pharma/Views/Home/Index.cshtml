@@ -6,23 +6,25 @@
     ViewBag.Description = config.Description;
     ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("Index");
 
-    var fb = Model.Banner.FirstOrDefault(b => b.Image != null);
-    if (fb != null)
+    var fb = Model.Banner.FirstOrDefault(a => a.GroupId == 0);
+    if (fb?.Image != null)
     {
         ViewBag.ImageShare = Request.Url?.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/banners/", fb.Image);
     }
 }
 
-@if (Model.Banner.Any())
+@if (Model.Banner.Any(a => a.GroupId == 0))
 {
     <section class="banner">
-        @foreach (var item in Model.Banner)
+        @foreach (var item in Model.Banner.Where(a => a.GroupId == 0))
         {
             <div class="banner-item">
-                @if (item.Image != null)
-                {
-                    <img src="@Path.Combine("/images/banners/" , item.Image)" alt="@item.BannerName">
-                }
+                <a href="@item.Url">
+                    @if (item.Image != null)
+                    {
+                        <img src="@Path.Combine("/images/banners/", item.Image)" alt="@item.BannerName">
+                    }
+                </a>
             </div>
         }
     </section>
@@ -260,7 +262,7 @@
                             </div>
                             <img class="fb-dot" src="~/Content/images/img-main/”.png" alt="">
                             <p class="truncate">
-                               @item.Content
+                                @item.Content
                             </p>
                         </div>
                         <div class="cutomer">
@@ -285,7 +287,7 @@
         </div>
     </section>
 }
-@if (Model.Partners.Any())
+@if (Model.Banner.Any(a => a.GroupId == 1))
 {
     <section class="partner">
         <div class="container">
@@ -293,17 +295,19 @@
                 Đối tác của chúng tôi
             </div>
             <div class="list-partner">
-                @foreach (var item in Model.Partners)
+                @foreach (var item in Model.Banner.Where(a => a.GroupId == 2))
                 {
                     <div class="partner-item">
-                        @if (item.Image != null)
-                        {
-                            <img src="@Path.Combine("/images/partner/", item.Image)" alt="@item.Name">
-                        }
-                        else
-                        {
-                            <img src="~/Content/images/img-main/on-image.jpg" alt="@item.Name">
-                        }
+                        <a href="@item.Url">
+                            @if (item.Image != null)
+                            {
+                                <img src="@Path.Combine("/images/partner/", item.Image)" alt="@item.BannerName">
+                            }
+                            else
+                            {
+                                <img src="~/Content/images/img-main/on-image.jpg" alt="@item.BannerName">
+                            }
+                        </a>
                     </div>
                 }
             </div>

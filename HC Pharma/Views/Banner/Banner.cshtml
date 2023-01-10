@@ -16,6 +16,13 @@
         @Html.ValidationSummary(true)
         <table class="form_table">
             <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Banner.GroupId)</td>
+                <td class="form_text">
+                    @Html.DropDownListFor(model => model.Banner.GroupId, Model.SelectGroup, "Hãy chọn vị trí", new { @class = "form_control" })
+                    @Html.ValidationMessageFor(a => a.Banner.GroupId)
+                </td>
+            </tr>
+            <tr>
                 <td class="form_name">@Html.LabelFor(model => model.Banner.BannerName)</td>
                 <td class="form_text">@Html.EditorFor(model => model.Banner.BannerName)</td>
             </tr>
@@ -50,5 +57,5 @@
                 </td>
             </tr>
         </table>
-        }
+    }
 </div>

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace HC_Pharma.Models
@@ -23,7 +21,7 @@ namespace HC_Pharma.Models
         [Display(Name = "Công dụng"), UIHint("EditorBox")]
         public string Uses { get; set; }
 
-        [Display(Name = "Thông tin sản phẩm"), UIHint("EditorBox")]
+        [Display(Name = "Thành phần"), UIHint("EditorBox")]
         public string Body { get; set; }
         [Display(Name = "Hướng dẫn sử dụng"), UIHint("EditorBox")]
         public string Usermanual { get; set; }

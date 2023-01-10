@@ -1,9 +1,6 @@
-﻿using System;
+﻿using HC_Pharma.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using HC_Pharma.Models;
 
 namespace HC_Pharma.ViewModel
 {
@@ -15,11 +12,8 @@ namespace HC_Pharma.ViewModel
         {
             var listgroup = new Dictionary<int, string>
             {
-                { 1, "Banner Chính (850 x 500)" },
-                { 2, "Banner Phải (300 x 250)" },
-                { 3, "Banner Phụ (500 x 250)" },
-                { 4, "Banner Home Center (500 x 250)" },
-                { 5, "Video" }
+                { 0, "Banner Slides (1900 x 650)" },
+                {1, "Đối tác (300 x 150)" }
             };
             SelectGroup = new SelectList(listgroup, "Key", "Value");
         }
@@ -33,11 +27,8 @@ namespace HC_Pharma.ViewModel
         {
             var listgroup = new Dictionary<int, string>
             {
-                { 1, "Banner Chính (850 x 500)" },
-                { 2, "Banner Phải (300 x 250)" },
-                { 3, "Banner Phụ (500 x 250)" },
-                { 4, "Banner Home Center (500 x 250)" },
-                { 5, "Video" }
+                {0, "Banner Slides (1900 x 650)" },
+                { 1, "Đối tác (300 x 150)" }
             };
             SelectGroup = new SelectList(listgroup, "Key", "Value");
         }

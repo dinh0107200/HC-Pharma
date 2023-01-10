@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace HC_Pharma.Models
 {
     public class Banner
     {
         public int Id { get; set; }
+        [Display(Name = "Vị trí quảng cáo"), Required(ErrorMessage = "Bạn chưa chọn vị trí")]
+        public int GroupId { get; set; }
         [Display(Name = "Tên banner"), Required(ErrorMessage = "Hãy nhập tên banner"), StringLength(100, ErrorMessage = "Tối đa 100 ký tự"), UIHint("TextBox")]
         public string BannerName { get; set; }
         [Display(Name = "Slogan"), StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), UIHint("TextArea")]
@@ -17,7 +15,7 @@ namespace HC_Pharma.Models
         public string Image { get; set; }
         [Display(Name = "Hoạt động")]
         public bool Active { get; set; }
-        
+
         [Display(Name = "Đường dẫn"), StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), UIHint("TextBox")]
         public string Url { get; set; }
         [Display(Name = "Thứ tự"), Required(ErrorMessage = "Hãy nhập thứ tự"), RegularExpression(@"\d+", ErrorMessage = "Chỉ nhập số nguyên"), UIHint("NumberBox")]

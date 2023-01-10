@@ -210,6 +210,10 @@
     <Compile Include="Migrations\202212300317279_intro.designer.cs">
       <DependentUpon>202212300317279_intro.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202301100155193_UpdateBannerClass.cs" />
+    <Compile Include="Migrations\202301100155193_UpdateBannerClass.designer.cs">
+      <DependentUpon>202301100155193_UpdateBannerClass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Article.cs" />
@@ -717,6 +721,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212300317279_intro.resx">
       <DependentUpon>202212300317279_intro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202301100155193_UpdateBannerClass.resx">
+      <DependentUpon>202301100155193_UpdateBannerClass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

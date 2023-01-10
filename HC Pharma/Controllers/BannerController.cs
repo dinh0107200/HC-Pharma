@@ -1,12 +1,12 @@
-﻿using Helpers;
+﻿using HC_Pharma.DAL;
+using HC_Pharma.Models;
+using HC_Pharma.ViewModel;
+using Helpers;
+using PagedList;
 using System;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
-using PagedList;
-using HC_Pharma.DAL;
-using HC_Pharma.Models;
-using HC_Pharma.ViewModel;
 
 namespace HC_Pharma.Controllers
 {
@@ -16,29 +16,35 @@ namespace HC_Pharma.Controllers
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
 
         #region Banner
-        public ActionResult ListBanner(int? page, int groupId = 0, string result = "")
+        public ActionResult ListBanner(int? page, int? groupId, string result = "")
         {
             ViewBag.Banner = result;
             var pageNumber = page ?? 1;
             const int pageSize = 10;
-            var banners = _unitOfWork.BannerRepository.GetQuery(orderBy: q => q.OrderBy(a =>a.Sort));
-           
+            var banners = _unitOfWork.BannerRepository.GetQuery(orderBy: q => q.OrderBy(a => a.Sort));
+
+            if (groupId.HasValue)
+            {
+                banners = banners.Where(a => a.GroupId == groupId);
+            }
+
             var model = new ListBannerViewModel
             {
                 Banners = banners.ToPagedList(pageNumber, pageSize),
+                GroupId = groupId
             };
             return View(model);
         }
         public ActionResult Banner()
         {
-            var model = new BannerViewModel()
+            var model = new BannerViewModel
             {
-                Banner = new Banner() { Sort = 1, Active = true }
+                Banner = new Banner { Sort = 1, Active = true, GroupId = -1 }
             };
             return View(model);
         }
         [HttpPost, ValidateInput(false)]
-        public ActionResult Banner(BannerViewModel model, FormCollection fc)
+        public ActionResult Banner(BannerViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -88,12 +94,12 @@ namespace HC_Pharma.Controllers
             }
             var model = new BannerViewModel
             {
-                Banner = banner,
+                Banner = banner
             };
             return View(model);
         }
         [HttpPost, ValidateInput(false)]
-        public ActionResult EditBanner(BannerViewModel model, FormCollection fc)
+        public ActionResult EditBanner(BannerViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -130,13 +136,13 @@ namespace HC_Pharma.Controllers
 
                 if (isPost)
                 {
+                    banner.GroupId = model.Banner.GroupId;
                     banner.BannerName = model.Banner.BannerName;
                     banner.Slogan = model.Banner.Slogan;
                     banner.Sort = model.Banner.Sort;
                     banner.Active = model.Banner.Active;
                     banner.Url = model.Banner.Url;
                     banner.Content = model.Banner.Content;
-                    _unitOfWork.BannerRepository.Update(banner);
                     _unitOfWork.Save();
 
                     return RedirectToAction("ListBanner", new { result = "update" });
@@ -171,6 +177,7 @@ namespace HC_Pharma.Controllers
             return true;
         }
         #endregion
+
         #region Intro
         public ActionResult ListIntro(int? page, int groupId = 0, string result = "")
         {
@@ -324,6 +331,7 @@ namespace HC_Pharma.Controllers
             return true;
         }
         #endregion
+
         protected override void Dispose(bool disposing)
         {
             _unitOfWork.Dispose();

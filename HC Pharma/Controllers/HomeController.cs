@@ -8,10 +8,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
-using System.Web.Services.Description;
 
 namespace HC_Pharma.Controllers
 {
@@ -53,13 +51,13 @@ namespace HC_Pharma.Controllers
         }
         public ActionResult Index()
         {
-            var category = _unitOfWork.ProductCategoryRepository.GetQuery(a => a.CategoryActive && a.ShowHome , o => o.OrderByDescending(a => a.CategorySort), 5);
-            var product = _unitOfWork.ProductRepository.GetQuery(a => a.Active && a.Home, o => o.OrderByDescending(a => a.CreateDate), 3);
-            var artilce = _unitOfWork.ArticleRepository.GetQuery(a => a.Active && a.Home , o => o.OrderByDescending(a => a.CreateDate),3);
-            var banner = _unitOfWork.BannerRepository.GetQuery(a => a.Active);
-            var feedback = _unitOfWork.FeedbackRepository.GetQuery(a => a.Active);
-            var partner = _unitOfWork.PartnerRepository.GetQuery(a => a.Active);
-            var intro = _unitOfWork._IntroductRepository.GetQuery(a => a.Active , o => o.OrderBy(a => a.Sort),3);
+            var category = _unitOfWork.ProductCategoryRepository.Get(a => a.CategoryActive && a.ShowHome, o => o.OrderByDescending(a => a.CategorySort), 5);
+            var product = _unitOfWork.ProductRepository.Get(a => a.Active && a.Home, o => o.OrderByDescending(a => a.CreateDate), 3);
+            var artilce = _unitOfWork.ArticleRepository.Get(a => a.Active && a.Home, o => o.OrderByDescending(a => a.CreateDate), 3);
+            var banner = _unitOfWork.BannerRepository.Get(a => a.Active, q => q.OrderBy(a => a.Sort));
+            var feedback = _unitOfWork.FeedbackRepository.Get(a => a.Active);
+            //var partner = _unitOfWork.PartnerRepository.Get(a => a.Active);
+            var intro = _unitOfWork._IntroductRepository.Get(a => a.Active, o => o.OrderBy(a => a.Sort), 3);
             var model = new HomeViewModel
             {
                 Categories = category,
@@ -67,7 +65,7 @@ namespace HC_Pharma.Controllers
                 Articles = artilce,
                 Banner = banner,
                 Feedbacks = feedback,
-                Partners = partner,
+                //Partners = partner,
                 Introducts = intro,
             };
             return View(model);
@@ -156,7 +154,7 @@ namespace HC_Pharma.Controllers
             return PartialView(model);
         }
         [Route("{url}.html", Order = 1)]
-        public ActionResult ProductDetail (string url)
+        public ActionResult ProductDetail(string url)
         {
             var newproduct = _unitOfWork.ProductRepository.GetQuery(
                 p => p.Active, c => c.OrderByDescending(p => p.CreateDate), 4);
@@ -319,7 +317,7 @@ namespace HC_Pharma.Controllers
             var model = new AllArticleViewModel()
             {
                 Articles = article.ToPagedList(pageNumber, 12),
-                Categories = ArticleCategories.Where(a=> a.TypePost == TypePost.Article || a.TypePost == TypePost.Introduce),
+                Categories = ArticleCategories.Where(a => a.TypePost == TypePost.Article || a.TypePost == TypePost.Introduce),
             };
             return View(model);
         }
