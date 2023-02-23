@@ -327,6 +327,7 @@
     <Content Include="Content\images\img-main\youtube.png" />
     <Content Include="Content\images\img-main\zalo-logo.png" />
     <Content Include="Content\images\img-main\”.png" />
+    <Content Include="Content\images\shopping-cart.gif" />
     <Content Include="Content\images\svg-contact\dichvu.svg" />
     <Content Include="Content\images\svg-contact\earth.svg" />
     <Content Include="Content\images\svg-contact\email.svg" />

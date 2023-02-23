@@ -85,6 +85,10 @@ button {
   outline: none;
 }
 
+.field-validation-error {
+  color: #f00;
+}
+
 h1,
 h2,
 h3,
