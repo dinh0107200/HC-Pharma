@@ -59,10 +59,4 @@ namespace HC_Pharma.ViewModel
         public IEnumerable<Product> Products { get; set;}
         public string Name { get; set; }
     }
-    public class ListOrderViewModel
-    {
-        public PagedList.IPagedList<Order> Orders { get; set; }
-        public IEnumerable<Product> Products { get; set; }
-        public string Name { get; set; }
-    }
 }

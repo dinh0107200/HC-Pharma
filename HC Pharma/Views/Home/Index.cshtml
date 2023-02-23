@@ -173,7 +173,7 @@
                                 </div>
                                 <div class="product-btn">
                                     <a href="@Url.Action("ProductDetail" , new {url = item.Url})" class="more">Xem thêm</a>
-                                    <a href="@Url.Action("Contact")" class="contact">Liên hệ</a>
+                                    <a href="javascript:;" class="contact" onclick="addCart(@item.Id)">Thêm vào giỏ hàng</a>
                                 </div>
                             </div>
 
@@ -313,4 +313,26 @@
             </div>
         </div>
     </section>
+}
+@section scripts
+{
+    <script>
+        function addCart(n, m) {
+            $.post("/gio-hang/them-vao-gio-hang", { productId: n}, function (n) {
+                n.result === 1
+                    ? ($.toast({
+                        text: "Thêm vào giỏ hàng thành công",
+                        icon: "success",
+                        position: "bottom-right",
+                    }),
+                        $(".number-cart").text(n.count))
+                    : $.toast({
+                        text: "Quá trình thực hiện không thành công",
+                        icon: "error",
+                        position: "bottom-right",
+                    });
+            });
+        }
+
+    </script>
 }

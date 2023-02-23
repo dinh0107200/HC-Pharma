@@ -178,63 +178,6 @@ namespace HC_Pharma.Controllers
             return View(model);
         }
         [ChildActionOnly]
-        public PartialViewResult OrderForm(string url)
-        {
-            var product = _unitOfWork.ProductRepository.GetQuery(a => a.Url == url).FirstOrDefault();
-            var model = new OrderFormViewModel
-            {
-                Product = product,
-            };
-            return PartialView(model);
-            //return PartialView();
-        }
-        [HttpPost, ValidateAntiForgeryToken]
-        public JsonResult OrderForm(OrderFormViewModel model, FormCollection fc)
-        {
-            var img = "NO PICTUR";
-            if (!ModelState.IsValid)
-            {
-                return Json(new { status = false, msg = "Hãy điền đúng định dạng." });
-            }
-            if (string.IsNullOrEmpty(model.Order.CustomerInfo.FullName))
-            {
-                model.Order.CustomerInfo.FullName = "Unknown";
-            }
-            if (model.Order.ProductImg != null)
-            {
-                img = "<img src='" + Request.Url?.GetLeftPart(UriPartial.Authority) + "/images/products/" + model.Order.ProductImg + "?w=100' />";
-            }
-            model.Order.CreateDate = DateTime.Now;
-            model.Order.Quantity = Convert.ToInt32(fc["Order.Quantity"]);
-            _unitOfWork.OrderRepository.Insert(model.Order);
-            _unitOfWork.Save();
-
-            var subject = "Email liên hệ từ website: " + Request.Url?.Host;
-            var body = $"<p>Tên người liên hệ: {model.Order.CustomerInfo.FullName},</p>" +
-                        $"<p>Email liên hệ: {model.Order.CustomerInfo.Email},</p>" +
-                        $"<p>Số điện thoại: {model.Order.CustomerInfo.Mobile},</p>" +
-                        $"<p>Địa chỉ: {model.Order.CustomerInfo.Address},</p>" +
-                        $"<p>Nội dung:{model.Order.CustomerInfo.Body}</p>" +
-                        $"<table border='1' cellpadding='10' style='border:1px #ccc solid;border-collapse: collapse'>" +
-                        "<tr>" +
-                        "<th> Ảnh sản phẩm</th>" +
-                        "<th> Tên sản phẩm </th>" +
-                        "<th> Giá tiền</th>" +
-                        "<th> Số lượng</th>" +
-                        "</tr>" +
-                        "<tr>" +
-                        $"<th>{img}</th>" +
-                        $"<th>{model.Order.ProductName}</th>" +
-                         $"<th>{Convert.ToDecimal(model.Order?.ProductPrice).ToString("N0")}</th>" +
-                         $"<th>{model.Order?.Quantity}</th>" +
-                        "</tr>" +
-                        $"</table>" +
-                        $"<p>Đây là hệ thống gửi email tự động, vui lòng không phản hồi lại email này.</p>";
-
-            Task.Run(() => HtmlHelpers.SendEmail("gmail", subject, body, ConfigSite.Email, Email, Email, Password, "HC Pharma"));
-            return Json(new { status = true, msg = "Đặt mua hàng thành công.\nChúng tôi sẽ liên lạc lại với bạn sớm nhất có thể." });
-        }
-        [ChildActionOnly]
         public PartialViewResult ReviewForm(string url)
         {
             var product = _unitOfWork.ProductRepository.GetQuery(a => a.Url == url).FirstOrDefault();
@@ -404,7 +347,7 @@ namespace HC_Pharma.Controllers
                        $"<p>Email: {model.Email},</p>" +
                        $"<p>Nội dung: {model.Body}</p>" +
                        $"<p>Đây là hệ thống gửi email tự động, vui lòng không phản hồi lại email này.</p>";
-            Task.Run(() => HtmlHelpers.SendEmail("gmail", subject, body, ConfigSite.Email, Email, Email, Password, "HC Pharma"));
+            Task.Run(() => HtmlHelpers.SendEmail("gmail", subject, body, ConfigSite.Email, Email, Email, Password, ConfigSite.Title));
 
             return Json(new { status = true, msg = "Gửi liên hệ thành công.\nChúng tôi sẽ liên lạc với bạn sớm nhất có thể." });
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using HC_Pharma.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace HC_Pharma.DAL
 {
@@ -17,12 +18,29 @@ namespace HC_Pharma.DAL
         private GenericRepository<ConfigSite> _configRepository;
         private GenericRepository<Product> _productRepository;
         private GenericRepository<ProductCategory> _productCategoryRepository;
-        private GenericRepository<Order> _orderRepository;
         private GenericRepository<Review> _reviewRepository;
         private GenericRepository<Feedback> _feedbackRepository;
         private GenericRepository<Partner> _partnerRepository;
         private GenericRepository<Introduct> _introductRepository;
+        private GenericRepository<Cart> _cartRepository;
+        private GenericRepository<City> _cityRepository;
+        private GenericRepository<District> _districtRepository;
+        private GenericRepository<Order> _orderRepository;
+        private GenericRepository<OrderDetail> _orderDetailRepository;
+        private GenericRepository<Ward> _wardRepository;
 
+        public GenericRepository<City> CityRepository =>
+            _cityRepository ?? (_cityRepository = new GenericRepository<City>(_context));
+        public GenericRepository<District> DistrictRepository =>
+            _districtRepository ?? (_districtRepository = new GenericRepository<District>(_context));
+        public GenericRepository<Order> OrderRepository =>
+            _orderRepository ?? (_orderRepository = new GenericRepository<Order>(_context));
+        public GenericRepository<OrderDetail> OrderDetailRepository =>
+            _orderDetailRepository ?? (_orderDetailRepository = new GenericRepository<OrderDetail>(_context));
+        public GenericRepository<Ward> WardRepository =>
+            _wardRepository ?? (_wardRepository = new GenericRepository<Ward>(_context));
+        public GenericRepository<Cart> CartRepository =>
+            _cartRepository ?? (_cartRepository = new GenericRepository<Cart>(_context));
         public GenericRepository<Introduct> _IntroductRepository =>
             _introductRepository ?? (_introductRepository = new GenericRepository<Introduct>(_context));
         public GenericRepository<Partner> PartnerRepository =>
@@ -31,8 +49,6 @@ namespace HC_Pharma.DAL
             _reviewRepository ?? (_reviewRepository = new GenericRepository<Review>(_context));
         public GenericRepository<Feedback> FeedbackRepository =>
             _feedbackRepository ?? (_feedbackRepository = new GenericRepository<Feedback>(_context));
-        public GenericRepository<Order> OrderRepository =>
-            _orderRepository ?? (_orderRepository = new GenericRepository<Order>(_context));
         
         public GenericRepository<Product> ProductRepository =>
             _productRepository ?? (_productRepository = new GenericRepository<Product>(_context));

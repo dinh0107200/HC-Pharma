@@ -1,5 +1,4 @@
-﻿using HC_Pharma.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,44 +9,77 @@ namespace HC_Pharma.Models
     public class Order
     {
         public int Id { get; set; }
-
-        [Display(Name = "Id sản phẩm")]
-        public int ProductId { get; set; }
-
-        [Display(Name = "Tên sản phẩm")]
-        public string ProductName { get; set; }
-
-        [Display(Name = "Giá sản phẩm")]
-        public decimal? ProductPrice { get; set; }
-        [Display(Name = "Đường dẫn sản phẩm")]
-        public string ProductUrl { get; set; }
-
-        [Display(Name = "Ảnh sản phẩm")]
-        public string ProductImg { get; set; }
-        [Display(Name = "Tổng tiền"), DisplayFormat(DataFormatString = "{0:N0}đ")]
-        public decimal? TotalPrice { get; set; }
-        [Display(Name = "Số lượng")]
-        public int? Quantity { get; set; }
+        [StringLength(50)]
+        public string MaDonHang { get; set; }
         public DateTime CreateDate { get; set; }
-        public virtual ICollection<Product> Product { get; set; }
+        [Display(Name = "Tình trang thanh toán"), UIHint("Payment")]
+        public bool Payment { get; set; }
+        [Display(Name = "Thanh toán"), UIHint("DisplayTypePay")]
+        public int TypePay { get; set; }
+        [Display(Name = "Chuyển hàng"), UIHint("DisplayTypeTransport")]
+        public int Transport { get; set; }
+        [Display(Name = "Ngày giao hàng"), UIHint("DateTimePicker"), Required(ErrorMessage = "Hãy chọn ngày giao hàng")]
+        public DateTime TransportDate { get; set; }
+        [Display(Name = "Trạng thái đơn hàng"), UIHint("DisplayOrderStatus")]
+        public int Status { get; set; }
+        public bool Viewed { get; set; }
         public CustomerInfo CustomerInfo { get; set; }
+        [Display(Name = "Thanh toán trước")]
+        public int ThanhToanTruoc { get; set; }
+        [Display(Name = "Phí Ship")]
+        public int ShipFee { get; set; }
 
+        public long Total()
+        {
+            return OrderDetails.Sum(a => (long?)(a.Price * a.Quantity)) ?? 0;
+        }
+
+        public long TotalDebt()
+        {
+            return TotalFee() - ThanhToanTruoc;
+        }
+
+        public long TotalFee()
+        {
+            var final = Total();
+            return final + ShipFee;
+        }
+
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+
+        public int? CityId { get; set; }
+        public int? DistrictId { get; set; }
+        public int? WardId { get; set; }
+
+        public virtual City City { get; set; }
+        public virtual District District { get; set; }
+        public virtual Ward Ward { get; set; }
+
+        public Order()
+        {
+            CreateDate = DateTime.Now;
+            TransportDate = DateTime.Now.AddDays(5);
+            Payment = false;
+            TypePay = 1;
+            Viewed = false;
+        }
     }
-
     [ComplexType]
     public class CustomerInfo
     {
-        [Display(Name = "Họ và tên *"), Required(ErrorMessage = "Hãy nhập họ tên"), StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), UIHint("Textbox")]
-        public string FullName { get; set; }
-        [Display(Name = "Địa chỉ"), Required(ErrorMessage = "Hãy nhập địa chỉ"), StringLength(200, ErrorMessage = "Tối đa 200 ký tự"), UIHint("Textbox")]
+        [Display(Name = "Họ và tên *"), Required(ErrorMessage = "Hãy nhập họ và tên"), StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), UIHint("TextBox")]
+        public string Fullname { get; set; }
+        [Display(Name = "Địa chỉ *"), Required(ErrorMessage = "Hãy nhập địa chỉ"), StringLength(200, ErrorMessage = "Tối đa 200 ký tự"), UIHint("TextBox")]
         public string Address { get; set; }
-        [Display(Name = "Số điện thoại"), Required(ErrorMessage = "Vui lòng nhập số điện thoại"),
-            RegularExpression(@"^\(?(09|03|07|08|05)\)?[-. ]?([0-9]{8})$", ErrorMessage = "Số điện thoại không đúng định dạng!"),
-            StringLength(10, ErrorMessage = "Tối đa 11 ký tự"), UIHint("TextBox")]
+        [Display(Name = "Điện thoại *"), Required(ErrorMessage = "Hãy nhập điện thoại"), StringLength(11, MinimumLength = 7, ErrorMessage = "Điện thoại từ 7, 11 ký tự"), UIHint("TextBox")]
         public string Mobile { get; set; }
-        [Display(Name = "Email"), EmailAddress(ErrorMessage = "Email không hợp lệ"), Required(ErrorMessage = "Hãy nhập Email"), StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), UIHint("Textbox")]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ"), Display(Name = "Email *"), StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), Required(ErrorMessage = "Hãy nhập email"), UIHint("TextBox")]
         public string Email { get; set; }
         [Display(Name = "Yêu cầu thêm"), StringLength(200, ErrorMessage = "Tối đa 200 ký tự"), DataType(DataType.MultilineText)]
         public string Body { get; set; }
+
+
+        [Display(Name = "Thành viên mới")]
+        public bool IsNewMember { get; set; }
     }
 }

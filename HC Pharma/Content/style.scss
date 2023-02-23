@@ -1317,6 +1317,9 @@ h6 {
     margin-top: 20px;
     display: flex;
     padding-bottom: 20px;
+    justify-content: space-between;
+
+
 
     span {
         border-radius: 5px;
@@ -1344,6 +1347,10 @@ h6 {
         height: 40.81px;
         background: $colorMain;
         color: $white;
+         transition:all .7s;
+        &:hover {
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
 
         i {
             padding-right: 5px;
@@ -1771,12 +1778,169 @@ h1 {
     border-bottom-left-radius: 10px;
 }
 
+.cart-item {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
 
+    .number-cart {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        color: $white;
+        border-radius: 50%;
+        background: $colorMain2;
+        top:0;
+        right:0;
+    }
 
+    i {
+        font-size: 20px;
+    }
+}
 
+.flex-item{
+    display:flex;
+    align-items:center;
+    height:200px;
+    img{
+        width:200px;
+        object-fit:cover;
+        aspect-ratio:5/4;
+    }
+}
+.cart-btn {
+    margin-top: 30px;
+    padding-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 
+    .item-btn {
+        margin-left: 20px;
+        padding: 10px 20px;
+        border-radius: 10px;
 
+        a {
+            color: $white;
 
+            i {
+                padding-right: 10px;
+            }
+        }
+
+        button {
+            background: none;
+            border: 0;
+            color: $white;
+
+            i {
+                padding-right: 10px;
+            }
+        }
+    }
+}
+.nice-number{
+    display:flex;
+    input{
+        text-align:center;
+    }
+}
+.cart-info{
+    display:flex;
+    align-items:center;
+    img{
+        width:130px;
+        aspect-ratio:4/4;
+        margin-right:10px;  
+    }
+}
+.box-checkout {
+    border-radius:10px;
+}
+.check-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+.price-cart{
+    display:flex;
+    flex-direction:column;
+    span{
+        text-align:end;
+    }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.sbox-address{
+    border-radius:10px;
+    .title{
+        font-size:25px;
+        padding-bottom:30px;
+    }
+}
+
+.box-payment {
+    border-radius: 10px;
+
+    .title {
+        font-size: 20px;
+        padding-bottom: 10px;
+    }
+}
+.total-price{
+    margin-bottom:10px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.btn-checkout{
+   width:100%;
+   padding:10px;
+   border:0;
+   background:$colorMain2;
+   border-radius:10px;
+   color:$white;
+}
+.detail-quantity{
+    width:100px;
+    outline:none;
+}
+.btn-light {
+    background: $colorMain;
+    color: $white;
+
+    &:hover {
+        background: $colorMain;
+        color: $white;
+    }
+}
+.order-detail {
+    background: $colorMain2;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 222px;
+    height: 40.81px;
+    color: #fff;
+    border: 0;
+    transition:all .7s;
+    &:hover {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+}
 @include maxWidth(1024px) {
     .form-input {
         input {
@@ -1861,6 +2025,28 @@ h1 {
 }
 
 @include maxWidth(820px) {
+    .flex-item {
+        height: 120px;
+
+        img {
+            width: 150px;
+        }
+    }
+
+    
+    .table {
+        display: grid;
+        justify-content: flex-start;
+        grid-auto-columns: max-content;
+        overflow: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-snap-stop: always;
+        touch-action: manipulation;
+        scroll-padding: 1rem;
+        grid-template-columns: unset;
+    }
+
     .list-social {
         right: -100% !important;
     }
@@ -2133,6 +2319,17 @@ h1 {
 
     .breadcrumb {
         font-size: 14px;
+    }
+
+    .cart-btn {
+        flex-direction: column;
+
+        .item-btn {
+            width: 100%;
+            text-align: center;
+            margin-left: 0;
+            margin-bottom: 20px;
+        }
     }
 
     .artilce-content {

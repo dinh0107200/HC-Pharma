@@ -1,0 +1,9 @@
+﻿@model HC_Pharma.ViewModel.CartSummaryViewModel
+<div class="cart-item">
+    <a href="@Url.Action("Index", "ShoppingCart")">
+        <i class="far fa-shopping-cart"></i>
+        <div class="number-cart">
+            @Model.Count
+        </div>
+    </a>
+</div>

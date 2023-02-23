@@ -339,37 +339,6 @@ namespace HC_Pharma.Controllers
             return true;
         }
         #endregion
-        #region order
-        public ActionResult ListOrder(int? page, string name)
-        {
-            var pageNumber = page ?? 1;
-            const int pageSize = 15;
-            var order = _unitOfWork.OrderRepository.GetQuery(orderBy: l => l.OrderByDescending(a => a.Id));
-
-            if (!string.IsNullOrEmpty(name))
-            {
-                order = order.Where(l => l.CustomerInfo.FullName.Contains(name));
-            }
-            var model = new ListOrderViewModel
-            {
-                Orders = order.ToPagedList(pageNumber, pageSize),
-                Name = name,
-                Products = _unitOfWork.ProductRepository.GetQuery(a => a.Active, q => q.OrderBy(a => a.Sort)),
-            };
-            return View(model);
-        }
-        public bool DeleteOrder(int orderId = 0)
-        {
-            var order = _unitOfWork.OrderRepository.GetById(orderId);
-            if (order == null)
-            {
-                return false;
-            }
-            _unitOfWork.OrderRepository.Delete(order);
-            _unitOfWork.Save();
-            return true;
-        }
-        #endregion
         protected override void Dispose(bool disposing)
         {
             _unitOfWork.Dispose();

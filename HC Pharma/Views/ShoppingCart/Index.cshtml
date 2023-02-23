@@ -1,0 +1,137 @@
+﻿@model HC_Pharma.ViewModel.ShoppingCartViewModel
+@{
+    ViewBag.Title = "Giỏ hàng của bạn";
+    var count = 0;
+}
+<link href="~/Content/sweetalert2.css" rel="stylesheet" />
+<nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <div class="container">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
+        </ol>
+    </div>
+</nav>
+<section class="shoping-cart  pt-5">
+    <div class="container ">
+        @if (!Model.CartItems.Any())
+        {
+            <div class="alert p-5 cart-empty">
+                <div class="text-center font-sm-14">
+                    <img src="~/Content/images/shopping-cart.gif" class="img-fluid rounded m-auto" alt="Đơn hàng" /><br /><br />
+                    Giỏ hàng của bạn đang trống. Hãy chọn sản phẩm!
+                </div>
+                <div class="text-center">
+                    <a href="@Url.Action("AllProduct", "Home")" class="btn-all-product">
+                        Mua hàng
+                    </a>
+                </div>
+            </div>
+        }
+        else
+        {
+            using (Html.BeginForm())
+            {
+                <div class="my-cart">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th class="text-xl-left" style="width: 25%">Thông tin sản phẩm</th>
+                                <th style="width: 10%">Số lượng</th>
+                                <th class="text-xl-right" style="width: 12%">Giá</th>
+                                <th class="text-xl-right" style="width: 12%">Thành tiền</th>
+                                <th class="text-xl-right" style="width: 8%"></th>
+                            </tr>
+                            @foreach (var item in Model.CartItems)
+                            {
+                                count++;
+                                var p = item.Price ?? 0;
+                                var price = item.Count * p;
+                                <tr data-row="@item.RecordId">
+                                    <td>
+                                        <div class="flex-item">
+                                            @if (item.Product.ListImage != null)
+                                            {
+                                                <img src="@Path.Combine("/images/products/", item.Product.ListImage.Split(',')[0])" class="img-product mr-3" alt="@item.Product.Name">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Content/images/img-main/on-image.jpg" class="img-product mr-3" alt="@item.Product.Name">
+                                            }
+                                            <div class="name font-weight-bold">
+                                                @item.Product.Name
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex-item">
+                                            <input type="hidden" name="RecordId" value="@item.RecordId" />
+                                            <input type="number" id="orderQuantity_@count" class="nice-number  form-control" name="Quantity" required="" min="1" max="999" value="@item.Count">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex-item justify-content-end font-weight-bold">
+                                            @if (p == 0)
+                                            {
+                                                <span>
+                                                    Liên hệ
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span><b>@p.ToString("N0") đ</b> </span>
+                                            }
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex-item justify-content-end font-weight-bold">
+                                            <span>
+                                                @price.ToString("N0") đ
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td class="flex-item justify-content-center">
+                                        <a href="javascript:;" title="Xóa" class="remove-product" style="color: dimgray" data-id="@item.RecordId">
+                                            <i class="fal fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                            }
+                        </table>
+                        <input type="hidden" value="@count" id="totalProduct" />
+                    </div>
+                    <hr>
+                    <div class="total text-right">
+                        Tổng cộng: <span class="font-weight-bold pl-2">@Model.CartTotal.ToString("N0") đ</span>
+                    </div>
+                    <div class="cart-btn text-right">
+                        <div class="item-btn bg-info">
+                            <a href="@Url.Action("AllProduct" ,"Home")"><i class="fas fa-cart-plus"></i>Tiếp tục mua hàng</a>
+                        </div>
+                        <div class="item-btn bg-success text-white">
+                            <button type="submit"><i class="fas fa-wrench"></i>Cập nhật giỏ hàng</button>
+                        </div>
+                        <div class="item-btn bg-primary text-white">
+                            <a href="@Url.Action("CheckOut")"><i class="fas fa-check"></i>Đặt hàng</a>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        }
+
+    </div>
+
+</section>
+
+@section scripts
+{
+    <script src="~/Scripts/jquery.nice-number.js"></script>
+    <script src="~/Scripts/sweetalert2.all.js"></script>
+    <script>
+        $(".nice-number").niceNumber({
+            autoSize: false
+        });
+    </script>
+}

@@ -150,10 +150,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\BannerController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntroductController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductVcmsController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UploaderController.cs" />
     <Compile Include="Controllers\VcmsController.cs" />
     <Compile Include="DAL\DataEntities.cs" />
@@ -214,20 +217,34 @@
     <Compile Include="Migrations\202301100155193_UpdateBannerClass.designer.cs">
       <DependentUpon>202301100155193_UpdateBannerClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202302230852022_cart.cs" />
+    <Compile Include="Migrations\202302230852022_cart.designer.cs">
+      <DependentUpon>202302230852022_cart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202302231153229_order.cs" />
+    <Compile Include="Migrations\202302231153229_order.designer.cs">
+      <DependentUpon>202302231153229_order.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticleCategory.cs" />
     <Compile Include="Models\Banner.cs" />
+    <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\City.cs" />
     <Compile Include="Models\ConfigSite.cs" />
     <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\District.cs" />
     <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\Introduct.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Partner.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />
     <Compile Include="Models\Review.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
+    <Compile Include="Models\Ward.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\AdminViewModel.cs" />
     <Compile Include="ViewModel\ArticleViewModel.cs" />
@@ -235,7 +252,9 @@
     <Compile Include="ViewModel\ContactViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\IntroViewModel.cs" />
+    <Compile Include="ViewModel\OrderViewModel.cs" />
     <Compile Include="ViewModel\ProductViewModel.cs" />
+    <Compile Include="ViewModel\ShoppingCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\adminSite.css" />
@@ -332,6 +351,7 @@
     <Content Include="Content\style.min.css">
       <DependentUpon>style.css</DependentUpon>
     </Content>
+    <Content Include="Content\sweetalert2.css" />
     <Content Include="Content\themes\adminSite.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -401,6 +421,7 @@
     <Content Include="Scripts\esm\popper.min.js.map" />
     <Content Include="Scripts\index.js.flow" />
     <Content Include="Content\style.scss" />
+    <Content Include="Scripts\sweetalert2.all.js" />
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-duotone-900.svg" />
     <Content Include="webfonts\fa-light-300.svg" />
@@ -670,6 +691,13 @@
     <Content Include="Views\Banner\ListIntro.cshtml" />
     <Content Include="Views\Banner\Intro.cshtml" />
     <Content Include="Views\Banner\EditIntro.cshtml" />
+    <Content Include="Views\ShoppingCart\CartSummary.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOut.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOutComplete.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\Order\ListOrder.cshtml" />
+    <Content Include="Views\Order\LoadOrder.cshtml" />
+    <Content Include="Views\Order\ReportProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -724,6 +752,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202301100155193_UpdateBannerClass.resx">
       <DependentUpon>202301100155193_UpdateBannerClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202302230852022_cart.resx">
+      <DependentUpon>202302230852022_cart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202302231153229_order.resx">
+      <DependentUpon>202302231153229_order.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

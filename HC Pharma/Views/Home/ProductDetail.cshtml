@@ -28,7 +28,7 @@
 <section class="product-detail">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 d-lg-block d-none" >
+            <div class="col-lg-3 d-lg-block d-none">
                 <div class="product-filter">
                     <div class="sidebar-nav mb-4">
                         <div class="filter-title">
@@ -170,7 +170,7 @@
                                 {
                                     <div class="price-item">
                                         <p>
-                                           Liên hệ
+                                            Liên hệ
                                         </p>
                                     </div>
                                 }
@@ -225,14 +225,22 @@
 
                             </div>
                         </div>
-                        <div class="detail-btn">
-                            <span>
-                                <i class="fas fa-comments-alt"></i> Liên hệ đặt hàng
-                            </span>
-                            <a href="tel:@config.Hotline">
-                                <i class="fas fa-phone-alt"></i>Gọi ngay
-                            </a>
-                        </div>
+                        <form class="mt-3" id="formBookProduct">
+                            <input type="hidden" name="ProductId" value="@Model.Product.Id" />
+                            <div class="quantity d-flex align-items-center">
+                                <span>Số lượng:</span>
+                                <div class="product-count ml-3">
+                                    <input type="text" value="1" min="1" id="number" name="quantity" class="nice-number detail-quantity border" maxlength="4" />
+                                </div>
+                            </div>
+                            <div class="detail-btn">
+                                <button type="submit" class="order-detail">Đặt hàng</button>
+                                <a href="tel:@config.Hotline">
+                                    <i class="fas fa-phone-alt"></i>Gọi ngay
+                                </a>
+                            </div>
+                        </form>
+                        
                         <div class="share mb-3">
                             <ul class="d-flex align-items-center ul-reset">
                                 <li class="mr-3">Chia sẻ:</li>
@@ -373,11 +381,13 @@
         }
     </div>
 </section>
-<section class="form-model">
-    @Html.Action("OrderForm")
-</section>
 @section scripts {
+    <script src="~/Scripts/jquery.nice-number.js"></script>
     <script>
         DetailJS();
+        $(".nice-number").niceNumber({
+            autoSize: false
+        });
+
     </script>
 }

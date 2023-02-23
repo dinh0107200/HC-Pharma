@@ -58,6 +58,12 @@
                             <div>@Html.ActionLink("Đăng xuất", "Logout", "Vcms", null, new { @class = "text_link" })</div>
                         </div>
                     </li>
+                    <li data-id="3">
+                        <a class="root"><i class="fal fa-shopping-basket icon"></i><span>Quản lý Đơn hàng</span><i class="fas fa-caret-down"></i></a>
+                        <div class="sub hidden">
+                            <div><a href="@Url.Action("ListOrder", "Order")" class="text_link">Tất cả Đơn hàng</a></div>
+                        </div>
+                    </li>
                     <li data-id="4">
                         <a class="root"><i class="fal fa-box icon"></i><span>Quản lý Sản phẩm</span><i class="fas fa-caret-down"></i></a>
                         <div class="sub hidden">

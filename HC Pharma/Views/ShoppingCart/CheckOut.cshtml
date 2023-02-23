@@ -1,0 +1,125 @@
+﻿@model HC_Pharma.ViewModel.CheckOutViewModel
+@using HC_Pharma.Models
+@{
+    ViewBag.Title = "Thanh toán";
+    var final = Model.CartTotal + Model.Order.ShipFee;
+    var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
+}
+
+<div class="bg-breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb mb-0 px-0">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","ShoppingCart")">Giỏ hàng</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Thanh toán</li>
+        </ol>
+    </div>
+</div>
+<div class="container  checkout">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="box-checkout shadow p-3 list-cart">
+                    @foreach (var cart in Model.CartItems)
+                    {
+                        var price = cart.CartItems.Count * cart.CartItems.Price;
+
+                        <div class="check-item w-100">
+                            <input type="hidden" name="CartTotal" value="@Model.CartTotal" />
+                            <div class="cart-info">
+                                @if (cart.CartItems.Product.ListImage != null)
+                                {
+                                    <img data-src="@Path.Combine("/images/products/", cart.CartItems.Product.ListImage.Split(',')[0])" src="~/Content/images/img-main/base64.gif" class="img-product lazyload" alt="@cart.CartItems.Product.Name" />
+                                }
+                                <div class="product-name font-weight-bold">
+                                    @cart.CartItems.Product.Name
+                                </div>
+                            </div>
+                            <div class="price-cart font-weight-bold">
+                                @if (price < 1)
+                                {
+                                    @:Liên hệ
+                                }
+                                else
+                                {
+                                    @Convert.ToDecimal(price).ToString("N0") @:đ
+                                }
+                                <span>
+                                    x @cart.CartItems.Count
+                                </span>
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                </div>
+                <div class="sbox-address shadow mb-4 mt-4 p-3">
+                    <div class="title font-weight-bold">
+                        Thông tin giao hàng
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="col-lg-6 col-md-6">
+                            @Html.TextBoxFor(a => a.Order.CustomerInfo.Fullname, new { @class = "form-control mb-lg-0 mm-md-0 mb-3", @placeholder = "Họ và tên" })
+                            @Html.ValidationMessageFor(a => a.Order.CustomerInfo.Fullname)
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            @Html.TextBoxFor(a => a.Order.CustomerInfo.Mobile, new { @class = "form-control", @placeholder = "Số điện thoại" })
+                            @Html.ValidationMessageFor(a => a.Order.CustomerInfo.Mobile)
+                        </div>
+                    </div>
+                    <div class="form-group form-row">
+                        <div class="col-lg-6 col-md-6">
+                            @Html.DropDownListFor(a => a.CityId, Model.CitySelectList, "Chọn thành phố", new { @class = "form-control mb-lg-0 mm-md-0 mb-3", data_item = "city" })
+                            @Html.ValidationMessageFor(a => a.CityId)
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            @Html.DropDownListFor(a => a.DistrictId, Model.DistrictSelectList, "Chọn quận huyện", new { @class = "form-control", data_item = "district" })
+                            @Html.ValidationMessageFor(a => a.DistrictId)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(a => a.Order.CustomerInfo.Address, new { @class = "form-control", @placeholder = "Địa chỉ" })
+                        @Html.ValidationMessageFor(a => a.Order.CustomerInfo.Address)
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(a => a.Order.CustomerInfo.Email, new { @class = "form-control", @placeholder = "Email của bạn" })
+                        @Html.ValidationMessageFor(a => a.Order.CustomerInfo.Email)
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" name="Order.CustomerInfo.Body" rows="4" placeholder="Lời nhắn (nếu có)"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="box-payment  shadow p-3 mb-5 ">
+                    <div class="title font-weight-bold">
+                        Tổng tiền cần thanh toán
+                    </div>
+                    <div class="total-price bg-light p-4 font-weight-bold" >
+                        @final.ToString("N0") đ
+                    </div>
+                    <P class="title font-weight-bold">Hình thức thanh toán</P>
+                    <label class="alert alert-info d-block">
+                        <input type="radio" checked="checked" name="Order.TypePay" value="1" />
+                        <i class="fal fa-fw fa-credit-card"></i>
+                        CHUYỂN KHOẢN
+                    </label>
+                    <label class="alert alert-info d-block">
+                        <input type="radio" name="Order.TypePay" value="2" />
+                        <i class="fas fa-fw fa-money-bill-alt"></i>
+                        TIỀN MẶT
+                    </label>
+                    <button type="submit" class="btn-checkout">
+                        Đặt hàng
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval", "~/bundles/jqueryui")
+}

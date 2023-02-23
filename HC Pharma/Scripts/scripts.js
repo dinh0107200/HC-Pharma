@@ -198,7 +198,22 @@ accordionNav = $(function () {
     });
 });
 
-function DetailJS(){ 
+function DetailJS() { 
+    $("#formBookProduct").on("submit", function (e) {
+        e.preventDefault();
+        $.post("/gio-hang/them-vao-gio-hang", $(this).serialize(), function (data) {
+            if (data.result === 1) {
+                $.toast({
+                    text: "Thêm vào giỏ hàng thành công",
+                    icon: "success",
+                    position: "bottom-right"
+                });
+                $(".number-cart").text(data.count);
+            } else {
+                $.toast("Quá trình thực hiện không thành công");
+            }
+        });
+    });
 }
 $("#review-form").on("submit", function (e) {
     e.preventDefault();
@@ -294,3 +309,61 @@ $('.hiden-soci').click(function () {
     $('.show-last').show()
 
 })
+
+$(".remove-product").click(function () {
+    const recordToDelete = $(this).attr("data-id");
+    if (recordToDelete !== "") {
+        Swal.fire({
+            title: 'Bạn có muốn xóa sản phẩm?',
+            text: "Sản phẩm sẽ bị xóa khỏi giỏ hàng",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Xóa'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                $.post("/ShoppingCart/RemoveFromCart", { "id": recordToDelete }, function (data) {
+                    if (data.ItemCount === 1) {
+                        alert("Quá trình thực hiện không thành công");
+                        
+                    } else {
+                        $("tr[data-row='" + recordToDelete + "']").fadeOut();
+                        function reload() {
+                            location.reload();
+                        }
+                        setTimeout(reload, 500);
+                        Swal.fire(
+                            'Xóa thành công!',
+                            'Sản phẩm đã bị xóa khỏi giỏ hàng',
+                            'success'
+                        )
+                    }
+                });
+
+
+            }
+        })
+
+    }
+});
+
+
+
+$("[data-item=city]").on("change", function (data) {
+    const id = $(this).val();
+    var items = [];
+    items.push("<option value>Chọn Quận/Huyện</option>");
+
+    if (id !== "") {
+        $.getJSON("/Base/GetDistrict", { cityId: id }, function (data) {
+            $.each(data, function (key, val) {
+                items.push("<option value='" + val.Id + "'>" + val.Name + "</option>");
+            });
+            $("[data-item=district]").html(items.join(""));
+        });
+    } else {
+        $("[data-item=district]").html(items.join(""));
+    }
+});
