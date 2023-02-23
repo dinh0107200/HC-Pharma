@@ -295,13 +295,13 @@
                 Đối tác của chúng tôi
             </div>
             <div class="list-partner">
-                @foreach (var item in Model.Banner.Where(a => a.GroupId == 2))
+                @foreach (var item in Model.Banner.Where(a => a.GroupId == 1))
                 {
                     <div class="partner-item">
                         <a href="@item.Url">
                             @if (item.Image != null)
                             {
-                                <img src="@Path.Combine("/images/partner/", item.Image)" alt="@item.BannerName">
+                                <img src="@Path.Combine("/images/banners/", item.Image)" alt="@item.BannerName">
                             }
                             else
                             {

@@ -111,14 +111,12 @@
                                 @foreach (var item in arr)
                                 {
                                     <div class="product-thumnail__item pt-0 pl-lg-0">
-                                        <img src="@Path.Combine("/images/products/", item)" alt="@Model.Product.Name">
+                                        <a href="@Path.Combine("/images/products/", item)" data-fancybox="group">
+                                            <img src="@Path.Combine("/images/products/", item)" alt="@Model.Product.Name">
+                                        </a>
                                     </div>
                                 }
                             </div>
-                        }
-                        @if (Model.Product.ListImage != null)
-                        {
-                            var arr = Model.Product.ListImage.Split(',');
                             <div class="product-nav">
                                 @foreach (var item in arr)
                                 {
@@ -128,7 +126,6 @@
                                 }
                             </div>
                         }
-
                     </div>
                     <div class="col-lg-6">
                         <div class="produc-detail_infor">

@@ -52,7 +52,7 @@ namespace HC_Pharma.Controllers
         public ActionResult Index()
         {
             var category = _unitOfWork.ProductCategoryRepository.Get(a => a.CategoryActive && a.ShowHome, o => o.OrderByDescending(a => a.CategorySort), 5);
-            var product = _unitOfWork.ProductRepository.Get(a => a.Active && a.Home, o => o.OrderByDescending(a => a.CreateDate), 3);
+            var product = _unitOfWork.ProductRepository.Get(a => a.Active && a.Home, o => o.OrderBy(a => a.Sort), 3);
             var artilce = _unitOfWork.ArticleRepository.Get(a => a.Active && a.Home, o => o.OrderByDescending(a => a.CreateDate), 3);
             var banner = _unitOfWork.BannerRepository.Get(a => a.Active, q => q.OrderBy(a => a.Sort));
             var feedback = _unitOfWork.FeedbackRepository.Get(a => a.Active);
@@ -314,7 +314,7 @@ namespace HC_Pharma.Controllers
         {
             var pageNumber = page ?? 1;
             var article = _unitOfWork.ArticleRepository.GetQuery(a => a.Active, o => o.OrderByDescending(a => a.CreateDate));
-            var model = new AllArticleViewModel()
+            var model = new AllArticleViewModel
             {
                 Articles = article.ToPagedList(pageNumber, 12),
                 Categories = ArticleCategories.Where(a => a.TypePost == TypePost.Article || a.TypePost == TypePost.Introduce),
