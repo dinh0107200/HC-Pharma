@@ -268,7 +268,7 @@ namespace HC_Pharma.Controllers
                 config.Tiki = model.Tiki;
                 config.Tiktok = model.Tiktok;
                 config.Shopee = model.Shopee;
-
+                config.BankInfo = model.BankInfo;
                 _unitOfWork.Save();
                 HttpContext.Application["ConfigSite"] = config;
                 return RedirectToAction("ConfigSite", "Vcms", new { result = "success" });

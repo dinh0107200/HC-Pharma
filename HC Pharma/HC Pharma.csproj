@@ -225,6 +225,10 @@
     <Compile Include="Migrations\202302231153229_order.designer.cs">
       <DependentUpon>202302231153229_order.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202302271027415_bank.cs" />
+    <Compile Include="Migrations\202302271027415_bank.designer.cs">
+      <DependentUpon>202302271027415_bank.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Article.cs" />
@@ -759,6 +763,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202302231153229_order.resx">
       <DependentUpon>202302231153229_order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202302271027415_bank.resx">
+      <DependentUpon>202302271027415_bank.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -65,8 +65,13 @@
                         @Html.ValidationMessageFor(a => a.Order.Transport)
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        @Html.DropDownListFor(model => model.Order.TypePay, Model.SelectTypePay, "Hình thức thanh toán", new { @class = "form-control mb-lg-0 mm-md-0 mb-3" })
+                        @Html.DropDownListFor(model => model.Order.TypePay, Model.SelectTypePay, "Hình thức thanh toán", new { @class = "form-control mb-lg-0 mm-md-0 mb-3 typepay" })
                         @Html.ValidationMessageFor(a => a.Order.TypePay)
+                    </div>
+                </div>
+                <div class="bank-info shadow mb-3">
+                    <div class="bank-item text-center">
+                        @Html.Raw(config.BankInfo)
                     </div>
                 </div>
                 <div class="group-check-out d-flex justify-content-between align-items-center">
@@ -134,4 +139,14 @@
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval", "~/bundles/jqueryui")
+    <script>
+        $(".typepay").change(function () {
+            if ($(".typepay").val() == 2) {
+                $('.bank-info').show();
+            } else {
+                $('.bank-info').hide();
+            }
+        })
+           
+    </script>
 }

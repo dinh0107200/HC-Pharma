@@ -1979,6 +1979,9 @@ input::-webkit-inner-spin-button {
   }
 }
 @media (max-width: 468px) {
+  .info-check {
+    padding-bottom: 0;
+  }
   .check-out-form {
     padding-top: 30px;
   }
@@ -2687,4 +2690,10 @@ a:not([href]):not([class]) {
 
 .price-color {
   color: #2CDEB4 !important;
+}
+
+.bank-info {
+  padding: 10px;
+  border-radius: 10px;
+  display: none;
 }

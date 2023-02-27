@@ -2313,6 +2313,11 @@ input::-webkit-inner-spin-button {
 }
 
 @include maxWidth(468px) {
+
+    .info-check {
+        padding-bottom: 0;
+    }
+
     .check-out-form {
         padding-top: 30px;
     }
@@ -3157,4 +3162,10 @@ a:not([href]):not([class]) {
 }   
 .price-color{
     color:$colorMain2 !important;
+}
+.bank-info{
+    padding:10px;
+    border-radius:10px;
+    display:none;
+
 }

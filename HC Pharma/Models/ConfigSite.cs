@@ -79,6 +79,8 @@ namespace HC_Pharma.Models
         public string InfoContact { get; set; }
         [Display(Name = "Thông tin chân trang"), UIHint("EditorBox")]
         public string InfoFooter { get; set; }
-        
+        [Display(Name = "Tài khoản ngân hàng"), UIHint("EditorBox")]
+        public string BankInfo { get; set; }
+
     }
 }
