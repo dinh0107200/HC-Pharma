@@ -2625,7 +2625,7 @@ a:not([href]):not([class]) {
   color: #2CDEB4;
 }
 .order-pr:hover {
-  color: #2CDEB4;
+  color: #fff;
   background: #3B66FF;
 }
 
@@ -2683,4 +2683,8 @@ a:not([href]):not([class]) {
   transform: translateX(60px);
   width: 15px;
   left: 15px;
+}
+
+.price-color {
+  color: #2CDEB4 !important;
 }

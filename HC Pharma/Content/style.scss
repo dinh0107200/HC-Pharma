@@ -3096,7 +3096,7 @@ a:not([href]):not([class]) {
     color: $colorMain2;
 
     &:hover {
-        color: $colorMain2;
+        color: $white;
         background: $colorMain;
     }
 }
@@ -3155,3 +3155,6 @@ a:not([href]):not([class]) {
     width: 15px;
     left: 15px;
 }   
+.price-color{
+    color:$colorMain2 !important;
+}

@@ -154,20 +154,24 @@
                                     </a>
                                     <a href="@Url.Action("ProductCategory",new { item.ProductCategory.Url })" class="category">(@item.ProductCategory.CategoryName)</a>
                                 </div>
-                                <div class="product-price">
-                                    @if (item.PriceSale != null)
-                                    {
+                                @if (item.PriceSale > 0)
+                                {
+                                    <div class="product-price text-danger">
                                         @Html.DisplayFor(a => item.PriceSale)
-                                    }
-                                    else
-                                    {
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="product-price price-color">
                                         @Html.DisplayFor(a => item.Price)
-                                    }
-                                    @if (item.Price == null && item.PriceSale == null)
-                                    {
+                                    </div>
+                                }
+                                @if (item.Price == null && item.PriceSale == null)
+                                {
+                                    <div class="product-price text-danger">
                                         <p>Liên hệ</p>
-                                    }
-                                </div>
+                                    </div>
+                                }
                                 <div class="product-description truncate">
                                     @item.Description
                                 </div>
