@@ -15,109 +15,121 @@
         </ol>
     </div>
 </div>
-<div class="container  checkout">
-    @using (Html.BeginForm())
-    {
-        @Html.ValidationSummary(true)
-        @Html.AntiForgeryToken()
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="box-checkout shadow p-3 list-cart">
-                    @foreach (var cart in Model.CartItems)
-                    {
-                        var price = cart.CartItems.Count * cart.CartItems.Price;
-
-                        <div class="check-item w-100">
-                            <input type="hidden" name="CartTotal" value="@Model.CartTotal" />
-                            <div class="cart-info">
-                                @if (cart.CartItems.Product.ListImage != null)
-                                {
-                                    <img data-src="@Path.Combine("/images/products/", cart.CartItems.Product.ListImage.Split(',')[0])" src="~/Content/images/img-main/base64.gif" class="img-product lazyload" alt="@cart.CartItems.Product.Name" />
-                                }
-                                <div class="product-name font-weight-bold">
-                                    @cart.CartItems.Product.Name
-                                </div>
-                            </div>
-                            <div class="price-cart font-weight-bold">
-                                @if (price < 1)
-                                {
-                                    @:Liên hệ
-                                }
-                                else
-                                {
-                                    @Convert.ToDecimal(price).ToString("N0") @:đ
-                                }
-                                <span>
-                                    x @cart.CartItems.Count
-                                </span>
-                            </div>
-                        </div>
-                        <hr />
-                    }
+<div class="container p-4 mb-5">
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col order-lg-0 order-md-1 order-1 check-out-form">
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true)
+                @Html.AntiForgeryToken()
+                <div class="title font-weight-bold mb-4">
+                    Thông tin liên lạc
                 </div>
-                <div class="sbox-address shadow mb-4 mt-4 p-3">
-                    <div class="title font-weight-bold">
-                        Thông tin giao hàng
+                <div class="form-group">
+                    @Html.TextBoxFor(a => a.Order.CustomerInfo.Email, new { @class = "form-control", @placeholder = "Email của bạn" })
+                    @Html.ValidationMessageFor(a => a.Order.CustomerInfo.Email)
+                </div>
+                <div class="title font-weight-bold mb-4">
+                    Địa chỉ nhận hàng
+                </div>
+                <div class="form-row form-group">
+                    <div class="col-lg-6 col-md-6">
+                        @Html.TextBoxFor(a => a.Order.CustomerInfo.Fullname, new { @class = "form-control mb-lg-0 mm-md-0 mb-3", @placeholder = "Họ và tên" })
+                        @Html.ValidationMessageFor(a => a.Order.CustomerInfo.Fullname)
                     </div>
-                    <div class="form-row form-group">
-                        <div class="col-lg-6 col-md-6">
-                            @Html.TextBoxFor(a => a.Order.CustomerInfo.Fullname, new { @class = "form-control mb-lg-0 mm-md-0 mb-3", @placeholder = "Họ và tên" })
-                            @Html.ValidationMessageFor(a => a.Order.CustomerInfo.Fullname)
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            @Html.TextBoxFor(a => a.Order.CustomerInfo.Mobile, new { @class = "form-control", @placeholder = "Số điện thoại" })
-                            @Html.ValidationMessageFor(a => a.Order.CustomerInfo.Mobile)
-                        </div>
-                    </div>
-                    <div class="form-group form-row">
-                        <div class="col-lg-6 col-md-6">
-                            @Html.DropDownListFor(a => a.CityId, Model.CitySelectList, "Chọn thành phố", new { @class = "form-control mb-lg-0 mm-md-0 mb-3", data_item = "city" })
-                            @Html.ValidationMessageFor(a => a.CityId)
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            @Html.DropDownListFor(a => a.DistrictId, Model.DistrictSelectList, "Chọn quận huyện", new { @class = "form-control", data_item = "district" })
-                            @Html.ValidationMessageFor(a => a.DistrictId)
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.TextBoxFor(a => a.Order.CustomerInfo.Address, new { @class = "form-control", @placeholder = "Địa chỉ" })
-                        @Html.ValidationMessageFor(a => a.Order.CustomerInfo.Address)
-                    </div>
-                    <div class="form-group">
-                        @Html.TextBoxFor(a => a.Order.CustomerInfo.Email, new { @class = "form-control", @placeholder = "Email của bạn" })
-                        @Html.ValidationMessageFor(a => a.Order.CustomerInfo.Email)
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control" name="Order.CustomerInfo.Body" rows="4" placeholder="Lời nhắn (nếu có)"></textarea>
+                    <div class="col-lg-6 col-md-6">
+                        @Html.TextBoxFor(a => a.Order.CustomerInfo.Mobile, new { @class = "form-control", @placeholder = "Số điện thoại" })
+                        @Html.ValidationMessageFor(a => a.Order.CustomerInfo.Mobile)
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="box-payment  shadow p-3 mb-5 ">
-                    <div class="title font-weight-bold">
-                        Tổng tiền cần thanh toán
+                <div class="form-group form-row">
+                    <div class="col-lg-6 col-md-6">
+                        @Html.DropDownListFor(a => a.CityId, Model.CitySelectList, "Chọn thành phố", new { @class = "form-control mb-lg-0 mm-md-0 mb-3", data_item = "city" })
+                        @Html.ValidationMessageFor(a => a.CityId)
                     </div>
-                    <div class="total-price bg-light p-4 font-weight-bold" >
-                        @final.ToString("N0") đ
+                    <div class="col-lg-6 col-md-6">
+                        @Html.DropDownListFor(a => a.DistrictId, Model.DistrictSelectList, "Chọn quận huyện", new { @class = "form-control", data_item = "district" })
+                        @Html.ValidationMessageFor(a => a.DistrictId)
                     </div>
-                    <P class="title font-weight-bold">Hình thức thanh toán</P>
-                    <label class="alert alert-info d-block">
-                        <input type="radio" checked="checked" name="Order.TypePay" value="1" />
-                        <i class="fal fa-fw fa-credit-card"></i>
-                        CHUYỂN KHOẢN
-                    </label>
-                    <label class="alert alert-info d-block">
-                        <input type="radio" name="Order.TypePay" value="2" />
-                        <i class="fas fa-fw fa-money-bill-alt"></i>
-                        TIỀN MẶT
-                    </label>
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(a => a.Order.CustomerInfo.Address, new { @class = "form-control", @placeholder = "Địa chỉ" })
+                    @Html.ValidationMessageFor(a => a.Order.CustomerInfo.Address)
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" name="Order.CustomerInfo.Body" rows="4" placeholder="Lời nhắn (nếu có)"></textarea>
+                </div>
+                <div class="form-row form-group">
+                    <div class="col-lg-6 col-md-6">
+                        @Html.DropDownListFor(model => model.Order.Transport, Model.SelectTransport, "Hình thức vận chuyển", new { @class = "form-control mb-lg-0 mm-md-0 mb-3" })
+                        @Html.ValidationMessageFor(a => a.Order.Transport)
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        @Html.DropDownListFor(model => model.Order.TypePay, Model.SelectTypePay, "Hình thức thanh toán", new { @class = "form-control mb-lg-0 mm-md-0 mb-3" })
+                        @Html.ValidationMessageFor(a => a.Order.TypePay)
+                    </div>
+                </div>
+                <div class="group-check-out d-flex justify-content-between align-items-center">
+                    <a href="@Url.Action("Index", "ShoppingCart")"><i class="fas fa-chevron-left mr-1"></i>Quay lại giỏ hàng</a>
                     <button type="submit" class="btn-checkout">
-                        Đặt hàng
+                        Xác nhận đặt hàng
                     </button>
                 </div>
-            </div>
+            }
         </div>
-    }
+        <div class="col-lg-6 col-md-12 col order-lg-1 order-md-1 order-0">
+            <div class="title font-weight-bold mb-4 info-check">
+                Thông tin đơn hàng
+            </div>
+            <table class="table-check-out">
+                <tr class="border-bottom border-top">
+                    <th class="text-xl-left p-2" style="width: 25%">Sản phẩm</th>
+                    <th style="width: 10%" class="text-center">Số lượng</th>
+                    <th class="text-xl-right text-center" style="width: 10%">Giá</th>
+                </tr>
+                @foreach (var item in Model.CartItems)
+                {
+                    var price = item.CartItems.Count * item.CartItems.Price;
+                    <tr class="border-bottom">
+                        <td>
+                            <div class="check-out-img">
+                                @if (item.CartItems.Product.ListImage != null)
+                                {
+                                    <img data-src="@Path.Combine("/images/products/", item.CartItems.Product.ListImage.Split(',')[0])" src="~/Content/images/img-main/base64.gif" class="img-product lazyload" alt="@item.CartItems.Product.Name" />
+                                }
+                                <div class="name font-weight-bold">
+                                    @item.CartItems.Product.Name
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            @item.CartItems.Count
+                        </td>
+                        <td class="text-right font-weight-bold">
+                            @if (price == 0)
+                            {
+                                @:Liên hệ
+                            }
+                            else
+                            {
+                                @Convert.ToDecimal(price).ToString("N0") @:đ
+                            }
+                        </td>
+                    </tr>
+                }
+
+                <tr class="border-top ">
+                    <td class="p-2">
+                        Tổng cộng (đã bao gồm VAT)
+                    </td>
+                    <td></td>
+                    <td class="text-right font-weight-bold text-danger">
+                        @final.ToString("N0") đ
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
 @section scripts
 {

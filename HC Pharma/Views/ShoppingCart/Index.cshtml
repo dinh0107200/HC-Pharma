@@ -85,9 +85,18 @@
                                     </td>
                                     <td>
                                         <div class="flex-item justify-content-end font-weight-bold">
-                                            <span>
-                                                @price.ToString("N0") đ
-                                            </span>
+                                            @if (price == 0)
+                                            {
+                                                <span>
+                                                    Liên hệ
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span>
+                                                    @price.ToString("N0") đ
+                                                </span>
+                                            }
                                         </div>
                                     </td>
                                     <td class="flex-item justify-content-center">
@@ -103,7 +112,7 @@
                     </div>
                     <hr>
                     <div class="total text-right">
-                        Tổng cộng: <span class="font-weight-bold pl-2">@Model.CartTotal.ToString("N0") đ</span>
+                        Tổng cộng (đã bao gồm VAT) <span class="font-weight-bold pl-2">@Model.CartTotal.ToString("N0") đ</span>
                     </div>
                     <div class="cart-btn text-right">
                         <div class="item-btn bg-info">

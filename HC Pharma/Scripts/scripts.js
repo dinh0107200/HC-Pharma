@@ -98,13 +98,13 @@ $(".back-top").click(function () {
     $("html, body").animate({ scrollTop: 0 }, 1000);
 });
 
-$(".hamburger").click(function () {
-    $(this).toggleClass("is-active");
-    $(".header-menu__mb").toggleClass("active");
+
+$('.toggle').click(function () {
+    $('.toggle').toggleClass('active')
     $(".overlay").toggleClass("active");
+    $(".header-menu__mb").toggleClass("active");
 
-});
-
+})
 
 $(".overlay").click(function () {
     $(this).toggleClass("is-active");
@@ -367,3 +367,19 @@ $("[data-item=city]").on("change", function (data) {
         $("[data-item=district]").html(items.join(""));
     }
 });
+function addCart(n, m) {
+    $.post("/gio-hang/them-vao-gio-hang", { productId: n }, function (n) {
+        n.result === 1
+            ? ($.toast({
+                text: "Thêm vào giỏ hàng thành công",
+                icon: "success",
+                position: "bottom-right",
+            }),
+                $(".number-cart").text(n.count))
+            : $.toast({
+                text: "Quá trình thực hiện không thành công",
+                icon: "error",
+                position: "bottom-right",
+            });
+    });
+}

@@ -10,6 +10,22 @@
         case 2:
             typepay = "Tiền mặt";
             break;
+    };
+    var typetransport = "Đến địa chỉ người nhận";
+    switch (Model.Order.Transport)
+    {
+        case 1:
+            typetransport = "Đến địa chỉ người nhận";
+            break;
+        case 2:
+            typetransport = "Khách đến nhận hàng";
+            break;
+        case 3:
+            typetransport = "Qua bưu điện";
+            break;
+        case 4:
+            typetransport = "Hình thức khác";
+            break;
     }
 }
 <style>
@@ -87,5 +103,9 @@
     <h2>Thanh toán</h2>
     <div class="box_content mt-0">
         <p class="mb-1">Hình thức thanh toán: <strong>@typepay</strong></p>
+    </div>
+    <h2>Hình thức vận chuyển</h2>
+    <div class="box_content mt-0">
+        <p class="mb-1">Hình thức vận chuyển : <strong>@typetransport</strong></p>
     </div>
 </div>
