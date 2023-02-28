@@ -78,4 +78,15 @@ namespace HC_Pharma.ViewModel
         public decimal TotalMoney { get; set; }
         public int Count { get; set; }
     }
+    public class CartStatistic
+    {
+        public int Status { get; set; }
+        public decimal totalMoney { get; set; }
+        public int totalItem { get; set; }
+        public int itemCont { get; set; }
+        public decimal totalMoneyItem { get; set; }
+        public string totalMoneyString => totalMoney.ToString("N0");
+        public string Msg { get; set; }
+    }
+
 }

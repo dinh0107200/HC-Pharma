@@ -9,6 +9,7 @@ using HC_Pharma.Models;
 using HC_Pharma.ViewModel;
 using System.Collections.Generic;
 using System.Net;
+using HC_Pharma.Migrations;
 
 namespace HC_Pharma.Controllers
 {
@@ -296,7 +297,47 @@ namespace HC_Pharma.Controllers
             };
             return PartialView("CartSummary", model);
         }
-
+        [HttpPost]
+        public JsonResult UpdateCartV2(int productId, int changeValue)
+        {
+            try
+            {
+                var cart = ShoppingCart.GetCart(HttpContext);
+                var addedProduct = cart.GetCartItems().FirstOrDefault(a => a.RecordId == productId);
+                if(addedProduct != null)
+                {
+                    var itemCount = cart.UpdateToCart(addedProduct, changeValue);
+                    var totalMoneyItem = addedProduct.Price * itemCount;
+                    var statistic = new CartStatistic
+                    {
+                        Status = 0,
+                        Msg = "Cập nhật thành công",
+                        itemCont = itemCount,
+                        totalItem = cart.GetCount(),
+                        totalMoneyItem = totalMoneyItem ?? 0,
+                        totalMoney = cart.GetTotal(),
+                    };
+                    return Json(statistic);
+                }
+                return Json(new CartStatistic
+                {
+                    Status = 0,
+                    totalItem = 0,
+                    totalMoney = 0,
+                    Msg = "Cập nhật thành công",
+                });
+            }
+            catch(Exception) {
+                return Json(new CartStatistic
+                {
+                    Status = 1,
+                    totalMoney = 0,
+                    itemCont = 0,
+                    totalItem = 0,
+                    Msg = "Cập nhật không thành công",
+                });
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             _unitOfWork.Dispose();

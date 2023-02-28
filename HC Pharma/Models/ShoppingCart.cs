@@ -120,6 +120,19 @@ namespace HC_Pharma.Models
             }
             return context.Session[CartSessionKey].ToString();
         }
+        public int UpdateToCart(Cart cart, int changeValue) {
+            var cartItem = _unitOfWork.CartRepository.Get(c => c.CartId == ShoppingCartId && c.RecordId == cart.RecordId).FirstOrDefault();
+            if(cartItem.Count +changeValue <=0)
+            {
+                _unitOfWork.CartRepository.Delete(cartItem);
+            }
+            else
+            {
+                cartItem.Count += changeValue;
+            }
+            _unitOfWork.Save();
+            return cartItem.Count;
+        }
         //public void MigrateCart(string userName)
         //{
         //    var user = _unitOfWork.UserRepository.GetQuery(a => a.Email == userName).Single();

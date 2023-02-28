@@ -383,3 +383,27 @@ function addCart(n, m) {
             });
     });
 }
+function UpdateToCard(id, changeValue) {
+    $.ajax({
+        type: "Post",
+        url: "/ShoppingCart/UpdateCartV2", data: { productId: id, changeValue },
+        success: function (res) {
+            if (res) {
+                console.log(res.totalMoneyItem);
+                console.log(res.totalMoneyString)
+                $("#finalTotal").html(res.totalMoneyString);
+                $.toast({
+                    heading: res.Msg,
+                    position: "bottom-right",
+                    icon: "success"
+                });
+            } else {
+                $.toast({
+                    heading: res.Msg,
+                    position: "bottom-right",
+                    icon: "error"
+                });
+            }
+        }
+    })
+}

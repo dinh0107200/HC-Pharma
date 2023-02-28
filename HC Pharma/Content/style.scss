@@ -1929,7 +1929,9 @@ input::-webkit-inner-spin-button {
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
 }
-
+.total{
+    justify-content:flex-end;
+}
 @include maxWidth(1024px) {
     .form-input {
         input {
@@ -2014,9 +2016,10 @@ input::-webkit-inner-spin-button {
 }
 
 @include maxWidth(820px) {
-    .toggle{
-        display:flex !important;
+    .toggle {
+        display: flex !important;
     }
+
     .check-out-form {
         padding-bottom: 30px;
     }
@@ -2032,9 +2035,7 @@ input::-webkit-inner-spin-button {
             width: 150px;
         }
     }
-
-
-    .table {
+    /*.table {
         display: grid;
         justify-content: flex-start;
         grid-auto-columns: max-content;
@@ -2045,7 +2046,7 @@ input::-webkit-inner-spin-button {
         touch-action: manipulation;
         scroll-padding: 1rem;
         grid-template-columns: unset;
-    }
+    }*/
 
     .list-social {
         right: -100% !important;
@@ -2313,6 +2314,28 @@ input::-webkit-inner-spin-button {
 }
 
 @include maxWidth(468px) {
+    .total{
+        justify-content:center;
+    } .select-all {
+        display: none !important;
+    }
+
+    .shoping-cart {
+        padding-top: 10px !important;
+    }
+
+    .table {
+        display: grid;
+        justify-content: flex-start;
+        grid-auto-columns: max-content;
+        overflow: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-snap-stop: always;
+        touch-action: manipulation;
+        scroll-padding: 1rem;
+        grid-template-columns: unset;
+    }
 
     .info-check {
         padding-bottom: 0;
@@ -3105,10 +3128,11 @@ a:not([href]):not([class]) {
         background: $colorMain;
     }
 }
+
 .order-btn {
     margin-top: 10px;
-
 }
+
 .toggle {
     position: relative;
     width: 40px;
@@ -3139,7 +3163,7 @@ a:not([href]):not([class]) {
     width: 40px;
     transform: translateY(0) rotate(45deg);
     transition-delay: .125s;
-    color:red;
+    color: red;
 }
 
 .toggle span:nth-child(2) {
@@ -3159,13 +3183,38 @@ a:not([href]):not([class]) {
     transform: translateX(60px);
     width: 15px;
     left: 15px;
-}   
-.price-color{
-    color:$colorMain2 !important;
 }
-.bank-info{
-    padding:10px;
-    border-radius:10px;
-    display:none;
 
+.price-color {
+    color: $colorMain2 !important;
+}
+
+.bank-info {
+    padding: 10px;
+    border-radius: 10px;
+    display: none;
+}
+
+.select-all {
+    margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-transform: uppercase;
+    color: #283454;
+    font-weight: 600;
+    align-items: center;
+    font-size: .95rem;
+}
+
+.price-c {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.finalTotal {
+    padding-top: 20px;
+    font-size: 14px;
 }

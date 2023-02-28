@@ -1695,6 +1695,10 @@ input::-webkit-inner-spin-button {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+.total {
+  justify-content: flex-end;
+}
+
 @media (max-width: 1024px) {
   .form-input input {
     width: 250px;
@@ -1768,18 +1772,18 @@ input::-webkit-inner-spin-button {
   .flex-item img {
     width: 150px;
   }
-  .table {
-    display: grid;
-    justify-content: flex-start;
-    grid-auto-columns: max-content;
-    overflow: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    scroll-snap-stop: always;
-    touch-action: manipulation;
-    scroll-padding: 1rem;
-    grid-template-columns: unset;
-  }
+  /*.table {
+      display: grid;
+      justify-content: flex-start;
+      grid-auto-columns: max-content;
+      overflow: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-snap-stop: always;
+      touch-action: manipulation;
+      scroll-padding: 1rem;
+      grid-template-columns: unset;
+  }*/
   .list-social {
     right: -100% !important;
   }
@@ -1979,6 +1983,27 @@ input::-webkit-inner-spin-button {
   }
 }
 @media (max-width: 468px) {
+  .total {
+    justify-content: center;
+  }
+  .select-all {
+    display: none !important;
+  }
+  .shoping-cart {
+    padding-top: 10px !important;
+  }
+  .table {
+    display: grid;
+    justify-content: flex-start;
+    grid-auto-columns: max-content;
+    overflow: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-snap-stop: always;
+    touch-action: manipulation;
+    scroll-padding: 1rem;
+    grid-template-columns: unset;
+  }
   .info-check {
     padding-bottom: 0;
   }
@@ -2696,4 +2721,28 @@ a:not([href]):not([class]) {
   padding: 10px;
   border-radius: 10px;
   display: none;
+}
+
+.select-all {
+  margin-bottom: 20px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: uppercase;
+  color: #283454;
+  font-weight: 600;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.price-c {
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.finalTotal {
+  padding-top: 20px;
+  font-size: 14px;
 }
