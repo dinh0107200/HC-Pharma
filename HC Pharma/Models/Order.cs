@@ -14,7 +14,7 @@ namespace HC_Pharma.Models
         public DateTime CreateDate { get; set; }
         [Display(Name = "Tình trang thanh toán"), UIHint("Payment")]
         public bool Payment { get; set; }
-        [Display(Name = "Thanh toán"), UIHint("DisplayTypePay")]
+        [Display(Name = "Thanh toán"), UIHint("DisplayTypePay"), Required(ErrorMessage = "Chọn hình thức thanh toán")]
         public int TypePay { get; set; }
         [Display(Name = "Chuyển hàng"), UIHint("DisplayTypeTransport"), Required(ErrorMessage = "Chọn hình thức vận chuyển")]
         public int Transport { get; set; }
