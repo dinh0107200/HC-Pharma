@@ -13,6 +13,7 @@
     </div>
 </nav>
 <section class="shoping-cart">
+
     <div class="container pt-lg-3 pt-2 mb-lg-4 mb-3" style="max-width: 1230px;">
         @if (!Model.CartItems.Any())
         {
@@ -30,15 +31,19 @@
         }
         else
         {
+            <div class="title-cart font-weight-bold">
+                Giỏ hàng của bạn
+            </div>
             using (Html.BeginForm())
             {
                 <div class="my-cart">
                     <div class="table-responsive">
-                       <div class="select-all border">
-                           <div>Sản phẩm</div>
-                           <div>Giá</div>
-                           <div>Số lượng</div>
-                       </div>
+                        <div class="select-all border">
+                            <div style="width:45%">Sản phẩm</div>
+                            <div style="width:15%">Giá</div>
+                            <div style="width:20%">Thành tiền</div>
+                            <div style="width:20%" class="text-right">Số lượng</div>
+                        </div>
                         <table class="table border">
                             @foreach (var item in Model.CartItems)
                             {
@@ -76,7 +81,22 @@
                                             {
                                                 <span><b>@p.ToString("N0") đ</b> </span>
                                             }
-                                           
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex-item font-weight-bold price-c">
+                                            @if (price == 0)
+                                            {
+                                                <span>
+                                                    Liên hệ
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span><b id="final"class="final" data-cart-item="@item.RecordId">@price.ToString("N0") </b> đ</span>
+                                            }
+
                                         </div>
                                     </td>
                                     <td>
@@ -96,16 +116,20 @@
                             <p class="font-weight-bold">đ</p>
                         </div>
                         <div class="cart-btn text-right">
-                            <div class="item-btn bg-info">
-                                <a href="@Url.Action("AllProduct" ,"Home")"><i class="fas fa-cart-plus"></i>Tiếp tục mua hàng</a>
+                            <div class="item-btn bg-danger text-white">
+                                <a href="@Url.Action("EmptyCart")"><i class="fa fa-trash mr-1"></i>Hủy đơn hàng</a>
                             </div>
-                            
-                            <div class="item-btn bg-primary text-white">
-                                <a href="@Url.Action("CheckOut")"><i class="fas fa-check"></i>Đặt hàng</a>
+                            <div class="right-btn">
+                                <div class="item-btn bg-info">
+                                    <a href="@Url.Action("AllProduct" ,"Home")"><i class="fas fa-cart-plus"></i>Tiếp tục mua hàng</a>
+                                </div>
+                                <div class="item-btn bg-primary text-white">
+                                    <a href="@Url.Action("CheckOut")"><i class="fas fa-check"></i>Đặt hàng</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
 
             }

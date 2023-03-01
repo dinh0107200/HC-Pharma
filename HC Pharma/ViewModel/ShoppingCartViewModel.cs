@@ -86,6 +86,7 @@ namespace HC_Pharma.ViewModel
         public int itemCont { get; set; }
         public decimal totalMoneyItem { get; set; }
         public string totalMoneyString => totalMoney.ToString("N0");
+        public string total => totalMoneyItem.ToString("N0");
         public string Msg { get; set; }
     }
 

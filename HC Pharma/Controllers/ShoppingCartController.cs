@@ -76,6 +76,7 @@ namespace HC_Pharma.Controllers
                 Order = new Order
                 {
                     TypePay = 1,
+                    Transport = 1,
                 },
                 CartItems = itemCarts,
                 CartTotal = cart.GetTotal(),
@@ -127,10 +128,26 @@ namespace HC_Pharma.Controllers
                 switch (model.Order.TypePay)
                 {
                     case 1:
-                        typepay = "Chuyển khoản";
+                        typepay = "Tiền mặt";
                         break;
                     case 2:
-                        typepay = "Tiền mặt";
+                        typepay = "Chuyển khoản";
+                        break;
+                }
+                var typetransport = "Hình thức vận chuyển";
+                switch (model.Order.Transport)
+                {
+                    case 1:
+                        typetransport = "Đến địa chỉ người nhận";
+                        break;
+                    case 2:
+                        typetransport = "Khách đến nhận hàng";
+                        break;
+                    case 3:
+                        typetransport = "Qua bưu điện";
+                        break;
+                    case 4:
+                        typetransport = "Hình thức khác";
                         break;
                 }
                 var sb = "<p>Cảm ơn quý khách đã đặt hàng tại website " + Request.Url?.Host + "</p>" +
@@ -145,6 +162,7 @@ namespace HC_Pharma.Controllers
 
                 sb += "<p>Ngày đặt hàng: <strong>" + model.Order.CreateDate.ToString("dd-MM-yyyy HH:ss") + "</strong></p>";
                 sb += "<p>Hình thức thanh toán: <strong>" + typepay + "</strong></p>";
+                sb += "<p>Hình thức vận chuyển: <strong>" + typetransport + "</strong></p>";
                 sb += "<p>Thông tin đơn hàng</p>";
                 sb += "<table border='1' cellpadding='10' style='border:1px #ccc solid;border-collapse: collapse'>" +
 
@@ -238,7 +256,8 @@ namespace HC_Pharma.Controllers
                 var data = new
                 {
                     result = 1,
-                    count = cart.GetCount()
+                    count = cart.GetCount(),
+                    CartTotal = cart.GetTotal(),
                 };
                 return Json(data);
             }

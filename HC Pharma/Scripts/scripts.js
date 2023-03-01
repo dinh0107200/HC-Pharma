@@ -370,6 +370,8 @@ $("[data-item=city]").on("change", function (data) {
 function addCart(n, m) {
     $.post("/gio-hang/them-vao-gio-hang", { productId: n }, function (n) {
         n.result === 1
+        console.log(n.CartTotal)
+        $("#finalcart").text(n.CartTotal)
             ? ($.toast({
                 text: "Thêm vào giỏ hàng thành công",
                 icon: "success",
@@ -389,9 +391,9 @@ function UpdateToCard(id, changeValue) {
         url: "/ShoppingCart/UpdateCartV2", data: { productId: id, changeValue },
         success: function (res) {
             if (res) {
-                console.log(res.totalMoneyItem);
-                console.log(res.totalMoneyString)
+                $("[data-cart-item=" + id + "]").text(res.total); 
                 $("#finalTotal").html(res.totalMoneyString);
+                $("#finalcart").html(res.totalMoneyString)
                 $.toast({
                     heading: res.Msg,
                     position: "bottom-right",

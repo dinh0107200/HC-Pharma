@@ -1570,7 +1570,11 @@ h1 {
   padding-bottom: 30px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+}
+.cart-btn .right-btn {
+  display: flex;
+  align-items: center;
 }
 .cart-btn .item-btn {
   margin-left: 20px;
@@ -1983,6 +1987,10 @@ input::-webkit-inner-spin-button {
   }
 }
 @media (max-width: 468px) {
+  .right-btn {
+    display: block !important;
+    width: 100%;
+  }
   .total {
     justify-content: center;
   }
@@ -2745,4 +2753,45 @@ a:not([href]):not([class]) {
 .finalTotal {
   padding-top: 20px;
   font-size: 14px;
+}
+
+.title-cart {
+  text-align: center;
+  font-size: 25px;
+  padding-bottom: 20px;
+}
+
+.cart-item {
+  position: relative;
+}
+.cart-item:hover .cart-menu {
+  display: block;
+}
+.cart-item:before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 60px;
+}
+.cart-item a {
+  z-index: 99;
+}
+.cart-item .cart-menu {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  background: #fff;
+  padding: 10px;
+  bottom: -160px;
+  z-index: 99;
+  border-radius: 10px;
+}
+.cart-item .cart-menu ul {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.cart-item .cart-menu ul li {
+  padding: 10px;
+  width: max-content;
 }

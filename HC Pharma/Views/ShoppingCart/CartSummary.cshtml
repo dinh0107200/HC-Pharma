@@ -6,4 +6,18 @@
             @Model.Count
         </div>
     </a>
+    <div class="cart-menu shadow">
+        <ul class="ul-reset">
+            <li><a href="@Url.Action("Index", "ShoppingCart")"><i class="far fa-shopping-cart mr-2"></i>Giỏ hàng của tôi</a></li>
+            <li><i class="fal fa-sack-dollar mr-2"></i>Tổng tiền:<span class="pl-2" id="finalcart">@Model.TotalMoney.ToString("N0")</span>đ</li>
+            <li><a href="/gio-hang/thanh-toan"><i class="far fa-credit-card mr-2"></i>Thanh toán</a></li>
+        </ul>
+    </div>
 </div>
+
+@section scripts
+{
+    <script>
+
+    </script>
+}
