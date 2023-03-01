@@ -257,7 +257,7 @@ namespace HC_Pharma.Controllers
                 {
                     result = 1,
                     count = cart.GetCount(),
-                    CartTotal = cart.GetTotal(),
+                    CartTotal = cart.GetTotal().ToString("N0"),
                 };
                 return Json(data);
             }
