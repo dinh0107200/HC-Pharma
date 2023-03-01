@@ -40,8 +40,8 @@
                     <div class="table-responsive">
                         <div class="select-all border">
                             <div style="width:45%">Sản phẩm</div>
-                            <div style="width:15%">Giá</div>
-                            <div style="width:20%">Thành tiền</div>
+                            <div style="width:15%" class="pl-4">Giá</div>
+                            <div style="width:20%" >Thành tiền</div>
                             <div style="width:20%" class="text-right">Số lượng</div>
                         </div>
                         <table class="table border">
@@ -69,7 +69,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td style="width:15%">
                                         <div class="flex-item font-weight-bold price-c">
                                             @if (p == 0)
                                             {
@@ -84,7 +84,7 @@
 
                                         </div>
                                     </td>
-                                    <td>
+                                    <td style="width:20%">
                                         <div class="flex-item font-weight-bold price-c">
                                             @if (price == 0)
                                             {
@@ -99,7 +99,7 @@
 
                                         </div>
                                     </td>
-                                    <td>
+                                    <td style="width:20%">
                                         <div class="flex-item justify-content-end">
                                             <input type="hidden" name="RecordId" value="@item.RecordId" />
                                             <input type="number" id="orderQuantity_@count" id-value="@item.RecordId" class="nice-number  form-control" name="Quantity" required="" min="1" max="999" value="@item.Count">
