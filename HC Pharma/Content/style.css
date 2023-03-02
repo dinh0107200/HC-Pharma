@@ -1555,12 +1555,6 @@ h1 {
 .cart-item:hover .cart-menu {
   display: block;
 }
-.cart-item:before {
-  content: "";
-  position: absolute;
-  width: 100px;
-  height: 60px;
-}
 .cart-item a {
   z-index: 99;
 }
@@ -1571,7 +1565,7 @@ h1 {
   padding: 5px;
   z-index: 99;
   border-radius: 10px;
-  top: 50px;
+  top: 40px;
 }
 .cart-item .cart-menu ul {
   display: flex;
@@ -2789,5 +2783,8 @@ a:not([href]):not([class]) {
     touch-action: manipulation;
     scroll-padding: 1rem;
     grid-template-columns: unset;
+  }
+  .cart-item:hover .cart-menu {
+    display: none;
   }
 }

@@ -1777,13 +1777,6 @@ h1 {
         display: block;
     }
 
-    &:before {
-        content: "";
-        position: absolute;
-        width: 100px;
-        height: 60px;
-    }
-
     a {
         z-index: 99;
     }
@@ -1795,7 +1788,7 @@ h1 {
         padding: 5px;
         z-index: 99;
         border-radius: 10px;
-        top: 50px;
+        top: 40px;
 
         ul {
             display: flex;
@@ -3272,5 +3265,11 @@ a:not([href]):not([class]) {
         touch-action: manipulation;
         scroll-padding: 1rem;
         grid-template-columns: unset;
+    }
+
+    .cart-item:hover {
+        .cart-menu {
+            display: none;
+        }
     }
 }
