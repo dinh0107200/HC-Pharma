@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using HC_Pharma.Models;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-using HC_Pharma.Models;
 
-namespace HC_Pharma.ViewModel  
+namespace HC_Pharma.ViewModel
 {
     public class ChangePasswordModel
     {
@@ -45,5 +41,7 @@ namespace HC_Pharma.ViewModel
         public string Username { get; set; }
         [Display(Name = "Mật khẩu"), UIHint("Password"), StringLength(20, MinimumLength = 6, ErrorMessage = "Mật khẩu từ 6 - 20 ký tự")]
         public string Password { get; set; }
+        [Display(Name = "Phân quyền")]
+        public RoleAdmin Role { get; set; }
     }
 }

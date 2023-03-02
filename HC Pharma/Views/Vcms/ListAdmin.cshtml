@@ -3,6 +3,7 @@
     <table class="list_table" id="list-admin">
         <tbody>
             <tr>
+                <th>@Html.DisplayNameFor(model => model.Role)</th>
                 <th>@Html.DisplayNameFor(model => model.Username)</th>
                 <th>@Html.DisplayNameFor(model => model.Active)</th>
                 <th></th>
@@ -10,6 +11,7 @@
             @foreach (var admin in Model)
             {
                 <tr data-id="@admin.Username">
+                    <td class="left">@admin.Role</td>
                     <td class="left">@admin.Username</td>
                     <td>@Html.DisplayFor(a => admin.Active)</td>
                     <td class="list-icon">
@@ -29,15 +31,16 @@
                     $.toast({
                         text: 'Xóa quản trị viên thành công',
                         position: 'bottom-right',
-                        icon: 'success',
-                    })
+                        icon: 'success'
+                    });
                     $("tr[data-id='" + id + "']").fadeOut();
                 } else {
                     $.toast({
                         text: 'Quá trình thực hiện không thành công. Hãy thử lại',
-                        icon: 'error',
-                    })
+                        icon: 'error'
+                    });
                 }
             });
         }
-    }</script>
+    }
+</script>

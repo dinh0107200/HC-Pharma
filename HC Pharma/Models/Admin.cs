@@ -12,9 +12,17 @@ namespace HC_Pharma.Models
         public string Password { get; set; }
         [Display(Name = "Hoạt động", Description = "Hoạt động")]
         public bool Active { get; set; }
+        [Display(Name = "Phân quyền")]
+        public RoleAdmin Role { get; set; }
         public Admin()
         {
             Active = true;
         }
+    }
+
+    public enum RoleAdmin
+    {
+        Admin,
+        Editor
     }
 }

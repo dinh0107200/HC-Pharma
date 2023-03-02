@@ -1,4 +1,5 @@
 ﻿using HC_Pharma.DAL;
+using HC_Pharma.Filters;
 using HC_Pharma.Models;
 using HC_Pharma.ViewModel;
 using Helpers;
@@ -12,18 +13,19 @@ using System.Web.Security;
 
 namespace HC_Pharma.Controllers
 {
-    [Authorize]
+    [Authorize, AdminRoleFilters]
     public class VcmsController : Controller
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
+        private RoleAdmin Role => (RoleAdmin)Enum.Parse(typeof(RoleAdmin), RouteData.Values["Role"].ToString());
 
         #region Login
-        [AllowAnonymous]
+        [AllowAnonymous, OverrideActionFilters]
         public ActionResult Login()
         {
             return View();
         }
-        [AllowAnonymous]
+        [AllowAnonymous, OverrideActionFilters]
         [HttpPost]
         public ActionResult Login(AdminLoginModel model, string returnUrl)
         {
@@ -34,7 +36,7 @@ namespace HC_Pharma.Controllers
                 if (admin != null && HtmlHelpers.VerifyHash(model.Password, "SHA256", admin.Password))
                 {
                     var ticket = new FormsAuthenticationTicket(1, model.Username.ToLower(), DateTime.Now, DateTime.Now.AddDays(30), true,
-                        admin.ToString(), FormsAuthentication.FormsCookiePath);
+                        admin.Role.ToString(), FormsAuthentication.FormsCookiePath);
 
                     var encTicket = FormsAuthentication.Encrypt(ticket);
                     // Create the cookie.
@@ -79,12 +81,21 @@ namespace HC_Pharma.Controllers
         }
         public ActionResult CreateAdmin(string result = "")
         {
+            if (Role != RoleAdmin.Admin)
+            {
+                return RedirectToAction("Index");
+            }
             ViewBag.Result = result;
             return View();
         }
         [HttpPost]
         public ActionResult CreateAdmin(Admin model)
         {
+            if (Role != RoleAdmin.Admin)
+            {
+                return RedirectToAction("Index");
+            }
+
             if (ModelState.IsValid)
             {
                 var admin = _unitOfWork.AdminRepository.GetQuery(a => a.Username.Equals(model.Username)).SingleOrDefault();
@@ -95,7 +106,7 @@ namespace HC_Pharma.Controllers
                 else
                 {
                     var hashPass = HtmlHelpers.ComputeHash(model.Password, "SHA256", null);
-                    _unitOfWork.AdminRepository.Insert(new Admin { Username = model.Username, Password = hashPass, Active = model.Active });
+                    _unitOfWork.AdminRepository.Insert(new Admin { Username = model.Username, Password = hashPass, Active = model.Active, Role = model.Role });
                     _unitOfWork.Save();
                     return RedirectToAction("CreateAdmin", new { result = "success" });
                 }
@@ -104,6 +115,11 @@ namespace HC_Pharma.Controllers
         }
         public ActionResult EditAdmin(int adminId = 0)
         {
+            if (Role != RoleAdmin.Admin)
+            {
+                return RedirectToAction("Index");
+            }
+
             var admin = _unitOfWork.AdminRepository.GetById(adminId);
             if (admin == null)
             {
@@ -114,7 +130,8 @@ namespace HC_Pharma.Controllers
             {
                 Id = admin.Id,
                 Username = admin.Username,
-                Active = admin.Active
+                Active = admin.Active,
+                Role = admin.Role
             };
 
             return View(model);
@@ -122,6 +139,11 @@ namespace HC_Pharma.Controllers
         [HttpPost]
         public ActionResult EditAdmin(EditAdminViewModel model)
         {
+            if (Role != RoleAdmin.Admin)
+            {
+                return RedirectToAction("Index");
+            }
+
             if (ModelState.IsValid)
             {
                 var admin = _unitOfWork.AdminRepository.GetById(model.Id);
@@ -129,28 +151,38 @@ namespace HC_Pharma.Controllers
                 {
                     return RedirectToAction("CreateAdmin");
                 }
-                if (admin.Username != model.Username)
+                if (admin.Username != "admin")
                 {
-                    var exists = _unitOfWork.AdminRepository.GetQuery(a => a.Username.Equals(model.Username)).SingleOrDefault();
-                    if (exists != null)
+                    if (admin.Username != model.Username)
                     {
-                        ModelState.AddModelError("", @"Tên đăng nhập này có rồi");
-                        return View(model);
+                        var exists = _unitOfWork.AdminRepository.GetQuery(a => a.Username.Equals(model.Username)).SingleOrDefault();
+                        if (exists != null)
+                        {
+                            ModelState.AddModelError("", @"Tên đăng nhập này có rồi");
+                            return View(model);
+                        }
+                        admin.Username = model.Username;
                     }
-                    admin.Username = model.Username;
-                }
-                admin.Active = model.Active;
-                if (model.Password != null)
-                {
-                    admin.Password = HtmlHelpers.ComputeHash(model.Password, "SHA256", null);
+                    admin.Active = model.Active;
+                    admin.Role = model.Role;
+                    if (model.Password != null)
+                    {
+                        admin.Password = HtmlHelpers.ComputeHash(model.Password, "SHA256", null);
+                    }
                 }
                 _unitOfWork.Save();
                 return RedirectToAction("CreateAdmin", new { result = "update" });
             }
             return View(model);
         }
+        [HttpPost]
         public bool DeleteAdmin(string username)
         {
+            if (Role != RoleAdmin.Admin)
+            {
+                return false;
+            }
+
             var admin = _unitOfWork.AdminRepository.GetQuery(a => a.Username.Equals(username)).SingleOrDefault();
             if (admin == null)
             {

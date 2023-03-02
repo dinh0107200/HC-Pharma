@@ -1,15 +1,13 @@
-﻿using Helpers;
+﻿using HC_Pharma.DAL;
+using HC_Pharma.Models;
+using HC_Pharma.ViewModel;
+using Helpers;
 using PagedList;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using HC_Pharma.DAL;
-using HC_Pharma.Models;
-using HC_Pharma.ViewModel;
 
 namespace HC_Pharma.Controllers
 {
@@ -17,6 +15,7 @@ namespace HC_Pharma.Controllers
     public class ContactController : Controller
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
+        private RoleAdmin Role => (RoleAdmin)Enum.Parse(typeof(RoleAdmin), RouteData.Values["Role"].ToString());
 
         #region Contact
         public ActionResult ListContact(int? page, string name)
@@ -39,6 +38,10 @@ namespace HC_Pharma.Controllers
         [HttpPost]
         public bool DeleteContact(int contactId = 0)
         {
+            if (Role != RoleAdmin.Admin)
+            {
+                return false;
+            }
             var contact = _unitOfWork.ContactRepository.GetById(contactId);
             if (contact == null)
             {
@@ -126,7 +129,7 @@ namespace HC_Pharma.Controllers
             var feedback = _unitOfWork.FeedbackRepository.GetById(feedbackId);
             if (feedback == null)
             {
-                return RedirectToAction("ListFeeback");
+                return RedirectToAction("ListFeedback");
             }
             return View(feedback);
         }
@@ -184,6 +187,11 @@ namespace HC_Pharma.Controllers
         [HttpPost]
         public bool DeleteFeedback(int feedbackId = 0)
         {
+            if (Role != RoleAdmin.Admin)
+            {
+                return false;
+            }
+
             var feedback = _unitOfWork.FeedbackRepository.GetById(feedbackId);
             if (feedback == null)
             {
@@ -329,6 +337,10 @@ namespace HC_Pharma.Controllers
         [HttpPost]
         public bool DeletePartner(int partnerId = 0)
         {
+            if (Role != RoleAdmin.Admin)
+            {
+                return false;
+            }
             var partner = _unitOfWork.PartnerRepository.GetById(partnerId);
             if (partner == null)
             {
@@ -339,6 +351,7 @@ namespace HC_Pharma.Controllers
             return true;
         }
         #endregion
+
         protected override void Dispose(bool disposing)
         {
             _unitOfWork.Dispose();

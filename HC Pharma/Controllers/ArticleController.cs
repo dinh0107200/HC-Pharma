@@ -1,4 +1,7 @@
-﻿using Helpers;
+﻿using HC_Pharma.DAL;
+using HC_Pharma.Models;
+using HC_Pharma.ViewModel;
+using Helpers;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -6,10 +9,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
-using System.Data.Entity;
-using HC_Pharma.DAL;
-using HC_Pharma.Models;
-using HC_Pharma.ViewModel;
 
 namespace HC_Pharma.Controllers
 {
@@ -17,7 +16,9 @@ namespace HC_Pharma.Controllers
     public class ArticleController : Controller
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
-        private IEnumerable<ArticleCategory> ArticleCategories => _unitOfWork.ArticleCategoryRepository.Get();
+        private RoleAdmin Role => (RoleAdmin)Enum.Parse(typeof(RoleAdmin), RouteData.Values["Role"].ToString());
+
+        private IEnumerable<ArticleCategory> ArticleCategories => _unitOfWork.ArticleCategoryRepository.Get(orderBy: q => q.OrderBy(a => a.CategorySort));
 
         #region ArticleCategory
         [ChildActionOnly]
@@ -140,7 +141,10 @@ namespace HC_Pharma.Controllers
         [HttpPost]
         public bool DeleteCategory(int catId = 0)
         {
-
+            if (Role != RoleAdmin.Admin)
+            {
+                return false;
+            }
             var category = _unitOfWork.ArticleCategoryRepository.GetById(catId);
             if (category == null)
             {
@@ -253,14 +257,17 @@ namespace HC_Pharma.Controllers
                 if (isPost)
                 {
                     model.Article.Url = HtmlHelpers.ConvertToUnSign(null, model.Article.Url ?? model.Article.Subject);
-                    var articles = _unitOfWork.ArticleRepository.GetQuery().AsNoTracking();
-                    if (articles.Any(p => p.Url.ToLower().Trim() == model.Article.Url.ToLower().Trim()))
-                    {
-                        model.Article.Url += "-" + DateTime.Now.Millisecond;
-                    }
                     model.Article.ArticleCategoryId = Convert.ToInt32(fc["CategoryId"]);
                     _unitOfWork.ArticleRepository.Insert(model.Article);
                     _unitOfWork.Save();
+
+                    var count = _unitOfWork.ArticleRepository.GetQuery(a => a.Url == model.Article.Url).Count();
+                    if (count > 1)
+                    {
+                        model.Article.Url += "-" + model.Article.Id;
+                        _unitOfWork.Save();
+                    }
+
                     return RedirectToAction("ListArticle", new { result = "success" });
                 }
             }
@@ -342,14 +349,15 @@ namespace HC_Pharma.Controllers
                     article.TitleMeta = model.Article.TitleMeta;
                     article.DescriptionMeta = model.Article.DescriptionMeta;
                     article.Menu = model.Article.Menu;
-
-
-                    var articles = _unitOfWork.ArticleRepository.GetQuery().AsNoTracking();
-                    if (articles.Any(p => p.Url.ToLower().Trim() == model.Article.Url.ToLower().Trim() && p.Id != model.Article.Id))
-                    {
-                        model.Article.Url += "-" + DateTime.Now.Millisecond;
-                    }
                     _unitOfWork.Save();
+
+                    var count = _unitOfWork.ArticleRepository.GetQuery(a => a.Url == article.Url).Count();
+                    if (count > 1)
+                    {
+                        article.Url += "-" + article.Id;
+                        _unitOfWork.Save();
+                    }
+
                     return RedirectToAction("ListArticle", new { result = "update" });
                 }
             }
@@ -359,6 +367,10 @@ namespace HC_Pharma.Controllers
         [HttpPost]
         public bool DeleteArticle(int articleId = 0)
         {
+            if (Role != RoleAdmin.Admin)
+            {
+                return false;
+            }
 
             var article = _unitOfWork.ArticleRepository.GetById(articleId);
             if (article == null)

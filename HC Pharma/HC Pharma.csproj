@@ -162,6 +162,7 @@
     <Compile Include="DAL\DataEntities.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
+    <Compile Include="Filters\AuthorLoginFilters.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -228,6 +229,10 @@
     <Compile Include="Migrations\202302271027415_bank.cs" />
     <Compile Include="Migrations\202302271027415_bank.designer.cs">
       <DependentUpon>202302271027415_bank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202303020739423_AddRoleToAdminClass.cs" />
+    <Compile Include="Migrations\202303020739423_AddRoleToAdminClass.designer.cs">
+      <DependentUpon>202303020739423_AddRoleToAdminClass.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
@@ -766,6 +771,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202302271027415_bank.resx">
       <DependentUpon>202302271027415_bank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202303020739423_AddRoleToAdminClass.resx">
+      <DependentUpon>202303020739423_AddRoleToAdminClass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

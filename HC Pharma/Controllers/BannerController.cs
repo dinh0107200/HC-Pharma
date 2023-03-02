@@ -14,6 +14,7 @@ namespace HC_Pharma.Controllers
     public class BannerController : Controller
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
+        private RoleAdmin Role => (RoleAdmin)Enum.Parse(typeof(RoleAdmin), RouteData.Values["Role"].ToString());
 
         #region Banner
         public ActionResult ListBanner(int? page, int? groupId, string result = "")
@@ -153,6 +154,10 @@ namespace HC_Pharma.Controllers
         [HttpPost]
         public bool DeleteBanner(int bannerId = 0)
         {
+            if (Role != RoleAdmin.Admin)
+            {
+                return false;
+            }
             var banner = _unitOfWork.BannerRepository.GetById(bannerId);
             if (banner == null)
             {

@@ -1,30 +1,28 @@
-﻿using PagedList;
+﻿using HC_Pharma.DAL;
+using HC_Pharma.Models;
+using HC_Pharma.ViewModel;
+using PagedList;
 using System;
 using System.Data;
 using System.Data.Entity;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
-using HC_Pharma.DAL;
-using HC_Pharma.Models;
-using HC_Pharma.ViewModel; 
+
 //using OfficeOpenXml;
 //using OfficeOpenXml.Style;
 
-namespace Binova.Controllers
+namespace HC_Pharma.Controllers
 {
     [Authorize]
     public class OrderController : Controller
     {
         // GET: Order
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
+        private RoleAdmin Role => (RoleAdmin)Enum.Parse(typeof(RoleAdmin), RouteData.Values["Role"].ToString());
 
         public ActionResult ListOrder(int? page, int? cityId, string madonhang, string fromdate, string todate, string customerName, string customerEmail, string customerMobile, int status = -1, int payment = 0, int pageSize = 50)
         {
-
-
             var pageNumber = page ?? 1;
             var orders = _unitOfWork.OrderRepository.GetQuery(orderBy: q => q.OrderByDescending(a => a.Id));
 
@@ -201,7 +199,10 @@ namespace Binova.Controllers
         [HttpPost]
         public bool DeleteOrder(int orderId = 0)
         {
-
+            if (Role != RoleAdmin.Admin)
+            {
+                return false;
+            }
             var order = _unitOfWork.OrderRepository.GetById(orderId);
             if (order == null)
             {

@@ -85,7 +85,7 @@
                 <td><a href="javascript:;" onclick="loadOrder(@order.Id)" class="@colorStats">@order.MaDonHang</a></td>
                 <td class="left">
                     <p><strong>Người mua</strong> @order.CustomerInfo.Fullname</p>
-                    <p><strong>Địa chỉ</strong> @order.CustomerInfo.Address, @order.District.Name, @order.City.Name</p>
+                    <p><strong>Địa chỉ</strong> @order.CustomerInfo.Address, @(order.District?.Name), @(order.City?.Name)</p>
                     <p><strong>Điện thoại</strong> @order.CustomerInfo.Mobile</p>
                     <p><strong>Email</strong> @order.CustomerInfo.Email</p>
                     <p><strong>Ngày đặt:</strong> @order.CreateDate.ToString("dd/MM/yyyy HH:mm")</p>

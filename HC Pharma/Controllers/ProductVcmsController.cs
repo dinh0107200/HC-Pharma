@@ -7,14 +7,10 @@ using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Validation;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Services.Description;
 
 namespace HC_Pharma.Controllers
 {
@@ -22,6 +18,8 @@ namespace HC_Pharma.Controllers
     public class ProductVcmsController : Controller
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
+        private RoleAdmin Role => (RoleAdmin)Enum.Parse(typeof(RoleAdmin), RouteData.Values["Role"].ToString());
+
         private IEnumerable<ProductCategory> ProductCategories =>
             _unitOfWork.ProductCategoryRepository.Get(a => a.CategoryActive, q => q.OrderBy(a => a.CategorySort));
         private SelectList ParentProductCategoryList => new SelectList(ProductCategories.Where(a => a.ParentId == null), "Id", "CategoryName");
@@ -78,6 +76,13 @@ namespace HC_Pharma.Controllers
                 model.ProductCategory.Url = HtmlHelpers.ConvertToUnSign(null, model.ProductCategory.Url ?? model.ProductCategory.CategoryName);
                 _unitOfWork.ProductCategoryRepository.Insert(model.ProductCategory);
                 _unitOfWork.Save();
+                var count = _unitOfWork.ProductCategoryRepository.GetQuery(a => a.Url == model.ProductCategory.Url).Count();
+                if (count > 1)
+                {
+                    model.ProductCategory.Url += "-" + model.ProductCategory.Id;
+                    _unitOfWork.Save();
+                }
+
                 return RedirectToAction("ProductCategory", new { result = "success" });
             }
             ViewBag.RootCats = new SelectList(ProductCategories.Where(a => a.ParentId == null), "Id", "CategoryName");
@@ -158,6 +163,14 @@ namespace HC_Pharma.Controllers
                 category.TitleIntroduce = model.ProductCategory.TitleIntroduce;
 
                 _unitOfWork.Save();
+
+                var count = _unitOfWork.ProductCategoryRepository.GetQuery(a => a.Url == category.Url).Count();
+                if (count > 1)
+                {
+                    category.Url += "-" + category.Id;
+                    _unitOfWork.Save();
+                }
+
                 return RedirectToAction("ProductCategory", new { result = "update" });
             }
             ViewBag.RootCats = new SelectList(ProductCategories.Where(a => a.ParentId == null), "Id", "CategoryName");
@@ -166,6 +179,10 @@ namespace HC_Pharma.Controllers
         [HttpPost]
         public bool DeleteCategory(int catId = 0)
         {
+            if (Role != RoleAdmin.Admin)
+            {
+                return false;
+            }
             var category = _unitOfWork.ProductCategoryRepository.GetById(catId);
             if (category == null)
             {
@@ -279,16 +296,15 @@ namespace HC_Pharma.Controllers
                 model.Product.ListImage = fc["Pictures"];
                 model.Product.ProductCategoryId = model.CategoryId ?? model.ParentId;
                 model.Product.Url = HtmlHelpers.ConvertToUnSign(null, model.Product.Url ?? model.Product.Name);
+                _unitOfWork.ProductRepository.Insert(model.Product);
+                _unitOfWork.Save();
 
                 var count = _unitOfWork.ProductRepository.GetQuery(a => a.Url == model.Product.Url).Count();
                 if (count > 1)
                 {
-                    model.Product.Url += "-" + DateTime.Now.Millisecond;
+                    model.Product.Url += "-" + model.Product.Id;
                     _unitOfWork.Save();
                 }
-
-                _unitOfWork.ProductRepository.Insert(model.Product);
-                _unitOfWork.Save();
 
                 return RedirectToAction("ListProduct", new { result = "success" });
             }
@@ -353,7 +369,7 @@ namespace HC_Pharma.Controllers
                 product.Star = model.Product.Star;
                 product.Origin = model.Product.Origin;
                 product.Producer = model.Product.Producer;
-                product.Specifications= model.Product.Specifications;
+                product.Specifications = model.Product.Specifications;
                 product.Uses = model.Product.Uses;
                 product.Usermanual = model.Product.Usermanual;
 
@@ -362,7 +378,7 @@ namespace HC_Pharma.Controllers
                 var count = _unitOfWork.ProductRepository.GetQuery(a => a.Url == product.Url).Count();
                 if (count > 1)
                 {
-                    product.Url += "-" + DateTime.Now.Millisecond;
+                    product.Url += "-" + product.Id;
                     _unitOfWork.Save();
                 }
 
@@ -375,6 +391,10 @@ namespace HC_Pharma.Controllers
         [HttpPost]
         public bool DeleteProduct(int proId = 0)
         {
+            if (Role != RoleAdmin.Admin)
+            {
+                return false;
+            }
             var product = _unitOfWork.ProductRepository.GetById(proId);
             if (product == null)
             {
@@ -408,7 +428,8 @@ namespace HC_Pharma.Controllers
         #endregion
 
         #region Review
-        public ActionResult ListReview(int? page, string name) {
+        public ActionResult ListReview(int? page, string name)
+        {
             var pageNumber = page ?? 1;
             const int pageSize = 15;
             var review = _unitOfWork.ReviewRepository.GetQuery(orderBy: l => l.OrderByDescending(a => a.Id));
@@ -421,12 +442,17 @@ namespace HC_Pharma.Controllers
             {
                 Reviews = review.ToPagedList(pageNumber, pageSize),
                 Name = name,
-                Products = _unitOfWork.ProductRepository.GetQuery(a => a.Active , q => q.OrderBy(a => a.Sort)),
+                Products = _unitOfWork.ProductRepository.GetQuery(a => a.Active, q => q.OrderBy(a => a.Sort)),
             };
             return View(model);
         }
-        public bool deleteReview(int id)
+        [HttpPost]
+        public bool DeleteReview(int id)
         {
+            if (Role != RoleAdmin.Admin)
+            {
+                return false;
+            }
             var review = _unitOfWork.ReviewRepository.GetById(id);
             if (review == null)
             {
@@ -449,6 +475,7 @@ namespace HC_Pharma.Controllers
             return true;
         }
         #endregion
+
         public JsonResult GetProductCategory(int? parentId)
         {
             var categories = ProductCategories.Where(a => a.ParentId == parentId);

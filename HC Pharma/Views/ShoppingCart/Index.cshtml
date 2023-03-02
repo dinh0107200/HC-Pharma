@@ -40,9 +40,9 @@
                     <div class="table-responsive">
                         <div class="select-all border">
                             <div style="width:45%">Sản phẩm</div>
-                            <div style="width:15%" class="pl-4">Giá</div>
-                            <div style="width:20%" >Thành tiền</div>
                             <div style="width:20%" class="text-right">Số lượng</div>
+                            <div style="width:15%" class="pl-4">Giá</div>
+                            <div style="width:20%">Thành tiền</div>
                         </div>
                         <table class="table border">
                             @foreach (var item in Model.CartItems)
@@ -67,6 +67,12 @@
                                                     Xóa
                                                 </a>
                                             </div>
+                                        </div>
+                                    </td>
+                                    <td style="width:20%">
+                                        <div class="flex-item justify-content-end">
+                                            <input type="hidden" name="RecordId" value="@item.RecordId" />
+                                            <input type="number" id="orderQuantity_@count" id-value="@item.RecordId" class="nice-number  form-control" name="Quantity" required="" min="1" max="999" value="@item.Count">
                                         </div>
                                     </td>
                                     <td style="width:15%">
@@ -94,17 +100,12 @@
                                             }
                                             else
                                             {
-                                                <span><b id="final"class="final" data-cart-item="@item.RecordId">@price.ToString("N0") </b> đ</span>
+                                                <span><b id="final" class="final" data-cart-item="@item.RecordId">@price.ToString("N0") </b> đ</span>
                                             }
 
                                         </div>
                                     </td>
-                                    <td style="width:20%">
-                                        <div class="flex-item justify-content-end">
-                                            <input type="hidden" name="RecordId" value="@item.RecordId" />
-                                            <input type="number" id="orderQuantity_@count" id-value="@item.RecordId" class="nice-number  form-control" name="Quantity" required="" min="1" max="999" value="@item.Count">
-                                        </div>
-                                    </td>
+
                                 </tr>
                             }
                         </table>
