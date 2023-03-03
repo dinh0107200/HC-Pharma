@@ -5,7 +5,7 @@
 }
 <link href="~/Content/sweetalert2.css" rel="stylesheet" />
 <nav aria-label="breadcrumb" class="breadcrumb-nav">
-    <div class="container"style="max-width: 1230px;">
+    <div class="container" style="max-width: 1230px;">
         <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
             <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
@@ -38,28 +38,30 @@
             {
                 <div class="my-cart">
                     <div class="table-responsive">
-                        <div class="select-all border">
-                            <div style="width:45%">Sản phẩm</div>
-                            <div style="width:20%" class="text-right">Số lượng</div>
-                            <div style="width:15%" class="pl-4">Giá</div>
-                            <div style="width:20%">Thành tiền</div>
-                        </div>
                         <table class="table border">
+                            <thead>
+                                <tr class="text-center">
+                                    <th style="width:55%" class="text-left">Sản phẩm</th>
+                                    <th style="width:15%">Số lượng</th>
+                                    <th style="width:15%">Giá</th>
+                                    <th style="width:15%">Thành tiền</th>
+                                </tr>
+                            </thead>
                             @foreach (var item in Model.CartItems)
                             {
                                 count++;
                                 var p = item.Price ?? 0;
                                 var price = item.Count * p;
                                 <tr data-row="@item.RecordId">
-                                    <td style="width:45%">
-                                        <div class="flex-item">
+                                    <td>
+                                        <div class="media align-items-center">
                                             @if (item.Product.ListImage != null)
                                             {
-                                                <img src="@Path.Combine("/images/products/", item.Product.ListImage.Split(',')[0])" class="img-product  mr-3" alt="@item.Product.Name">
+                                                <img src="@Path.Combine("/images/products/", item.Product.ListImage.Split(',')[0])" width="200" class="mr-3 img-thumbnail" alt="@item.Product.Name">
                                             }
                                             else
                                             {
-                                                <img src="~/Content/images/img-main/on-image.jpg" class="img-product mr-3" alt="@item.Product.Name">
+                                                <img src="~/Content/images/img-main/on-image.jpg" width="200" class="mr-3 img-thumbnail" alt="@item.Product.Name">
                                             }
                                             <div class="name font-weight-bold truncate">
                                                 @item.Product.Name
@@ -69,43 +71,34 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td style="width:20%">
-                                        <div class="flex-item justify-content-end">
-                                            <input type="hidden" name="RecordId" value="@item.RecordId" />
-                                            <input type="number" id="orderQuantity_@count" id-value="@item.RecordId" class="nice-number  form-control" name="Quantity" required="" min="1" max="999" value="@item.Count">
-                                        </div>
+                                    <td style="vertical-align: middle">
+                                        <input type="hidden" name="RecordId" value="@item.RecordId" />
+                                        <input type="number" id="orderQuantity_@count" id-value="@item.RecordId" class="nice-number form-control" name="Quantity" required="" min="1" max="999" value="@item.Count">
                                     </td>
-                                    <td style="width:15%">
-                                        <div class="flex-item font-weight-bold price-c">
-                                            @if (p == 0)
-                                            {
-                                                <span>
-                                                    Liên hệ
-                                                </span>
-                                            }
-                                            else
-                                            {
-                                                <span><b>@p.ToString("N0") đ</b> </span>
-                                            }
-
-                                        </div>
+                                    <td style="width: 15%; vertical-align: middle" class="text-center font-weight-bold">
+                                        @if (p == 0)
+                                        {
+                                            <span>
+                                                Liên hệ
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span><b>@p.ToString("N0") đ</b> </span>
+                                        }
                                     </td>
-                                    <td style="width:20%">
-                                        <div class="flex-item font-weight-bold price-c">
-                                            @if (price == 0)
-                                            {
-                                                <span>
-                                                    Liên hệ
-                                                </span>
-                                            }
-                                            else
-                                            {
-                                                <span><b id="final" class="final" data-cart-item="@item.RecordId">@price.ToString("N0") </b> đ</span>
-                                            }
-
-                                        </div>
+                                    <td style="width: 20%; vertical-align: middle" class="text-center font-weight-bold">
+                                        @if (price == 0)
+                                        {
+                                            <span>
+                                                Liên hệ
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span><b id="final" class="final" data-cart-item="@item.RecordId">@price.ToString("N0") </b> đ</span>
+                                        }
                                     </td>
-
                                 </tr>
                             }
                         </table>
@@ -113,7 +106,7 @@
                     </div>
                     <div class="border p-3">
                         <div class="total text-right d-flex">
-                            Tổng cộng (đã bao gồm VAT) <span class="font-weight-bold pl-2" id="finalTotal">@Model.CartTotal.ToString("N0") </span>
+                            Tổng tiền (đã bao gồm VAT) <span class="font-weight-bold pl-2" id="finalTotal">@Model.CartTotal.ToString("N0") </span>
                             <p class="font-weight-bold">đ</p>
                         </div>
                         <div class="cart-btn text-right">
