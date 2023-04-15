@@ -83,15 +83,15 @@ button {
   color: #f00;
 }
 
-h1,
+/*h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
-
+*/
 img {
   max-width: 100% !important;
 }
@@ -1262,11 +1262,6 @@ img {
   padding-bottom: 10px;
 }
 
-.artilce-content img {
-  width: 100%;
-  height: auto;
-}
-
 .artilce-content .date {
   font-style: normal;
   font-weight: 400;
@@ -1274,6 +1269,19 @@ img {
   line-height: 18px;
   color: #9B9B9B;
   font-family: "Quicksand-Regular";
+}
+.artilce-content img {
+  width: 100%;
+  height: auto;
+}
+.artilce-content h2 {
+  font-size: 1.5rem;
+}
+.artilce-content h3 {
+  font-size: 1.25rem;
+}
+.artilce-content h4 {
+  font-size: 1.125rem;
 }
 
 .contact-form {
@@ -2140,6 +2148,27 @@ a:not([href]):not([class]) {
   font-weight: 600;
 }
 
+.widget-toc {
+  border: 1px #eee solid;
+  margin-bottom: 1rem;
+}
+.widget-toc .toc-title {
+  background: #eee;
+  padding: 0.25rem 0.5rem;
+  font-weight: 700;
+}
+.widget-toc ol {
+  margin: 0.75rem 0;
+  padding: 0 2rem;
+}
+.widget-toc ol li {
+  padding: 0.25rem 0;
+}
+.widget-toc ol ol {
+  margin: 0;
+  padding: 0 1rem;
+}
+
 .content-detail h2 {
   width: max-content;
   font-size: 18px;
@@ -2344,6 +2373,7 @@ a:not([href]):not([class]) {
   text-align: center;
   font-size: 25px;
   padding-bottom: 20px;
+  color: #3B66FF;
 }
 
 @media (max-width: 1024px) {

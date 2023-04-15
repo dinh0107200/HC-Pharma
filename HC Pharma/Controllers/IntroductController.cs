@@ -1,17 +1,9 @@
 ﻿using HC_Pharma.DAL;
-using HC_Pharma.Models;
-using HC_Pharma.ViewModel;
-using Helpers;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web;
+using HC_Pharma.Filters;
 using System.Web.Mvc;
-using PagedList;
 namespace HC_Pharma.Controllers
 {
-    [Authorize]
+    [Authorize, AdminRoleFilters]
 
     public class IntroductController : Controller
     {

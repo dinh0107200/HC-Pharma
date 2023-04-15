@@ -1,13 +1,12 @@
 ﻿using HC_Pharma.DAL;
 using HC_Pharma.Models;
 using HC_Pharma.ViewModel;
-using Helpers;
 using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Net.Mail;
 using System.Web.Configuration;
 using System.Web.Mvc;
 
@@ -16,13 +15,16 @@ namespace HC_Pharma.Controllers
     public class HomeController : Controller
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
+
         public ConfigSite ConfigSite => (ConfigSite)HttpContext.Application["ConfigSite"];
+        private static string Smtp => WebConfigurationManager.AppSettings["smtp"];
         private static string Email => WebConfigurationManager.AppSettings["email"];
         private static string Password => WebConfigurationManager.AppSettings["password"];
-        private IEnumerable<ProductCategory> ProductCategories =>
-           _unitOfWork.ProductCategoryRepository.Get(a => a.CategoryActive, q => q.OrderBy(a => a.CategorySort));
-        private IEnumerable<ArticleCategory> ArticleCategories =>
-            _unitOfWork.ArticleCategoryRepository.Get(a => a.CategoryActive, q => q.OrderBy(a => a.CategorySort));
+        private static int SmtpPort => Convert.ToInt32(WebConfigurationManager.AppSettings["smtpport"]);
+
+        private IEnumerable<ProductCategory> ProductCategories => _unitOfWork.ProductCategoryRepository.Get(a => a.CategoryActive, q => q.OrderBy(a => a.CategorySort));
+        private IEnumerable<ArticleCategory> ArticleCategories => _unitOfWork.ArticleCategoryRepository.Get(a => a.CategoryActive, q => q.OrderBy(a => a.CategorySort));
+
         #region Home
         public PartialViewResult Header()
         {
@@ -347,9 +349,62 @@ namespace HC_Pharma.Controllers
                        $"<p>Email: {model.Email},</p>" +
                        $"<p>Nội dung: {model.Body}</p>" +
                        $"<p>Đây là hệ thống gửi email tự động, vui lòng không phản hồi lại email này.</p>";
-            Task.Run(() => HtmlHelpers.SendEmail("gmail", subject, body, ConfigSite.Email, Email, Email, Password, ConfigSite.Title));
+            //Task.Run(() => HtmlHelpers.SendEmail(Smtp, subject, body, "anhquang.tran@vico.vn", Email, Email, Password, "HCPHARMA.VN", port: SmtpPort));
+
+            MailMessage mail = new MailMessage();
+            mail.To.Add("anhquang.tran@vico.vn");
+            mail.From = new MailAddress(Email);
+            mail.Subject = "Subject: Test Mail";
+            mail.Body = body;
+            mail.IsBodyHtml = true;
+
+            //Added this line here
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(RemoteServerCertificateValidationCallback);
+            SmtpClient smtp = new SmtpClient();
+
+            smtp.Host = Smtp;
+            smtp.Credentials = new System.Net.NetworkCredential(Email, Password);
+            smtp.EnableSsl = true;
+            smtp.Port = 587;
+            smtp.Send(mail);
 
             return Json(new { status = true, msg = "Gửi liên hệ thành công.\nChúng tôi sẽ liên lạc với bạn sớm nhất có thể." });
+        }
+        private bool RemoteServerCertificateValidationCallback(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certificate, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
+        {
+            //Console.WriteLine(certificate);
+            return true;
+        }
+        //public static bool RemoteServerCertificateValidationCallback(Object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        //{
+        //    if (sslPolicyErrors == SslPolicyErrors.None)
+        //        return true;
+
+        //    // if got an cert auth error
+        //    if (sslPolicyErrors != SslPolicyErrors.RemoteCertificateNameMismatch) return false;
+        //    const string sertFileName = "smpthost.cer";
+
+        //    // check if cert file exists
+        //    if (System.IO.File.Exists(sertFileName))
+        //    {
+        //        var actualCertificate = X509Certificate.CreateFromCertFile(sertFileName);
+        //        return certificate.Equals(actualCertificate);
+        //    }
+
+        //    // export and check if cert not exists
+        //    using (var file = System.IO.File.Create(sertFileName))
+        //    {
+        //        var cert = certificate.Export(X509ContentType.Cert);
+        //        file.Write(cert, 0, cert.Length);
+        //    }
+        //    var createdCertificate = X509Certificate.CreateFromCertFile(sertFileName);
+        //    return certificate.Equals(createdCertificate);
+        //}
+
+        protected override void Dispose(bool disposing)
+        {
+            _unitOfWork.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

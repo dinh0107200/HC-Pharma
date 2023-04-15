@@ -1,4 +1,5 @@
 ﻿using HC_Pharma.DAL;
+using HC_Pharma.Filters;
 using HC_Pharma.Models;
 using HC_Pharma.ViewModel;
 using Helpers;
@@ -11,7 +12,7 @@ using System.Web.Mvc;
 
 namespace HC_Pharma.Controllers
 {
-    [Authorize]
+    [Authorize, AdminRoleFilters]
     public class ContactController : Controller
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
@@ -52,6 +53,7 @@ namespace HC_Pharma.Controllers
             return true;
         }
         #endregion
+
         #region Feedback
         public ActionResult ListFeedback(int? page, string name, string result = "")
         {
@@ -202,8 +204,8 @@ namespace HC_Pharma.Controllers
             return true;
         }
         #endregion
-        #region Partner
 
+        #region Partner
         public ActionResult ListPartner(int? page, string name, string result = "")
         {
             ViewBag.Result = result;

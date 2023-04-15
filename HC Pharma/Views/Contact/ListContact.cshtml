@@ -58,15 +58,15 @@
                         $.toast({
                             text: 'Xóa liên hệ thành công',
                             position: 'bottom-right',
-                            icon: 'success',
-                        })
+                            icon: 'success'
+                        });
                         $("tr[data-id='" + id + "']").fadeOut();
                     }
                     else {
                         $.toast({
                             text: 'Quá trình thực hiện không thành công. Hãy thử lại',
-                            icon: 'error',
-                        })
+                            icon: 'error'
+                        });
                     }
                 });
             }

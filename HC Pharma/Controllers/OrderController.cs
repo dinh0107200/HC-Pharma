@@ -1,4 +1,5 @@
 ﻿using HC_Pharma.DAL;
+using HC_Pharma.Filters;
 using HC_Pharma.Models;
 using HC_Pharma.ViewModel;
 using PagedList;
@@ -14,7 +15,7 @@ using System.Web.Mvc;
 
 namespace HC_Pharma.Controllers
 {
-    [Authorize]
+    [Authorize, AdminRoleFilters]
     public class OrderController : Controller
     {
         // GET: Order

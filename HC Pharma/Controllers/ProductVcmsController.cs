@@ -1,5 +1,5 @@
-﻿
-using HC_Pharma.DAL;
+﻿using HC_Pharma.DAL;
+using HC_Pharma.Filters;
 using HC_Pharma.Models;
 using HC_Pharma.ViewModel;
 using Helpers;
@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace HC_Pharma.Controllers
 {
-    [Authorize]
+    [Authorize, AdminRoleFilters]
     public class ProductVcmsController : Controller
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();

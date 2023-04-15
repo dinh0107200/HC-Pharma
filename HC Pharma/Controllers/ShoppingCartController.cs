@@ -1,15 +1,11 @@
-﻿ using Helpers;
+﻿using HC_Pharma.Models;
+using HC_Pharma.ViewModel;
+using Helpers;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Configuration;
 using System.Web.Mvc;
-using HC_Pharma.DAL;
-using HC_Pharma.Models;
-using HC_Pharma.ViewModel;
-using System.Collections.Generic;
-using System.Net;
-using HC_Pharma.Migrations;
 
 namespace HC_Pharma.Controllers
 {
@@ -17,8 +13,10 @@ namespace HC_Pharma.Controllers
     public class ShoppingCartController : BaseController
     {
         public ConfigSite ConfigSite => (ConfigSite)HttpContext.Application["ConfigSite"];
+        private static string Smtp => WebConfigurationManager.AppSettings["smtp"];
         private static string Email => WebConfigurationManager.AppSettings["email"];
         private static string Password => WebConfigurationManager.AppSettings["password"];
+        private static int SmtpPort => Convert.ToInt32(WebConfigurationManager.AppSettings["smtpport"]);
 
         //List<int?> DistrictIds = new List<int?>() { 1, 732, 13, 78, 76, 15, 14, 79, 77, 85, 87, 80 };
         [Route("thong-tin")]
@@ -181,11 +179,11 @@ namespace HC_Pharma.Controllers
                     var img = "NO PICTURE";
                     if (odetails.Product.ListImage != null)
                     {
-                        img = "<img src='https://" + Request.Url?.Host + "/images/products/" + odetails.Product.ListImage   .Split(',')[0] + "?w=100' />";
+                        img = "<img src='" + Request.Url?.GetLeftPart(UriPartial.Authority) + "/images/products/" + odetails.Product.ListImage.Split(',')[0] + "?w=100' />";
                     }
                     sb += "<tr>" +
                           "<td>" + img + "</td>" +
-                          "<td><a href='https://" + Request.Url?.Host + Url.Action("Product", "Home", new { proId = odetails.ProductId, name = HtmlHelpers.ConvertToUnSign(null, odetails.Product.Name) }) + "' >" + odetails.Product.Name + "</a>";
+                          "<td><a href='" + Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("ProductDetail", "Home", new { proId = odetails.ProductId, name = HtmlHelpers.ConvertToUnSign(null, odetails.Product.Name) }) + "' >" + odetails.Product.Name + "</a>";
                     sb += "</td>" +
                           "<td style='text-align:center'>" + odetails.Quantity + "</td>" +
                           "<td style='text-align:center'>" + Convert.ToDecimal(odetails.Price).ToString("N0") + "</td>" +
@@ -200,8 +198,8 @@ namespace HC_Pharma.Controllers
 
                 Task.Run(() =>
                 {
-                    HtmlHelpers.SendEmail("gmail", "[" + orderId + "] Đơn đặt hàng từ website " + Request.Url?.Host, sb,
-                        ConfigSite.Email, Email, Email, Password, "Đặt Hàng Online", model.Order.CustomerInfo.Email, ConfigSite.Email);
+                    HtmlHelpers.SendEmail(Smtp, "[" + orderId + "] Đơn đặt hàng từ website " + Request.Url?.Host, sb,
+                        ConfigSite.Email, Email, Email, Password, "Đặt Hàng Online", model.Order.CustomerInfo.Email, ConfigSite.Email, port: SmtpPort);
                 });
 
                 return RedirectToAction("CheckOutComplete", new { orderId });
@@ -236,7 +234,7 @@ namespace HC_Pharma.Controllers
         }
 
         [Route("them-vao-gio-hang")]
-        public JsonResult AddToCart( int productId, int quantity = 1)
+        public JsonResult AddToCart(int productId, int quantity = 1)
         {
             var cart = ShoppingCart.GetCart(HttpContext);
             decimal? price = null;
@@ -271,7 +269,7 @@ namespace HC_Pharma.Controllers
                 return Json(data);
             }
         }
-         
+
         [HttpPost]
         public void AddProduct(int sid = 0, int pid = 0, int quantity = 0)
         {
@@ -323,7 +321,7 @@ namespace HC_Pharma.Controllers
             {
                 var cart = ShoppingCart.GetCart(HttpContext);
                 var addedProduct = cart.GetCartItems().FirstOrDefault(a => a.RecordId == productId);
-                if(addedProduct != null)
+                if (addedProduct != null)
                 {
                     var itemCount = cart.UpdateToCart(addedProduct, changeValue);
                     var totalMoneyItem = addedProduct.Price * itemCount;
@@ -346,7 +344,8 @@ namespace HC_Pharma.Controllers
                     Msg = "Cập nhật thành công",
                 });
             }
-            catch(Exception) {
+            catch (Exception)
+            {
                 return Json(new CartStatistic
                 {
                     Status = 1,
