@@ -91,10 +91,10 @@ namespace HC_Pharma.Controllers
                 var carts = ShoppingCart.GetCart(HttpContext);
                 var item = carts.GetCartItems();
 
-                if (carts.GetTotal() < 100000)
-                {
-                    return RedirectToAction("Index");
-                }
+                //if (carts.GetTotal() < 100000)
+                //{
+                //    return RedirectToAction("Index");
+                //}
 
                 model.Order.CityId = model.CityId;
                 model.Order.DistrictId = model.DistrictId;
