@@ -401,6 +401,13 @@ namespace HC_Pharma.Controllers
         //    return certificate.Equals(createdCertificate);
         //}
 
+
+        public ActionResult LandingPage()
+        {
+
+
+            return View();
+        }
         protected override void Dispose(bool disposing)
         {
             _unitOfWork.Dispose();

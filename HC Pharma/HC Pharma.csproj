@@ -49,7 +49,7 @@
       <HintPath>..\packages\AjaxMin.5.14.5506.26202\lib\net40\AjaxMin.dll</HintPath>
     </Reference>
     <Reference Include="CKFinder">
-      <HintPath>..\..\..\CKFinder.dll</HintPath>
+      <HintPath>..\..\KhoGiaoDien\KhoGiaoDien\bin\CKFinder.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -58,7 +58,7 @@
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Helpers">
-      <HintPath>..\..\Helpers\bin\Release\Helpers.dll</HintPath>
+      <HintPath>C:\Users\haianh\Downloads\ck\ck\Helpers.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.11.46.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.11.46\lib\Net45\HtmlAgilityPack.dll</HintPath>
@@ -336,6 +336,8 @@
     <Content Include="Content\images\img-main\youtube.png" />
     <Content Include="Content\images\img-main\zalo-logo.png" />
     <Content Include="Content\images\img-main\”.png" />
+    <Content Include="Content\images\landing\banner.png" />
+    <Content Include="Content\images\landing\intro.png" />
     <Content Include="Content\images\shopping-cart.gif" />
     <Content Include="Content\images\svg-contact\dichvu.svg" />
     <Content Include="Content\images\svg-contact\earth.svg" />
@@ -708,6 +710,7 @@
     <Content Include="Views\Order\ListOrder.cshtml" />
     <Content Include="Views\Order\LoadOrder.cshtml" />
     <Content Include="Views\Order\ReportProduct.cshtml" />
+    <Content Include="Views\Home\LandingPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
