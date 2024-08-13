@@ -51,10 +51,10 @@ body {
   }
 }
 
-p {
-  margin-bottom: 0;
+/*p {
+    margin-bottom: 0;
 }
-
+*/
 a,
 a:hover {
   color: #000;
@@ -2374,6 +2374,326 @@ a:not([href]):not([class]) {
   font-size: 25px;
   padding-bottom: 20px;
   color: #3B66FF;
+}
+
+.banner-landing {
+  background: url("images/landing/bg-banner.png") no-repeat center;
+  /* background-image:url("images/landing/bg-banner.png");
+  background-repeat:no-repeat;
+  background-position:center;*/
+  background-size: 100% 100%;
+  padding: 45px 0;
+}
+.banner-landing .title-landing {
+  color: #000;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 2rem;
+  font-family: "Quicksand-Bold";
+}
+.banner-landing .title-landing-sub {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  color: #3B66FF;
+  font-family: "Quicksand-Bold";
+}
+.banner-landing .title-landing-subline {
+  display: block;
+  color: #495057;
+  max-width: 860px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+.banner-landing .img-banner-langding {
+  width: 100%;
+  aspect-ratio: 2;
+  object-fit: contain;
+}
+.banner-landing .w-55 {
+  width: 55%;
+}
+.banner-landing .w-45 {
+  width: 45%;
+}
+
+.support-form {
+  border-radius: 10px;
+  padding: 30px;
+  background-color: rgba(59, 102, 255, 0.75);
+  text-align: center;
+  color: #fff;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.support-form p {
+  font-family: "Quicksand-Bold";
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+.support-form span {
+  margin-bottom: 25px;
+  display: block;
+}
+
+.section-padding {
+  padding: 50px 0;
+}
+
+.title-landing-page {
+  font-size: 2.5rem;
+  font-family: "Quicksand-Bold";
+  color: #3B66FF;
+}
+
+.sub-title-landing {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.common-diseases {
+  background-color: #DEFFF7;
+}
+.common-diseases .sub-title-landing {
+  margin-bottom: 40px;
+}
+
+.common-diseases__item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.common-diseases__item .img {
+  position: relative;
+  z-index: 2;
+}
+.common-diseases__item .img img {
+  width: 88px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 6px solid #3B66FF;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+}
+.common-diseases__item .body {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 21px;
+  border: 2px solid #3B66FF;
+  padding: 15px 15px 15px 30px;
+  margin-left: -15px;
+  z-index: 1;
+}
+.common-diseases__item .body .name {
+  font-family: "Quicksand-Bold";
+}
+.common-diseases__item .number {
+  color: #2CDEB4;
+  font-size: 2.25rem;
+  margin-right: 15px;
+  font-family: "Quicksand-Bold";
+}
+
+.cause-disease-item img {
+  width: 100%;
+  aspect-ratio: 1.4;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 7px solid rgba(44, 222, 180, 0.32);
+}
+.cause-disease-item .name {
+  margin-top: 18px;
+  text-transform: uppercase;
+  font-family: "Quicksand-Bold";
+}
+
+.cause-disease-list .slick-list.draggable {
+  margin: 0 -15px;
+}
+.cause-disease-list .slick-slide {
+  padding: 0 15px;
+}
+
+.user-manua-item {
+  text-align: center;
+  max-width: 175px;
+  margin: 0 auto;
+}
+.user-manua-item img {
+  border-radius: 50%;
+  border: 14px solid rgba(44, 222, 180, 0.32);
+}
+.user-manua-item .name {
+  margin-top: 15px;
+  text-transform: uppercase;
+  font-family: "Quicksand-Bold";
+}
+
+.feedback-landing {
+  background: #DEFFF7;
+}
+
+.feedback-landing-item {
+  background: #fff;
+}
+.feedback-landing-item .img {
+  position: relative;
+}
+.feedback-landing-item .img .ic-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 24px;
+  background-color: rgba(44, 222, 180, 0.5);
+  width: 40px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.feedback-landing-item .body {
+  padding: 15px;
+  padding-bottom: 35px;
+  position: relative;
+}
+.feedback-landing-item .body .name {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  padding: 14px;
+  min-width: 210px;
+  border-radius: 26.043px;
+  background: #2CDEB4;
+  line-height: 1;
+  color: #fff;
+  font-size: 1.25rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Quicksand-Bold";
+}
+
+.landing-qa-item {
+  border-radius: 4px;
+  border: 1px solid #DCDFE6;
+  background: #fff;
+}
+.landing-qa-item .name {
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Quicksand-Bold";
+}
+.landing-qa-item .name i {
+  margin-top: 5px;
+  margin-left: 20px;
+}
+.landing-qa-item .name[aria-expanded=true] {
+  background: #E1E8FF;
+}
+.landing-qa-item .name[aria-expanded=true] i {
+  transform: rotate(180deg);
+}
+.landing-qa-item .body {
+  padding: 20px 45px 22px 22px;
+}
+
+.feedback-landing-list .slick-list.draggable {
+  margin: 0 -15px;
+  padding-bottom: 40px;
+}
+.feedback-landing-list .slick-slide {
+  padding: 0 15px;
+}
+
+.combo-item {
+  border: 1px solid #3B66FF;
+  border-radius: 8px;
+  text-align: center;
+}
+.combo-item .stt {
+  color: #fff;
+  background: #3B66FF;
+  padding: 11px;
+  border-radius: 8px 8px 0px 0px;
+  text-transform: uppercase;
+  font-family: "Quicksand-Bold";
+}
+.combo-item .content {
+  padding: 30px 18px;
+}
+.combo-item .img {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #E0E3E4;
+  border: 17px solid #2CDEB4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.combo-item .img img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+.combo-item .name {
+  font-size: 1.25rem;
+  font-family: "Quicksand-Bold";
+}
+.combo-item .cat {
+  color: #747474;
+  font-size: 14px;
+}
+.combo-item .price-new {
+  color: #FF3636;
+  font-size: 1.5rem;
+  font-family: "Quicksand-Bold";
+}
+.combo-item .price-old {
+  color: #747474;
+  text-decoration: line-through;
+}
+.combo-item .btn-order a {
+  padding: 11px;
+  font-size: 1.25rem;
+  color: #fff;
+  background: #2CDEB4;
+  display: inline-block;
+  border-radius: 50px;
+  line-height: 1;
+  font-family: "Quicksand-Bold";
+  margin-top: 10px;
+}
+
+.section-policy {
+  padding: 40px 0;
+  background: #3B66FF;
+}
+
+.policy-item {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px 27px;
+  text-align: center;
+}
+.policy-item img {
+  width: 56px;
+  margin: 0 auto;
+}
+.policy-item .name {
+  color: #3B66FF;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-family: "Quicksand-Bold";
+}
+.policy-item .des {
+  text-align: justify;
 }
 
 @media (max-width: 1024px) {

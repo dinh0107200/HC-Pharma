@@ -337,7 +337,17 @@
     <Content Include="Content\images\img-main\zalo-logo.png" />
     <Content Include="Content\images\img-main\”.png" />
     <Content Include="Content\images\landing\banner.png" />
+    <Content Include="Content\images\landing\bg-banner.png" />
+    <Content Include="Content\images\landing\car.png" />
+    <Content Include="Content\images\landing\cause-disease.png" />
+    <Content Include="Content\images\landing\common.png" />
+    <Content Include="Content\images\landing\cup.png" />
+    <Content Include="Content\images\landing\dangkyprobiotics.png" />
+    <Content Include="Content\images\landing\feedback.png" />
     <Content Include="Content\images\landing\intro.png" />
+    <Content Include="Content\images\landing\policy.png" />
+    <Content Include="Content\images\landing\product.png" />
+    <Content Include="Content\images\landing\user-manua.png" />
     <Content Include="Content\images\shopping-cart.gif" />
     <Content Include="Content\images\svg-contact\dichvu.svg" />
     <Content Include="Content\images\svg-contact\earth.svg" />

@@ -13,14 +13,14 @@
     <div class="container overflow-hidden">
         <div class="d-lg-flex">
             <div class="w-55">
-                <img src="~/Content/images/landing/banner.png" />
+                <img src="~/Content/images/landing/banner.png" class="img-banner-langding" />
             </div>
             <div class="w-45">
                 <form class="support-form landing-form">
                     <p>Đăng ký tư vấn</p>
                     @Html.AntiForgeryToken()
                     <span>
-                        Cần thêm thông tin về sản phẩm
+                        Cần thêm thông tin về sản phẩm<br />
                         Hãy để lại SĐT để chúng tôi tư vấn cho bạn
                     </span>
                     <div class="form-group">
@@ -38,15 +38,19 @@
     </div>
 </div>
 
-<div class="intro-landing">
+<section class="intro-landing section-padding">
     <div class="container">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-lg-6">
-                <h2 class="title-section">Probiotics Plus Hcpharma</h2>
+                <h2 class="title-landing-page ">Probiotics Plus Hcpharma</h2>
                 <div class="content-detail">
-                    <strong> Nhà sản xuất</strong>: CÔNG TY TNHH MEDISTAR VIỆT NAM
-                    <strong>Xuất xứ</strong>: Việt Nam
-                    <strong> Quy cách</strong>: Gói: 3g ± 7,5%. Hộp: 30 gói
+                    <p><strong> Nhà sản xuất</strong>: CÔNG TY TNHH MEDISTAR VIỆT NAM</p>
+                    <p>
+                        <strong>Xuất xứ</strong>: Việt Nam
+                    </p>
+                    <p>
+                        <strong> Quy cách</strong>: Gói: 3g ± 7,5%. Hộp: 30 gói
+                    </p>
 
                     <strong>Mô tả</strong>
                     <p>
@@ -57,40 +61,380 @@
                     </p>
                 </div>
             </div>
+            <div class="col-lg-6 text-center">
+                <img src="~/Content/images/landing/intro.png" class="" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="common-diseases section-padding">
+    <div class="container">
+        <div class="title-landing-page text-center text-uppercase">
+            Các bệnh thường gặp + dấu hiệu
+        </div>
+        <div class="sub-title-landing text-center">
+            Bất kỳ ở độ tuổi nào chúng ta đều có thể mắc các bệnh liên quan đến đường ruột và nhất là ở trẻ em và mẹ bầu (Các bệnh thường gặp khi bị loạn khuẩn đường ruột)
+        </div>
+        <div class="row">
+            @for (var i = 0; i < 6; i++)
+            {
+                <div class="col-lg-6">
+                    <div class="common-diseases__item">
+                        <div class="img">
+                            <img src="~/Content/images/landing/common.png" />
+                        </div>
+                        <div class="body">
+                            <div class="number">
+                                01
+                            </div>
+                            <div class="text">
+                                <div class="name">Ảnh hưởng của tiêu chảy</div>
+                                <div class="des">
+                                    Dấu hiệu: Phân lỏng, đi nhiều lần trong ngày, đau bụng, mất nước, sốt.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="cause-disease section-padding">
+    <div class=" container">
+        <div class="title-landing-page text-center text-uppercase">
+            nguyên nhân gây bệnh
+        </div>
+        <div class="sub-title-landing text-center mb-4">
+            Tất cả những triệu chứng này là hồi chuông cảnh báo cho một trạng thái thể chất và tinh thần hoạt động không bình thường.
+            Đường ruột của bạn sẽ cảm thấy "chưa sẵn sàng" và không thích ứng kịp với những thay đổi đột ngột này trong cuộc sống hàng ngà => Gây ra chứng loạn khuẩn ruột
+        </div>
+
+        <div class="cause-disease-list">
+            @for (var i = 0; i < 7; i++)
+            {
+                <div class="cause-disease-item">
+                    <div class="img">
+                        <img src="~/Content/images/landing/cause-disease.png" />
+                    </div>
+                    <div class="body">
+                        <div class="name">
+                            Vi khuẩn và virus gây viêm nhiễm:
+                        </div>
+                        <div class="des">
+                            Những tác nhân này tấn công và làm tổn thương hệ tiêu hóa.
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<div class="intro-landing section-padding">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 text-center">
+                <img src="~/Content/images/landing/intro.png" />
+            </div>
             <div class="col-lg-6">
-                <img src="~/Content/images/landing/intro.png"/>
+                <h2 class="title-landing-page">
+                    Giải pháp<br />
+                    Sp của HCPharma
+                </h2>
+                <div class="content-detail">
+                    <p>
+                        Các nghiên cứu khoa học đã chỉ ra rằng trong đường ruột người có chứa rất nhiều vi khuẩn có lợi với nhiều chủng loại khác nhau.
+                        Các vi khuẩn có lợi này luôn duy trì sự cân bằng để đảm bảo quá trình tiêu hóa của cơ thể, hấp thu chất dinh dưỡng, đào thải cặn
+                        bã và ức chế các hại khuẩn gây bệnh ở đường ruột. Probiotics Plus Hcpharma là thực phẩm bảo vệ sức khoẻ. Bổ sung hơn 3 tỷ lợi khuẩn
+                        đường ruột, giúp chống các triệu chứng rồi loại tiêu hóa và cân bằng hệ vi sinh đường ruột.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="intro-landing">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+                <h2 class="title-landing-page">Phân tích sản phẩm</h2>
+                <div class="content-detail">
+                    <p>
+                        Để có một sức khỏe đường ruột tốt nhất cho cả gia đình, Probiotics Plus Hcpharma đã được tạo ra với
+                        sự kết hợp của các bào tử lợi khuẩn đa chủng hàm lượng cao, chất xơ và kẽm:
+                    </p>
+                    <ul>
+                        <li>
+                            <p>
+                                <strong>Bacillus subtilis:</strong>
+                                Tổng hợp được các vitamin (B2, B6, B12, K....), các chất kháng khuẩn tiêu diệt hại khuẩn và các enzyme đường tiêu hoá như amylase, protease, lipase.
+                            </p>
+                            <p>
+                                <strong>Bacillus subtilis:</strong>
+                                Tổng hợp được các vitamin (B2, B6, B12, K....), các chất kháng khuẩn tiêu diệt hại khuẩn và các enzyme đường tiêu hoá như amylase, protease, lipase.
+                            </p>
+                            <p>
+                                <strong>Bacillus subtilis:</strong>
+                                Tổng hợp được các vitamin (B2, B6, B12, K....), các chất kháng khuẩn tiêu diệt hại khuẩn và các enzyme đường tiêu hoá như amylase, protease, lipase.
+                            </p>
+                            <p>
+                                <strong>Bacillus subtilis:</strong>
+                                Tổng hợp được các vitamin (B2, B6, B12, K....), các chất kháng khuẩn tiêu diệt hại khuẩn và các enzyme đường tiêu hoá như amylase, protease, lipase.
+                            </p>
+                        </li>
+                    </ul>
+                    <p>
+                        Probiotics Plus Hcpharma không chỉ giúp cân bằng hệ vi sinh trong đường ruột mà còn tăng cường hệ miễn dịch,
+                        cải thiện chức năng tiêu hóa và giúp cơ thể hấp thụ dinh dưỡng tối đa.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="~/Content/images/landing/intro.png" />
             </div>
         </div>
     </div>
 </div>
 
-<section class="common-diseases">
-    <div class="container">
-        <div class="section-title">
-            Các bệnh thường gặp + dấu hiệu
-        </div>
-        <div class="sub-title">
-            Bất kỳ ở độ tuổi nào chúng ta đều có thể mắc các bệnh liên quan đến đường ruột và nhất là ở trẻ em và mẹ bầu (Các bệnh thường gặp khi bị loạn khuẩn đường ruột)
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="common-diseases__item">
-                    <div class="img">
 
-                    </div>
-                    <div class="body">
-                        <div class="number">
-                            01
+<section class="user-manua section-padding">
+    <div class="container">
+    <div class="title-landing-page text-center text-uppercase mb-4">
+        Hướng dẫn sử dụng
+    </div>
+        <div class="row">
+            @for (var i = 0; i < 4; i++)
+            {
+                <div class="col-lg-3">
+                    <div class="user-manua-item">
+                        <div class="img">
+                            <img src="~/Content/images/landing/user-manua.png" />
                         </div>
-                        <div class="text">
-                            <div class="name">Ảnh hưởng của tiêu chảy</div>
-                            <div class="des">
-                                Dấu hiệu: Phân lỏng, đi nhiều lần trong ngày, đau bụng, mất nước, sốt.
-                            </div>
+                        <div class="name">
+                            Lấy 4 muỗng sữa gạt ngang
                         </div>
                     </div>
                 </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section-register section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="section-register-img">
+                    <img src="~/Content/images/landing/dangkyprobiotics.png" />
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="title-landing-page">
+                    Đăng ký nhận tư vấn
+                </div>
+                <form class="form-register form-contact-submit" id="form-register-consultation">
+                    @Html.ValidationSummary(true)
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-lg-6">
+                                <input type="text" maxlength="100" name="Fullname" class="form-control" placeholder="Tên đầy đủ" required />
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" maxlength="100" name="Email" class="form-control" placeholder="Email" required />
+
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" maxlength="20" name="Mobile" placeholder="Số điện thoại" />
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" name="Address" maxlength="200" placeholder="Địa chỉ (Thành Phố)" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="mb-4 d-block font-weight-bold">Nhu cầu</span>
+                        <label class="label d-block contact-needs">
+                            Tư vấn dịch vụ
+                            <input type="radio" checked="checked" name="ContactNeeds" value="Tư vấn dịch vụ">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="label d-block contact-needs">
+                            Tư vấn sản phẩm
+                            <input type="radio" name="ContactNeeds" value="Tư vấn sản phẩm">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="label d-block contact-needs">
+                            Hướng dẫn mua hàng
+                            <input type="radio" name="ContactNeeds" value="Hướng dẫn mua hàng">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="label d-block contact-needs">
+                            Khác
+                            <input type="radio" name="ContactNeeds" value="Khác">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" maxlength="4000" class="form-control" name="Body" placeholder="Tin nhắn">
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn text-uppercase">
+                            gửi thông tin
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </section>
+
+<section class="feedback-landing section-padding">
+    <div class="container">
+        <div class="title-landing-page text-center text-uppercase mb-4">
+            feedback của khách hàng
+        </div>
+        <div class="feedback-landing-list">
+            @for (var i = 0; i < 5; i++)
+            {
+                <div class="feedback-landing-item">
+                    <div class="img">
+                        <img src="~/Content/images/landing/feedback.png" />
+                        <div class="ic-play">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <div class="name">
+                            chị ly - 32 tuổi
+                        </div>
+                        <div class="des">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="landing-qa section-padding">
+    <div class="container">
+        <div class="title-landing-page text-center text-uppercase">
+            Câu hỏi thường gặp
+        </div>
+        <div class="sub-title-landing text-center mb-4">
+            Bạn vẫn đang quyết định? Đọc 4 câu hỏi thường gặp nhất của khách hàng trước khi đặt mua men vi sinh Probiotics Plus
+        </div>
+
+        <div class="row">
+            @for (var i = 0; i < 4; i++)
+            {
+                @*<div class="col-lg-6">
+
+                    <div class="landing-qa-item">
+                        <div class="name">
+                            Tại sao Probiotics Plus Hcpharma lại hiệu quả trong cuộc chiến chống lại các vấn đề về tiêu hóa?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="body">
+                            Probiotics Probiotics Plus Hcpharma bổ sung hơn 3 tỷ lợi khuẩn tấn công tiêu diệt hại khuẩn giúp phục hồi môi trường đường ruột
+                            đồng thời giúp khôi phục lại sự cân bằng của hệ vi sinh vật đường ruột.
+                        </div>
+                    </div>
+                </div>*@
+                <div class="col-lg-6 mb-3">
+                    <div class="landing-qa-item">
+                        <div class="name" data-toggle="collapse" data-target="#qa-@i" aria-controls="#qa-@i">
+                            Hiệu quả có rõ rệt và kéo dài bào lâu ?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="body collapse" id="qa-@i">
+                            Probiotics Probiotics Plus Hcpharma bổ sung hơn 3 tỷ lợi khuẩn tấn công tiêu diệt hại khuẩn giúp phục hồi môi trường đường ruột
+                            đồng thời giúp khôi phục lại sự cân bằng của hệ vi sinh vật đường ruột.
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section-combo section-padding">
+    <div class="container">
+        <div class="title-landing-page text-center text-uppercase mb-4">
+            mua combo nhận ưu đãi
+        </div>
+        <div class="row">
+            @for (var i = 1; i < 4; i++)
+            {
+                <div class="col-lg-4">
+                    <div class="combo-item">
+                        <div class="stt">
+                            Combo @i
+                        </div>
+                        <div class="content">
+                            <div class="img">
+                                <img src="~/Content/images/landing/product.png" />
+                            </div>
+                            <div class="name">
+                                Probiotics Plus - 1 hộp
+                            </div>
+                            <div class="cat">
+                                (Thực phẩm bảo vệ sức khỏe)
+                            </div>
+                            <div class="price">
+                                <div class="price-new">
+                                    1.000.000₫
+                                </div>
+                                <div class="price-old">
+                                    1.200.000đ
+                                </div>
+                            </div>
+                            <div class="ship">
+                                <img src="~/Content/images/landing/car.png" />
+                                MIỄN PHÍ vận chuyển toàn quốc.
+                            </div>
+                            <div class="btn-order">
+                                <a href="">ĐẶT HÀNG NGAY</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section-policy section-padding">
+    <div class="container">
+        <div class="row">
+            @for (var i = 0; i < 3; i++)
+            {
+                <div class="col-lg-4">
+                    <div class="policy-item">
+                        <img src="~/Content/images/landing/policy.png" />
+                        <div class="name">
+                            Chính sách vận chuyển
+                        </div>
+                        <div class="des">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@section scripts{
+
+    <script>
+        landingPage();
+    </script>
+}

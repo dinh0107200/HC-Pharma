@@ -144,7 +144,54 @@ $(".close-model").click(function () {
 $('ul.pagination li.PagedList-skipToNext a').html('<i class="fas fa-chevron-right"></i>');
 $('ul.pagination li.PagedList-skipToPrevious a').html('<i class="fas fa-chevron-left"></i>');
 
+function landingPage() { 
+    $('.cause-disease-list').slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        arrows: false,
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        prevArrow: "<button class='prev-btn'><i class='fas fa-chevron-left'></i></button>",
+        nextArrow: "<button class='next-btn'><i class='fas fa-chevron-right'></i></button>",
+        //responsive: [
+        //    {
+        //        breakpoint: 1024,
+        //        settings: {
+        //            slidesToShow: 1,
+        //            slidesToScroll: 1,
+        //        }
+        //    },
+        //    {
+        //        breakpoint: 600,
+        //        settings: {
+        //            slidesToShow: 1,
+        //            slidesToScroll: 1
+        //        }
+        //    },
+        //    {
+        //        breakpoint: 480,
+        //        settings: {
+        //            slidesToShow: 1,
+        //            slidesToScroll: 1
+        //        }
+        //    }
 
+        //]
+    });
+
+    $('.feedback-landing-list').slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        arrows: false,
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 3000,
+             
+    });
+}
 
 
 function Sort(action) {

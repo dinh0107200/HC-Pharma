@@ -76,4 +76,52 @@ namespace HC_Pharma.Models
             Active = true;
         }
     }
+    public class Combo
+    {
+        public int Id { get; set; }
+        [Display(Name = "Tên Combo"), Required(ErrorMessage = "Chưa nhập tên combo")]
+        public string Name { get; set; }
+        public int? ProductId { get; set; }
+        [Display(Name = "Thứ tự")]
+        public int Sort { get; set; }
+        [Display(Name = "Giá niêm yết"), DisplayFormat(DataFormatString = "{0:N0}đ")]
+        public decimal? Price { get; set; }
+
+        [Display(Name = "Giá khuyến mãi"), DisplayFormat(DataFormatString = "{0:N0}đ")]
+        public decimal? PriceSale { get; set; }
+        [Display(Name = "Ảnh sản phẩm")]
+        public string Image { get; set; }
+        public virtual Product Product { get; set; }
+    }
+    public class About
+    {
+        public int Id { get; set; }
+        [Display(Name = "Tên "), Required(ErrorMessage = "Chưa nhập tên")]
+        public string Name { get; set; }
+        [Display(Name = "Ảnh")]
+        public string Image { get; set; }
+        [Display(Name = "Đường dẫn video")]
+        public string UrlVideo { get; set; }
+        [Display(Name = "Lời nhận xét"), StringLength(700, ErrorMessage = "Tối đa 700 ký tự"), UIHint("TextArea")]
+        public string Content { get; set; }
+        [Display(Name = "Thứ tự"), Required(ErrorMessage = "Hãy nhập số thứ tự"), RegularExpression(@"\d+", ErrorMessage = "Chỉ nhập số nguyên dương"), UIHint("NumberBox")]
+        public int Sort { get; set; }
+        [Display(Name = "Hoạt động")]
+        public bool Active { get; set; }
+        public int ProductId { get; set; }
+        public PostionAbout PostionAbout { get; set; }
+        public virtual Product Product { get; set; }
+
+    }
+    public enum PostionAbout
+    {
+        [Display(Name = "Banner")]
+        Banner,
+        [Display(Name = "Thông tin sản phẩm")]
+        Info,
+        [Display(Name = "Dành cho ai?")]
+        Customer,
+        [Display(Name = "Chia sẻ của khách hàng")]
+        Share
+    }
 }
