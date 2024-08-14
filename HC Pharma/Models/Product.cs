@@ -76,6 +76,49 @@ namespace HC_Pharma.Models
             Active = true;
         }
     }
+
+    public class LandingPage
+    {
+        public int Id { get; set; }
+        [Display(Name = "Ảnh giới thiệu")]
+        public string ImageIntro { get; set; }
+        [Display(Name = "Giới thiệu"), UIHint("EditorBox")]
+        public string Intro { get; set; }
+
+        [Display(Name = "Ảnh giải pháp")]
+        public string Imagesolution { get; set; }
+        [Display(Name = "Giải pháp"), UIHint("EditorBox")]
+        public string Solution { get; set; }
+
+
+        [Display(Name = "Ảnh phân tích sản phẩm")]
+        public string ImageAnalysis { get; set; }
+        [Display(Name = "Phân tích sản phẩm"), UIHint("EditorBox")]
+        public string ProductAnalysis { get; set; }
+        [Display(Name = "Mô tả các dấu hiệu thường gặp + dấu hiệu"), UIHint("TextArea")]
+        public string CommonDiseases { get; set; }
+        [Display(Name = "Mô tả nguyên nhân gây bệnh"), UIHint("TextArea")]
+        public string CauseDisease { get; set; }
+        [Display(Name = "Mô tả câu hỏi thường gặp"), UIHint("TextArea")]
+        public string QA { get; set; }
+        public int ProductId { get; set; }
+        public virtual Product Product { get; set; }
+    }
+
+    public class QaProduct
+    {
+        public int Id { get; set; }
+
+        [Display(Name = "Tên câu hỏi")]
+        public string Name { get; set; }
+        [Display(Name = "Câu trả lời"), UIHint("TextArea")]
+        public string Body { get; set; }
+        [Display(Name = "Thứ tự"), Required(ErrorMessage = "Hãy nhập số thứ tự")
+        ,RegularExpression(@"\d+", ErrorMessage = "Chỉ nhập số nguyên dương"), UIHint("NumberBox")]
+        public int Sort { get; set; }
+        public int ProductId { get; set; }
+        public virtual Product Product { get; set; }
+    }
     public class Combo
     {
         public int Id { get; set; }
@@ -93,14 +136,17 @@ namespace HC_Pharma.Models
         public string Image { get; set; }
         public virtual Product Product { get; set; }
     }
-    public class About
+
+    public class BannerLandingPage
     {
         public int Id { get; set; }
         [Display(Name = "Tên "), Required(ErrorMessage = "Chưa nhập tên")]
         public string Name { get; set; }
         [Display(Name = "Ảnh")]
         public string Image { get; set; }
-        [Display(Name = "Đường dẫn video")]
+        [Display(Name = "File video feedback")]
+        public string FileVideo { get; set; }
+        [Display(Name = "Đường dẫn video feedback")]
         public string UrlVideo { get; set; }
         [Display(Name = "Lời nhận xét"), StringLength(700, ErrorMessage = "Tối đa 700 ký tự"), UIHint("TextArea")]
         public string Content { get; set; }
@@ -117,11 +163,9 @@ namespace HC_Pharma.Models
     {
         [Display(Name = "Banner")]
         Banner,
-        [Display(Name = "Thông tin sản phẩm")]
-        Info,
-        [Display(Name = "Dành cho ai?")]
-        Customer,
-        [Display(Name = "Chia sẻ của khách hàng")]
-        Share
+        [Display(Name = "Các bệnh thường gặp + dấu hiệu")]
+        CommonDiseases,
+        [Display(Name = "Nguyên nhân gây bệnh")]
+        CauseDisease, 
     }
 }

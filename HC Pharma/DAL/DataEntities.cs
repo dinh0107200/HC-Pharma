@@ -29,5 +29,12 @@ namespace HC_Pharma.DAL
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
 
+
+        public DbSet<Combo> Combos { get; set; }
+        public DbSet<LandingPage> LandingPages { get; set; }
+        public DbSet<QaProduct> QaProducts { get; set; }
+        public DbSet<BannerLandingPage> BannerLandingPages { get; set; }
+
+
     }
 }

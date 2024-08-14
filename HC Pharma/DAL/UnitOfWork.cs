@@ -28,7 +28,11 @@ namespace HC_Pharma.DAL
         private GenericRepository<Order> _orderRepository;
         private GenericRepository<OrderDetail> _orderDetailRepository;
         private GenericRepository<Ward> _wardRepository;
+        private GenericRepository<Combo> _comboRepository;
 
+
+        public GenericRepository<Combo> ComboRepository =>
+          _comboRepository ?? (_comboRepository = new GenericRepository<Combo>(_context));
         public GenericRepository<City> CityRepository =>
             _cityRepository ?? (_cityRepository = new GenericRepository<City>(_context));
         public GenericRepository<District> DistrictRepository =>
