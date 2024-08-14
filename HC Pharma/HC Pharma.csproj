@@ -155,6 +155,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntroductController.cs" />
+    <Compile Include="Controllers\LandingPageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductVcmsController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
@@ -234,6 +235,10 @@
     <Compile Include="Migrations\202303020739423_AddRoleToAdminClass.cs" />
     <Compile Include="Migrations\202303020739423_AddRoleToAdminClass.designer.cs">
       <DependentUpon>202303020739423_AddRoleToAdminClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202408140131203_up-LandingPage.cs" />
+    <Compile Include="Migrations\202408140131203_up-LandingPage.Designer.cs">
+      <DependentUpon>202408140131203_up-LandingPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
@@ -722,6 +727,17 @@
     <Content Include="Views\Order\LoadOrder.cshtml" />
     <Content Include="Views\Order\ReportProduct.cshtml" />
     <Content Include="Views\Home\LandingPage.cshtml" />
+    <Content Include="Views\LandingPage\Feedback.cshtml" />
+    <Content Include="Views\Shared\_AdminLandingPageLayout.cshtml" />
+    <Content Include="Views\LandingPage\Menu.cshtml" />
+    <Content Include="Views\LandingPage\LandingPage.cshtml" />
+    <Content Include="Views\LandingPage\ListFeedback.cshtml" />
+    <Content Include="Views\LandingPage\UpdateFeedback.cshtml" />
+    <Content Include="Views\LandingPage\QaProduct.cshtml" />
+    <Content Include="Views\LandingPage\ListQaProduct.cshtml" />
+    <Content Include="Views\LandingPage\UpdateQaProduct.cshtml" />
+    <Content Include="Views\LandingPage\Combo.cshtml" />
+    <Content Include="Views\LandingPage\ListCombo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -788,6 +804,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202303020739423_AddRoleToAdminClass.resx">
       <DependentUpon>202303020739423_AddRoleToAdminClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408140131203_up-LandingPage.resx">
+      <DependentUpon>202408140131203_up-LandingPage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

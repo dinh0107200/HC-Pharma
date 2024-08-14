@@ -59,4 +59,28 @@ namespace HC_Pharma.ViewModel
         public IEnumerable<Product> Products { get; set;}
         public string Name { get; set; }
     }
+
+    public class InsertComboViewModel
+    {
+        public Combo Combo { get; set; }
+        [Display(Name = "Giá niêm yết"), UIHint("MoneyBox"), DisplayFormat(DataFormatString = "{0:N0}đ")]
+        public string Price { get; set; }
+        [Display(Name = "Giá khuyến mãi"), UIHint("MoneyBox"), DisplayFormat(DataFormatString = "{0:N0}đ")]
+        public string PriceSale { get; set; }
+    }
+
+    public class ListComboViewModel
+    {
+        public PagedList.IPagedList<Combo> Combos { get; set; }
+        public int ProductId { get; set; }
+        public string Name { get; set; }
+    }
+    public class ListBannerLandingPageViewModel
+    {
+        public IEnumerable<BannerLandingPage> Banners { get; set; }
+        public int ProductId { get; set; }
+        public string Name { get; set; }
+        public int GroupId { get; set; }
+    }
+
 }

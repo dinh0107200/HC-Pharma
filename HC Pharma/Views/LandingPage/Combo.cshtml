@@ -1,0 +1,63 @@
+﻿@model HC_Pharma.ViewModel.InsertComboViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLandingPageLayout.cshtml";
+}
+
+<div id="responsive">
+
+    <div id="left_menu_profile">
+        @Html.Action("Menu", "LandingPage", new { productId = Model.Combo.ProductId })
+    </div>
+    <div id="content_center_right">
+        <div class="content_center_right">
+            <h2>Thêm phản hồi</h2>
+            <a class="btn quick-link" href="@Url.Action("ListCombo", "LandingPage", new {productId = Model.Combo.ProductId})"><i class="far fa-list mr-1"></i> Danh sách combo</a>
+            <div class="box_content">
+                @using (Html.BeginForm("Combo", "LandingPage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(a => a.Combo.ProductId)
+                    <table class="form_table">
+                        <tr>
+                            <td class="form_name">@Html.LabelFor(model => model.Combo.Name)</td>
+                            <td class="form_text">@Html.EditorFor(model => model.Combo.Name)</td>
+                        </tr>
+                        <tr>
+                            <td class="form_name">@Html.LabelFor(model => model.Combo.Image)</td>
+                            <td class="form_text">@Html.TextBoxFor(model => model.Combo.Image, new { type = "file" }) <span class="red-warring">Chấp nhận ảnh jpg, png, gif, jpeg < 4MB</span></td>
+                        </tr>
+                        <tr>
+                            <td class="form_name">@Html.LabelFor(model => model.Price) (đ)</td>
+                            <td class="form_text">@Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "input-number" } })</td>
+                        </tr>
+                        <tr>
+                            <td class="form_name">@Html.LabelFor(model => model.PriceSale) (đ)</td>
+                            <td class="form_text">@Html.EditorFor(model => model.PriceSale, new { htmlAttributes = new { @class = "input-number" } })</td>
+                        </tr>
+                        <tr>
+                            <td class="form_name">@Html.LabelFor(model => model.Combo.Active)</td>
+                            <td class="form_text">@Html.CheckBoxFor(model => model.Combo.Active, new { @checked = "checked" })</td>
+                        </tr>
+                        <tr>
+                            <td class="form_name"></td>
+                            <td class="form_text"><input type="submit" class="btn quick-link" value="Cập nhật" /></td>
+                        </tr>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery.maskMoney.min.js"></script>
+
+    <script>
+        $(function () {
+            $(".input-number").maskMoney({
+                precision: 0,
+                thousands: ','
+            });
+        });
+
+    </script>
+}

@@ -101,6 +101,7 @@
                         <td>
                             @Html.ActionLink("Sửa", "UpdateProduct", new { proId = product.Id })
                             - <a href="javascript:;" onclick="deleteProduct('@product.Id')" class="red-warring">Xóa</a>
+                            - <a href="@Url.Action("LandingPage","LandingPage", new {productId = product.Id})" data-fancybox data-type="iframe" class="red-warring">LandingPage</a>
                         </td>
                     </tr>
                 }

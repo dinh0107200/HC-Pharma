@@ -135,6 +135,30 @@ namespace HC_Pharma.Models
         [Display(Name = "Ảnh sản phẩm")]
         public string Image { get; set; }
         public virtual Product Product { get; set; }
+        [Display(Name = "Hoạt động")]
+        public bool Active { get; set; }
+    }
+
+    public class FeedbackProduct
+    {
+        public int Id { get; set; }
+        [Display(Name = "Tên "), Required(ErrorMessage = "Chưa nhập tên")]
+        public string Name { get; set; }
+        [Display(Name = "Ảnh")]
+        public string Image { get; set; }
+        [Display(Name = "Link video youtube")]
+        public string UrlVideo { get; set; }
+        [Display(Name = "File video mp4")]
+        public string FileVideo { get; set; }
+        [Display(Name = "Lời nhận xét"), StringLength(700, ErrorMessage = "Tối đa 700 ký tự"), UIHint("TextArea")]
+        public string Content { get; set; }
+        [Display(Name = "Thứ tự"), Required(ErrorMessage = "Hãy nhập số thứ tự"), RegularExpression(@"\d+", ErrorMessage = "Chỉ nhập số nguyên dương"), UIHint("NumberBox")]
+        public int Sort { get; set; }
+        [Display(Name = "Hoạt động")]
+        public bool Active { get; set; }
+        public int ProductId { get; set; }
+        public virtual Product Product { get; set; }
+
     }
 
     public class BannerLandingPage
@@ -144,10 +168,6 @@ namespace HC_Pharma.Models
         public string Name { get; set; }
         [Display(Name = "Ảnh")]
         public string Image { get; set; }
-        [Display(Name = "File video feedback")]
-        public string FileVideo { get; set; }
-        [Display(Name = "Đường dẫn video feedback")]
-        public string UrlVideo { get; set; }
         [Display(Name = "Lời nhận xét"), StringLength(700, ErrorMessage = "Tối đa 700 ký tự"), UIHint("TextArea")]
         public string Content { get; set; }
         [Display(Name = "Thứ tự"), Required(ErrorMessage = "Hãy nhập số thứ tự"), RegularExpression(@"\d+", ErrorMessage = "Chỉ nhập số nguyên dương"), UIHint("NumberBox")]
@@ -162,7 +182,7 @@ namespace HC_Pharma.Models
     public enum PostionAbout
     {
         [Display(Name = "Banner")]
-        Banner,
+        Banner = 1,
         [Display(Name = "Các bệnh thường gặp + dấu hiệu")]
         CommonDiseases,
         [Display(Name = "Nguyên nhân gây bệnh")]

@@ -1,0 +1,29 @@
+﻿@model HC_Pharma.ViewModel.ListComboViewModel
+@using PagedList.Mvc
+@{
+    Layout = "~/Views/Shared/_AdminLandingPageLayout.cshtml";
+}
+
+<div id="responsive">
+
+    <div id="left_menu_profile">
+        @Html.Action("Menu", "LandingPage", new { productId = Model.ProductId })
+    </div>
+    <div id="content_center_right">
+        <div class="content_center_right">
+            <h2>Danh sách combo</h2>
+            <a class="btn quick-link" href="@Url.Action("Combo", "LandingPage", new {productId = Model.ProductId})"><i class="fas fa-plus mr-1"></i> Thêm Combo</a>
+            <div class="box_content">
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+       
+    </script>
+
+}

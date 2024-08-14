@@ -1,0 +1,88 @@
+﻿@model HC_Pharma.ViewModel.ListFeedbackProductViewModel
+@using PagedList.Mvc
+@{
+    Layout = "~/Views/Shared/_AdminLandingPageLayout.cshtml";
+}
+
+<div id="responsive">
+
+    <div id="left_menu_profile">
+        @Html.Action("Menu", "LandingPage", new { productId = Model.Product.Id })
+    </div>
+    <div id="content_center_right">
+        <div class="content_center_right">
+            <h2>Danh sách phản hồi</h2>
+            <a class="btn quick-link" href="@Url.Action("Feedback", "LandingPage", new {productId = Model.Product.Id})"><i class="fas fa-plus mr-1"></i> Thêm phản hồi</a>
+            <div class="box_content">
+                <table class="list_table tablecenter table-striped">
+                    <tr>
+                        <th style="width: 50px">STT</th>
+                        <th style="width: 150px">Hình ảnh</th>
+                        <th>Tên</th>
+                        <th>Hoạt động</th>
+                        <th style="width: 80px"></th>
+                    </tr>
+                    @foreach (var item in Model.Feedbacks)
+                    {
+                        <tr data-id="@item.Id">
+                            <td style="width: 100px;">
+                                @item.Sort
+                            </td>
+                            <td>
+                                @if (item.Image != null)
+                                {
+                                    <img class="img-border" src="@Path.Combine("/images/feedbacks/", item.Image)" /> }
+                                else
+                                {
+                                    @:NO PICTURE
+                                }
+                            </td>
+                            <td>
+                                <strong>@item.Name</strong>
+                            </td>
+                            <td>@Html.EditorFor(a => item.Active, new { htmlAttributes = new { id = "Active" } })</td>
+                            <td style="width: 160px;">
+                                @*<a href="javascript:;" onclick="updateBanner('@banner.Id')">Cập nhật - </a>*@
+                                @Html.ActionLink("Sửa", "UpdateFeedback", new { feedbackId = item.Id }) -
+                                <a href="javascript:;" style="color:red" onclick="deleteFeedback('@item.Id')">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                    @if (Model.Feedbacks.PageCount > 1)
+                    {
+                        <tr>
+                            <td colspan="8">@Html.PagedListPager(Model.Feedbacks, page => Url.Action("ListFeedback", new { page, productId = Model.Product.Id, name = Model.Name }))</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        function deleteFeedback(id) {
+            if (confirm("Bạn có chắc chắn xóa phản hồi này không?")) {
+                $.post("/LandingPage/DeleteFeedback", { feedbackId: id }, function (data) {
+                    if (data) {
+                        $.toast({
+                            text: 'Xóa phản hồi thành công',
+                            position: 'bottom-right',
+                            icon: 'success',
+                        })
+                        $("tr[data-id='" + id + "']").fadeOut();
+                    }
+                    else {
+                        $.toast({
+                            text: 'Quá trình thực hiện không thành công. Hãy thử lại',
+                            icon: 'error',
+                        })
+                    }
+                });
+            }
+        };
+    </script>    
+    
+}

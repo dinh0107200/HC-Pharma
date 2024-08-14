@@ -1,0 +1,20 @@
+﻿@{ 
+    var productId = ViewBag.ProductId;
+}
+
+<div class="left_menu_profile">
+    <ul class="drop-bar">
+        <li data-id="1">
+            <a class="root" href="@Url.Action("LandingPage","LandingPage", new {productId = productId})"><span>Thông tin LandingPage</span></a>          
+        </li>
+        <li data-id="3">
+            <a class="root" href="@Url.Action("Feedback","LandingPage", new {productId = productId})"><span>Quản lý phản hồi </span></a>          
+        </li>
+        <li data-id="4">
+            <a class="root" href="@Url.Action("QaProduct","LandingPage", new {productId = productId})"><span>Quản lý câu hỏi</span></a>           
+        </li>
+        <li data-id="5">
+            <a class="root" href="@Url.Action("Combo","LandingPage", new {productId = productId})"><span>Quản lý Combo</span></a>          
+        </li>      
+    </ul>
+</div>

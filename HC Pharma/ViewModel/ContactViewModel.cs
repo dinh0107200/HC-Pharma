@@ -16,7 +16,18 @@ namespace HC_Pharma.ViewModel
         public string Name { get; set; }
     }
 
+    public class ListFeedbackProductViewModel
+    {
+        public PagedList.IPagedList<FeedbackProduct> Feedbacks { get; set; }
+        public string Name { get; set; }
+        public Product Product { get; set; }
+    }
+    public class InserFeedbackProductViewModel
+    {
+        public FeedbackProduct Feedback { get; set; }
 
+        public Product Product { get; set; }
+    }
     public class ListPartnerViewModel
     {
         public PagedList.IPagedList<Partner> Partners { get; set; }

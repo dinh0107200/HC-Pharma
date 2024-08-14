@@ -1,0 +1,95 @@
+﻿@model HC_Pharma.ViewModel.InserFeedbackProductViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLandingPageLayout.cshtml";
+}
+
+<div id="responsive">
+
+    <div id="left_menu_profile">
+        @Html.Action("Menu", "LandingPage", new { productId = Model.Feedback.ProductId })
+    </div>
+    <div id="content_center_right">
+        <div class="content_center_right">
+            <h2>Thêm phản hồi</h2>
+            <a class="btn quick-link" href="@Url.Action("ListFeedback", "LandingPage", new {productId = Model.Feedback.ProductId})"><i class="far fa-list mr-1"></i> Danh sách phản hồi</a>
+            <div class="box_content">
+                @using (Html.BeginForm("UpdateFeedback", "LandingPage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(a => a.Feedback.Id)
+                    @Html.HiddenFor(a => a.Feedback.ProductId)
+                <table class="form_table">
+                    <tr>
+                        <td class="form_name">@Html.LabelFor(model => model.Feedback.Name)</td>
+                        <td class="form_text">@Html.EditorFor(model => model.Feedback.Name)</td>
+                    </tr>
+                    <tr>
+                        <td class="form_name">@Html.LabelFor(model => model.Feedback.UrlVideo)</td>
+                        <td class="form_text">@Html.EditorFor(model => model.Feedback.UrlVideo)</td>
+                    </tr>
+                    <tr>
+                        <td class="form_name">@Html.LabelFor(model => model.Feedback.Image)</td>
+                        <td class="form_text">@Html.TextBoxFor(model => model.Feedback.Image, new { type = "file" }) <span class="red-warring">Chấp nhận ảnh jpg, png, gif, jpeg < 4MB</span></td>
+                    </tr>
+                    @if (Model.Feedback.Image != null)
+                    {
+                        <tr id="ImgPreview">
+                            <td class="form_name"></td>
+                            <td class="form_text">
+                                <img src="@Path.Combine("/images/feedbacks/", Model.Feedback.Image)?w=100" alt="" width="100" />
+                                <br /><br /><a href="javascript:;" onclick="$('#ImgPreview').hide(); $('#CurrentFile').val('');">
+                                    <img src="/Content/admin/icon-delete-red.png" alt="" style="        vertical-align: middle;
+                                    margin-top: 0;
+                                    height: 10px;" /> Xóa ảnh
+                                </a>
+                                <input type="hidden" name="CurrentFile" id="CurrentFile" value="@Model.Feedback.Image" />
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <td class="form_name">@Html.LabelFor(model => model.Feedback.FileVideo)</td>
+                        <td class="form_text">@Html.TextBoxFor(model => model.Feedback.FileVideo, new { type = "file" }) <span class="red-warring">Chấp nhận file mp4 < 30MB</span></td>
+                    </tr>
+                    @if (Model.Feedback.FileVideo != null)
+                    {
+                        <tr id="FileVideoPreview">
+                            <td class="form_name"></td>
+                            <td class="form_text">
+
+                                <div style="max-width:270px;">
+                                    <video controls>
+                                        <source src="@Path.Combine("/images/feedbacks/", Model.Feedback.FileVideo)">
+                                    </video>
+                                </div>
+                                @*<img src="@Path.Combine("/images/feedbacks/", Model.Feedback.Image)?w=100" alt="" width="100" />*@
+                                <br /><br /><a href="javascript:;" onclick="$('#FileVideoPreview').hide(); $('#CurrentFileVideo').val('');">
+                                    <img src="/Content/admin/icon-delete-red.png" alt="" style="vertical-align: middle;
+                                    margin-top: 0;
+                                    height: 10px;" /> Xóa file
+                                </a>
+                                <input type="hidden" name="CurrentFileVideo" id="CurrentFileVideo" value="@Model.Feedback.FileVideo" />
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <td class="form_name">@Html.LabelFor(model => model.Feedback.Content)</td>
+                        <td class="form_text">@Html.EditorFor(model => model.Feedback.Content)</td>
+                    </tr>
+                    <tr>
+                        <td class="form_name">@Html.LabelFor(model => model.Feedback.Sort)</td>
+                        <td class="form_text">@Html.EditorFor(model => model.Feedback.Sort)</td>
+                    </tr>
+                    <tr>
+                        <td class="form_name">@Html.LabelFor(model => model.Feedback.Active)</td>
+                        <td class="form_text">@Html.CheckBoxFor(model => model.Feedback.Active, new { @checked = "checked" })</td>
+                    </tr>
+                    <tr>
+                        <td class="form_name"></td>
+                        <td class="form_text"><input type="submit" class="btn quick-link" value="Cập nhật" /></td>
+                    </tr>
+                </table>
+                }
+            </div>
+        </div>
+    </div>
+</div>

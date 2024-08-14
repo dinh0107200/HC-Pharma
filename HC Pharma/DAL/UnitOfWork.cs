@@ -29,8 +29,20 @@ namespace HC_Pharma.DAL
         private GenericRepository<OrderDetail> _orderDetailRepository;
         private GenericRepository<Ward> _wardRepository;
         private GenericRepository<Combo> _comboRepository;
+        private GenericRepository<FeedbackProduct> _feedbackProductRepository;
+        private GenericRepository<LandingPage> _landingPageRepository;
+        private GenericRepository<QaProduct> _qaProductRepository;
+        private GenericRepository<BannerLandingPage> _bannerLandingPageRepository;
 
 
+        public GenericRepository<BannerLandingPage> BannerLandingPageRepository =>
+        _bannerLandingPageRepository ?? (_bannerLandingPageRepository = new GenericRepository<BannerLandingPage>(_context));
+        public GenericRepository<QaProduct> QaProductRepository =>
+        _qaProductRepository ?? (_qaProductRepository = new GenericRepository<QaProduct>(_context));
+        public GenericRepository<LandingPage> LandingPageRepository =>
+        _landingPageRepository ?? (_landingPageRepository = new GenericRepository<LandingPage>(_context));
+        public GenericRepository<FeedbackProduct> FeedbackProductRepository =>
+        _feedbackProductRepository ?? (_feedbackProductRepository = new GenericRepository<FeedbackProduct>(_context));
         public GenericRepository<Combo> ComboRepository =>
           _comboRepository ?? (_comboRepository = new GenericRepository<Combo>(_context));
         public GenericRepository<City> CityRepository =>

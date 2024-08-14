@@ -1,0 +1,48 @@
+﻿@model HC_Pharma.Models.QaProduct
+@{
+    Layout = "~/Views/Shared/_AdminLandingPageLayout.cshtml";
+}
+
+<div id="responsive">
+
+    <div id="left_menu_profile">
+        @Html.Action("Menu", "LandingPage", new { productId = Model.ProductId })
+    </div>
+    <div id="content_center_right">
+        <div class="content_center_right">
+            <h2>Thêm phản hồi</h2>
+            <a class="btn quick-link" href=""><i class="far fa-list mr-1"></i> Danh sách phản hồi</a>
+            <div class="box_content">
+                @using (Html.BeginForm("UpdateQaProduct", "LandingPage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(a => a.ProductId)
+                    @Html.HiddenFor(a => a.Id)
+
+                    <table class="form_table">
+                        <tr>
+                            <td class="form_name">@Html.LabelFor(model => model.Name)</td>
+                            <td class="form_text">@Html.EditorFor(model => model.Name)</td>
+                        </tr>
+                        <tr>
+                            <td class="form_name">@Html.LabelFor(model => model.Body)</td>
+                            <td class="form_text">@Html.EditorFor(model => model.Body)</td>
+                        </tr>
+                        <tr>
+                            <td class="form_name">@Html.LabelFor(model => model.Sort)</td>
+                            <td class="form_text">@Html.EditorFor(model => model.Sort)</td>
+                        </tr>
+                        <tr>
+                            <td class="form_name"></td>
+                            <td class="form_text"><input type="submit" class="btn quick-link" value="Cập nhật" /></td>
+                        </tr>
+                    </table>
+                }
+
+
+                @Html.Action("ListQaProduct", "LandingPage", new { productId = Model.ProductId })
+            </div>
+        </div>
+    </div>
+</div>
+

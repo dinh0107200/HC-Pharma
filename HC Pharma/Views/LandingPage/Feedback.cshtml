@@ -1,0 +1,58 @@
+﻿@model HC_Pharma.ViewModel.InserFeedbackProductViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLandingPageLayout.cshtml";
+}
+
+<div id="responsive">
+
+    <div id="left_menu_profile">
+        @Html.Action("Menu", "LandingPage", new { productId = Model.Feedback.ProductId })
+    </div>
+    <div id="content_center_right">
+        <div class="content_center_right">
+            <h2>Thêm phản hồi</h2>
+            <a class="btn quick-link" href="@Url.Action("ListFeedback", "LandingPage", new {productId = Model.Feedback.ProductId})"><i class="far fa-list mr-1"></i> Danh sách phản hồi</a>
+            <div class="box_content">
+                @using (Html.BeginForm("Feedback", "LandingPage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(a => a.Feedback.ProductId)
+                <table class="form_table">
+                    <tr>
+                        <td class="form_name">@Html.LabelFor(model => model.Feedback.Name)</td>
+                        <td class="form_text">@Html.EditorFor(model => model.Feedback.Name)</td>
+                    </tr>
+                    <tr>
+                        <td class="form_name">@Html.LabelFor(model => model.Feedback.UrlVideo)</td>
+                        <td class="form_text">@Html.EditorFor(model => model.Feedback.UrlVideo)</td>
+                    </tr>
+                    <tr>
+                        <td class="form_name">@Html.LabelFor(model => model.Feedback.Image)</td>
+                        <td class="form_text">@Html.TextBoxFor(model => model.Feedback.Image, new { type = "file" }) <span class="red-warring">Chấp nhận ảnh jpg, png, gif, jpeg < 4MB</span></td>
+                    </tr>
+                    <tr>
+                        <td class="form_name">@Html.LabelFor(model => model.Feedback.FileVideo)</td>
+                        <td class="form_text">@Html.TextBoxFor(model => model.Feedback.FileVideo, new { type = "file" }) <span class="red-warring">Chấp nhận file mp4 < 30MB</span></td>
+                    </tr>
+                    <tr>
+                        <td class="form_name">@Html.LabelFor(model => model.Feedback.Content)</td>
+                        <td class="form_text">@Html.EditorFor(model => model.Feedback.Content)</td>
+                    </tr>
+                    <tr>
+                        <td class="form_name">@Html.LabelFor(model => model.Feedback.Sort)</td>
+                        <td class="form_text">@Html.EditorFor(model => model.Feedback.Sort)</td>
+                    </tr>
+                    <tr>
+                        <td class="form_name">@Html.LabelFor(model => model.Feedback.Active)</td>
+                        <td class="form_text">@Html.CheckBoxFor(model => model.Feedback.Active, new { @checked = "checked" })</td>
+                    </tr>
+                    <tr>
+                        <td class="form_name"></td>
+                        <td class="form_text"><input type="submit" class="btn quick-link" value="Cập nhật" /></td>
+                    </tr>
+                </table>
+                }
+            </div>
+        </div>
+    </div>
+</div>
