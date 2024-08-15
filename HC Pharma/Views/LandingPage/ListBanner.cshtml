@@ -1,0 +1,65 @@
+﻿@model HC_Pharma.ViewModel.ListBannerLandingPageViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLandingPageLayout.cshtml";
+}
+<div id="responsive">
+
+    <div id="left_menu_profile">
+        @Html.Action("Menu", "LandingPage", new { productId = Model.ProductId })
+    </div>
+    <div id="content_center_right">
+        <div class="content_center_right">
+            <h2>Danh sách ảnh quảng cáo</h2>
+            <a class="btn quick-link" href="@Url.Action("BannerLandingPage", "LandingPage", new {productId = Model.ProductId})"><i class="fas fa-plus mr-1"></i> Thêm ảnh quảng cáo</a>
+
+            <div class="box_content">
+                <p class="w-25 d-flex align-items-center">
+                    <span class="d-block pb-2 w-50">Vị trí quảng cáo</span>
+                    @Html.EnumDropDownListFor(model => model.GroupId, "Tất cả vị trí",
+                    new { @class = "form_control w300", onchange = $"window.location.href='/LandingPage/ListBanner?groupId='+this.value+'&productId={Model.ProductId}'" })
+                </p>
+                <table class="list_table tablecenter table-striped">
+                    <tr>
+                        <th style="width: 50px">STT</th>
+                        <th style="width: 150px">Hình ảnh</th>
+                        <th>Tên</th>
+                        <th>Nội dung</th>
+                        <th>Vị trí</th>
+                        <th>Hoạt động</th>
+                        <th style="width: 80px"></th>
+                    </tr>
+                    @foreach (var item in Model.Banners)
+                    {
+                        <tr data-id="@item.Id">
+                            <td style="width: 100px;">
+                                @item.Sort
+                            </td>
+                            <td>
+                                @if (item.Image != null)
+                                {
+                                    <img class="img-border" src="@Path.Combine("/images/banners/", item.Image)" /> }
+                                else
+                                {
+                                    @:NO PICTURE
+                                }
+                            </td>
+                            <td>
+                                <strong>@item.Name</strong>
+                            </td>
+                            <td>
+                                @item.Content
+                            </td>
+                            <td>@Html.DisplayFor(model => item.PostionAbout)</td>
+                            <td>@Html.EditorFor(a => item.Active, new { htmlAttributes = new { id = "Active" } })</td>
+                            <td style="width: 160px;">
+                                <a href="javascript:;" onclick="updateBanner('@item.Id')">Cập nhật - </a>
+                                @Html.ActionLink("Sửa", "UpdateLandingPage", new { bannerId = item.Id, productId = item.ProductId })
+                                - <a href="javascript:;" onclick="deleteBanner('@item.Id')">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

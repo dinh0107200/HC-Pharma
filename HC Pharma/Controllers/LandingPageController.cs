@@ -134,7 +134,7 @@ namespace HC_Pharma.Controllers
 
                 _unitOfWork.FeedbackProductRepository.Insert(model.Feedback);
                 _unitOfWork.Save();
-                return RedirectToAction("ListFeedback", new { result = "success", id = product.Id });
+                return RedirectToAction("ListFeedback", new { result = "success", productId = product.Id });
             }
             return View(model);
         }
@@ -382,12 +382,10 @@ namespace HC_Pharma.Controllers
         #endregion
 
         #region Combo
-
-        public ActionResult ListCombo(int? page, string name, int productId, string result = "")
+        [ChildActionOnly]
+        public ActionResult ListCombo(string name, int productId)
         {
-            ViewBag.Result = result;
-            var pageNumber = page ?? 1;
-            const int pageSize = 15;
+          
             var combos = _unitOfWork.ComboRepository.GetQuery(l => l.ProductId == productId, c => c.OrderBy(l => l.Sort));
             if (!string.IsNullOrEmpty(name))
             {
@@ -395,15 +393,16 @@ namespace HC_Pharma.Controllers
             }
             var model = new ListComboViewModel
             {
-                Combos = combos.ToPagedList(pageNumber, pageSize),
+                Combos = combos,
                 Name = name,
                 ProductId = productId,
             };
-            return View(model);
+            return PartialView(model);
         }
 
-        public ActionResult Combo(int productId)
+        public ActionResult Combo(int productId, string result = "")
         {
+            ViewBag.Result = result;
             var model = new InsertComboViewModel
             {
                 Combo = new Combo { ProductId = productId, Active = true },
@@ -428,7 +427,7 @@ namespace HC_Pharma.Controllers
                     ModelState.AddModelError("", @"Giá khuyến mãi không hợp lệ, vui lòng kiểm tra lại.");
                     return View(model);
                 }
-                var file = Request.Files["Image"];
+                var file = Request.Files["Combo.Image"];
                 if (file != null && file.ContentLength > 0)
                 {
                     if (file.ContentType != "image/jpeg" & file.ContentType != "image/png" && file.ContentType != "image/gif")
@@ -462,6 +461,7 @@ namespace HC_Pharma.Controllers
 
                 _unitOfWork.ComboRepository.Insert(model.Combo);
                 _unitOfWork.Save();
+                return RedirectToAction("Combo", new { result = "update", productId = model.Combo.ProductId });
             }
             return View(model);
         }
@@ -471,7 +471,7 @@ namespace HC_Pharma.Controllers
             var combo = _unitOfWork.ComboRepository.GetById(proId);
             if (combo == null)
             {
-                return RedirectToAction("ListCombot", new { productId = productId });
+                return RedirectToAction("Combo", new { productId = productId });
             }
             var model = new InsertComboViewModel
             {
@@ -509,7 +509,7 @@ namespace HC_Pharma.Controllers
                     return View(model);
                 }
 
-                var file = Request.Files["Article.Image"];
+                var file = Request.Files["Combo.Image"];
                 if (file != null && file.ContentLength > 0)
                 {
                     if (!HtmlHelpers.CheckFileExt(file.FileName, "jpg|jpeg|png|gif"))
@@ -544,7 +544,7 @@ namespace HC_Pharma.Controllers
                 combo.Sort = model.Combo.Sort;
                 combo.Active = model.Combo.Active;
                 _unitOfWork.Save();
-                return RedirectToAction("ListCombo", new { result = "update", productId = model.Combo.ProductId });
+                return RedirectToAction("Combo", new { result = "update", productId = model.Combo.ProductId });
             }
             return View(model);
         }
@@ -564,12 +564,12 @@ namespace HC_Pharma.Controllers
 
         #region BannerLandingPage
 
-        public ActionResult ListBanner(int? page, int groupId, int productId,string result ="")
+        public ActionResult ListBanner(int? page, PostionAbout? groupId, int productId,string result ="")
         {
             var banners = _unitOfWork.BannerLandingPageRepository.GetQuery(l => l.ProductId == productId, c => c.OrderBy(l => l.PostionAbout));
             if(groupId > 0)
             {
-                banners = banners.Where(a => a.PostionAbout == (PostionAbout)groupId);
+                banners = banners.Where(a => a.PostionAbout == groupId);
             }
             var model = new ListBannerLandingPageViewModel
             {
@@ -609,7 +609,7 @@ namespace HC_Pharma.Controllers
                         }
                         else
                         {
-                            var imgPath = "/images/articleCategory/" + DateTime.Now.ToString("yyyy/MM/dd");
+                            var imgPath = "/images/banners/" + DateTime.Now.ToString("yyyy/MM/dd");
                             HtmlHelpers.CreateFolder(Server.MapPath(imgPath));
                             var imgFileName = DateTime.Now.ToFileTimeUtc() + Path.GetExtension(file.FileName);
 
@@ -624,44 +624,51 @@ namespace HC_Pharma.Controllers
                 }
                 _unitOfWork.BannerLandingPageRepository.Insert(banner);
                 _unitOfWork.Save();
-                return RedirectToAction("ListBanner", new { result = "update" });
+                return RedirectToAction("ListBanner", new { productId = banner.ProductId, result = "success" });
             }
             return View(banner);
         }
-        public ActionResult UpdateLandingPage(int id, int productId)
+        public ActionResult UpdateLandingPage(int bannerId, int productId)
         {
          
-            var banner = _unitOfWork.BannerLandingPageRepository.GetById(id);
+            var banner = _unitOfWork.BannerLandingPageRepository.GetById(bannerId);
             if (banner == null)
             {
                 return RedirectToAction("ListBanner", new { productId = productId });
             }
             return View(banner);
         }
-
-        public ActionResult UpdateLandingPage(BannerLandingPage banner, FormCollection fc)
+        [HttpPost, ValidateInput(false)]
+        public ActionResult UpdateLandingPage(BannerLandingPage model, FormCollection fc)
         {
             if (ModelState.IsValid)
             {
+                var banner = _unitOfWork.BannerLandingPageRepository.GetById(model.Id);
                 var file = Request.Files["Image"];
                 if (file != null && file.ContentLength > 0)
                 {
                     if (file.ContentType != "image/jpeg" & file.ContentType != "image/png" && file.ContentType != "image/gif")
                     {
                         ModelState.AddModelError("", @"Chỉ chấp nhận định dạng jpg, png, gif, jpeg");
+                        return View(model);
                     }
                     else
                     {
                         if (file.ContentLength > 4000 * 1024)
                         {
                             ModelState.AddModelError("", @"Dung lượng lớn hơn 4MB. Hãy thử lại");
+                            return View(model);
                         }
                         else
                         {
-                            var imgPath = "/images/articleCategory/" + DateTime.Now.ToString("yyyy/MM/dd");
+                            var imgPath = "/images/banners/" + DateTime.Now.ToString("yyyy/MM/dd");
                             HtmlHelpers.CreateFolder(Server.MapPath(imgPath));
                             var imgFileName = DateTime.Now.ToFileTimeUtc() + Path.GetExtension(file.FileName);
 
+                            if (System.IO.File.Exists(Server.MapPath("/images/banners/" + banner.Image)))
+                            {
+                                System.IO.File.Delete(Server.MapPath("/images/banners/" + banner.Image));
+                            }
                             banner.Image = DateTime.Now.ToString("yyyy/MM/dd") + "/" + imgFileName;
 
                             //var newImage = Image.FromStream(file.InputStream);
@@ -671,15 +678,17 @@ namespace HC_Pharma.Controllers
                         }
                     }
                 }
-                else
-                {
-                    banner.Image = fc["CurrentFile"];
-                }
-                _unitOfWork.BannerLandingPageRepository.Update(banner);
+                banner.Name = model.Name;
+                banner.Sort = model.Sort;
+                banner.Active = model.Active;
+                banner.Content = model.Content;
+                banner.PostionAbout = model.PostionAbout;
+                //_unitOfWork.BannerLandingPageRepository.Update(banner);
                 _unitOfWork.Save();
-                return RedirectToAction("ArticleCategory", new { result = "update" });
+                return RedirectToAction("ListBanner", new { productId = model.ProductId, result = "update" });
+
             }
-            return View(banner);
+            return View(model);
         }
         #endregion
         protected override void Dispose(bool disposing)

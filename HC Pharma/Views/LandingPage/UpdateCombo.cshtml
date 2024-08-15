@@ -10,13 +10,15 @@
     </div>
     <div id="content_center_right">
         <div class="content_center_right">
-            <h2>Thêm Combo</h2>
+            <h2>Sửa Combo</h2>
             <a class="btn quick-link" href="#list-cat"><i class="far fa-list mr-1"></i> Danh sách combo</a>
             <div class="box_content">
-                @using (Html.BeginForm("Combo", "LandingPage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("UpdateCombo", "LandingPage", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     @Html.ValidationSummary(true)
                     @Html.HiddenFor(a => a.Combo.ProductId)
+                    @Html.HiddenFor(a => a.Combo.Id)
+
                 <table class="form_table">
                     <tr>
                         <td class="form_name">@Html.LabelFor(model => model.Combo.Name)</td>
@@ -26,6 +28,21 @@
                         <td class="form_name">@Html.LabelFor(model => model.Combo.Image)</td>
                         <td class="form_text">@Html.TextBoxFor(model => model.Combo.Image, new { type = "file" }) <span class="red-warring">Chấp nhận ảnh jpg, png, gif, jpeg < 4MB</span></td>
                     </tr>
+                    @if (Model.Combo.Image != null)
+                    {
+                        <tr id="ImgPreview">
+                            <td class="form_name"></td>
+                            <td class="form_text">
+                                <img src="@Path.Combine("/images/combos/", Model.Combo.Image)?w=100" alt="" width="100" />
+                                <br /><br /><a href="javascript:;" onclick="$('#ImgPreview').hide(); $('#CurrentFile').val('');">
+                                    <img src="/Content/admin/icon-delete-red.png" alt="" style="        vertical-align: middle;
+                             margin-top: 0;
+                             height: 10px;" /> Xóa ảnh
+                                </a>
+                                <input type="hidden" name="CurrentFile" id="CurrentFile" value="@Model.Combo.Image" />
+                            </td>
+                        </tr>
+                    }
                     <tr>
                         <td class="form_name">@Html.LabelFor(model => model.Price) (đ)</td>
                         <td class="form_text">@Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "input-number" } })</td>

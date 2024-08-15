@@ -182,7 +182,7 @@ namespace HC_Pharma.Models
     public enum PostionAbout
     {
         [Display(Name = "Banner")]
-        Banner = 1,
+        Banner ,
         [Display(Name = "Các bệnh thường gặp + dấu hiệu")]
         CommonDiseases,
         [Display(Name = "Nguyên nhân gây bệnh")]

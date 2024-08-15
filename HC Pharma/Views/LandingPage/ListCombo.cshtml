@@ -1,29 +1,68 @@
 ﻿@model HC_Pharma.ViewModel.ListComboViewModel
-@using PagedList.Mvc
-@{
-    Layout = "~/Views/Shared/_AdminLandingPageLayout.cshtml";
-}
 
-<div id="responsive">
 
-    <div id="left_menu_profile">
-        @Html.Action("Menu", "LandingPage", new { productId = Model.ProductId })
-    </div>
-    <div id="content_center_right">
-        <div class="content_center_right">
-            <h2>Danh sách combo</h2>
-            <a class="btn quick-link" href="@Url.Action("Combo", "LandingPage", new {productId = Model.ProductId})"><i class="fas fa-plus mr-1"></i> Thêm Combo</a>
-            <div class="box_content">
-               
-            </div>
-        </div>
-    </div>
-</div>
+<table class="list_table tablecenter mb-4" id="list-cat">
+    <tr>
+        <th>STT</th>
+        <th>Hình ảnh</th>
+        <th>Tên Combo</th>
+        <th>Giá </th>
+        <th style="width: 160px"></th>
+    </tr>
+    @foreach (var product in Model.Combos)
+    {
+        <tr data-id="@product.Id">
+            <td>
+                @product.Sort
+            </td>
+            <td>
+                @if (product.Image != null)
+                {
+                    <img class="img-border" src="@Path.Combine("/images/combos/", product.Image)?w=100&h=100" alt="" />
+                }
+                else
+                {
+                    @:NO PICTURE
+                }
+            </td>
+            <td class="left">
+                <strong>@product.Name</strong>
+            </td>
+            <td>
+                <p>Giá niêm yết: @Html.DisplayFor(m => product.Price) </p>
+                @if (product.PriceSale > 1)
+                {
+                    <span class="text-danger">Giá khuyến mãi: @Html.DisplayFor(m => product.PriceSale) </span> <br />
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "UpdateCombo", new { proId = product.Id, productId = product.ProductId })
+                - <a href="javascript:;" onclick="deleteProduct('@product.Id')" class="red-warring">Xóa</a>
+            </td>
+        </tr>
+    }
+</table>
 
-@section scripts
-{
-    <script type="text/javascript">
-       
-    </script>
 
-}
+<script type="text/javascript">
+    function deleteProduct(id) {
+        if (confirm("Bạn có chắc chắn xóa sản phẩm này không?")) {
+            $.post("/LandingPage/DeleteCombo", { id: id }, function (data) {
+                if (data) {
+                    $.toast({
+                        text: 'Xóa sản phẩm thành công',
+                        position: 'bottom-right',
+                        icon: 'success',
+                    })
+                    $("tr[data-id='" + id + "']").fadeOut();
+                }
+                else {
+                    $.toast({
+                        text: 'Quá trình thực hiện không thành công. Hãy thử lại',
+                        icon: 'error',
+                    })
+                }
+            });
+        }
+    }
+</script>

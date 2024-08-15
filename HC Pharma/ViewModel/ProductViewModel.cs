@@ -71,7 +71,7 @@ namespace HC_Pharma.ViewModel
 
     public class ListComboViewModel
     {
-        public PagedList.IPagedList<Combo> Combos { get; set; }
+        public IEnumerable<Combo> Combos { get; set; }
         public int ProductId { get; set; }
         public string Name { get; set; }
     }
@@ -80,7 +80,7 @@ namespace HC_Pharma.ViewModel
         public IEnumerable<BannerLandingPage> Banners { get; set; }
         public int ProductId { get; set; }
         public string Name { get; set; }
-        public int GroupId { get; set; }
+        public PostionAbout? GroupId { get; set; }
     }
 
 }

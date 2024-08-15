@@ -738,6 +738,10 @@
     <Content Include="Views\LandingPage\UpdateQaProduct.cshtml" />
     <Content Include="Views\LandingPage\Combo.cshtml" />
     <Content Include="Views\LandingPage\ListCombo.cshtml" />
+    <Content Include="Views\LandingPage\UpdateCombo.cshtml" />
+    <Content Include="Views\LandingPage\BannerLandingPage.cshtml" />
+    <Content Include="Views\LandingPage\ListBanner.cshtml" />
+    <Content Include="Views\LandingPage\UpdateLandingPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

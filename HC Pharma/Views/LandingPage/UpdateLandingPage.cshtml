@@ -1,0 +1,63 @@
+﻿@model HC_Pharma.Models.BannerLandingPage
+@{
+    Layout = "~/Views/Shared/_AdminLandingPageLayout.cshtml";
+}
+
+<div id="responsive">
+    <div id="left_menu_profile">
+        @Html.Action("Menu", "LandingPage", new { productId = Model.ProductId })
+    </div>
+    <div id="content_center_right">
+        <div class="content_center_right">
+            <h2>Thêm quảng cáo</h2>
+            <a class="btn quick-link" href="@Url.Action("ListBanner", "LandingPage", new {productId = Model.ProductId})"><i class="far fa-list mr-1"></i> Danh sách quảng cáo</a>
+            <div class="box_content">
+                @using (Html.BeginForm("UpdateLandingPage", "LandingPage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(a => a.ProductId)
+                    @Html.HiddenFor(a => a.Id)
+
+                    <table class="form_table">
+                        <tr>
+                            <td class="form_name">@Html.LabelFor(model => model.PostionAbout)</td>
+                            <td class="form_text">@Html.EnumDropDownListFor(model => model.PostionAbout, new { @class = "form_control w300" })</td>
+                        </tr>
+                        <tr>
+                            <td class="form_name">@Html.LabelFor(model => model.Name)</td>
+                            <td class="form_text">@Html.EditorFor(model => model.Name)</td>
+                        </tr>
+                        <tr>
+                            <td class="form_name">@Html.LabelFor(model => model.Image)</td>
+                            <td class="form_text">@Html.TextBoxFor(model => model.Image, new { type = "file" }) <span class="red-warring">Chấp nhận ảnh jpg, png, gif, jpeg < 4MB</span></td>
+                        </tr>
+                        @if (Model.Image != null)
+                        {
+                            <tr>
+                                <td class="form_name"></td>
+                                <td class="form_text"><img class="img-border" src="@Path.Combine("/images/banners/",  Model.Image)" /></td>
+                            </tr>
+
+                        }
+                        <tr>
+                            <td class="form_name">@Html.LabelFor(model => model.Content)</td>
+                            <td class="form_text">@Html.EditorFor(model => model.Content)</td>
+                        </tr>
+                        <tr>
+                            <td class="form_name">@Html.LabelFor(model => model.Active)</td>
+                            <td class="form_text">@Html.CheckBoxFor(model => model.Active, new { @checked = "checked" })</td>
+                        </tr>
+                        <tr>
+                            <td class="form_name">@Html.LabelFor(model => model.Sort)</td>
+                            <td class="form_text">@Html.EditorFor(model => model.Sort)</td>
+                        </tr>
+                        <tr>
+                            <td class="form_name"></td>
+                            <td class="form_text"><input type="submit" class="btn quick-link" value="Cập nhật" /></td>
+                        </tr>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+</div>
