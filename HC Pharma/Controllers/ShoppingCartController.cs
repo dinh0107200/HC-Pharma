@@ -179,13 +179,18 @@ namespace HC_Pharma.Controllers
                     tongtien += thanhtien;
 
                     var img = "NO PICTURE";
+                    var NameCombo = "";
                     if (odetails.Product.ListImage != null)
                     {
                         img = "<img src='" + Request.Url?.GetLeftPart(UriPartial.Authority) + "/images/products/" + odetails.Product.ListImage.Split(',')[0] + "?w=100' />";
+                    }           
+                    if(odetails.NameCombo != null)
+                    {
+                        NameCombo = "-" + odetails.NameCombo;
                     }
                     sb += "<tr>" +
                           "<td>" + img + "</td>" +
-                          "<td><a href='" + Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("ProductDetail", "Home", new { proId = odetails.ProductId, name = HtmlHelpers.ConvertToUnSign(null, odetails.Product.Name) }) + "' >" + odetails.Product.Name + "</a>";
+                          "<td><a href='" + Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("ProductDetail", "Home", new { proId = odetails.ProductId, name = HtmlHelpers.ConvertToUnSign(null, odetails.Product.Name) }) + "' >" + odetails.Product.Name +NameCombo +"</a>";
                     sb += "</td>" +
                           "<td style='text-align:center'>" + odetails.Quantity + "</td>" +
                           "<td style='text-align:center'>" + Convert.ToDecimal(odetails.Price).ToString("N0") + "</td>" +

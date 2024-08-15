@@ -3614,6 +3614,21 @@ a:not([href]):not([class]) {
 
 @include maxWidth(468px) {
 
+    .common-diseases__item {
+        .number{
+            font-size:2rem;
+        }
+        .body{
+            padding-left:20px;
+        }
+        .img {
+            img {
+                width: 75px;
+                border: 3px solid #3B66FF;
+            }
+        }
+    }
+
     .feedback-landing-item {
         .body {
             .name {
@@ -3628,8 +3643,8 @@ a:not([href]):not([class]) {
             font-size: 20px;
         }
 
-        .title-landing-sub{
-            font-size:18px;
+        .title-landing-sub {
+            font-size: 18px;
         }
     }
 

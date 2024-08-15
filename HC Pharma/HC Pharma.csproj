@@ -764,6 +764,7 @@
     <Content Include="Views\Vcms\AddOrUpdateDistrict.cshtml" />
     <Content Include="Views\Vcms\EditCity.cshtml" />
     <Content Include="Views\Vcms\ListCityPartial.cshtml" />
+    <Content Include="Views\Contact\ListContactProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
