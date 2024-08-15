@@ -240,6 +240,22 @@
     <Compile Include="Migrations\202408140131203_up-LandingPage.Designer.cs">
       <DependentUpon>202408140131203_up-LandingPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202408150504016_fix-LandingPage.cs" />
+    <Compile Include="Migrations\202408150504016_fix-LandingPage.Designer.cs">
+      <DependentUpon>202408150504016_fix-LandingPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202408150754580_city-ShipFee.cs" />
+    <Compile Include="Migrations\202408150754580_city-ShipFee.Designer.cs">
+      <DependentUpon>202408150754580_city-ShipFee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202408150916389_Add-ContactProduct.cs" />
+    <Compile Include="Migrations\202408150916389_Add-ContactProduct.Designer.cs">
+      <DependentUpon>202408150916389_Add-ContactProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202408151011359_fix-ContactProduct.cs" />
+    <Compile Include="Migrations\202408151011359_fix-ContactProduct.Designer.cs">
+      <DependentUpon>202408151011359_fix-ContactProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Article.cs" />
@@ -249,6 +265,7 @@
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\ConfigSite.cs" />
     <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\ContactProduct.cs" />
     <Compile Include="Models\District.cs" />
     <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\Introduct.cs" />
@@ -344,6 +361,7 @@
     <Content Include="Content\images\img-main\”.png" />
     <Content Include="Content\images\landing\banner.png" />
     <Content Include="Content\images\landing\bg-banner.png" />
+    <Content Include="Content\images\landing\bg-user-manua.png" />
     <Content Include="Content\images\landing\car.png" />
     <Content Include="Content\images\landing\cause-disease.png" />
     <Content Include="Content\images\landing\common.png" />
@@ -742,6 +760,10 @@
     <Content Include="Views\LandingPage\BannerLandingPage.cshtml" />
     <Content Include="Views\LandingPage\ListBanner.cshtml" />
     <Content Include="Views\LandingPage\UpdateLandingPage.cshtml" />
+    <Content Include="Views\Vcms\City.cshtml" />
+    <Content Include="Views\Vcms\AddOrUpdateDistrict.cshtml" />
+    <Content Include="Views\Vcms\EditCity.cshtml" />
+    <Content Include="Views\Vcms\ListCityPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -811,6 +833,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202408140131203_up-LandingPage.resx">
       <DependentUpon>202408140131203_up-LandingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408150504016_fix-LandingPage.resx">
+      <DependentUpon>202408150504016_fix-LandingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408150754580_city-ShipFee.resx">
+      <DependentUpon>202408150754580_city-ShipFee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408150916389_Add-ContactProduct.resx">
+      <DependentUpon>202408150916389_Add-ContactProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408151011359_fix-ContactProduct.resx">
+      <DependentUpon>202408151011359_fix-ContactProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

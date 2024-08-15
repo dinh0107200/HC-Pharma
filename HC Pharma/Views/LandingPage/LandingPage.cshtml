@@ -20,69 +20,92 @@
                     @Html.ValidationSummary(true)
                     @Html.HiddenFor(a => a.Id)
                     @Html.HiddenFor(a => a.ProductId)
-                    <table class="form_table">
-                        <tr>
-                            <td class="form_name">@Html.LabelFor(model => model.Intro)</td>
-                            <td class="form_text">@Html.EditorFor(model => model.Intro)</td>
-                        </tr>
-                        <tr>
-                            <td class="form_name">@Html.LabelFor(model => model.ImageIntro)</td>
-                            <td class="form_text">@Html.TextBoxFor(model => model.ImageIntro, new { type = "file" }) @*<span class="red-warring">Kích thươc: 470px - 600px</span>*@</td>
-                        </tr>
-                        @if (Model.ImageIntro != null)
-                        {
-                            <tr>
-                                <td class="form_name"></td>
-                                <td class="form_text"><img class="img-border" src="@Path.Combine("/images/landingPage/", Model.ImageIntro)?w=150" /></td>
-                            </tr>
-                        }
-                        <tr>
-                            <td class="form_name">@Html.LabelFor(model => model.Solution)</td>
-                            <td class="form_text">@Html.EditorFor(model => model.Solution)</td>
-                        </tr>
-                        <tr>
-                            <td class="form_name">@Html.LabelFor(model => model.Imagesolution)</td>
-                            <td class="form_text">@Html.TextBoxFor(model => model.Imagesolution, new { type = "file" }) @*<span class="red-warring">Kích thươc: 470px - 600px</span>*@</td>
-                        </tr>
-                        @if (Model.Imagesolution != null)
-                        {
-                            <tr>
-                                <td class="form_name"></td>
-                                <td class="form_text"><img class="img-border" src="@Path.Combine("/images/landingPage/", Model.Imagesolution)?w=150" /></td>
-                            </tr>
-                        }
-                        <tr>
-                            <td class="form_name">@Html.LabelFor(model => model.ProductAnalysis)</td>
-                            <td class="form_text">@Html.EditorFor(model => model.ProductAnalysis)</td>
-                        </tr>
-                        <tr>
-                            <td class="form_name">@Html.LabelFor(model => model.ImageAnalysis)</td>
-                            <td class="form_text">@Html.TextBoxFor(model => model.ImageAnalysis, new { type = "file" }) @*<span class="red-warring">Kích thươc: 470px - 600px</span>*@</td>
-                        </tr>
-                        @if (Model.ImageAnalysis != null)
-                        {
-                            <tr>
-                                <td class="form_name"></td>
-                                <td class="form_text"><img class="img-border" src="@Path.Combine("/images/landingPage/", Model.ImageAnalysis)?w=150" /></td>
-                            </tr>
-                        }
-                        <tr>
-                            <td class="form_name">@Html.LabelFor(model => model.CommonDiseases)</td>
-                            <td class="form_text">@Html.EditorFor(model => model.CommonDiseases)</td>
-                        </tr>
-                        <tr>
-                            <td class="form_name">@Html.LabelFor(model => model.CauseDisease)</td>
-                            <td class="form_text">@Html.EditorFor(model => model.CauseDisease)</td>
-                        </tr>
-                        <tr>
-                            <td class="form_name">@Html.LabelFor(model => model.QA)</td>
-                            <td class="form_text">@Html.EditorFor(model => model.QA)</td>
-                        </tr>
-                        <tr>
-                            <td class="form_name"></td>
-                            <td class="form_text"><input type="submit" class="btn quick-link" value="Cập nhật" /></td>
-                        </tr>
-                    </table>
+            <table class="form_table">
+                <tr>
+                    <td class="form_name">@Html.LabelFor(model => model.Title)</td>
+                    <td class="form_text">@Html.EditorFor(model => model.Title)</td>
+                </tr>
+                <tr>
+                    <td class="form_name">@Html.LabelFor(model => model.SubTitle)</td>
+                    <td class="form_text">@Html.EditorFor(model => model.SubTitle)</td>
+                </tr>
+                <tr>
+                    <td class="form_name">@Html.LabelFor(model => model.SubTitle2)</td>
+                    <td class="form_text">@Html.EditorFor(model => model.SubTitle2)</td>
+                </tr>
+                <tr>
+                    <td class="form_name">@Html.LabelFor(model => model.Intro)</td>
+                    <td class="form_text">@Html.EditorFor(model => model.Intro)</td>
+                </tr>
+                <tr>
+                    <td class="form_name">@Html.LabelFor(model => model.Imageregistration)</td>
+                    <td class="form_text">@Html.TextBoxFor(model => model.Imageregistration, new { type = "file" }) @*<span class="red-warring">Kích thươc: 470px - 600px</span>*@</td>
+                </tr>
+                @if (Model.Imageregistration != null)
+                {
+                    <tr>
+                        <td class="form_name"></td>
+                        <td class="form_text"><img class="img-border" src="@Path.Combine("/images/landingPage/", Model.Imageregistration)?w=150" /></td>
+                    </tr>
+                }
+                <tr>
+                    <td class="form_name">@Html.LabelFor(model => model.ImageIntro)</td>
+                    <td class="form_text">@Html.TextBoxFor(model => model.ImageIntro, new { type = "file" }) @*<span class="red-warring">Kích thươc: 470px - 600px</span>*@</td>
+                </tr>
+                @if (Model.ImageIntro != null)
+                {
+                    <tr>
+                        <td class="form_name"></td>
+                        <td class="form_text"><img class="img-border" src="@Path.Combine("/images/landingPage/", Model.ImageIntro)?w=150" /></td>
+                    </tr>
+                }
+                <tr>
+                    <td class="form_name">@Html.LabelFor(model => model.Solution)</td>
+                    <td class="form_text">@Html.EditorFor(model => model.Solution)</td>
+                </tr>
+                <tr>
+                    <td class="form_name">@Html.LabelFor(model => model.Imagesolution)</td>
+                    <td class="form_text">@Html.TextBoxFor(model => model.Imagesolution, new { type = "file" }) @*<span class="red-warring">Kích thươc: 470px - 600px</span>*@</td>
+                </tr>
+                @if (Model.Imagesolution != null)
+                {
+                    <tr>
+                        <td class="form_name"></td>
+                        <td class="form_text"><img class="img-border" src="@Path.Combine("/images/landingPage/", Model.Imagesolution)?w=150" /></td>
+                    </tr>
+                }
+                <tr>
+                    <td class="form_name">@Html.LabelFor(model => model.ProductAnalysis)</td>
+                    <td class="form_text">@Html.EditorFor(model => model.ProductAnalysis)</td>
+                </tr>
+                <tr>
+                    <td class="form_name">@Html.LabelFor(model => model.ImageAnalysis)</td>
+                    <td class="form_text">@Html.TextBoxFor(model => model.ImageAnalysis, new { type = "file" }) @*<span class="red-warring">Kích thươc: 470px - 600px</span>*@</td>
+                </tr>
+                @if (Model.ImageAnalysis != null)
+                {
+                    <tr>
+                        <td class="form_name"></td>
+                        <td class="form_text"><img class="img-border" src="@Path.Combine("/images/landingPage/", Model.ImageAnalysis)?w=150" /></td>
+                    </tr>
+                }
+                <tr>
+                    <td class="form_name">@Html.LabelFor(model => model.CommonDiseases)</td>
+                    <td class="form_text">@Html.EditorFor(model => model.CommonDiseases)</td>
+                </tr>
+                <tr>
+                    <td class="form_name">@Html.LabelFor(model => model.CauseDisease)</td>
+                    <td class="form_text">@Html.EditorFor(model => model.CauseDisease)</td>
+                </tr>
+                <tr>
+                    <td class="form_name">@Html.LabelFor(model => model.QA)</td>
+                    <td class="form_text">@Html.EditorFor(model => model.QA)</td>
+                </tr>
+                <tr>
+                    <td class="form_name"></td>
+                    <td class="form_text"><input type="submit" class="btn quick-link" value="Cập nhật" /></td>
+                </tr>
+            </table>
                 }
             </div>
         </div>

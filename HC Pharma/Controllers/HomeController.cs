@@ -1,12 +1,14 @@
 ﻿using HC_Pharma.DAL;
 using HC_Pharma.Models;
 using HC_Pharma.ViewModel;
+using Helpers;
 using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web.Configuration;
 using System.Web.Mvc;
 
@@ -401,12 +403,85 @@ namespace HC_Pharma.Controllers
         //    return certificate.Equals(createdCertificate);
         //}
 
-
-        public ActionResult LandingPage()
+        [Route("landing-page/{url}")]
+        public ActionResult LandingPage(string url)
         {
+            var product = _unitOfWork.ProductRepository.GetQuery(a => a.Active && a.Url == url).FirstOrDefault();
+            if (product == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var landingPage = _unitOfWork.LandingPageRepository.GetQuery(l => l.ProductId == product.Id).FirstOrDefault();
+            if (landingPage == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var model = new LandingPageViewModel
+            {
+                Policy = _unitOfWork.BannerRepository.GetQuery(l => l.Active && l.GroupId == 2, c => c.OrderBy(l => l.Sort)),
+                Banners = _unitOfWork.BannerLandingPageRepository.GetQuery(l => l.ProductId == product.Id, c => c.OrderBy(l => l.Sort)),
+                Feedbacks = _unitOfWork.FeedbackProductRepository.GetQuery(l => l.ProductId == product.Id, c => c.OrderBy(l => l.Sort)),
+                Combos = _unitOfWork.ComboRepository.GetQuery(l => l.ProductId == product.Id, c => c.OrderBy(l => l.Sort)),
+                QaProducts = _unitOfWork.QaProductRepository.GetQuery(l => l.ProductId == product.Id, c => c.OrderBy(l => l.Sort)),
+                LandingPage = landingPage,
+                Product = product,
+            };
+            return View(model);
+        }
+        [HttpPost, ValidateAntiForgeryToken]
+        public JsonResult ContactProduct1(ContactProduct model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Json(new { status = false, msg = "Hãy điền đúng định dạng." });
+            }
+            model.IpAddress = Request.UserHostAddress;
+            var currentDate = DateTime.Now;
+            var contacts = _unitOfWork.ContactProductRepository.GetQuery(l => l.IpAddress == model.IpAddress && DbFunctions.TruncateTime(l.CreateDate) == DbFunctions.TruncateTime(currentDate)).Count();
+            if (contacts >= 10)
+            {
+                return Json(new { status = false, msg = "Mỗi ngày chử được gửi tối đa 10 yêu cầu tư vấn" });
+            }
+            _unitOfWork.ContactProductRepository.Insert(model);
+            _unitOfWork.Save();
+            var product = _unitOfWork.ProductRepository.GetById(model.ProductId);
+            var subject = "Email liên hệ từ website: " + Request.Url?.Host;
+            var body = $"<p>Tên người liên hệ: {model.Fullname},</p>" +
+                        $"<p>Số điện thoại: {model.Mobile},</p>" +
+                        $"<p>Nội dung:Tư vấn sản phẩm {product.Name}</p>" +
+                        $"<p>Đây là hệ thống gửi email tự động, vui lòng không phản hồi lại email này.</p>";
+            Task.Run(() => HtmlHelpers.SendEmail("gmail", subject, body, ConfigSite.Email, Email, Email, Password, "HC Pharma"));
+            return Json(new { status = true, msg = "Gửi liên hệ thành công.\nChúng tôi sẽ liên lạc lại với bạn sớm nhất có thể." });
+        }
 
-
-            return View();
+        [HttpPost, ValidateAntiForgeryToken]
+        public JsonResult ContactProduct2(ContactProduct model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Json(new { status = false, msg = "Hãy điền đúng định dạng." });
+            }
+            model.IpAddress = Request.UserHostAddress;
+            var currentDate = DateTime.Now;
+            var contacts = _unitOfWork.ContactProductRepository.GetQuery(l => l.IpAddress == model.IpAddress && DbFunctions.TruncateTime(l.CreateDate) == DbFunctions.TruncateTime(currentDate)).Count();
+            if (contacts >= 10)
+            {
+                return Json(new { status = false, msg = "Mỗi ngày chử được gửi tối đa 10 yêu cầu tư vấn" });
+            }
+            _unitOfWork.ContactProductRepository.Insert(model);
+            _unitOfWork.Save();
+            var product = _unitOfWork.ProductRepository.GetById(model.ProductId);
+            var subject = "Email liên hệ từ website: " + Request.Url?.Host;
+            var body = $"<p>Tên người liên hệ: {model.Fullname},</p>" +
+                        $"<p>Email liên hệ: {model.Email},</p>" +
+                        $"<p>Số điện thoại: {model.Mobile},</p>" +
+                          $"<p>Địa chỉ: {model.Address},</p>" +
+                           $"<p>Nội dung:Tư vấn sản phẩm {product.Name}</p>" +
+                           $"<p>Nhu cầu:{model.ContactNeeds}</p>" +
+                           $"<p>Nội dung:{model.Body}</p>" +
+                        $"<p>Đây là hệ thống gửi email tự động, vui lòng không phản hồi lại email này.</p>";
+            Task.Run(() => HtmlHelpers.SendEmail("gmail", subject, body, ConfigSite.Email, Email, Email, Password, "HC Pharma"));
+            return Json(new { status = true, msg = "Gửi liên hệ thành công.\nChúng tôi sẽ liên lạc lại với bạn sớm nhất có thể." });
         }
         protected override void Dispose(bool disposing)
         {

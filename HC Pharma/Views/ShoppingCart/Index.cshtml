@@ -63,12 +63,17 @@
                                             {
                                                 <img src="~/Content/images/img-main/on-image.jpg" width="200" class="mr-3 img-thumbnail border-primary" alt="@item.Product.Name">
                                             }
-                                            <div class="name font-weight-bold truncate">
-                                                @item.Product.Name
-                                                <a href="javascript:;" title="Xóa" class="remove-product d-block text-danger mt-3" style="color: dimgray" data-id="@item.RecordId">
-                                                    Xóa
-                                                </a>
-                                            </div>
+                                        <div class="name font-weight-bold truncate">
+                                            @item.Product.Name
+                                            <br />
+                                            @if (item.Combo != null)
+                                            {
+                                                <span class="badge badge-info">@item.Combo.Name</span>
+                                            }
+                                            <a href="javascript:;" title="Xóa" class="remove-product d-block text-danger mt-3" style="color: dimgray" data-id="@item.RecordId">
+                                                Xóa
+                                            </a>
+                                        </div>
                                         </div>
                                     </td>
                                     <td style="vertical-align: middle">

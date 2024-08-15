@@ -33,8 +33,11 @@ namespace HC_Pharma.DAL
         private GenericRepository<LandingPage> _landingPageRepository;
         private GenericRepository<QaProduct> _qaProductRepository;
         private GenericRepository<BannerLandingPage> _bannerLandingPageRepository;
+        private GenericRepository<ContactProduct> _contactProductRepository;
 
 
+        public GenericRepository<ContactProduct> ContactProductRepository =>
+       _contactProductRepository ?? (_contactProductRepository = new GenericRepository<ContactProduct>(_context));
         public GenericRepository<BannerLandingPage> BannerLandingPageRepository =>
         _bannerLandingPageRepository ?? (_bannerLandingPageRepository = new GenericRepository<BannerLandingPage>(_context));
         public GenericRepository<QaProduct> QaProductRepository =>

@@ -23,11 +23,10 @@ namespace HC_Pharma.Models
         {
             return GetCart(controller.HttpContext);
         }
-        public void AddToCart(int proId, decimal? price, int quantity = 1)
+        public void AddToCart(int proId, decimal? price, int? comboId, int quantity = 1)
         {
             var cartItem = _unitOfWork.CartRepository.GetQuery
-                (c => c.CartId == ShoppingCartId && c.ProductId == proId).SingleOrDefault();
-
+                (c => c.CartId == ShoppingCartId && c.ProductId == proId && c.ComboId == comboId).SingleOrDefault();
             if (cartItem == null)
             {
                 cartItem = new Cart
@@ -36,6 +35,7 @@ namespace HC_Pharma.Models
                     Price = price,
                     CartId = ShoppingCartId,
                     Count = quantity,
+                    ComboId = comboId,
                     DateCreated = DateTime.Now
                 };
                 _unitOfWork.CartRepository.Insert(cartItem);

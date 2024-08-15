@@ -13,7 +13,9 @@ namespace HC_Pharma.ViewModel
             var listgroup = new Dictionary<int, string>
             {
                 { 0, "Banner Slides (1900 x 650)" },
-                {1, "Đối tác (300 x 150)" }
+                {1, "Đối tác (300 x 150)" },
+                {2, "Chính sách trong LandingPage" }
+
             };
             SelectGroup = new SelectList(listgroup, "Key", "Value");
         }
@@ -28,7 +30,8 @@ namespace HC_Pharma.ViewModel
             var listgroup = new Dictionary<int, string>
             {
                 {0, "Banner Slides (1900 x 650)" },
-                { 1, "Đối tác (300 x 150)" }
+                { 1, "Đối tác (300 x 150)" },
+                 {2, "Chính sách trong LandingPage" }
             };
             SelectGroup = new SelectList(listgroup, "Key", "Value");
         }

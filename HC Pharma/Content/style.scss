@@ -57,7 +57,14 @@ $colorblur: #9B9B9B;
 @mixin Quicksand-SemiBold {
     font-family: 'Quicksand-SemiBold';
 }
-
+@mixin text-truncate($q) {
+    display: -webkit-box;
+    -webkit-line-clamp: $q;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}
 @mixin maxWidth($value) {
     @media (max-width: $value) {
         @content;
@@ -98,7 +105,13 @@ html {
 }
 
 body {
+    margin: 0;
+    padding: 0;
     @include Quicksand-Regular;
+
+    @include maxWidth(768px) {
+        font-size: 14px;
+    }
 }
 
 .container {
@@ -1618,8 +1631,8 @@ img {
 
 fieldset,
 label {
-    margin: 0;
-    padding: 0;
+    /*margin: 0;*/
+    /*padding: 0;*/
 }
 
 h1 {
@@ -2737,11 +2750,20 @@ a:not([href]):not([class]) {
 
     .w-55 {
         width: 55%;
+
+        @include maxWidth(992px) {
+            width: 100%;
+        }
     }
 
     .w-45 {
         width: 45%;
+
+        @include maxWidth(992px) {
+            width: 100%;
+        }
     }
+
 }
 
 .support-form {
@@ -2763,6 +2785,13 @@ a:not([href]):not([class]) {
     span {
         margin-bottom: 25px;
         display: block;
+    }
+    button{
+        color:$white;
+        background:$colorMain2;
+        @include Quicksand-Bold;
+        padding:7px 30px;
+        border-radius:34px;
     }
 }
 
@@ -2793,11 +2822,11 @@ a:not([href]):not([class]) {
     display: flex;
     align-items: center;
     margin-bottom: 40px;
-
+    height:calc(100% - 40px);
     .img {
         position: relative;
         z-index: 2;
-
+        flex-shrink:0;
         img {
             width: 88px;
             aspect-ratio: 1;
@@ -2817,7 +2846,8 @@ a:not([href]):not([class]) {
         padding: 15px 15px 15px 30px;
         margin-left: -15px;
         z-index: 1;
-
+        height:100%;
+        flex:1;
         .name {
             @include Quicksand-Bold;
         }
@@ -2856,15 +2886,38 @@ a:not([href]):not([class]) {
         padding: 0 15px;
     }
 }
+.user-manua{
+    background-image:url("./images/landing/bg-user-manua.png");
+    background-size:cover;
+    background-repeat:no-repeat;
+}
+
 
 .user-manua-item {
     text-align: center;
     max-width: 175px;
     margin: 0 auto;
 
-    img {
-        border-radius: 50%;
+    .img {
+        width: 100%;
         border: 14px solid rgba(#2CDEB4,0.32);
+        aspect-ratio: 1;
+        border-radius: 50%;
+    
+
+        > div {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: $colorMain;
+        }
+    }
+
+    img {
+        object-fit: contain;
     }
 
     .name {
@@ -2883,7 +2936,11 @@ a:not([href]):not([class]) {
 
     .img {
         position: relative;
-
+        img{
+            width:100%;
+            object-fit:cover;
+            aspect-ratio:1.5;
+        }
         .ic-play {
             position: absolute;
             top: 50%;
@@ -2899,6 +2956,13 @@ a:not([href]):not([class]) {
             justify-content: center;
             border-radius: 50%;
         }
+    }
+    a{
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
     }
 
     .body {
@@ -2922,6 +2986,9 @@ a:not([href]):not([class]) {
             text-transform: uppercase;
             @include Quicksand-Bold;
         }
+    }
+    .des{
+        @include text-truncate(4);
     }
 }
 
@@ -3046,7 +3113,7 @@ a:not([href]):not([class]) {
     border-radius: 8px;
     padding: 20px 27px;
     text-align: center;
-
+    height:100%;
     img {
         width: 56px;
         margin: 0 auto;
@@ -3063,6 +3130,87 @@ a:not([href]):not([class]) {
         text-align: justify;
     }
 }
+
+
+.form-register {
+    color: #666;
+
+    .form-control {
+        border: none;
+        border-bottom: 1px solid #333;
+        margin-bottom: 10px;
+        border-radius: 0;
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+    span {
+        @include Quicksand-Bold;
+    }
+
+    .contact-needs {
+        position: relative;
+        padding-left: 40px;
+
+        input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            border-radius: 5px;
+            border: 1px solid #666;
+
+            &:after {
+                content: "";
+                position: absolute;
+                display: none;
+            }
+
+            &::after {
+                left: 7px;
+                top: 2px;
+                width: 9px;
+                height: 14px;
+                border: solid white;
+                border-width: 0 3px 3px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+        }
+
+        &:hover input ~ .checkmark {
+            background-color: #ccc;
+        }
+
+        input:checked ~ .checkmark {
+            background-color: #2196F3;
+        }
+
+        input:checked ~ .checkmark:after {
+            display: block;
+        }
+    }
+
+    button {
+        @include Quicksand-Bold;
+        padding: 8px 22px;
+        color: $white;
+        background: $colorMain2;
+    }
+}
+
 
 @include maxWidth(1024px) {
     .form-input {
@@ -3144,6 +3292,25 @@ a:not([href]):not([class]) {
 
     .artilce-thumail img {
         height: 220px;
+    }
+}
+
+@include maxWidth(992px) {
+    .support-form {
+        width: 100%;
+        max-width: unset;
+    }
+
+    .section-padding {
+        padding: 40px 0;
+    }
+
+    .title-landing-page {
+        font-size: 2rem;
+    }
+
+    .img-banner-langding{
+        margin-bottom:15px;
     }
 }
 
@@ -3446,6 +3613,34 @@ a:not([href]):not([class]) {
 }
 
 @include maxWidth(468px) {
+
+    .feedback-landing-item {
+        .body {
+            .name {
+                font-size: 1rem;
+                padding: 8px 14px;
+            }
+        }
+    }
+
+    .banner-landing {
+        .title-landing {
+            font-size: 20px;
+        }
+
+        .title-landing-sub{
+            font-size:18px;
+        }
+    }
+
+    .section-padding {
+        padding: 20px 0;
+    }
+
+    .title-landing-page {
+        font-size: 1.5rem;
+    }
+
     .right-btn {
         display: block !important;
         width: 100%;
@@ -3674,3 +3869,4 @@ a:not([href]):not([class]) {
         }
     }
 }
+

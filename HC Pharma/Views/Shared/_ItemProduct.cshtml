@@ -1,7 +1,20 @@
 ﻿@model HC_Pharma.Models.Product
+@{
+    var url = "";
+    if (Model.LandingPage)
+    {
+        url = Url.Action("LandingPage", "Home", new { url = Model.Url });
+    }
+    else
+    {
+        url = Url.Action("ProductDetail", "Home", new { url = Model.Url });
+    }
+}
+
+
 <div class="product-item mt-0">
     <div class="product-thumail">
-        <a href="@Url.Action("ProductDetail", new {url = Model.Url})">
+        <a href="@url">
             @if (Model.ListImage != null)
             {
                 <img src="@Path.Combine("/images/products/", Model.ListImage.Split(',')[0])" alt="@Model.Name">
@@ -15,7 +28,7 @@
     <div class="prouduct-infor">
         <div class="product-name">
             <a href="@Url.Action("ProductDetail", new {url = Model.Url})" class="name">
-               @Model.Name
+                @Model.Name
             </a>
             <a href="@Url.Action("ProductCategory", new {url = Model.ProductCategory.Url})" class="category">(@Model.ProductCategory.CategoryName)</a>
         </div>
@@ -34,10 +47,10 @@
             }
         </div>
         <div class="product-description truncate mt-2">
-           @Model.Description
+            @Model.Description
         </div>
     </div>
-    <div class="order-btn text-center" >
+    <div class="order-btn text-center">       
         <a href="javascript:;" class="order-pr" onclick="addCart(@Model.Id)"><i class="far fa-shopping-cart pr-2"></i>Thêm vào giỏ hàng </a>
     </div>
 </div>

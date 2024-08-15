@@ -363,6 +363,7 @@ namespace HC_Pharma.Controllers
                 product.Active = model.Product.Active;
                 product.Description = model.Product.Description;
                 product.Home = model.Product.Home;
+                product.LandingPage = model.Product.LandingPage;
                 product.TitleMeta = model.Product.TitleMeta;
                 product.DescriptionMeta = model.Product.DescriptionMeta;
                 product.Sort = model.Product.Sort;

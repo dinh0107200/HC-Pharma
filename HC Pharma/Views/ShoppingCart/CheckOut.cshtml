@@ -3,11 +3,12 @@
 @{
     ViewBag.Title = "Thanh toán";
     var final = Model.CartTotal + Model.Order.ShipFee;
+    decimal? totalPrice = 0;
     var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
 }
 
 <div class="bg-breadcrumb">
-    <div class="container"style="max-width: 1230px;">
+    <div class="container" style="max-width: 1230px;">
         <ol class="breadcrumb mb-0 px-0">
             <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
             <li class="breadcrumb-item"><a href="@Url.Action("Index","ShoppingCart")">Giỏ hàng</a></li>
@@ -44,7 +45,7 @@
                 </div>
                 <div class="form-group form-row">
                     <div class="col-lg-6 col-md-6">
-                        @Html.DropDownListFor(a => a.CityId, Model.CitySelectList, "Chọn thành phố", new { @class = "form-control mb-lg-0 mm-md-0 mb-3", data_item = "city" })
+                        @Html.DropDownListFor(a => a.CityId, Model.CitySelectList, "Chọn thành phố", new { @class = "form-control mb-lg-0 mm-md-0 mb-3", data_item = "city", onchange = "updateShip(this.value)" })
                         @Html.ValidationMessageFor(a => a.CityId)
                     </div>
                     <div class="col-lg-6 col-md-6">
@@ -75,6 +76,8 @@
                     </div>
                 </div>
                 <div class="group-check-out d-flex justify-content-between align-items-center">
+                    <input type="hidden" name="ShipFee" id="shipp" value="@Model.Order.ShipFee" />
+
                     <a href="@Url.Action("Index", "ShoppingCart")"><i class="fas fa-chevron-left mr-1"></i>Quay lại giỏ hàng</a>
                     <button type="submit" class="btn-checkout">
                         Xác nhận đặt hàng
@@ -104,7 +107,13 @@
                                 }
                                 <div class="name font-weight-bold">
                                     @item.CartItems.Product.Name
+                                    <br />
+                                    @if (item.CartItems.Combo != null)
+                                    {
+                                        <span class="badge badge-info">@item.CartItems.Combo.Name</span>
+                                    }
                                 </div>
+
                             </div>
                         </td>
                         <td class="text-center">
@@ -121,15 +130,36 @@
                             }
                         </td>
                     </tr>
+                    totalPrice += price;
                 }
-
+                <tr class="border-top ">
+                    <td class="p-2">
+                        Tiền tạm tính
+                    </td>
+                    <td></td>
+                    <td class="text-right">
+                        <strong><span data-item="cart-total" data-amount="@totalPrice">@(totalPrice?.ToString("N0"))</span> đ</strong>
+                    </td>
+                </tr>
+                <tr class="border-top ">
+                    <td class="p-2">
+                        Chi phí vận chuyển
+                    </td>
+                    <td></td>
+                    <td class="text-right">
+                        <strong><span data-item="ship-fee">@Model.Order.ShipFee.ToString("N0")</span> đ</strong>
+                    </td>
+                </tr>
                 <tr class="border-top ">
                     <td class="p-2">
                         Tổng tiền (đã bao gồm VAT)
                     </td>
                     <td></td>
                     <td class="text-right font-weight-bold text-danger">
-                        @final.ToString("N0") đ
+                        <span id="finalPrices">
+                            @final.ToString("N0")
+                        </span>
+                        đ
                     </td>
                 </tr>
             </table>
@@ -147,6 +177,19 @@
                 $('.bank-info').hide();
             }
         })
-           
+
+
+        function updateShip(id) {
+            const cartTotal = $("[data-item='cart-total']").data("amount");
+            //var final = parseFloat(cartTotal) + 30000;
+            //var discount = Number($("#prices-discount").text().replace(/,/g, ''))
+            $.getJSON("/Base/GetShipFee", { id: id }, function (data) {
+                final = parseFloat(cartTotal) + data;
+                $("#shipp").val(data);
+                $("#finalPrices").text(final.toLocaleString());
+                $("[ data-item='ship-fee']").text(data.toLocaleString());
+            });
+
+        }
     </script>
 }

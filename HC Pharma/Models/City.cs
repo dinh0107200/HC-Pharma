@@ -16,6 +16,8 @@ namespace HC_Pharma.Models
         public string Prefix { get; set; }
 
         public virtual ICollection<District> Districts { get; set; }
+        [Display(Name = "Phí Ship")]
+        public int ShipFee { get; set; }
         //public virtual ICollection<Product> Products { get; set; }
     }
 }

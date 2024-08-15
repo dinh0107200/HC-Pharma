@@ -105,6 +105,20 @@ namespace HC_Pharma.ViewModel
         public int BeginCount { get; set; }
         public int EndCount { get; set; }
     }
+
+    public class LandingPageViewModel
+    {
+        public IEnumerable<Banner> Policy { get; set; }
+
+        public IEnumerable<BannerLandingPage> Banners { get; set; }
+        public IEnumerable<FeedbackProduct> Feedbacks { get; set; }
+        public IEnumerable<Combo> Combos { get; set; }
+        public IEnumerable<QaProduct> QaProducts { get; set; }
+
+        public Product Product { get; set; }
+        public LandingPage LandingPage { get; set; }    
+
+    }
 }
 
 

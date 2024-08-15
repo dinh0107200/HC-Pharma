@@ -51,8 +51,8 @@ namespace HC_Pharma.Models
         [Display(Name = "Hiện trang chủ")]
         public bool Home { get; set; }
 
-        //[Display(Name = "Sản phẩm nổi bật")]
-        //public bool Hot { get; set; }
+        [Display(Name = "Chuyển sang LandingPage")]
+        public bool LandingPage { get; set; }
 
         [StringLength(300)]
         public string Url { get; set; }
@@ -79,7 +79,14 @@ namespace HC_Pharma.Models
 
     public class LandingPage
     {
+
         public int Id { get; set; }
+        [Display(Name = "Tên LandingPage")]
+        public string Title { get; set; }
+        [Display(Name = "Mô tả tên 1")]
+        public string SubTitle { get; set; }
+        [Display(Name = "Mô tả tên 2")]
+        public string SubTitle2 { get; set; }
         [Display(Name = "Ảnh giới thiệu")]
         public string ImageIntro { get; set; }
         [Display(Name = "Giới thiệu"), UIHint("EditorBox")]
@@ -90,6 +97,8 @@ namespace HC_Pharma.Models
         [Display(Name = "Giải pháp"), UIHint("EditorBox")]
         public string Solution { get; set; }
 
+        [Display(Name = "Ảnh cạnh đăng ký tư vấn")]
+        public string Imageregistration { get; set; }
 
         [Display(Name = "Ảnh phân tích sản phẩm")]
         public string ImageAnalysis { get; set; }
@@ -186,6 +195,8 @@ namespace HC_Pharma.Models
         [Display(Name = "Các bệnh thường gặp + dấu hiệu")]
         CommonDiseases,
         [Display(Name = "Nguyên nhân gây bệnh")]
-        CauseDisease, 
+        CauseDisease,
+        [Display(Name = "Hướng dẫn sử dụng")]
+        Instructions,
     }
 }

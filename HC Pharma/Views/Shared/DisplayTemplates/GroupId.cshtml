@@ -1,14 +1,14 @@
-﻿@if (Model == 1)
+﻿@if (Model == 0)
 {
-    @Html.Raw("Banner Chính (850 x 500)")
+    @Html.Raw("Banner Slides (1900 x 650)")
+}
+else if (Model == 1)
+{
+    @Html.Raw("Đối tác (300 x 150)")
 }
 else if (Model == 2)
 {
-    @Html.Raw("Banner Phải (300 x 250)")
-}
-else if (Model == 3)
-{
-    @Html.Raw("Banner Phụ (500 x 250)")
+    @Html.Raw("Chính sách trong LandingPage")
 }
 else if (Model == 4)
 {

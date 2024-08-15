@@ -32,12 +32,12 @@
                     {
                         <tr data-id="@item.Id">
                             <td style="width: 100px;">
-                                @item.Sort
+                                <input type="number" name="Sort" value="@item.Sort" class="form_control w100" />
                             </td>
                             <td>
                                 @if (item.Image != null)
                                 {
-                                    <img class="img-border" src="@Path.Combine("/images/banners/", item.Image)" /> }
+                                    <img class="img-border" src="@Path.Combine("/images/banners/", item.Image)" style="background-color: #d6d6d6" /> }
                                 else
                                 {
                                     @:NO PICTURE
@@ -63,3 +63,53 @@
         </div>
     </div>
 </div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        function deleteBanner(id) {
+            if (confirm("Bạn có chắc chắn xóa ảnh này không?")) {
+                $.post("/LandingPage/DeleteBanner", { bannerId: id }, function (data) {
+                    if (data) {
+                        $.toast({
+                            text: 'Xóa banner thành công',
+                            position: 'bottom-right',
+                            icon: 'success',
+                        })
+                        $("tr[data-id='" + id + "']").fadeOut();
+                    } else {
+                        $.toast({
+                            text: 'Quá trình thực hiện không thành công. Hãy thử lại',
+                            icon: 'error',
+                        })
+                    }
+                });
+            }
+        }
+        function updateBanner(id) {
+            var divId = $("tr[data-id='" + id + "']");
+            var sort = divId.find("input[name=Sort]").val();
+            var active = divId.find("input#Active").prop("checked");
+
+            if (sort == "") {
+                alert("Bạn hãy nhập số thứ tự");
+            }
+
+            $.post("/LandingPage/UpdateBannerQuick", { bannerId: id, sort, active }, function (data) {
+                if (data) {
+                    $.toast({
+                        text: 'Cập nhật thành công',
+                        position: 'bottom-right',
+                        icon: 'success',
+                    })
+                } else {
+                    $.toast({
+                        text: 'Quá trình thực hiện không thành công. Hãy thử lại',
+                        icon: 'error',
+                    })
+                }
+            });
+        }
+    </script>
+    
+    }

@@ -155,30 +155,30 @@ function landingPage() {
         autoplaySpeed: 3000,
         prevArrow: "<button class='prev-btn'><i class='fas fa-chevron-left'></i></button>",
         nextArrow: "<button class='next-btn'><i class='fas fa-chevron-right'></i></button>",
-        //responsive: [
-        //    {
-        //        breakpoint: 1024,
-        //        settings: {
-        //            slidesToShow: 1,
-        //            slidesToScroll: 1,
-        //        }
-        //    },
-        //    {
-        //        breakpoint: 600,
-        //        settings: {
-        //            slidesToShow: 1,
-        //            slidesToScroll: 1
-        //        }
-        //    },
-        //    {
-        //        breakpoint: 480,
-        //        settings: {
-        //            slidesToShow: 1,
-        //            slidesToScroll: 1
-        //        }
-        //    }
+        responsive: [
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
 
-        //]
+        ]
     });
 
     $('.feedback-landing-list').slick({
@@ -189,8 +189,77 @@ function landingPage() {
         dots: true,
         autoplay: true,
         autoplaySpeed: 3000,
-             
+        responsive: [
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                }
+            },
+            {
+                breakpoint: 769,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+
+        ]
     });
+
+    $(".support-form.landing-form").on("submit",
+        function (e) {
+            e.preventDefault();
+            $.post("/Home/ContactProduct1",
+                $(this).serialize(),
+                function (data) {
+                    if (data.status) {
+                        $.toast({
+                            heading: "Liên hệ thành công",
+                            text: data.msg,
+                            icon: "success"
+                        });
+                        $(".support-form.landing-form").trigger("reset");
+                    } else {
+                        $.toast({
+                            heading: "Liên hệ không thành công",
+                            text: data.msg,
+                            icon: "error"
+                        });
+                    }
+                });
+        });
+
+    $("#form-register-consultation").on("submit",
+        function (e) {
+            e.preventDefault();
+            $.post("/Home/ContactProduct2",
+                $(this).serialize(),
+                function (data) {
+                    if (data.status) {
+                        $.toast({
+                            heading: "Liên hệ thành công",
+                            text: data.msg,
+                            icon: "success"
+                        });
+                        $("#form-register-consultation").trigger("reset");
+                    } else {
+                        $.toast({
+                            heading: "Liên hệ không thành công",
+                            text: data.msg,
+                            icon: "error"
+                        });
+                    }
+                });
+        });
 }
 
 

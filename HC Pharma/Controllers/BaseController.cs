@@ -31,6 +31,11 @@ namespace HC_Pharma.Controllers
                 .GetQuery(a => a.Active && a.DistrictId == districtId, q => q.OrderBy(a => a.Sort)).Select(a => new { a.Id, a.Name });
             return Json(wards, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetShipFee(int id = 0)
+        {
+            var price = _unitOfWork.CityRepository.GetById(id)?.ShipFee;
+            return Json(price, JsonRequestBehavior.AllowGet);
+        }
 
         protected override void Dispose(bool disposing)
         {

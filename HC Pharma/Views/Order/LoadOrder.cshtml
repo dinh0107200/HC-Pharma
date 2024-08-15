@@ -51,7 +51,13 @@
             <tr>
                 <td>@i</td>
                 <td><img class="img-fluid" src="@Path.Combine("/images/products/", detail.Product.ListImage.Split(',')[0])?w=50" /></td>
-                <td>@detail.Product.Name</td>
+                <td>
+                    @detail.Product.Name<br />
+                    @if (detail.NameCombo != null)
+                    {
+                        <span class="badge badge-info">@detail.NameCombo</span>
+                    }
+                </td>
                 <td>
                     @detail.Quantity
                 </td>

@@ -309,6 +309,133 @@ namespace HC_Pharma.Controllers
         }
         #endregion
 
+
+
+        #region City
+        public ActionResult City()
+        {
+         
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult City(City model)
+        {
+          
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.CityRepository.Insert(model);
+                _unitOfWork.Save();
+                return RedirectToAction("City");
+            }
+            return View(model);
+        }
+
+        [ChildActionOnly]
+        public ActionResult ListCity()
+        {
+            var cities = _unitOfWork.CityRepository.Get(orderBy: q => q.OrderBy(c => c.Sort));
+            return PartialView("ListCityPartial", cities);
+        }
+
+        public ActionResult EditCity(int cityId = 0)
+        {
+         
+
+            var city = _unitOfWork.CityRepository.GetById(cityId);
+            if (city == null)
+            {
+                return RedirectToAction("City");
+            }
+            return View(city);
+        }
+
+        [HttpPost]
+        public ActionResult EditCity(City model)
+        {
+         
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.CityRepository.Update(model);
+                _unitOfWork.Save();
+                return RedirectToAction("City");
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public bool DeleteCity(int cityId = 0)
+        {
+            if (Role != RoleAdmin.Admin)
+            {
+                return false;
+            }
+
+            var city = _unitOfWork.CityRepository.GetById(cityId);
+            if (city == null)
+            {
+                return false;
+            }
+
+            city.Active = false;
+            //_unitOfWork.CityRepository.Delete(city);
+            _unitOfWork.Save();
+            return true;
+        }
+        #endregion
+
+        #region District
+        public ActionResult AddOrUpdateDistrict(int? districtId, int cityId, int result = 0)
+        {
+        
+
+            var model = new District
+            {
+                CityId = cityId
+            };
+            if (districtId.HasValue)
+            {
+                model = _unitOfWork.DistrictRepository.GetById(districtId);
+            }
+            ViewBag.Districts = _unitOfWork.DistrictRepository.Get(a => a.CityId == cityId, q => q.OrderBy(a => a.Sort));
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddOrUpdateDistrict(District model)
+        {
+         
+
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.DistrictRepository.Insert(model);
+                _unitOfWork.Save();
+                return RedirectToAction("AddOrUpdateDistrict", new { cityId = model.CityId, result = 1 });
+            }
+            ViewBag.Districts = _unitOfWork.DistrictRepository.Get(a => a.CityId == model.CityId, q => q.OrderBy(a => a.Sort));
+            return View(model);
+        }
+
+        [HttpPost]
+        public bool DeleteDistrict(int districtId = 0)
+        {
+            if (Role != RoleAdmin.Admin)
+            {
+                return false;
+            }
+
+            var district = _unitOfWork.DistrictRepository.GetById(districtId);
+            if (district == null)
+            {
+                return false;
+            }
+
+            district.Active = false;
+            //_unitOfWork.DistrictRepository.Delete(district);
+            _unitOfWork.Save();
+            return true;
+        }
+        #endregion
         protected override void Dispose(bool disposing)
         {
             _unitOfWork.Dispose();

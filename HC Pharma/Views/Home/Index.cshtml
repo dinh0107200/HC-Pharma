@@ -132,10 +132,20 @@
                 @foreach (var item in Model.Products)
                 {
                     var arr = item.ListImage.Split(',')[0];
+                    var url = "";
+                    if (item.LandingPage)
+                    {
+                        url = Url.Action("LandingPage", "Home", new { url = item.Url });
+                    }
+                    else
+                    {
+                        url = Url.Action("ProductDetail", "Home", new { url = item.Url });
+                    }
+
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="product-item" data-aos-duration="700" data-aos-delay="@delay" data-aos="fade-up">
                             <div class="product-thumail">
-                                <a href="@Url.Action("ProductDetail" , new {url = item.Url})">
+                                <a href="@url">
                                     @if (item.ListImage != null)
                                     {
                                         <img src="@Path.Combine("/images/products/", arr)" alt="@item.Name">
@@ -149,7 +159,7 @@
                             </div>
                             <div class="prouduct-infor">
                                 <div class="product-name">
-                                    <a href="@Url.Action("ProductDetail" , new {url = item.Url})" class="name">
+                                    <a href="@url" class="name">
                                         @item.Name
                                     </a>
                                     <a href="@Url.Action("ProductCategory",new { item.ProductCategory.Url })" class="category">(@item.ProductCategory.CategoryName)</a>
@@ -176,7 +186,7 @@
                                     @item.Description
                                 </div>
                                 <div class="product-btn">
-                                    <a href="@Url.Action("ProductDetail" , new {url = item.Url})" class="more">Xem thêm</a>
+                                    <a href="@url" class="more">Xem thêm</a>
                                     <a href="javascript:;" class="contact" onclick="addCart(@item.Id)">Thêm vào giỏ hàng</a>
                                 </div>
                             </div>

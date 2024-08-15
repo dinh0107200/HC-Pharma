@@ -58,6 +58,8 @@
                     <th style="width: 130px">Danh mục</th>
                     <th>Giá sản phẩm</th>
                     <th>Hoạt động</th>
+                    <th>Trang chủ</th>
+                    <th>LandingPage</th>
                     <th style="width: 140px;"></th>
                 </tr>
                 @foreach (var product in Model.Products)
@@ -97,6 +99,14 @@
                         <td>
                             @Html.DisplayFor(model => product.Active)<br />
                             <span id="statusResult"></span>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => product.Home)<br />
+                            @*<span id="statusResult"></span>*@
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => product.LandingPage)<br />
+                            @*<span id="statusResult"></span>*@
                         </td>
                         <td>
                             @Html.ActionLink("Sửa", "UpdateProduct", new { proId = product.Id })

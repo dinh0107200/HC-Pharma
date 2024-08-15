@@ -19,6 +19,41 @@ namespace HC_Pharma.Controllers
         private RoleAdmin Role => (RoleAdmin)Enum.Parse(typeof(RoleAdmin), RouteData.Values["Role"].ToString());
 
         #region Contact
+        public ActionResult ListContactProduct(int? page, string name)
+        {
+            var pageNumber = page ?? 1;
+            const int pageSize = 15;
+            var contact = _unitOfWork.ContactProductRepository.GetQuery(orderBy: l => l.OrderByDescending(a => a.Id));
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                contact = contact.Where(l => l.Fullname.Contains(name));
+            }
+            var model = new ListContactProductViewModel
+            {
+                Contacts = contact.ToPagedList(pageNumber, pageSize),
+                Name = name
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public bool DeletContactProduct(int contactId = 0)
+        {
+            if (Role != RoleAdmin.Admin)
+            {
+                return false;
+            }
+            var contact = _unitOfWork.ContactProductRepository.GetById(contactId);
+            if (contact == null)
+            {
+                return false;
+            }
+            _unitOfWork.ContactProductRepository.Delete(contact);
+            _unitOfWork.Save();
+            return true;
+        }
+
         public ActionResult ListContact(int? page, string name)
         {
             var pageNumber = page ?? 1;

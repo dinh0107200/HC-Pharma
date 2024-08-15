@@ -1,33 +1,52 @@
-﻿
+﻿@model HC_Pharma.ViewModel.LandingPageViewModel
+@using HC_Pharma.Models
+@using Helpers
+@{
+    var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
+    ViewBag.Title = Model.Product.TitleMeta ?? Model.Product.Name;
+    ViewBag.Description = Model.Product.DescriptionMeta ?? Model.Product.Description;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("LandingPage", new { url = Model.Product.Url });
 
+    if (Model.Product.ListImage != null)
+    {
+        ViewBag.ImagShare = Request.Url?.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/products/"
+            , Model.Product.ListImage.Split(',')[0]);
+    }
+
+    var delay = 200;
+}
 <div class="banner-landing">
     <div class="text-center">
         <h2 class="title-landing">
-            Probiotics Plus Hcpharma
+            @Model.LandingPage.Title
         </h2>
-        <p class="title-landing-sub">Một người bạn đồng hành quan trọng trong việc phục hồi sức khỏe đường ruột</p>
+        <p class="title-landing-sub">@Model.LandingPage.SubTitle</p>
         <span class="title-landing-subline">
-            Chìa khóa vàng cho 1 hệ tiêu hóa khỏe mạnh . Men vi sinh đa chủng kết hợp với chất xơ và kẽm sẽ giúp bạn nhẹ nhàng thoát khỏi các vấn đề liên quan đến hệ tiêu hóa !
+            @Model.LandingPage.SubTitle2
         </span>
     </div>
     <div class="container overflow-hidden">
         <div class="d-lg-flex">
             <div class="w-55">
-                <img src="~/Content/images/landing/banner.png" class="img-banner-langding" />
+                @foreach (var item in Model.Banners.Where(l => l.PostionAbout == PostionAbout.Banner).Take(1))
+                {
+                    <img src="@Path.Combine("/images/banners/", item.Image)" class="img-banner-langding" />
+                }
             </div>
             <div class="w-45">
                 <form class="support-form landing-form">
                     <p>Đăng ký tư vấn</p>
                     @Html.AntiForgeryToken()
+                    <input type="hidden" value="@Model.Product.Id" name="ProductId"/>
                     <span>
                         Cần thêm thông tin về sản phẩm<br />
                         Hãy để lại SĐT để chúng tôi tư vấn cho bạn
                     </span>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Họ và tên" />
+                        <input type="text" class="form-control" name="Fullname" placeholder="Họ và tên" />
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Số điện thoại" />
+                        <input type="text" class="form-control" name="Mobile" placeholder="Số điện thoại" />
                     </div>
                     <div class="text-center">
                         <button class="btn" type="submit">TƯ VẤN</button>
@@ -44,25 +63,14 @@
             <div class="col-lg-6">
                 <h2 class="title-landing-page ">Probiotics Plus Hcpharma</h2>
                 <div class="content-detail">
-                    <p><strong> Nhà sản xuất</strong>: CÔNG TY TNHH MEDISTAR VIỆT NAM</p>
-                    <p>
-                        <strong>Xuất xứ</strong>: Việt Nam
-                    </p>
-                    <p>
-                        <strong> Quy cách</strong>: Gói: 3g ± 7,5%. Hộp: 30 gói
-                    </p>
-
-                    <strong>Mô tả</strong>
-                    <p>
-                        Các nghiên cứu khoa học đã chỉ ra rằng trong đường ruột người có chứa rất nhiều vi khuẩn có lợi với nhiều chủng loại khác nhau.
-                        Các vi khuẩn có lợi này luôn duy trì sự cân bằng để đảm bảo quá trình tiêu hóa của cơ thể, hấp thu chất dinh dưỡng, đào thải cặn
-                        bã và ức chế các hại khuẩn gây bệnh ở đường ruột. Probiotics Plus Hcpharma là thực phẩm bảo vệ sức khoẻ. Bổ sung hơn 3 tỷ lợi khuẩn
-                        đường ruột, giúp chống các triệu chứng rồi loại tiêu hóa và cân bằng hệ vi sinh đường ruột.
-                    </p>
+                    @Html.Raw(Model.LandingPage.Intro)
                 </div>
             </div>
             <div class="col-lg-6 text-center">
-                <img src="~/Content/images/landing/intro.png" class="" />
+                @if (Model.LandingPage.ImageIntro != null)
+                {
+                    <img src="@Path.Combine("/images/landingPage/", Model.LandingPage.ImageIntro)" class="" />
+                }
             </div>
         </div>
     </div>
@@ -74,29 +82,44 @@
             Các bệnh thường gặp + dấu hiệu
         </div>
         <div class="sub-title-landing text-center">
-            Bất kỳ ở độ tuổi nào chúng ta đều có thể mắc các bệnh liên quan đến đường ruột và nhất là ở trẻ em và mẹ bầu (Các bệnh thường gặp khi bị loạn khuẩn đường ruột)
+            @Model.LandingPage.CommonDiseases
         </div>
         <div class="row">
-            @for (var i = 0; i < 6; i++)
+            @{
+                var common = 1;
+            }
+            @foreach (var item in Model.Banners.Where(l => l.PostionAbout == PostionAbout.CommonDiseases))
             {
                 <div class="col-lg-6">
                     <div class="common-diseases__item">
                         <div class="img">
-                            <img src="~/Content/images/landing/common.png" />
+                            @if (item.Image != null)
+                            {
+                                <img src="@Path.Combine("/images/banners/", item.Image)" class="" />
+                            }
                         </div>
                         <div class="body">
                             <div class="number">
-                                01
+                                @if (common < 10)
+                                {
+                                    @("0"+common)
+                                }
+                                else
+                                {
+                                    @common
+
+                                }
                             </div>
                             <div class="text">
-                                <div class="name">Ảnh hưởng của tiêu chảy</div>
+                                <div class="name">@item.Name</div>
                                 <div class="des">
-                                    Dấu hiệu: Phân lỏng, đi nhiều lần trong ngày, đau bụng, mất nước, sốt.
+                                    @item.Content
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                common++;
             }
         </div>
     </div>
@@ -108,23 +131,25 @@
             nguyên nhân gây bệnh
         </div>
         <div class="sub-title-landing text-center mb-4">
-            Tất cả những triệu chứng này là hồi chuông cảnh báo cho một trạng thái thể chất và tinh thần hoạt động không bình thường.
-            Đường ruột của bạn sẽ cảm thấy "chưa sẵn sàng" và không thích ứng kịp với những thay đổi đột ngột này trong cuộc sống hàng ngà => Gây ra chứng loạn khuẩn ruột
+            @Model.LandingPage.CauseDisease
         </div>
 
         <div class="cause-disease-list">
-            @for (var i = 0; i < 7; i++)
+            @foreach (var item in Model.Banners.Where(l => l.PostionAbout == PostionAbout.CauseDisease))
             {
                 <div class="cause-disease-item">
                     <div class="img">
-                        <img src="~/Content/images/landing/cause-disease.png" />
+                        @if (item.Image != null)
+                        {
+                            <img src="@Path.Combine("/images/banners/", item.Image)" class="" />
+                        }
                     </div>
                     <div class="body">
                         <div class="name">
-                            Vi khuẩn và virus gây viêm nhiễm:
+                            @item.Name
                         </div>
                         <div class="des">
-                            Những tác nhân này tấn công và làm tổn thương hệ tiêu hóa.
+                            @item.Content
                         </div>
                     </div>
                 </div>
@@ -136,21 +161,19 @@
 <div class="intro-landing section-padding">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-6 text-center">
-                <img src="~/Content/images/landing/intro.png" />
+            <div class="col-lg-6 text-center order-1 order-lg-0">
+                @if (Model.LandingPage.Imagesolution != null)
+                {
+                    <img src="@Path.Combine("/images/landingPage/", Model.LandingPage.Imagesolution)" class="" />
+                }
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 order-0 order-lg-1">
                 <h2 class="title-landing-page">
                     Giải pháp<br />
                     Sp của HCPharma
                 </h2>
                 <div class="content-detail">
-                    <p>
-                        Các nghiên cứu khoa học đã chỉ ra rằng trong đường ruột người có chứa rất nhiều vi khuẩn có lợi với nhiều chủng loại khác nhau.
-                        Các vi khuẩn có lợi này luôn duy trì sự cân bằng để đảm bảo quá trình tiêu hóa của cơ thể, hấp thu chất dinh dưỡng, đào thải cặn
-                        bã và ức chế các hại khuẩn gây bệnh ở đường ruột. Probiotics Plus Hcpharma là thực phẩm bảo vệ sức khoẻ. Bổ sung hơn 3 tỷ lợi khuẩn
-                        đường ruột, giúp chống các triệu chứng rồi loại tiêu hóa và cân bằng hệ vi sinh đường ruột.
-                    </p>
+                    @Html.Raw(Model.LandingPage.Solution)
                 </div>
             </div>
 
@@ -164,38 +187,14 @@
             <div class="col-lg-6">
                 <h2 class="title-landing-page">Phân tích sản phẩm</h2>
                 <div class="content-detail">
-                    <p>
-                        Để có một sức khỏe đường ruột tốt nhất cho cả gia đình, Probiotics Plus Hcpharma đã được tạo ra với
-                        sự kết hợp của các bào tử lợi khuẩn đa chủng hàm lượng cao, chất xơ và kẽm:
-                    </p>
-                    <ul>
-                        <li>
-                            <p>
-                                <strong>Bacillus subtilis:</strong>
-                                Tổng hợp được các vitamin (B2, B6, B12, K....), các chất kháng khuẩn tiêu diệt hại khuẩn và các enzyme đường tiêu hoá như amylase, protease, lipase.
-                            </p>
-                            <p>
-                                <strong>Bacillus subtilis:</strong>
-                                Tổng hợp được các vitamin (B2, B6, B12, K....), các chất kháng khuẩn tiêu diệt hại khuẩn và các enzyme đường tiêu hoá như amylase, protease, lipase.
-                            </p>
-                            <p>
-                                <strong>Bacillus subtilis:</strong>
-                                Tổng hợp được các vitamin (B2, B6, B12, K....), các chất kháng khuẩn tiêu diệt hại khuẩn và các enzyme đường tiêu hoá như amylase, protease, lipase.
-                            </p>
-                            <p>
-                                <strong>Bacillus subtilis:</strong>
-                                Tổng hợp được các vitamin (B2, B6, B12, K....), các chất kháng khuẩn tiêu diệt hại khuẩn và các enzyme đường tiêu hoá như amylase, protease, lipase.
-                            </p>
-                        </li>
-                    </ul>
-                    <p>
-                        Probiotics Plus Hcpharma không chỉ giúp cân bằng hệ vi sinh trong đường ruột mà còn tăng cường hệ miễn dịch,
-                        cải thiện chức năng tiêu hóa và giúp cơ thể hấp thụ dinh dưỡng tối đa.
-                    </p>
+                    @Html.Raw(Model.LandingPage.ProductAnalysis)
                 </div>
             </div>
             <div class="col-lg-6 text-center">
-                <img src="~/Content/images/landing/intro.png" />
+                @if (Model.LandingPage.ImageAnalysis != null)
+                {
+                    <img src="@Path.Combine("/images/landingPage/", Model.LandingPage.ImageAnalysis)" class="" />
+                }
             </div>
         </div>
     </div>
@@ -204,19 +203,25 @@
 
 <section class="user-manua section-padding">
     <div class="container">
-    <div class="title-landing-page text-center text-uppercase mb-4">
-        Hướng dẫn sử dụng
-    </div>
+        <div class="title-landing-page text-center text-uppercase mb-4">
+            Hướng dẫn sử dụng
+        </div>
         <div class="row">
-            @for (var i = 0; i < 4; i++)
+            @foreach (var item in Model.Banners.Where(l => l.PostionAbout == PostionAbout.Instructions))
             {
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-6 mb-3">
                     <div class="user-manua-item">
                         <div class="img">
-                            <img src="~/Content/images/landing/user-manua.png" />
+                            <div class="">
+                                @if (item.Image != null)
+                                {
+                                    <img src="@Path.Combine("/images/banners/", item.Image)" class="" />
+                                }
+
+                            </div>
                         </div>
                         <div class="name">
-                            Lấy 4 muỗng sữa gạt ngang
+                            @item.Name
                         </div>
                     </div>
                 </div>
@@ -228,9 +233,12 @@
 <section class="section-register section-padding">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-6 text-center">
                 <div class="section-register-img">
-                    <img src="~/Content/images/landing/dangkyprobiotics.png" />
+                    @if (Model.LandingPage.Imageregistration != null)
+                    {
+                        <img src="@Path.Combine("/images/landingPage/", Model.LandingPage.Imageregistration)" class="" />
+                    }
                 </div>
             </div>
             <div class="col-lg-6">
@@ -240,6 +248,7 @@
                 <form class="form-register form-contact-submit" id="form-register-consultation">
                     @Html.ValidationSummary(true)
                     @Html.AntiForgeryToken()
+                    <input type="hidden" value="@Model.Product.Id" name="ProductId" />
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-6">
@@ -250,7 +259,7 @@
 
                             </div>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control" maxlength="20" name="Mobile" placeholder="Số điện thoại" />
+                                <input type="text" class="form-control" maxlength="20" name="Mobile" placeholder="Số điện thoại"  required/>
                             </div>
                             <div class="col-lg-6">
                                 <input type="text" class="form-control" name="Address" maxlength="200" placeholder="Địa chỉ (Thành Phố)" />
@@ -283,7 +292,7 @@
                     <div class="form-group">
                         <input type="text" maxlength="4000" class="form-control" name="Body" placeholder="Tin nhắn">
                     </div>
-                    <div class="text-right">
+                    <div class="text-left">
                         <button type="submit" class="btn text-uppercase">
                             gửi thông tin
                         </button>
@@ -300,21 +309,36 @@
             feedback của khách hàng
         </div>
         <div class="feedback-landing-list">
-            @for (var i = 0; i < 5; i++)
+            @foreach (var item in Model.Feedbacks)
             {
                 <div class="feedback-landing-item">
                     <div class="img">
-                        <img src="~/Content/images/landing/feedback.png" />
-                        <div class="ic-play">
-                            <i class="fas fa-play-circle"></i>
-                        </div>
+                        @if (item.Image != null)
+                        {
+                            <img src="@Path.Combine("/images/feedbacks/", item.Image)" class="" />
+
+                        }
+                        @if (item.UrlVideo != null || item.FileVideo != null)
+                        {
+                            <div class="ic-play">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            if (item.UrlVideo != null)
+                            {
+                                <a href="@item.UrlVideo" class="play-video" data-fancybox=""></a>
+                            }
+                            else
+                            {
+                                <a href="@Path.Combine("/images/feedbacks/", item.FileVideo)" class="play-video" data-fancybox=""></a>
+                            }
+                        }
                     </div>
                     <div class="body">
                         <div class="name">
-                            chị ly - 32 tuổi
+                            @item.Name
                         </div>
                         <div class="des">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                            @item.Content
                         </div>
                     </div>
                 </div>
@@ -333,30 +357,16 @@
         </div>
 
         <div class="row">
-            @for (var i = 0; i < 4; i++)
+            @foreach (var item in Model.QaProducts)
             {
-                @*<div class="col-lg-6">
-
-                    <div class="landing-qa-item">
-                        <div class="name">
-                            Tại sao Probiotics Plus Hcpharma lại hiệu quả trong cuộc chiến chống lại các vấn đề về tiêu hóa?
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="body">
-                            Probiotics Probiotics Plus Hcpharma bổ sung hơn 3 tỷ lợi khuẩn tấn công tiêu diệt hại khuẩn giúp phục hồi môi trường đường ruột
-                            đồng thời giúp khôi phục lại sự cân bằng của hệ vi sinh vật đường ruột.
-                        </div>
-                    </div>
-                </div>*@
                 <div class="col-lg-6 mb-3">
                     <div class="landing-qa-item">
-                        <div class="name" data-toggle="collapse" data-target="#qa-@i" aria-controls="#qa-@i">
-                            Hiệu quả có rõ rệt và kéo dài bào lâu ?
+                        <div class="name" data-toggle="collapse" data-target="#qa-@item.Id" aria-controls="#qa-@item.Id">
+                            @item.Name
                             <i class="fas fa-chevron-down"></i>
                         </div>
-                        <div class="body collapse" id="qa-@i">
-                            Probiotics Probiotics Plus Hcpharma bổ sung hơn 3 tỷ lợi khuẩn tấn công tiêu diệt hại khuẩn giúp phục hồi môi trường đường ruột
-                            đồng thời giúp khôi phục lại sự cân bằng của hệ vi sinh vật đường ruột.
+                        <div class="body collapse" id="qa-@item.Id">
+                            @item.Body
                         </div>
                     </div>
                 </div>
@@ -364,66 +374,87 @@
         </div>
     </div>
 </section>
+@if (Model.Combos.Any())
+{
+    var combo = 1;
+    <section class="section-combo section-padding">
+        <div class="container">
+            <div class="title-landing-page text-center text-uppercase mb-4">
+                mua combo nhận ưu đãi
+            </div>
+            <div class="row justify-content-center">
+                @foreach (var item in Model.Combos)
+                {
+                    <div class="col-lg-4 col-md-6 mb-3">
+                        <div class="combo-item">
+                            <div class="stt">
+                                Combo @combo
+                            </div>
+                            <div class="content">
+                                <div class="img">
+                                    @if (item.Image != null)
+                                    {
+                                        <img src="@Path.Combine("/images/combos/", item.Image)" class="" />
 
-<section class="section-combo section-padding">
-    <div class="container">
-        <div class="title-landing-page text-center text-uppercase mb-4">
-            mua combo nhận ưu đãi
-        </div>
-        <div class="row">
-            @for (var i = 1; i < 4; i++)
-            {
-                <div class="col-lg-4">
-                    <div class="combo-item">
-                        <div class="stt">
-                            Combo @i
-                        </div>
-                        <div class="content">
-                            <div class="img">
-                                <img src="~/Content/images/landing/product.png" />
-                            </div>
-                            <div class="name">
-                                Probiotics Plus - 1 hộp
-                            </div>
-                            <div class="cat">
-                                (Thực phẩm bảo vệ sức khỏe)
-                            </div>
-                            <div class="price">
-                                <div class="price-new">
-                                    1.000.000₫
+                                    }
                                 </div>
-                                <div class="price-old">
-                                    1.200.000đ
+                                <div class="name">
+                                    @item.Product.Name - @item.Name
                                 </div>
-                            </div>
-                            <div class="ship">
-                                <img src="~/Content/images/landing/car.png" />
-                                MIỄN PHÍ vận chuyển toàn quốc.
-                            </div>
-                            <div class="btn-order">
-                                <a href="">ĐẶT HÀNG NGAY</a>
+                                <div class="cat">
+                                    (@item.Product.ProductCategory.CategoryName)
+                                </div>
+                                <div class="price">
+                                    @if (item.PriceSale != null)
+                                    {
+                                        <div class="price-new">
+                                            @Html.DisplayFor(a => item.PriceSale)
+                                        </div>
+                                        <div class="price-old">
+                                            @Html.DisplayFor(a => item.Price)
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="price-new">
+                                            @Html.DisplayFor(a => item.Price)
+                                        </div>
+                                    }
+                                </div>
+                                @*<div class="ship">
+                                    <img src="~/Content/images/landing/car.png" />
+                                    MIỄN PHÍ vận chuyển toàn quốc.
+                                </div>*@
+                                <div class="btn-order">
+                                    <a href="javascript:;" onclick="addComboCart(@item.ProductId,@item.Id)">ĐẶT HÀNG NGAY</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            }
+                    combo++;
+                }
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+}
 
 <section class="section-policy section-padding">
     <div class="container">
         <div class="row">
-            @for (var i = 0; i < 3; i++)
+            @foreach (var item in Model.Policy)
             {
-                <div class="col-lg-4">
+                <div class="col-lg-4 mb-3">
                     <div class="policy-item">
-                        <img src="~/Content/images/landing/policy.png" />
+                        @if (item.Image != null)
+                        {
+                            <img src="@Path.Combine("/images/banners/", item.Image)" class="" />
+                        }
+                        @*<img src="~/Content/images/landing/policy.png" />*@
                         <div class="name">
-                            Chính sách vận chuyển
+                            @item.BannerName
                         </div>
                         <div class="des">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            @item.Slogan
                         </div>
                     </div>
                 </div>
@@ -436,5 +467,24 @@
 
     <script>
         landingPage();
+        function addComboCart(n, m) {
+            $.post("/gio-hang/them-vao-gio-hang", { productId: n, comboId: m }, function (n) {
+                n.result === 1
+                console.log(n.CartTotal)
+                $("#finalcart").text(n.CartTotal)
+                    ? ($.toast({
+                        text: "Thêm vào giỏ hàng thành công",
+                        icon: "success",
+                        position: "bottom-right",
+                    }),
+                        $(".number-cart").text(n.count))
+                    : $.toast({
+                        text: "Quá trình thực hiện không thành công",
+                        icon: "error",
+                        position: "bottom-right",
+                    });
+            });
+        }
+
     </script>
 }

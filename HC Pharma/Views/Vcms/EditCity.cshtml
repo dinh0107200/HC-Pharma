@@ -1,0 +1,55 @@
+﻿@model HC_Pharma.Models.City
+
+@{
+    ViewBag.Title = "Cập nhật Thành phố";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .form_name {
+        width: 200px;
+    }
+</style>
+
+<h2>Cập nhật Thành phố</h2>
+@Html.ActionLink("Thêm mới", "City", "Vcms", new { @class = "btn quick-link" })
+<div class="box_content">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.Id)
+        @Html.ValidationSummary(true)
+        <table class="form_table">
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Name)</td>
+                <td class="form_text">
+                    @Html.EditorFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </td>
+            </tr>
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Sort)</td>
+                <td class="form_text">
+                    @Html.EditorFor(model => model.Sort)
+                    @Html.ValidationMessageFor(model => model.Sort)
+                </td>
+            </tr>
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.ShipFee)</td>
+                <td class="form_text">
+                    @Html.EditorFor(model => model.ShipFee)
+                    @Html.ValidationMessageFor(model => model.ShipFee)
+                </td>
+            </tr>
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Active)</td>
+                <td class="form_text">@Html.EditorFor(model => model.Active) Có/Không</td>
+            </tr>
+            <tr>
+                <td class="form_name"></td>
+                <td class="form_text">
+                    <input type="submit" value="Cập nhật" class="btn quick-link" />
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+@Html.Action("ListCity")

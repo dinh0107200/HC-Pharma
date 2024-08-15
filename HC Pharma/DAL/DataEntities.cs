@@ -35,7 +35,7 @@ namespace HC_Pharma.DAL
         public DbSet<LandingPage> LandingPages { get; set; }
         public DbSet<QaProduct> QaProducts { get; set; }
         public DbSet<BannerLandingPage> BannerLandingPages { get; set; }
-
+        public DbSet<ContactProduct> ContactProducts { get; set; }
 
     }
 }

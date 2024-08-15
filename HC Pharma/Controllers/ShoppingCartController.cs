@@ -84,7 +84,7 @@ namespace HC_Pharma.Controllers
         }
         [Route("thanh-toan")]
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult CheckOut(CheckOutViewModel model)
+        public ActionResult CheckOut(CheckOutViewModel model, FormCollection fc)
         {
             if (ModelState.IsValid)
             {
@@ -99,6 +99,7 @@ namespace HC_Pharma.Controllers
                 model.Order.CityId = model.CityId;
                 model.Order.DistrictId = model.DistrictId;
                 //model.Order.WardId = model.WardId;
+                model.Order.ShipFee = Convert.ToInt32(fc["ShipFee"]);
                 _unitOfWork.OrderRepository.Insert(model.Order);
                 _unitOfWork.Save();
 
@@ -112,6 +113,7 @@ namespace HC_Pharma.Controllers
                                              ProductId = cart1.ProductId,
                                              Quantity = cart1.Count,
                                              Price = (int?)cart1.Price,
+                                             NameCombo = cart1.Combo?.Name
                                          })
                 {
                     _unitOfWork.OrderDetailRepository.Insert(odetails);
@@ -201,6 +203,7 @@ namespace HC_Pharma.Controllers
                 //    HtmlHelpers.SendEmail(Smtp, "[" + orderId + "] Đơn đặt hàng từ website " + Request.Url?.Host, sb,
                 //        ConfigSite.Email, Email, Email, Password, "Đặt Hàng Online", model.Order.CustomerInfo.Email, ConfigSite.Email, port: SmtpPort);
                 //});
+                Task.Run(() => HtmlHelpers.SendEmail("gmail", "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website " + Request.Url?.Host, sb, ConfigSite.Email, Email, Email, Password, "Đặt Hàng Online", model.Order.CustomerInfo.Email, ConfigSite.Email));
 
                 return RedirectToAction("CheckOutComplete", new { orderId });
             }
@@ -234,23 +237,42 @@ namespace HC_Pharma.Controllers
         }
 
         [Route("them-vao-gio-hang")]
-        public JsonResult AddToCart(int productId, int quantity = 1)
+        public JsonResult AddToCart(int? comboId,int productId, int quantity = 1)
         {
             var cart = ShoppingCart.GetCart(HttpContext);
             decimal? price = null;
 
-            var addedProduct = _unitOfWork.ProductRepository.GetQuery(a => a.Id == productId).SingleOrDefault();
-            if (addedProduct?.PriceSale != null)
+
+            if(comboId != null)
             {
-                price = addedProduct.PriceSale;
+                var combo = _unitOfWork.ComboRepository.GetQuery(l => l.ProductId == productId && l.Id == comboId).FirstOrDefault();
+                if(combo != null)
+                {
+                    if (combo.PriceSale != null)
+                    {
+                        price = combo.PriceSale;
+                    }
+                    else if (combo.Price != null)
+                    {
+                        price = combo.Price;
+                    }
+                }
             }
-            else if (addedProduct?.Price != null)
+            else
             {
-                price = addedProduct.Price;
+                var addedProduct = _unitOfWork.ProductRepository.GetQuery(a => a.Id == productId).SingleOrDefault();
+                if (addedProduct?.PriceSale != null)
+                {
+                    price = addedProduct.PriceSale;
+                }
+                else if (addedProduct?.Price != null)
+                {
+                    price = addedProduct.Price;
+                }
             }
             try
             {
-                cart.AddToCart(productId, price, quantity);
+                cart.AddToCart(productId, price, comboId, quantity);
                 var data = new
                 {
                     result = 1,

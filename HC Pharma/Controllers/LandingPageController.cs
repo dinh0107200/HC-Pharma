@@ -17,6 +17,7 @@ namespace HC_Pharma.Controllers
     [Authorize, AdminRoleFilters]
     public class LandingPageController : Controller
     {
+        private RoleAdmin Role => (RoleAdmin)Enum.Parse(typeof(RoleAdmin), RouteData.Values["Role"].ToString());
 
         public PartialViewResult Menu(int productId)
         {
@@ -305,7 +306,14 @@ namespace HC_Pharma.Controllers
                 {
                     config.Imagesolution = imgFile;
                 }
+                else if (Request.Files.Keys[i] == "Imageregistration")
+                {
+                    config.Imageregistration = imgFile;
+                }
             }
+            config.Title = model.Title;
+            config.SubTitle2 = model.SubTitle2;
+            config.SubTitle = model.SubTitle;
             config.Intro = model.Intro;
             config.Solution = model.Solution;
             config.ProductAnalysis = model.ProductAnalysis;
@@ -689,6 +697,37 @@ namespace HC_Pharma.Controllers
 
             }
             return View(model);
+        }
+        [HttpPost]
+        public bool DeleteBanner(int bannerId = 0)
+        {
+            if (Role != RoleAdmin.Admin)
+            {
+                return false;
+            }
+            var banner = _unitOfWork.BannerLandingPageRepository.GetById(bannerId);
+            if (banner == null)
+            {
+                return false;
+            }
+            HtmlHelpers.DeleteFile(Server.MapPath("/images/banners/" + banner.Image));
+            _unitOfWork.BannerLandingPageRepository.Delete(banner);
+            _unitOfWork.Save();
+            return true;
+        }
+
+        public bool UpdateBannerQuick(int sort = 1, bool active = false, int bannerId = 0)
+        {
+            var banner = _unitOfWork.BannerLandingPageRepository.GetById(bannerId);
+            if (banner == null)
+            {
+                return false;
+            }
+            banner.Sort = sort;
+            banner.Active = active;
+
+            _unitOfWork.Save();
+            return true;
         }
         #endregion
         protected override void Dispose(bool disposing)
