@@ -1,34 +1,6 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
-@font-face {
-    font-family: 'Quicksand-Bold';
-    font-display: swap;
-    src: url('../webfonts/Quicksand-Bold.ttf') format('truetype');
-}
 
-@font-face {
-    font-family: 'Quicksand-Light';
-    font-display: swap;
-    src: url('../webfonts/Quicksand-Light.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'Quicksand-Medium';
-    font-display: swap;
-    src: url('../webfonts/Quicksand-Medium.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'Quicksand-Regular';
-    font-display: swap;
-    src: url('../webfonts/Quicksand-Regular.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'Quicksand-SemiBold';
-    font-display: swap;
-    src: url('../webfonts/Quicksand-SemiBold.ttf') format('truetype');
-}
 
 $colorMain: #3B66FF;
 $colorMain2: #2CDEB4;
@@ -39,23 +11,23 @@ $blur: #7991ad70;
 $colorblur: #9B9B9B;
 
 @mixin Quicksand-Bold {
-    font-family: 'Quicksand-Bold';
+    font-weight: 700;
 }
 
 @mixin Quicksand-Light {
-    font-family: 'Quicksand-Light';
+    font-weight: 300;
 }
 
 @mixin Quicksand-Medium {
-    font-family: 'Quicksand-Medium';
+    font-weight: 500;
 }
 
 @mixin Quicksand-Regular {
-    font-family: 'Quicksand-Regular';
+    font-weight: 400;
 }
 
 @mixin Quicksand-SemiBold {
-    font-family: 'Quicksand-SemiBold';
+    font-weight: 600;
 }
 @mixin text-truncate($q) {
     display: -webkit-box;
@@ -102,13 +74,15 @@ $colorblur: #9B9B9B;
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 180px;
 }
 
 body {
     margin: 0;
     padding: 0;
-    @include Quicksand-Regular;
-
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight:400;
     @include maxWidth(768px) {
         font-size: 14px;
     }
@@ -2441,11 +2415,11 @@ a:not([href]):not([class]) {
     border-radius: 5px;
 }
 
-.artilce-content {
+/*.artilce-content {
     ul {
         list-style: none;
     }
-}
+}*/
 
 .breadcrumb-item {
     a {
@@ -2477,7 +2451,7 @@ a:not([href]):not([class]) {
     ol {
         margin: .75rem 0;
         padding: 0 2rem;
-
+        list-style:none !important;
         li {
             padding: .25rem 0;
         }
@@ -2862,12 +2836,20 @@ a:not([href]):not([class]) {
 }
 
 .cause-disease-item {
+    .img{
+        overflow:hidden;
+        border: 7px solid rgba(44, 222, 180, 0.32);
+        border-radius:18px;
+    }
     img {
         width: 100%;
         aspect-ratio: 1.4;
         object-fit: cover;
         border-radius: 12px;
-        border: 7px solid rgba(44, 222, 180, 0.32);
+        transition:0.3s all;
+        &:hover{
+            transform:scale(1.1);
+        }
     }
 
     .name {

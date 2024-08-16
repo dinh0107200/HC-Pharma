@@ -17,11 +17,11 @@
 }
 <div class="banner-landing">
     <div class="text-center">
-        <h2 class="title-landing">
+        <h2 class="title-landing" data-aos="fade-up">
             @Model.LandingPage.Title
         </h2>
-        <p class="title-landing-sub">@Model.LandingPage.SubTitle</p>
-        <span class="title-landing-subline">
+        <p class="title-landing-sub" data-aos="fade-up">@Model.LandingPage.SubTitle</p>
+        <span class="title-landing-subline" data-aos="fade-up">
             @Model.LandingPage.SubTitle2
         </span>
     </div>
@@ -30,11 +30,11 @@
             <div class="w-55">
                 @foreach (var item in Model.Banners.Where(l => l.PostionAbout == PostionAbout.Banner).Take(1))
                 {
-                    <img src="@Path.Combine("/images/banners/", item.Image)" class="img-banner-langding" />
+                    <img src="@Path.Combine("/images/banners/", item.Image)" class="img-banner-langding" data-aos="fade-up"/>
                 }
             </div>
             <div class="w-45">
-                <form class="support-form landing-form">
+                <form class="support-form landing-form" data-aos="fade-down">
                     <p>Đăng ký tư vấn</p>
                     @Html.AntiForgeryToken()
                     <input type="hidden" value="@Model.Product.Id" name="ProductId"/>
@@ -61,15 +61,15 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
-                <h2 class="title-landing-page ">Probiotics Plus Hcpharma</h2>
-                <div class="content-detail">
+                <h2 class="title-landing-page " data-aos="fade-down">Probiotics Plus Hcpharma</h2>
+                <div class="content-detail" data-aos="zoom-in">
                     @Html.Raw(Model.LandingPage.Intro)
                 </div>
             </div>
             <div class="col-lg-6 text-center">
                 @if (Model.LandingPage.ImageIntro != null)
                 {
-                    <img src="@Path.Combine("/images/landingPage/", Model.LandingPage.ImageIntro)" class="" />
+                    <img src="@Path.Combine("/images/landingPage/", Model.LandingPage.ImageIntro)" class=""  data-aos="zoom-in"/>
                 }
             </div>
         </div>
@@ -78,20 +78,21 @@
 
 <section class="common-diseases section-padding">
     <div class="container">
-        <div class="title-landing-page text-center text-uppercase">
+        <div class="title-landing-page text-center text-uppercase" data-aos="fade-down" >
             Các bệnh thường gặp + dấu hiệu
         </div>
-        <div class="sub-title-landing text-center">
+        <div class="sub-title-landing text-center"  data-aos="fade-down">
             @Model.LandingPage.CommonDiseases
         </div>
         <div class="row">
             @{
                 var common = 1;
+                delay = 0;
             }
             @foreach (var item in Model.Banners.Where(l => l.PostionAbout == PostionAbout.CommonDiseases))
             {
                 <div class="col-lg-6">
-                    <div class="common-diseases__item">
+                    <div class="common-diseases__item" data-aos="fade-right" data-aos-delay="@delay">
                         <div class="img">
                             @if (item.Image != null)
                             {
@@ -120,6 +121,8 @@
                     </div>
                 </div>
                 common++;
+                delay += 50;
+
             }
         </div>
     </div>
@@ -127,17 +130,20 @@
 
 <section class="cause-disease section-padding">
     <div class=" container">
-        <div class="title-landing-page text-center text-uppercase">
+        <div class="title-landing-page text-center text-uppercase" data-aos="fade-down">
             nguyên nhân gây bệnh
         </div>
-        <div class="sub-title-landing text-center mb-4">
+        <div class="sub-title-landing text-center mb-4" data-aos="fade-down">
             @Model.LandingPage.CauseDisease
         </div>
 
         <div class="cause-disease-list">
+            @{ 
+                delay = 0;
+            }
             @foreach (var item in Model.Banners.Where(l => l.PostionAbout == PostionAbout.CauseDisease))
             {
-                <div class="cause-disease-item">
+                <div class="cause-disease-item" data-aos="fade-right" data-aos-delay="@delay">
                     <div class="img">
                         @if (item.Image != null)
                         {
@@ -153,6 +159,7 @@
                         </div>
                     </div>
                 </div>
+                delay += 50;
             }
         </div>
     </div>
@@ -164,15 +171,15 @@
             <div class="col-lg-6 text-center order-1 order-lg-0">
                 @if (Model.LandingPage.Imagesolution != null)
                 {
-                    <img src="@Path.Combine("/images/landingPage/", Model.LandingPage.Imagesolution)" class="" />
+                    <img src="@Path.Combine("/images/landingPage/", Model.LandingPage.Imagesolution)" class="" data-aos="zoom-in"/>
                 }
             </div>
             <div class="col-lg-6 order-0 order-lg-1">
-                <h2 class="title-landing-page">
+                <h2 class="title-landing-page"  data-aos="fade-down">
                     Giải pháp<br />
                     Sp của HCPharma
                 </h2>
-                <div class="content-detail">
+                <div class="content-detail" data-aos="zoom-in">
                     @Html.Raw(Model.LandingPage.Solution)
                 </div>
             </div>
@@ -180,20 +187,20 @@
         </div>
     </div>
 </div>
-<div class="intro-landing">
+<div class="intro-landing section-padding">
     <div class="container">
         <div class="row align-items-center">
 
             <div class="col-lg-6">
-                <h2 class="title-landing-page">Phân tích sản phẩm</h2>
-                <div class="content-detail">
+                <h2 class="title-landing-page" data-aos="fade-down">Phân tích sản phẩm</h2>
+                <div class="content-detail" data-aos="zoom-in">
                     @Html.Raw(Model.LandingPage.ProductAnalysis)
                 </div>
             </div>
             <div class="col-lg-6 text-center">
                 @if (Model.LandingPage.ImageAnalysis != null)
                 {
-                    <img src="@Path.Combine("/images/landingPage/", Model.LandingPage.ImageAnalysis)" class="" />
+                    <img src="@Path.Combine("/images/landingPage/", Model.LandingPage.ImageAnalysis)" class="" data-aos="zoom-in" />
                 }
             </div>
         </div>
@@ -203,14 +210,17 @@
 
 <section class="user-manua section-padding">
     <div class="container">
-        <div class="title-landing-page text-center text-uppercase mb-4">
+        <div class="title-landing-page text-center text-uppercase mb-4"  data-aos="fade-down">
             Hướng dẫn sử dụng
         </div>
         <div class="row">
+            @{ 
+                delay = 0;
+            }
             @foreach (var item in Model.Banners.Where(l => l.PostionAbout == PostionAbout.Instructions))
             {
                 <div class="col-lg-3 col-6 mb-3">
-                    <div class="user-manua-item">
+                    <div class="user-manua-item" data-aos="fade-right" data-aos-delay="@delay">
                         <div class="img">
                             <div class="">
                                 @if (item.Image != null)
@@ -225,6 +235,7 @@
                         </div>
                     </div>
                 </div>
+                delay += 50;
             }
         </div>
     </div>
@@ -237,15 +248,15 @@
                 <div class="section-register-img">
                     @if (Model.LandingPage.Imageregistration != null)
                     {
-                        <img src="@Path.Combine("/images/landingPage/", Model.LandingPage.Imageregistration)" class="" />
+                        <img src="@Path.Combine("/images/landingPage/", Model.LandingPage.Imageregistration)" class=""   data-aos="zoom-in"/>
                     }
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="title-landing-page">
+                <div class="title-landing-page" data-aos="zoom-in" >
                     Đăng ký nhận tư vấn
                 </div>
-                <form class="form-register form-contact-submit" id="form-register-consultation">
+                <form class="form-register form-contact-submit" id="form-register-consultation"  data-aos="zoom-in">
                     @Html.ValidationSummary(true)
                     @Html.AntiForgeryToken()
                     <input type="hidden" value="@Model.Product.Id" name="ProductId" />
@@ -305,13 +316,16 @@
 
 <section class="feedback-landing section-padding">
     <div class="container">
-        <div class="title-landing-page text-center text-uppercase mb-4">
+        <div class="title-landing-page text-center text-uppercase mb-4" data-aos="fade-up">
             feedback của khách hàng
         </div>
         <div class="feedback-landing-list">
+            @{
+                delay = 0;
+            }
             @foreach (var item in Model.Feedbacks)
             {
-                <div class="feedback-landing-item">
+                <div class="feedback-landing-item" data-aos="zoom-in" data-aos-delay="@delay">
                     <div class="img">
                         @if (item.Image != null)
                         {
@@ -342,6 +356,7 @@
                         </div>
                     </div>
                 </div>
+                delay += 50;
             }
         </div>
     </div>
@@ -349,18 +364,21 @@
 
 <section class="landing-qa section-padding">
     <div class="container">
-        <div class="title-landing-page text-center text-uppercase">
+        <div class="title-landing-page text-center text-uppercase" data-aos="fade-up">
             Câu hỏi thường gặp
         </div>
-        <div class="sub-title-landing text-center mb-4">
+        <div class="sub-title-landing text-center mb-4" data-aos="fade-up">
             Bạn vẫn đang quyết định? Đọc 4 câu hỏi thường gặp nhất của khách hàng trước khi đặt mua men vi sinh Probiotics Plus
         </div>
 
         <div class="row">
+            @{
+                delay = 0;
+            }
             @foreach (var item in Model.QaProducts)
             {
                 <div class="col-lg-6 mb-3">
-                    <div class="landing-qa-item">
+                    <div class="landing-qa-item" data-aos="zoom-in" data-aos-delay="@delay">
                         <div class="name" data-toggle="collapse" data-target="#qa-@item.Id" aria-controls="#qa-@item.Id">
                             @item.Name
                             <i class="fas fa-chevron-down"></i>
@@ -370,6 +388,7 @@
                         </div>
                     </div>
                 </div>
+                delay += 50;
             }
         </div>
     </div>
@@ -377,16 +396,17 @@
 @if (Model.Combos.Any())
 {
     var combo = 1;
+    delay = 0;
     <section class="section-combo section-padding">
         <div class="container">
-            <div class="title-landing-page text-center text-uppercase mb-4">
+            <div class="title-landing-page text-center text-uppercase mb-4" data-aos="fade-up">
                 mua combo nhận ưu đãi
             </div>
             <div class="row justify-content-center">
                 @foreach (var item in Model.Combos)
                 {
                     <div class="col-lg-4 col-md-6 mb-3">
-                        <div class="combo-item">
+                        <div class="combo-item" data-aos="zoom-in" data-aos-delay="@delay">
                             <div class="stt">
                                 Combo @combo
                             </div>
@@ -432,6 +452,7 @@
                         </div>
                     </div>
                     combo++;
+                    delay += 50;
                 }
             </div>
         </div>
@@ -444,7 +465,7 @@
             @foreach (var item in Model.Policy)
             {
                 <div class="col-lg-4 mb-3">
-                    <div class="policy-item">
+                    <div class="policy-item" data-aos="zoom-in">
                         @if (item.Image != null)
                         {
                             <img src="@Path.Combine("/images/banners/", item.Image)" class="" />

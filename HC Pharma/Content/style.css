@@ -1,37 +1,15 @@
 ﻿@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
-@font-face {
-  font-family: "Quicksand-Bold";
-  font-display: swap;
-  src: url("../webfonts/Quicksand-Bold.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Quicksand-Light";
-  font-display: swap;
-  src: url("../webfonts/Quicksand-Light.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Quicksand-Medium";
-  font-display: swap;
-  src: url("../webfonts/Quicksand-Medium.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Quicksand-Regular";
-  font-display: swap;
-  src: url("../webfonts/Quicksand-Regular.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Quicksand-SemiBold";
-  font-display: swap;
-  src: url("../webfonts/Quicksand-SemiBold.ttf") format("truetype");
-}
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 180px;
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: "Quicksand-Regular";
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
 }
 @media (max-width: 768px) {
   body {
@@ -187,7 +165,7 @@ img {
   font-weight: 600;
   font-size: 14px;
   line-height: 22px;
-  font-family: "Quicksand-SemiBold";
+  font-weight: 600;
   border: 0;
   outline: none;
   color: #3B66FF;
@@ -209,7 +187,7 @@ img {
   font-size: 16px;
   line-height: 20px;
   text-align: center;
-  font-family: "Quicksand-SemiBold";
+  font-weight: 600;
 }
 .header-hotline:hover {
   color: #fff;
@@ -229,7 +207,7 @@ img {
   position: relative;
 }
 .list-menu li a {
-  font-family: "Quicksand-SemiBold";
+  font-weight: 600;
   color: #fff;
   font-weight: 600;
   font-size: 16px;
@@ -320,7 +298,7 @@ img {
   width: 55px;
 }
 .introduct-img h3 {
-  font-family: "Quicksand-SemiBold";
+  font-weight: 600;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -344,7 +322,7 @@ img {
   font-size: 40px;
   line-height: 50px;
   color: #3B66FF;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 .introduct-content .introduct-description {
   -webkit-line-clamp: 8;
@@ -354,7 +332,7 @@ img {
   font-size: 16px;
   line-height: 35px;
   text-align: justify;
-  font-family: "Quicksand-Regular";
+  font-weight: 400;
   color: #333333;
   margin-bottom: 40px;
 }
@@ -380,7 +358,7 @@ img {
   text-align: center;
   text-transform: uppercase;
   color: #3B66FF;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 
 .category-item {
@@ -408,7 +386,7 @@ img {
   font-size: 16px;
   line-height: 23px;
   text-align: center;
-  font-family: "Quicksand-SemiBold";
+  font-weight: 600;
   color: #000;
   width: 170px;
   margin: 0 auto;
@@ -436,7 +414,7 @@ img {
   line-height: 38px;
   text-align: center;
   text-transform: uppercase;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
   color: #3B66FF;
 }
 .new-proudct-title p {
@@ -445,7 +423,7 @@ img {
   font-size: 16px;
   line-height: 20px;
   text-align: center;
-  font-family: "Quicksand-Regular";
+  font-weight: 400;
   color: #9B9B9B;
 }
 
@@ -496,7 +474,7 @@ img {
   text-align: center;
   color: #000;
   transition: all 0.6s;
-  font-family: "Quicksand-SemiBold";
+  font-weight: 600;
 }
 .product-item .prouduct-infor .product-name .name:hover {
   color: #3B66FF;
@@ -507,7 +485,7 @@ img {
   font-size: 14px;
   line-height: 18px;
   text-align: center;
-  font-family: "Quicksand-Regular";
+  font-weight: 400;
 }
 .product-item .prouduct-infor .product-price {
   font-style: normal;
@@ -516,7 +494,7 @@ img {
   line-height: 25px;
   text-align: center;
   color: #FF3636;
-  font-family: "Quicksand-SemiBold";
+  font-weight: 600;
   margin-top: 5px;
 }
 .product-item .prouduct-infor .product-description {
@@ -528,7 +506,7 @@ img {
   line-height: 18px;
   text-align: center;
   color: #747474;
-  font-family: "Quicksand-Regular";
+  font-weight: 400;
 }
 .product-item .prouduct-infor .product-btn {
   margin-top: 30px;
@@ -604,7 +582,7 @@ img {
   line-height: 38px;
   text-transform: uppercase;
   color: #3B66FF;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 .artilce-title-item p {
   font-style: normal;
@@ -612,7 +590,7 @@ img {
   font-size: 16px;
   line-height: 20px;
   color: #9B9B9B;
-  font-family: "Quicksand-SemiBold";
+  font-weight: 600;
 }
 .artilce-title-item a {
   font-style: normal;
@@ -620,7 +598,7 @@ img {
   font-size: 16px;
   line-height: 22px;
   text-align: center;
-  font-family: "Quicksand-SemiBold";
+  font-weight: 600;
   padding: 10px 20px;
   background: #2CDEB4;
   color: #fff;
@@ -667,7 +645,7 @@ img {
   font-size: 14px;
   line-height: 18px;
   color: #9B9B9B;
-  font-family: "Quicksand-Regular";
+  font-weight: 400;
 }
 .artilce-infor .name {
   display: flex;
@@ -680,7 +658,7 @@ img {
   font-size: 20px;
   line-height: 25px;
   color: #333333;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 .artilce-infor .description {
   -webkit-line-clamp: 3;
@@ -692,7 +670,7 @@ img {
   line-height: 22px;
   text-align: justify;
   color: #333333;
-  font-family: "Quicksand-Regular";
+  font-weight: 400;
   margin-bottom: 10px;
 }
 
@@ -729,7 +707,7 @@ img {
   color: #fff;
   text-align: center;
   text-transform: uppercase;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 
 .list-feed-back > .feed-back-item:not(:first-child) {
@@ -793,14 +771,14 @@ img {
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
-  font-family: "Quicksand-SemiBold";
+  font-weight: 600;
 }
 .cutomer .customer-name span {
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 18px;
-  font-family: "Quicksand-Medium";
+  font-weight: 500;
 }
 
 .slick-dots {
@@ -839,7 +817,7 @@ img {
   text-align: center;
   text-transform: uppercase;
   color: #3B66FF;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 
 .list-partner {
@@ -877,7 +855,7 @@ img {
   font-size: 18px;
   line-height: 23px;
   color: #3B66FF;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
   text-transform: uppercase;
 }
 
@@ -904,7 +882,7 @@ img {
   font-size: 16px;
   line-height: 23px;
   color: #000;
-  font-family: "Quicksand-Regular";
+  font-weight: 400;
 }
 
 .copyright {
@@ -974,7 +952,7 @@ img {
   line-height: 22px;
   color: #fff;
   text-align: center;
-  font-family: "Quicksand-SemiBold";
+  font-weight: 600;
 }
 
 .filter-search {
@@ -1049,7 +1027,7 @@ img {
   font-size: 20px;
   line-height: 25px;
   text-align: justify;
-  font-family: "Quicksand-SemiBold";
+  font-weight: 600;
   color: #000;
 }
 
@@ -1077,7 +1055,7 @@ img {
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
-  font-family: "Quicksand-Regular";
+  font-weight: 400;
   color: #46483A;
 }
 
@@ -1089,7 +1067,7 @@ img {
   font-weight: 600;
   font-size: 24px;
   line-height: 30px;
-  font-family: "Quicksand-SemiBold";
+  font-weight: 600;
   color: #EA3D30;
   margin-bottom: 5px;
 }
@@ -1098,7 +1076,7 @@ img {
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
-  font-family: "Quicksand-Regular";
+  font-weight: 400;
   text-decoration-line: line-through;
   color: #ADADAD;
 }
@@ -1217,7 +1195,7 @@ img {
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
-  font-family: "Quicksand-SemiBold";
+  font-weight: 600;
   text-transform: uppercase;
   background: #3B66FF;
   color: #fff;
@@ -1243,7 +1221,7 @@ img {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-family: "Quicksand-Regular";
+  font-weight: 400;
   color: #333333;
   -webkit-line-clamp: 2;
   line-height: 18px;
@@ -1255,7 +1233,7 @@ img {
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
-  font-family: "Quicksand-Regular";
+  font-weight: 400;
   color: #9B9B9B;
 }
 
@@ -1264,7 +1242,7 @@ img {
   font-weight: 700;
   font-size: 30px;
   line-height: 38px;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
   color: #3B66FF;
   padding-bottom: 10px;
 }
@@ -1275,7 +1253,7 @@ img {
   font-size: 14px;
   line-height: 18px;
   color: #9B9B9B;
-  font-family: "Quicksand-Regular";
+  font-weight: 400;
 }
 .artilce-content img {
   width: 100%;
@@ -1315,7 +1293,7 @@ img {
   font-size: 30px;
   line-height: 38px;
   color: #3B66FF;
-  font-family: "Quicksand-Regular";
+  font-weight: 400;
   margin-bottom: 20px;
 }
 
@@ -1368,7 +1346,7 @@ img {
   font-size: 30px;
   line-height: 38px;
   color: #3B66FF;
-  font-family: "Quicksand-Regular";
+  font-weight: 400;
 }
 .model-form form .model-input {
   margin-bottom: 20px;
@@ -1402,7 +1380,7 @@ img {
   font-size: 30px;
   line-height: 38px;
   color: #3B66FF;
-  font-family: "Quicksand-Regular";
+  font-weight: 400;
 }
 
 .close-model {
@@ -1493,7 +1471,7 @@ h1 {
   font-size: 20px;
   line-height: 38px;
   color: #3B66FF;
-  font-family: "Quicksand-Regular";
+  font-weight: 400;
 }
 
 .form-row input {
@@ -1855,7 +1833,7 @@ a:not([href]):not([class]) {
 }
 .sidebar-nav .nav ul li a {
   color: #fff;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 
 .menu-toggle {
@@ -1872,7 +1850,7 @@ a:not([href]):not([class]) {
   background: #2CDEB4;
 }
 .sidebar-nav ul.sub-menu li a {
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 
 .color-base {
@@ -2135,14 +2113,15 @@ a:not([href]):not([class]) {
   color: #fff;
   text-transform: uppercase;
   font-size: 18px;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
   border-radius: 5px;
 }
 
-.artilce-content ul {
-  list-style: none;
-}
-
+/*.artilce-content {
+    ul {
+        list-style: none;
+    }
+}*/
 .breadcrumb-item a {
   color: #3B66FF;
 }
@@ -2151,7 +2130,7 @@ a:not([href]):not([class]) {
   display: flex;
 }
 .media-item .media-content h5 {
-  font-family: "Quicksand-Regular";
+  font-weight: 400;
   font-weight: 600;
 }
 
@@ -2167,6 +2146,7 @@ a:not([href]):not([class]) {
 .widget-toc ol {
   margin: 0.75rem 0;
   padding: 0 2rem;
+  list-style: none !important;
 }
 .widget-toc ol li {
   padding: 0.25rem 0;
@@ -2179,7 +2159,7 @@ a:not([href]):not([class]) {
 .content-detail h2 {
   width: max-content;
   font-size: 18px;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
   position: relative;
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
@@ -2214,7 +2194,7 @@ a:not([href]):not([class]) {
   text-transform: uppercase;
   color: #3B66FF;
   margin-bottom: 10px;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 
 .media-infor a {
@@ -2396,13 +2376,13 @@ a:not([href]):not([class]) {
   text-transform: uppercase;
   text-align: center;
   font-size: 2rem;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 .banner-landing .title-landing-sub {
   text-transform: uppercase;
   font-size: 1.5rem;
   color: #3B66FF;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 .banner-landing .title-landing-subline {
   display: block;
@@ -2443,7 +2423,7 @@ a:not([href]):not([class]) {
   margin: 0 auto;
 }
 .support-form p {
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
   font-size: 1.5rem;
   text-transform: uppercase;
   margin-bottom: 15px;
@@ -2455,7 +2435,7 @@ a:not([href]):not([class]) {
 .support-form button {
   color: #fff;
   background: #2CDEB4;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
   padding: 7px 30px;
   border-radius: 34px;
 }
@@ -2466,7 +2446,7 @@ a:not([href]):not([class]) {
 
 .title-landing-page {
   font-size: 2.5rem;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
   color: #3B66FF;
 }
 
@@ -2514,26 +2494,34 @@ a:not([href]):not([class]) {
   flex: 1;
 }
 .common-diseases__item .body .name {
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 .common-diseases__item .number {
   color: #2CDEB4;
   font-size: 2.25rem;
   margin-right: 15px;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 
+.cause-disease-item .img {
+  overflow: hidden;
+  border: 7px solid rgba(44, 222, 180, 0.32);
+  border-radius: 18px;
+}
 .cause-disease-item img {
   width: 100%;
   aspect-ratio: 1.4;
   object-fit: cover;
   border-radius: 12px;
-  border: 7px solid rgba(44, 222, 180, 0.32);
+  transition: 0.3s all;
+}
+.cause-disease-item img:hover {
+  transform: scale(1.1);
 }
 .cause-disease-item .name {
   margin-top: 18px;
   text-transform: uppercase;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 
 .cause-disease-list .slick-list.draggable {
@@ -2575,7 +2563,7 @@ a:not([href]):not([class]) {
 .user-manua-item .name {
   margin-top: 15px;
   text-transform: uppercase;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 
 .feedback-landing {
@@ -2634,7 +2622,7 @@ a:not([href]):not([class]) {
   font-size: 1.25rem;
   text-align: center;
   text-transform: uppercase;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 .feedback-landing-item .des {
   display: -webkit-box;
@@ -2654,7 +2642,7 @@ a:not([href]):not([class]) {
   padding: 15px 20px;
   display: flex;
   justify-content: space-between;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 .landing-qa-item .name i {
   margin-top: 5px;
@@ -2689,7 +2677,7 @@ a:not([href]):not([class]) {
   padding: 11px;
   border-radius: 8px 8px 0px 0px;
   text-transform: uppercase;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 .combo-item .content {
   padding: 30px 18px;
@@ -2712,7 +2700,7 @@ a:not([href]):not([class]) {
 }
 .combo-item .name {
   font-size: 1.25rem;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 .combo-item .cat {
   color: #747474;
@@ -2721,7 +2709,7 @@ a:not([href]):not([class]) {
 .combo-item .price-new {
   color: #FF3636;
   font-size: 1.5rem;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 .combo-item .price-old {
   color: #747474;
@@ -2735,7 +2723,7 @@ a:not([href]):not([class]) {
   display: inline-block;
   border-radius: 50px;
   line-height: 1;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
   margin-top: 10px;
 }
 
@@ -2759,7 +2747,7 @@ a:not([href]):not([class]) {
   color: #3B66FF;
   margin-bottom: 15px;
   text-transform: uppercase;
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 .policy-item .des {
   text-align: justify;
@@ -2778,7 +2766,7 @@ a:not([href]):not([class]) {
   box-shadow: none;
 }
 .form-register span {
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
 }
 .form-register .contact-needs {
   position: relative;
@@ -2826,7 +2814,7 @@ a:not([href]):not([class]) {
   display: block;
 }
 .form-register button {
-  font-family: "Quicksand-Bold";
+  font-weight: 700;
   padding: 8px 22px;
   color: #fff;
   background: #2CDEB4;
