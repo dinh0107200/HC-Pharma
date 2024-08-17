@@ -241,78 +241,7 @@
     </div>
 </section>
 
-<section class="section-register section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 text-center">
-                <div class="section-register-img">
-                    @if (Model.LandingPage.Imageregistration != null)
-                    {
-                        <img src="@Path.Combine("/images/landingPage/", Model.LandingPage.Imageregistration)" class=""   data-aos="zoom-in"/>
-                    }
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="title-landing-page" data-aos="zoom-in" >
-                    Đăng ký nhận tư vấn
-                </div>
-                <form class="form-register form-contact-submit" id="form-register-consultation"  data-aos="zoom-in">
-                    @Html.ValidationSummary(true)
-                    @Html.AntiForgeryToken()
-                    <input type="hidden" value="@Model.Product.Id" name="ProductId" />
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-lg-6">
-                                <input type="text" maxlength="100" name="Fullname" class="form-control" placeholder="Tên đầy đủ" required />
-                            </div>
-                            <div class="col-lg-6">
-                                <input type="text" maxlength="100" name="Email" class="form-control" placeholder="Email" required />
 
-                            </div>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" maxlength="20" name="Mobile" placeholder="Số điện thoại"  required/>
-                            </div>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" name="Address" maxlength="200" placeholder="Địa chỉ (Thành Phố)" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <span class="mb-4 d-block font-weight-bold">Nhu cầu</span>
-                        <label class="label d-block contact-needs">
-                            Tư vấn dịch vụ
-                            <input type="radio" checked="checked" name="ContactNeeds" value="Tư vấn dịch vụ">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="label d-block contact-needs">
-                            Tư vấn sản phẩm
-                            <input type="radio" name="ContactNeeds" value="Tư vấn sản phẩm">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="label d-block contact-needs">
-                            Hướng dẫn mua hàng
-                            <input type="radio" name="ContactNeeds" value="Hướng dẫn mua hàng">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="label d-block contact-needs">
-                            Khác
-                            <input type="radio" name="ContactNeeds" value="Khác">
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" maxlength="4000" class="form-control" name="Body" placeholder="Tin nhắn">
-                    </div>
-                    <div class="text-left">
-                        <button type="submit" class="btn text-uppercase">
-                            gửi thông tin
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
 
 <section class="feedback-landing section-padding">
     <div class="container">
@@ -393,6 +322,83 @@
         </div>
     </div>
 </section>
+
+<section class="section-register section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 ">
+                <div class="title-landing-page text-center mb-3" data-aos="zoom-in">
+                    Chứng nhận, & Kiểm định
+                </div>
+                <div class="section-register-img text-center">
+                    @if (Model.LandingPage.Imageregistration != null)
+                    {
+                        <img src="@Path.Combine("/images/landingPage/", Model.LandingPage.Imageregistration)" class="" data-aos="zoom-in" />
+                    }
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="title-landing-page mb-3" data-aos="zoom-in">
+                    Đăng ký nhận tư vấn
+                </div>
+                <form class="form-register form-contact-submit" id="form-register-consultation" data-aos="zoom-in">
+                    @Html.ValidationSummary(true)
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" value="@Model.Product.Id" name="ProductId" />
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-lg-6">
+                                <input type="text" maxlength="100" name="Fullname" class="form-control" placeholder="Tên đầy đủ" required />
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" maxlength="100" name="Email" class="form-control" placeholder="Email" required />
+
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" maxlength="20" name="Mobile" placeholder="Số điện thoại" required />
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" name="Address" maxlength="200" placeholder="Địa chỉ (Thành Phố)" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="mb-4 d-block font-weight-bold">Nhu cầu</span>
+                        <label class="label d-block contact-needs">
+                            Tư vấn dịch vụ
+                            <input type="radio" checked="checked" name="ContactNeeds" value="Tư vấn dịch vụ">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="label d-block contact-needs">
+                            Tư vấn sản phẩm
+                            <input type="radio" name="ContactNeeds" value="Tư vấn sản phẩm">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="label d-block contact-needs">
+                            Hướng dẫn mua hàng
+                            <input type="radio" name="ContactNeeds" value="Hướng dẫn mua hàng">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="label d-block contact-needs">
+                            Khác
+                            <input type="radio" name="ContactNeeds" value="Khác">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" maxlength="4000" class="form-control" name="Body" placeholder="Tin nhắn">
+                    </div>
+                    <div class="text-left">
+                        <button type="submit" class="btn text-uppercase">
+                            gửi thông tin
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
 @if (Model.Combos.Any())
 {
     var combo = 1;
