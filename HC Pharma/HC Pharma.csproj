@@ -289,8 +289,12 @@
     <Compile Include="ViewModel\ShoppingCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\adminSite.css" />
-    <Content Include="Content\adminSite.min.css" />
+    <Content Include="Content\adminSite.css">
+      <DependentUpon>adminSite.less</DependentUpon>
+    </Content>
+    <Content Include="Content\adminSite.min.css">
+      <DependentUpon>adminSite.css</DependentUpon>
+    </Content>
     <Content Include="Content\admin\bg-login.jpg" />
     <Content Include="Content\admin\favicon.png" />
     <Content Include="Content\admin\form_control_bg.gif" />
@@ -371,6 +375,7 @@
     <Content Include="Content\images\landing\intro.png" />
     <Content Include="Content\images\landing\policy.png" />
     <Content Include="Content\images\landing\product.png" />
+    <Content Include="Content\images\landing\tag-video.png" />
     <Content Include="Content\images\landing\user-manua.png" />
     <Content Include="Content\images\shopping-cart.gif" />
     <Content Include="Content\images\svg-contact\dichvu.svg" />

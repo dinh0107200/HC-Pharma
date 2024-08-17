@@ -2587,14 +2587,22 @@ a:not([href]):not([class]) {
   left: 50%;
   transform: translate(-50%, -50%);
   color: #fff;
-  font-size: 24px;
+  font-size: 2rem;
   background-color: rgba(44, 222, 180, 0.5);
-  width: 40px;
+  width: 45px;
   aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+}
+.feedback-landing-item .img .tag {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.feedback-landing-item .img .tag img {
+  width: 52px;
 }
 .feedback-landing-item a {
   position: absolute;
@@ -2625,12 +2633,18 @@ a:not([href]):not([class]) {
   font-weight: 700;
 }
 .feedback-landing-item .des {
+  height: 96px;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
+}
+@media (max-width: 500px) {
+  .feedback-landing-item .des {
+    height: auto;
+  }
 }
 
 .landing-qa-item {

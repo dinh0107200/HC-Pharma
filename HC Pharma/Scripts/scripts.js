@@ -183,8 +183,8 @@ function landingPage() {
 
     $('.feedback-landing-list').slick({
         infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToShow: 3,
+        slidesToScroll: 3,
         arrows: false,
         dots: true,
         autoplay: true,

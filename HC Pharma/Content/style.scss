@@ -2929,14 +2929,23 @@ a:not([href]):not([class]) {
             left: 50%;
             transform: translate(-50%,-50%);
             color: $white;
-            font-size: 24px;
+            font-size: 2rem;
             background-color: rgba(#2CDEB4,0.5);
-            width: 40px;
+            width: 45px;
             aspect-ratio: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
+        }
+
+        .tag{
+            position:absolute;
+            top:0;
+            left:0;
+            img{
+                width:52px;
+            }
         }
     }
     a{
@@ -2970,7 +2979,11 @@ a:not([href]):not([class]) {
         }
     }
     .des{
+        height:96px;
         @include text-truncate(4);
+        @include maxWidth(500px){
+            height:auto;
+        }
     }
 }
 

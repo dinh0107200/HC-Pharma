@@ -17,11 +17,11 @@
 }
 <div class="banner-landing">
     <div class="text-center">
-        <h2 class="title-landing" data-aos="fade-up">
+        <h2 class="title-landing" data-aos="fade-up" data-aos-delay="200">
             @Model.LandingPage.Title
         </h2>
-        <p class="title-landing-sub" data-aos="fade-up">@Model.LandingPage.SubTitle</p>
-        <span class="title-landing-subline" data-aos="fade-up">
+        <p class="title-landing-sub" data-aos="fade-up" data-aos-delay="200">@Model.LandingPage.SubTitle</p>
+        <span class="title-landing-subline" data-aos="fade-up" data-aos-delay="200">
             @Model.LandingPage.SubTitle2
         </span>
     </div>
@@ -34,7 +34,7 @@
                 }
             </div>
             <div class="w-45">
-                <form class="support-form landing-form" data-aos="fade-down">
+                <form class="support-form landing-form" data-aos="fade-down" data-aos-delay="200">
                     <p>Đăng ký tư vấn</p>
                     @Html.AntiForgeryToken()
                     <input type="hidden" value="@Model.Product.Id" name="ProductId"/>
@@ -62,7 +62,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <h2 class="title-landing-page " data-aos="fade-down">Probiotics Plus Hcpharma</h2>
-                <div class="content-detail" data-aos="zoom-in">
+                <div class="content-detail" data-aos="zoom-in" data-aos-delay="200">
                     @Html.Raw(Model.LandingPage.Intro)
                 </div>
             </div>
@@ -78,16 +78,16 @@
 
 <section class="common-diseases section-padding">
     <div class="container">
-        <div class="title-landing-page text-center text-uppercase" data-aos="fade-down" >
+        <div class="title-landing-page text-center text-uppercase" data-aos="fade-down"data-aos-delay="200" >
             Các bệnh thường gặp + dấu hiệu
         </div>
-        <div class="sub-title-landing text-center"  data-aos="fade-down">
+        <div class="sub-title-landing text-center"  data-aos="fade-down" data-aos-delay="200">
             @Model.LandingPage.CommonDiseases
         </div>
         <div class="row">
             @{
                 var common = 1;
-                delay = 0;
+                delay = 200;
             }
             @foreach (var item in Model.Banners.Where(l => l.PostionAbout == PostionAbout.CommonDiseases))
             {
@@ -121,7 +121,7 @@
                     </div>
                 </div>
                 common++;
-                delay += 50;
+                delay += 100;
 
             }
         </div>
@@ -130,16 +130,16 @@
 
 <section class="cause-disease section-padding">
     <div class=" container">
-        <div class="title-landing-page text-center text-uppercase" data-aos="fade-down">
+        <div class="title-landing-page text-center text-uppercase" data-aos="fade-down" data-aos-delay="200">
             nguyên nhân gây bệnh
         </div>
-        <div class="sub-title-landing text-center mb-4" data-aos="fade-down">
+        <div class="sub-title-landing text-center mb-4" data-aos="fade-down" data-aos-delay="200">
             @Model.LandingPage.CauseDisease
         </div>
 
         <div class="cause-disease-list">
             @{ 
-                delay = 0;
+                delay = 200;
             }
             @foreach (var item in Model.Banners.Where(l => l.PostionAbout == PostionAbout.CauseDisease))
             {
@@ -159,7 +159,7 @@
                         </div>
                     </div>
                 </div>
-                delay += 50;
+                delay += 100;
             }
         </div>
     </div>
@@ -175,11 +175,11 @@
                 }
             </div>
             <div class="col-lg-6 order-0 order-lg-1">
-                <h2 class="title-landing-page"  data-aos="fade-down">
+                <h2 class="title-landing-page"  data-aos="fade-down" data-aos-delay="200">
                     Giải pháp<br />
                     Sp của HCPharma
                 </h2>
-                <div class="content-detail" data-aos="zoom-in">
+                <div class="content-detail" data-aos="zoom-in" data-aos-delay="200">
                     @Html.Raw(Model.LandingPage.Solution)
                 </div>
             </div>
@@ -192,15 +192,15 @@
         <div class="row align-items-center">
 
             <div class="col-lg-6">
-                <h2 class="title-landing-page" data-aos="fade-down">Phân tích sản phẩm</h2>
-                <div class="content-detail" data-aos="zoom-in">
+                <h2 class="title-landing-page" data-aos="fade-down" data-aos-delay="200">Phân tích sản phẩm</h2>
+                <div class="content-detail" data-aos="zoom-in" data-aos-delay="200">
                     @Html.Raw(Model.LandingPage.ProductAnalysis)
                 </div>
             </div>
             <div class="col-lg-6 text-center">
                 @if (Model.LandingPage.ImageAnalysis != null)
                 {
-                    <img src="@Path.Combine("/images/landingPage/", Model.LandingPage.ImageAnalysis)" class="" data-aos="zoom-in" />
+                    <img src="@Path.Combine("/images/landingPage/", Model.LandingPage.ImageAnalysis)" class="" data-aos="zoom-in" data-aos-delay="200"/>
                 }
             </div>
         </div>
@@ -210,12 +210,12 @@
 
 <section class="user-manua section-padding">
     <div class="container">
-        <div class="title-landing-page text-center text-uppercase mb-4"  data-aos="fade-down">
+        <div class="title-landing-page text-center text-uppercase mb-4"  data-aos="fade-down" data-aos-delay="200">
             Hướng dẫn sử dụng
         </div>
         <div class="row">
             @{ 
-                delay = 0;
+                delay = 200;
             }
             @foreach (var item in Model.Banners.Where(l => l.PostionAbout == PostionAbout.Instructions))
             {
@@ -235,7 +235,7 @@
                         </div>
                     </div>
                 </div>
-                delay += 50;
+                delay += 100;
             }
         </div>
     </div>
@@ -245,12 +245,12 @@
 
 <section class="feedback-landing section-padding">
     <div class="container">
-        <div class="title-landing-page text-center text-uppercase mb-4" data-aos="fade-up">
+        <div class="title-landing-page text-center text-uppercase mb-4" data-aos="fade-up" data-aos-delay="200">
             feedback của khách hàng
         </div>
         <div class="feedback-landing-list">
             @{
-                delay = 0;
+                delay = 200;
             }
             @foreach (var item in Model.Feedbacks)
             {
@@ -275,6 +275,10 @@
                                 <a href="@Path.Combine("/images/feedbacks/", item.FileVideo)" class="play-video" data-fancybox=""></a>
                             }
                         }
+
+                        <div class="tag">
+                            <img src="~/Content/images/landing/tag-video.png"/>
+                        </div>
                     </div>
                     <div class="body">
                         <div class="name">
@@ -285,7 +289,7 @@
                         </div>
                     </div>
                 </div>
-                delay += 50;
+                delay += 100;
             }
         </div>
     </div>
@@ -293,16 +297,16 @@
 
 <section class="landing-qa section-padding">
     <div class="container">
-        <div class="title-landing-page text-center text-uppercase" data-aos="fade-up">
+        <div class="title-landing-page text-center text-uppercase" data-aos="fade-up" data-aos-delay="200">
             Câu hỏi thường gặp
         </div>
-        <div class="sub-title-landing text-center mb-4" data-aos="fade-up">
+        <div class="sub-title-landing text-center mb-4" data-aos="fade-up" data-aos-delay="200">
             Bạn vẫn đang quyết định? Đọc 4 câu hỏi thường gặp nhất của khách hàng trước khi đặt mua men vi sinh Probiotics Plus
         </div>
 
         <div class="row">
             @{
-                delay = 0;
+                delay = 200;
             }
             @foreach (var item in Model.QaProducts)
             {
@@ -317,7 +321,7 @@
                         </div>
                     </div>
                 </div>
-                delay += 50;
+                delay += 100;
             }
         </div>
     </div>
@@ -327,21 +331,21 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 ">
-                <div class="title-landing-page text-center mb-3" data-aos="zoom-in">
+                <div class="title-landing-page text-center mb-3" data-aos="zoom-in" data-aos-delay="200">
                     Chứng nhận, & Kiểm định
                 </div>
                 <div class="section-register-img text-center">
                     @if (Model.LandingPage.Imageregistration != null)
                     {
-                        <img src="@Path.Combine("/images/landingPage/", Model.LandingPage.Imageregistration)" class="" data-aos="zoom-in" />
+                        <img src="@Path.Combine("/images/landingPage/", Model.LandingPage.Imageregistration)" class="" data-aos="zoom-in" data-aos-delay="200"/>
                     }
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="title-landing-page mb-3" data-aos="zoom-in">
+                <div class="title-landing-page mb-3" data-aos="zoom-in" data-aos-delay="200">
                     Đăng ký nhận tư vấn
                 </div>
-                <form class="form-register form-contact-submit" id="form-register-consultation" data-aos="zoom-in">
+                <form class="form-register form-contact-submit" id="form-register-consultation" data-aos="zoom-in" data-aos-delay="200">
                     @Html.ValidationSummary(true)
                     @Html.AntiForgeryToken()
                     <input type="hidden" value="@Model.Product.Id" name="ProductId" />
@@ -402,10 +406,10 @@
 @if (Model.Combos.Any())
 {
     var combo = 1;
-    delay = 0;
+    delay = 200;
     <section class="section-combo section-padding">
         <div class="container">
-            <div class="title-landing-page text-center text-uppercase mb-4" data-aos="fade-up">
+            <div class="title-landing-page text-center text-uppercase mb-4" data-aos="fade-up" data-aos-delay="200">
                 mua combo nhận ưu đãi
             </div>
             <div class="row justify-content-center">
@@ -458,7 +462,7 @@
                         </div>
                     </div>
                     combo++;
-                    delay += 50;
+                    delay += 100;
                 }
             </div>
         </div>
@@ -471,7 +475,7 @@
             @foreach (var item in Model.Policy)
             {
                 <div class="col-lg-4 mb-3">
-                    <div class="policy-item" data-aos="zoom-in">
+                    <div class="policy-item" data-aos="zoom-in" data-aos-delay="200">
                         @if (item.Image != null)
                         {
                             <img src="@Path.Combine("/images/banners/", item.Image)" class="" />
