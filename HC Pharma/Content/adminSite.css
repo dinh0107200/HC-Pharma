@@ -343,11 +343,14 @@ ul.ui-autocomplete {
   display: inline-block;
   padding-right: 10px;
 }
+.fancybox-slide {
+  padding: 0;
+}
 .fancybox-slide--iframe .fancybox-content {
   /*width: 1400px;*/
-  height: 90%;
+  height: 100% !important;
   width: 100% !important;
-  max-height: 95%;
+  max-height: 100%;
   margin: 0;
 }
 .mask-body {
