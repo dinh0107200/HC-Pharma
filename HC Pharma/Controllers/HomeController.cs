@@ -351,24 +351,7 @@ namespace HC_Pharma.Controllers
                        $"<p>Email: {model.Email},</p>" +
                        $"<p>Nội dung: {model.Body}</p>" +
                        $"<p>Đây là hệ thống gửi email tự động, vui lòng không phản hồi lại email này.</p>";
-            //Task.Run(() => HtmlHelpers.SendEmail(Smtp, subject, body, "anhquang.tran@vico.vn", Email, Email, Password, "HCPHARMA.VN", port: SmtpPort));
-
-            MailMessage mail = new MailMessage();
-            mail.To.Add("anhquang.tran@vico.vn");
-            mail.From = new MailAddress(Email);
-            mail.Subject = "Subject: Test Mail";
-            mail.Body = body;
-            mail.IsBodyHtml = true;
-
-            //Added this line here
-            System.Net.ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(RemoteServerCertificateValidationCallback);
-            SmtpClient smtp = new SmtpClient();
-
-            smtp.Host = Smtp;
-            smtp.Credentials = new System.Net.NetworkCredential(Email, Password);
-            smtp.EnableSsl = true;
-            smtp.Port = 587;
-            smtp.Send(mail);
+            Task.Run(() => HtmlHelpers.SendEmail(Smtp, subject, body, "anhquang.tran@vico.vn", Email, Email, Password, "HCPHARMA.VN", port: SmtpPort));
 
             return Json(new { status = true, msg = "Gửi liên hệ thành công.\nChúng tôi sẽ liên lạc với bạn sớm nhất có thể." });
         }

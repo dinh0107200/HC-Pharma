@@ -203,12 +203,7 @@ namespace HC_Pharma.Controllers
 
                 var orderId = DateTime.Now.ToString("yyMMddHHmmss");
 
-                //Task.Run(() =>
-                //{
-                //    HtmlHelpers.SendEmail(Smtp, "[" + orderId + "] Đơn đặt hàng từ website " + Request.Url?.Host, sb,
-                //        ConfigSite.Email, Email, Email, Password, "Đặt Hàng Online", model.Order.CustomerInfo.Email, ConfigSite.Email, port: SmtpPort);
-                //});
-                Task.Run(() => HtmlHelpers.SendEmail("gmail", "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website " + Request.Url?.Host, sb, ConfigSite.Email, Email, Email, Password, "Đặt Hàng Online", model.Order.CustomerInfo.Email, ConfigSite.Email));
+                Task.Run(() => HtmlHelpers.SendEmail(Smtp, "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website " + Request.Url?.Host, sb, ConfigSite.Email, Email, Email, Password, "Đặt Hàng Online", model.Order.CustomerInfo.Email, ConfigSite.Email, SmtpPort));
 
                 return RedirectToAction("CheckOutComplete", new { orderId });
             }

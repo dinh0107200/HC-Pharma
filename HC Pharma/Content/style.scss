@@ -29,6 +29,7 @@ $colorblur: #9B9B9B;
 @mixin Quicksand-SemiBold {
     font-weight: 600;
 }
+
 @mixin text-truncate($q) {
     display: -webkit-box;
     -webkit-line-clamp: $q;
@@ -37,6 +38,7 @@ $colorblur: #9B9B9B;
     text-overflow: ellipsis;
     word-break: break-word;
 }
+
 @mixin maxWidth($value) {
     @media (max-width: $value) {
         @content;
@@ -82,7 +84,8 @@ body {
     padding: 0;
     font-family: "Roboto", sans-serif;
     font-style: normal;
-    font-weight:400;
+    font-weight: 400;
+
     @include maxWidth(768px) {
         font-size: 14px;
     }
@@ -1400,6 +1403,7 @@ img {
 
     .artilce-nav_infor {
         margin-left: 10px;
+        flex: 1;
 
         a {
             font-style: normal;
@@ -2451,7 +2455,8 @@ a:not([href]):not([class]) {
     ol {
         margin: .75rem 0;
         padding: 0 2rem;
-        list-style:none !important;
+        list-style: none !important;
+
         li {
             padding: .25rem 0;
         }
@@ -2737,7 +2742,6 @@ a:not([href]):not([class]) {
             width: 100%;
         }
     }
-
 }
 
 .support-form {
@@ -2760,12 +2764,13 @@ a:not([href]):not([class]) {
         margin-bottom: 25px;
         display: block;
     }
-    button{
-        color:$white;
-        background:$colorMain2;
+
+    button {
+        color: $white;
+        background: $colorMain2;
         @include Quicksand-Bold;
-        padding:7px 30px;
-        border-radius:34px;
+        padding: 7px 30px;
+        border-radius: 34px;
     }
 }
 
@@ -2796,11 +2801,13 @@ a:not([href]):not([class]) {
     display: flex;
     align-items: center;
     margin-bottom: 40px;
-    height:calc(100% - 40px);
+    height: calc(100% - 40px);
+
     .img {
         position: relative;
         z-index: 2;
-        flex-shrink:0;
+        flex-shrink: 0;
+
         img {
             width: 88px;
             aspect-ratio: 1;
@@ -2820,8 +2827,9 @@ a:not([href]):not([class]) {
         padding: 15px 15px 15px 30px;
         margin-left: -15px;
         z-index: 1;
-        height:100%;
-        flex:1;
+        height: 100%;
+        flex: 1;
+
         .name {
             @include Quicksand-Bold;
         }
@@ -2836,19 +2844,21 @@ a:not([href]):not([class]) {
 }
 
 .cause-disease-item {
-    .img{
-        overflow:hidden;
+    .img {
+        overflow: hidden;
         border: 7px solid rgba(44, 222, 180, 0.32);
-        border-radius:18px;
+        border-radius: 18px;
     }
+
     img {
         width: 100%;
         aspect-ratio: 1.4;
         object-fit: cover;
         border-radius: 12px;
-        transition:0.3s all;
-        &:hover{
-            transform:scale(1.1);
+        transition: 0.3s all;
+
+        &:hover {
+            transform: scale(1.1);
         }
     }
 
@@ -2868,10 +2878,11 @@ a:not([href]):not([class]) {
         padding: 0 15px;
     }
 }
-.user-manua{
-    background-image:url("./images/landing/bg-user-manua.png");
-    background-size:cover;
-    background-repeat:no-repeat;
+
+.user-manua {
+    background-image: url("./images/landing/bg-user-manua.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 
@@ -2885,7 +2896,7 @@ a:not([href]):not([class]) {
         border: 14px solid rgba(#2CDEB4,0.32);
         aspect-ratio: 1;
         border-radius: 50%;
-    
+
 
         > div {
             width: 100%;
@@ -2918,11 +2929,13 @@ a:not([href]):not([class]) {
 
     .img {
         position: relative;
-        img{
-            width:100%;
-            object-fit:cover;
-            aspect-ratio:1.5;
+
+        img {
+            width: 100%;
+            object-fit: cover;
+            aspect-ratio: 1.5;
         }
+
         .ic-play {
             position: absolute;
             top: 50%;
@@ -2939,21 +2952,23 @@ a:not([href]):not([class]) {
             border-radius: 50%;
         }
 
-        .tag{
-            position:absolute;
-            top:0;
-            left:0;
-            img{
-                width:52px;
+        .tag {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            img {
+                width: 52px;
             }
         }
     }
-    a{
-        position:absolute;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
+
+    a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
     }
 
     .body {
@@ -2978,11 +2993,13 @@ a:not([href]):not([class]) {
             @include Quicksand-Bold;
         }
     }
-    .des{
-        height:96px;
+
+    .des {
+        height: 96px;
         @include text-truncate(4);
-        @include maxWidth(500px){
-            height:auto;
+
+        @include maxWidth(500px) {
+            height: auto;
         }
     }
 }
@@ -3085,16 +3102,16 @@ a:not([href]):not([class]) {
         text-decoration: line-through;
     }
 
-    .btn-order a{
-        padding:11px;
-        font-size:1.25rem;
-        color:$white;
-        background:$colorMain2;
-        display:inline-block;
-        border-radius:50px;
-        line-height:1;
+    .btn-order a {
+        padding: 11px;
+        font-size: 1.25rem;
+        color: $white;
+        background: $colorMain2;
+        display: inline-block;
+        border-radius: 50px;
+        line-height: 1;
         @include Quicksand-Bold;
-        margin-top:10px;
+        margin-top: 10px;
     }
 }
 
@@ -3108,7 +3125,8 @@ a:not([href]):not([class]) {
     border-radius: 8px;
     padding: 20px 27px;
     text-align: center;
-    height:100%;
+    height: 100%;
+
     img {
         width: 56px;
         margin: 0 auto;
@@ -3304,8 +3322,8 @@ a:not([href]):not([class]) {
         font-size: 2rem;
     }
 
-    .img-banner-langding{
-        margin-bottom:15px;
+    .img-banner-langding {
+        margin-bottom: 15px;
     }
 }
 
@@ -3610,12 +3628,14 @@ a:not([href]):not([class]) {
 @include maxWidth(468px) {
 
     .common-diseases__item {
-        .number{
-            font-size:2rem;
+        .number {
+            font-size: 2rem;
         }
-        .body{
-            padding-left:20px;
+
+        .body {
+            padding-left: 20px;
         }
+
         .img {
             img {
                 width: 75px;
@@ -3879,4 +3899,3 @@ a:not([href]):not([class]) {
         }
     }
 }
-
