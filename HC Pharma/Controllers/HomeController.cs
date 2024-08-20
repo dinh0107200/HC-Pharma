@@ -351,7 +351,7 @@ namespace HC_Pharma.Controllers
                        $"<p>Email: {model.Email},</p>" +
                        $"<p>Nội dung: {model.Body}</p>" +
                        $"<p>Đây là hệ thống gửi email tự động, vui lòng không phản hồi lại email này.</p>";
-            Task.Run(() => HtmlHelpers.SendEmail(Smtp, subject, body, "anhquang.tran@vico.vn", Email, Email, Password, "HCPHARMA.VN", port: SmtpPort));
+            Task.Run(() => HtmlHelpers.SendEmail(Smtp, subject, body, ConfigSite.Email, Email, Email, Password, "HCPHARMA.VN", port: SmtpPort));
 
             return Json(new { status = true, msg = "Gửi liên hệ thành công.\nChúng tôi sẽ liên lạc với bạn sớm nhất có thể." });
         }
@@ -423,7 +423,7 @@ namespace HC_Pharma.Controllers
             var contacts = _unitOfWork.ContactProductRepository.GetQuery(l => l.IpAddress == model.IpAddress && DbFunctions.TruncateTime(l.CreateDate) == DbFunctions.TruncateTime(currentDate)).Count();
             if (contacts >= 10)
             {
-                return Json(new { status = false, msg = "Mỗi ngày chử được gửi tối đa 10 yêu cầu tư vấn" });
+                return Json(new { status = false, msg = "Mỗi ngày chỉ được gửi tối đa 10 yêu cầu tư vấn" });
             }
             _unitOfWork.ContactProductRepository.Insert(model);
             _unitOfWork.Save();
@@ -433,10 +433,9 @@ namespace HC_Pharma.Controllers
                         $"<p>Số điện thoại: {model.Mobile},</p>" +
                         $"<p>Nội dung:Tư vấn sản phẩm {product.Name}</p>" +
                         $"<p>Đây là hệ thống gửi email tự động, vui lòng không phản hồi lại email này.</p>";
-            Task.Run(() => HtmlHelpers.SendEmail("gmail", subject, body, ConfigSite.Email, Email, Email, Password, "HC Pharma"));
+            Task.Run(() => HtmlHelpers.SendEmail(Smtp, subject, body, ConfigSite.Email, Email, Email, Password, "HCPharma.vn"));
             return Json(new { status = true, msg = "Gửi liên hệ thành công.\nChúng tôi sẽ liên lạc lại với bạn sớm nhất có thể." });
         }
-
         [HttpPost, ValidateAntiForgeryToken]
         public JsonResult ContactProduct2(ContactProduct model)
         {
@@ -449,7 +448,7 @@ namespace HC_Pharma.Controllers
             var contacts = _unitOfWork.ContactProductRepository.GetQuery(l => l.IpAddress == model.IpAddress && DbFunctions.TruncateTime(l.CreateDate) == DbFunctions.TruncateTime(currentDate)).Count();
             if (contacts >= 10)
             {
-                return Json(new { status = false, msg = "Mỗi ngày chử được gửi tối đa 10 yêu cầu tư vấn" });
+                return Json(new { status = false, msg = "Mỗi ngày chỉ được gửi tối đa 10 yêu cầu tư vấn" });
             }
             _unitOfWork.ContactProductRepository.Insert(model);
             _unitOfWork.Save();
@@ -463,7 +462,7 @@ namespace HC_Pharma.Controllers
                            $"<p>Nhu cầu:{model.ContactNeeds}</p>" +
                            $"<p>Nội dung:{model.Body}</p>" +
                         $"<p>Đây là hệ thống gửi email tự động, vui lòng không phản hồi lại email này.</p>";
-            Task.Run(() => HtmlHelpers.SendEmail("gmail", subject, body, ConfigSite.Email, Email, Email, Password, "HC Pharma"));
+            Task.Run(() => HtmlHelpers.SendEmail(Smtp, subject, body, ConfigSite.Email, Email, Email, Password, "HCPharma.vn"));
             return Json(new { status = true, msg = "Gửi liên hệ thành công.\nChúng tôi sẽ liên lạc lại với bạn sớm nhất có thể." });
         }
         protected override void Dispose(bool disposing)

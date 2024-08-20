@@ -183,14 +183,14 @@ namespace HC_Pharma.Controllers
                     if (odetails.Product.ListImage != null)
                     {
                         img = "<img src='" + Request.Url?.GetLeftPart(UriPartial.Authority) + "/images/products/" + odetails.Product.ListImage.Split(',')[0] + "?w=100' />";
-                    }           
-                    if(odetails.NameCombo != null)
+                    }
+                    if (odetails.NameCombo != null)
                     {
                         NameCombo = "-" + odetails.NameCombo;
                     }
                     sb += "<tr>" +
                           "<td>" + img + "</td>" +
-                          "<td><a href='" + Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("ProductDetail", "Home", new { proId = odetails.ProductId, name = HtmlHelpers.ConvertToUnSign(null, odetails.Product.Name) }) + "' >" + odetails.Product.Name +NameCombo +"</a>";
+                          "<td><a href='" + Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("ProductDetail", "Home", new { proId = odetails.ProductId, name = HtmlHelpers.ConvertToUnSign(null, odetails.Product.Name) }) + "' >" + odetails.Product.Name + NameCombo + "</a>";
                     sb += "</td>" +
                           "<td style='text-align:center'>" + odetails.Quantity + "</td>" +
                           "<td style='text-align:center'>" + Convert.ToDecimal(odetails.Price).ToString("N0") + "</td>" +
@@ -203,7 +203,7 @@ namespace HC_Pharma.Controllers
 
                 var orderId = DateTime.Now.ToString("yyMMddHHmmss");
 
-                Task.Run(() => HtmlHelpers.SendEmail(Smtp, "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website " + Request.Url?.Host, sb, ConfigSite.Email, Email, Email, Password, "Đặt Hàng Online", model.Order.CustomerInfo.Email, ConfigSite.Email, SmtpPort));
+                Task.Run(() => HtmlHelpers.SendEmail(Smtp, "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website " + Request.Url?.Host, sb, ConfigSite.Email, Email, Email, Password, "Đặt Hàng Online", model.Order.CustomerInfo.Email, port: SmtpPort));
 
                 return RedirectToAction("CheckOutComplete", new { orderId });
             }
@@ -237,16 +237,16 @@ namespace HC_Pharma.Controllers
         }
 
         [Route("them-vao-gio-hang")]
-        public JsonResult AddToCart(int? comboId,int productId, int quantity = 1)
+        public JsonResult AddToCart(int? comboId, int productId, int quantity = 1)
         {
             var cart = ShoppingCart.GetCart(HttpContext);
             decimal? price = null;
 
 
-            if(comboId != null)
+            if (comboId != null)
             {
                 var combo = _unitOfWork.ComboRepository.GetQuery(l => l.ProductId == productId && l.Id == comboId).FirstOrDefault();
-                if(combo != null)
+                if (combo != null)
                 {
                     if (combo.PriceSale != null)
                     {

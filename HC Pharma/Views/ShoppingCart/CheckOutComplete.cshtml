@@ -1,6 +1,7 @@
 ﻿@using HC_Pharma.Models
 @{
     ViewBag.Title = "Đặt hàng thành công";
+    ViewBag.Robots = "noindex";
     var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
 }
 
@@ -17,12 +18,12 @@
     <div class="container ">
         <h1 id="main-header">Đặt hàng thành công</h1>
         <div class="alert alert-success">
-            <p>Cảm ơn quý khách đã mua hàng tại @Request.Url?.Host!</p>
+            <p>Cảm ơn quý khách đã mua hàng tại @(Request.Url?.Host)!</p>
             <p>
                 Mã đơn hàng : <strong>@ViewBag.OrderId</strong>
             </p>
-            <p>@Request.Url?.Host đã gửi email xác nhận đơn hàng tới địa chỉ email của bạn.</p>
-            <p>Nhân viên chăm sóc khách hàng của <strong>@Request.Url?.Host</strong> sẽ gọi điện xác minh lại đơn hàng của bạn sau khi nhận được đơn đặt hàng.</p>
+            <p>@(Request.Url?.Host) đã gửi email xác nhận đơn hàng tới địa chỉ email của bạn.</p>
+            <p>Nhân viên chăm sóc khách hàng của <strong>@(Request.Url?.Host)</strong> sẽ gọi điện xác minh lại đơn hàng của bạn sau khi nhận được đơn đặt hàng.</p>
             @*<p>Có nhiều phương thức thanh toán để bạn lựa chọn (trả tiền khi giao hàng, thanh toán bẳng thẻ tín dụng hoặc ATM, chuyển khoản qua ngân hàng)</p>*@
             <p>
                 Để được hỗ trợ thêm vui lòng liên hệ với chúng tôi qua số <strong>@config.Hotline</strong> hoặc Email <a href="mailto:@config.Email">@config.Email</a>

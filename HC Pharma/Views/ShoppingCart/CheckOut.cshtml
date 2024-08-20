@@ -2,6 +2,7 @@
 @using HC_Pharma.Models
 @{
     ViewBag.Title = "Thanh toán";
+    ViewBag.Robots = "noindex";
     var final = Model.CartTotal + Model.Order.ShipFee;
     decimal? totalPrice = 0;
     var config = (ConfigSite)HttpContext.Current.Application["ConfigSite"];
