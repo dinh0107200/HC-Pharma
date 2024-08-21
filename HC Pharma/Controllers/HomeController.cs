@@ -268,6 +268,23 @@ namespace HC_Pharma.Controllers
             };
             return View(model);
         }
+        [Route("tim-kiem-bai-viet")]
+        public ActionResult SearchArticle(int? page, string keyword)
+        {
+            if (string.IsNullOrEmpty(keyword))
+            {
+                return RedirectToAction("AllArticle");
+            }
+            var pageNumber = page ?? 1;
+            var article = _unitOfWork.ArticleRepository.GetQuery(a => a.Active && a.Subject.Contains(keyword), o => o.OrderByDescending(a => a.CreateDate));
+            var model = new AllArticleViewModel
+            {
+                Keyword = keyword,
+                Articles = article.ToPagedList(pageNumber, 12),
+                Categories = ArticleCategories.Where(a => a.TypePost == TypePost.Article || a.TypePost == TypePost.Introduce),
+            };
+            return View(model);
+        }
         [Route("blog/{url}.html", Order = 1)]
         public ActionResult ArticleDetail(string url)
         {

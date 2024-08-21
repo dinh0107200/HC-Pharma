@@ -74,9 +74,11 @@ namespace HC_Pharma.ViewModel
     }
     public class AllArticleViewModel
     {
+        public string Keyword { get; set; }
         public IPagedList<Article> Articles { get; set; }
         public IEnumerable<ArticleCategory> Categories { get; set; }
     }
+
     public class MenuArticleViewModel
     {
         public int RootId { get; set; }
