@@ -15,18 +15,18 @@
 	display: block;
 	position: relative;
 }
-.widget-toc  ol li:before {
+/*.widget-toc  ol li:before {
 	content: counters(item, ".");
 	counter-increment: item;
 	position: absolute;
 	margin-right: 100%;
 	right: 0.5rem;
-}
+}*/
 
 
 .toc-title{
-
-	text-align: center;
+/*
+	text-align: center;*/
 	font-weight: 700;
 	margin: 0;
 	padding: 0;

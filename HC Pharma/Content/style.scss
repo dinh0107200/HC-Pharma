@@ -2443,13 +2443,20 @@ a:not([href]):not([class]) {
 }
 
 .widget-toc {
-    border: 1px #eee solid;
+    transition: all .3s;
+    width: 100%;
+    background: #edf6ff;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     margin-bottom: 1rem;
 
     .toc-title {
-        background: #eee;
-        padding: .25rem .5rem;
         font-weight: 700;
+        margin-bottom: .5rem;
+        padding-bottom: .5rem;
+        border-bottom: 1px #ddd solid;
     }
 
     ol {

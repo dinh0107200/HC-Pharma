@@ -343,6 +343,9 @@ ul.ui-autocomplete {
   display: inline-block;
   padding-right: 10px;
 }
+.widget-toc ol li:before {
+  display: none;
+}
 .fancybox-slide {
   padding: 40px 0;
 }

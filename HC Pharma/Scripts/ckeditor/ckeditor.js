@@ -5703,7 +5703,7 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
     CKEDITOR.plugins.add("contents", {
         requires: "widget", icons: "contents", init: function (f) {
             function d(a) {
-                a.setHtml('\x3cp class\x3d"toc-title"\x3eContents\x3c/p\x3e'); Container = new CKEDITOR.dom.element("ol"); Container.appendTo(a); findRoot = a.hasClass("toc_root") ? "\x3e h1,\x3e h2,\x3e h3,\x3e h4,\x3e h5,\x3e h6," : "h1,h2,h3,h4,h5,h6,"; a = f.editable().find(findRoot); for (var c = 1, d = a.count(), g = 0; g < d; ++g) {
+                a.setHtml('\x3cp class\x3d"toc-title"\x3eMục lục bài viết\x3c/p\x3e'); Container = new CKEDITOR.dom.element("ol"); Container.appendTo(a); findRoot = a.hasClass("toc_root") ? "\x3e h1,\x3e h2,\x3e h3,\x3e h4,\x3e h5,\x3e h6," : "h1,h2,h3,h4,h5,h6,"; a = f.editable().find(findRoot); for (var c = 1, d = a.count(), g = 0; g < d; ++g) {
                     var k = a.getItem(g), e = k.getText(), b = parseInt(k.getName().substr(1, 1)), h = b - c; 0 === g && (h = 0, c = b); if (0 < h) {
                         var c =
                             Container.getLast(), l = new CKEDITOR.dom.element("ol"); l.appendTo(c); Container = l; c = b
