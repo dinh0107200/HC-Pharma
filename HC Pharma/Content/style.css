@@ -844,6 +844,31 @@ img {
   aspect-ratio: 2;
 }
 
+.list-people {
+  margin-top: 2rem;
+}
+.list-people > .item:not(:first-child) {
+  display: none;
+}
+.list-people .slick-list {
+  margin-left: -10px;
+}
+.list-people .slick-slide {
+  padding-left: 10px;
+}
+.list-people img {
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 1;
+}
+.list-people .name {
+  background: #eee;
+  text-align: center;
+  padding: 0.25rem 0.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
 .footer {
   background: #F4F6FF;
   padding-top: 30px;

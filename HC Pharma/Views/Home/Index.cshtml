@@ -201,7 +201,32 @@
             <a href="@Url.Action("AllProduct")" class="see-more">Xem thêm</a>
         </div>
     </section>
-
+}
+@if (Model.Banner.Any(a => a.GroupId == 3))
+{
+    <div class="container">
+        <div class="partner-title">
+            Nhân sự
+        </div>
+        <div class="list-people">
+            @foreach (var item in Model.Banner.Where(a => a.GroupId == 3))
+            {
+                <div class="item">
+                    <a href="@item.Url">
+                        @if (item.Image != null)
+                        {
+                            <img src="@Path.Combine("/images/banners/", item.Image)" alt="@item.BannerName">
+                        }
+                        else
+                        {
+                            <img src="~/Content/images/img-main/on-image.jpg" alt="@item.BannerName">
+                        }
+                    </a>
+                    <div class="name">@item.BannerName</div>
+                </div>
+            }
+        </div>
+    </div>
 }
 @if (Model.Articles.Any())
 {
@@ -327,4 +352,11 @@
             </div>
         </div>
     </section>
+}
+
+@section scripts
+{
+    <script>
+        homeJs();
+    </script>
 }

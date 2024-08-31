@@ -999,6 +999,35 @@ img {
     }
 }
 
+.list-people {
+    margin-top: 2rem;
+    & > .item:not(:first-child) {
+        display: none;
+    }
+
+    .slick-list {
+        margin-left: -10px;
+    }
+
+    .slick-slide {
+        padding-left: 10px;
+    }
+
+    img {
+        width: 100%;
+        object-fit: cover;
+        aspect-ratio: 1;
+    }
+
+    .name {
+        background: #eee;
+        text-align: center;
+        padding: .25rem .5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+}
+
 .footer {
     background: #F4F6FF;
     padding-top: 30px;
