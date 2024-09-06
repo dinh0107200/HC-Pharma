@@ -61,12 +61,12 @@
 
                                 @if (Model.Categories.Any(a => a.ParentId == item.Id))
                                 {
-                                    <i class="fas fa-sort-down down-arr"></i>
-                                    <ul class="list list-unstyled list-product-subnav">
+                                    @*<i class="fas fa-sort-down down-arr"></i>*@
+                                    <ul class="list list-unstyled list-product-subnav pl-3 mt-2">
                                         @foreach (var child in Model.Categories.Where(a => a.ParentId == item.Id))
                                         {
                                             {
-                                                <li> <a href="@Url.Action("ArticleCategory", new { url = item.Url })">@child.CategoryName</a> </li>
+                                                <li> <a href="@Url.Action("ArticleCategory", new { url = child.Url })">@child.CategoryName</a> </li>
 
                                             }
                                         }
