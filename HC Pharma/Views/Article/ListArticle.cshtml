@@ -55,6 +55,8 @@
                     <td>
                         @Html.ActionLink("Sửa", "UpdateArticle", new { articleId = article.Id }) -
                         <a href="javascript:;" onclick="deleteArticle('@article.Id')" style="color: red;">Xóa</a>
+                        <a href="@Url.Action("ArticleDetail","Home", new {url = article.Url})">Xem bài</a>
+
                     </td>
                 </tr>
             }
