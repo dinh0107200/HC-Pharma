@@ -275,7 +275,8 @@ img {
   transition: all 1s;
   width: 100%;
   object-fit: cover;
-  height: calc(100vh - 140px);
+  aspect-ratio: 7/3;
+  /*height: calc(100vh - 140px);*/
 }
 
 .introduct {
