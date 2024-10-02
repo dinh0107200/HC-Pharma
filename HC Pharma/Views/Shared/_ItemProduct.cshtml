@@ -35,11 +35,18 @@
         <div class="product-price">
             @if (Model.PriceSale != null)
             {
-                @Html.DisplayFor(a => a.PriceSale)
+                <div class="price-old">
+                    @Html.DisplayFor(a => a.Price)
+                </div>
+                <div class="price">
+                    @Html.DisplayFor(a => a.PriceSale)
+                </div>
             }
             else
             {
-                @Html.DisplayFor(a => a.Price)
+                <div class="price">
+                    @Html.DisplayFor(a => a.Price)
+                </div>
             }
             @if (Model.Price == null && Model.PriceSale == null)
             {

@@ -166,14 +166,21 @@
                                 </div>
                                 @if (item.PriceSale > 0)
                                 {
-                                    <div class="product-price text-danger">
-                                        @Html.DisplayFor(a => item.PriceSale)
+                                    <div class="product-price">
+                                        <div class="price-old">
+                                            @Html.DisplayFor(a => item.Price)
+                                        </div>
+                                        <div class="price">
+                                            @Html.DisplayFor(a => item.PriceSale)
+                                        </div>
                                     </div>
                                 }
                                 else
                                 {
-                                    <div class="product-price price-color">
-                                        @Html.DisplayFor(a => item.Price)
+                                    <div class="product-price">
+                                        <div class="price">
+                                            @Html.DisplayFor(a => item.Price)
+                                        </div>
                                     </div>
                                 }
                                 @if (item.Price == null && item.PriceSale == null)

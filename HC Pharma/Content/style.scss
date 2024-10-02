@@ -615,6 +615,16 @@ img {
             color: #FF3636;
             @include Quicksand-SemiBold;
             margin-top: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .price-old {
+                color: #747474;
+                font-size: 16px;
+                margin-right: 10px;
+                text-decoration: line-through;
+            }
         }
 
         .product-description {
