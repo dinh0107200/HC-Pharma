@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace HC_Pharma.Models
@@ -69,6 +70,7 @@ namespace HC_Pharma.Models
 
         [DisplayFormat(DataFormatString = "{0:N0} đ")]
         public decimal? FinalPrice => PriceSale ?? Price;
+        public virtual ICollection<Combo> Combos { get; set; }
 
         public Product()
         {

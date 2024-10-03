@@ -1,4 +1,5 @@
-﻿using HC_Pharma.Models;
+﻿using HC_Pharma.Migrations;
+using HC_Pharma.Models;
 using HC_Pharma.ViewModel;
 using Helpers;
 using System;
@@ -203,7 +204,7 @@ namespace HC_Pharma.Controllers
 
                 var orderId = DateTime.Now.ToString("yyMMddHHmmss");
 
-                Task.Run(() => HtmlHelpers.SendEmail(Smtp, "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website " + Request.Url?.Host, sb, ConfigSite.Email, Email, Email, Password, "Đặt Hàng Online", model.Order.CustomerInfo.Email, port: SmtpPort));
+                //Task.Run(() => HtmlHelpers.SendEmail(Smtp, "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website " + Request.Url?.Host, sb, ConfigSite.Email, Email, Email, Password, "Đặt Hàng Online", model.Order.CustomerInfo.Email, port: SmtpPort));
 
                 return RedirectToAction("CheckOutComplete", new { orderId });
             }
@@ -227,6 +228,31 @@ namespace HC_Pharma.Controllers
             EmptyCart();
             ViewBag.OrderId = orderId;
             return View();
+        }
+        [HttpPost]
+        public JsonResult SelectCombo(int? comboId, int cartId, decimal? price)
+        {
+            var cart = _unitOfWork.CartRepository.GetQuery(l => l.RecordId == cartId).FirstOrDefault();
+            if(cart != null)
+            {
+                cart.Price = price;
+                cart.ComboId = comboId;
+                _unitOfWork.Save();
+                var data = new
+                {
+                    result = 1,
+                };
+                return Json(data);
+            }
+            else
+            {
+                var data = new
+                {
+                    result = 0,               
+                };
+                return Json(data);
+
+            }
         }
 
         public ActionResult EmptyCart()

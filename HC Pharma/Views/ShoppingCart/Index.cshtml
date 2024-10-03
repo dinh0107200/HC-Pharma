@@ -67,12 +67,27 @@
                                         <div class="name font-weight-bold truncate">
                                             @item.Product.Name
                                             <br />
-                                            @*@if(item.Product.)*@
+                                            <br />
 
-                                            @if (item.Combo != null)
+                                            @if (item.Product.Combos.Any(l => l.Active))
                                             {
-                                                <span class="badge badge-info">@item.Combo.Name</span>
+                                                <div class="d-flex align-items-center">
+                                                    <span> Chọn combo:</span>
+                                                    <select class="select-combo">
+                                                        <option value="">Chọn combo</option>
+                                                        @foreach (var combo in item.Product.Combos.Where(l => l.Active).OrderBy(l => l.Sort))
+                                                        {
+                                                            <option value="@combo.Id" data-cart="@item.RecordId" data-price="@(combo.PriceSale ?? combo.Price)" @if (combo.Id == item.ComboId) { @Html.Raw("selected='selected'") }>@combo.Name</option>
+                                                        }
+                                                    </select>
+
+                                                </div>
                                             }
+
+                                            @*@if (item.Combo != null)
+        {
+            <span class="badge badge-info">@item.Combo.Name</span>
+        }*@
                                             <a href="javascript:;" title="Xóa" class="remove-product d-block text-danger mt-3" style="color: dimgray" data-id="@item.RecordId">
                                                 Xóa
                                             </a>
@@ -146,6 +161,21 @@
     <script src="~/Scripts/jquery.nice-number.js"></script>
     <script src="~/Scripts/sweetalert2.all.js"></script>
     <script>
+
+        $('.select-combo').on('change', function () {
+            // Lấy giá trị của option được chọn
+            var selectedOption = $(this).find('option:selected');
+            var cartValue = selectedOption.data('cart');
+            var priceValue = selectedOption.data('price');
+            var selectedValue = $(this).val();
+            if (selectedValue != "") {
+                $.post("/ShoppingCart/SelectCombo", { comboId: selectedValue, cartId: cartValue, price: priceValue }, function (data) {
+                    if (data.result === 1) {
+                        location.reload()
+                    }
+                })
+            }
+        });
 
         $('input[type="number"]').niceNumber({
             autoSize: false,

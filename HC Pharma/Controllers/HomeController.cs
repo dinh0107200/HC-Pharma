@@ -368,7 +368,7 @@ namespace HC_Pharma.Controllers
                        $"<p>Email: {model.Email},</p>" +
                        $"<p>Nội dung: {model.Body}</p>" +
                        $"<p>Đây là hệ thống gửi email tự động, vui lòng không phản hồi lại email này.</p>";
-            Task.Run(() => HtmlHelpers.SendEmail(Smtp, subject, body, ConfigSite.Email, Email, Email, Password, "HCPHARMA.VN", port: SmtpPort));
+            //Task.Run(() => HtmlHelpers.SendEmail(Smtp, subject, body, ConfigSite.Email, Email, Email, Password, "HCPHARMA.VN", port: SmtpPort));
 
             return Json(new { status = true, msg = "Gửi liên hệ thành công.\nChúng tôi sẽ liên lạc với bạn sớm nhất có thể." });
         }

@@ -503,10 +503,13 @@ img {
   justify-content: center;
 }
 .product-item .prouduct-infor .product-price .price-old {
-  color: #747474;
+  color: #2CDEB4;
   font-size: 16px;
   margin-right: 10px;
   text-decoration: line-through;
+}
+.product-item .prouduct-infor .product-price .price {
+  color: red;
 }
 .product-item .prouduct-infor .product-description {
   -webkit-line-clamp: 3;
