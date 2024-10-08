@@ -198,11 +198,14 @@ namespace HC_Pharma.Controllers
                           "<td style='text-align:center'>" + thanhtien.ToString("N0") + " đ</td>" +
                           "</tr>";
                 }
+                tongtien = tongtien + model.Order.ShipFee;
+                sb += "<tr><td colspan='5' style='text-align:right'><strong>Phí giao hàng: " + model.Order.ShipFee.ToString("N0") + " đ</strong></td></tr>";
                 sb += "<tr><td colspan='5' style='text-align:right'><strong>Tổng tiền: " + tongtien.ToString("N0") + " đ</strong></td></tr>";
                 sb += "</table>";
                 sb += "<p>Cảm ơn bạn đã tin tưởng và mua hàng của chúng tôi.</p>";
 
                 var orderId = DateTime.Now.ToString("yyMMddHHmmss");
+                //Task.Run(() => HtmlHelpers.SendEmail("gmail", "[" + model.Order.MaDonHang + "] Thông tin đơn hàng trên website 2cream", sb, ConfigSite.Email, Email, Email, Password, "kem2cream.com", model.Order.CustomerInfo.Email, ConfigSite.Email));
 
                 Task.Run(() => HtmlHelpers.SendEmail(Smtp, "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website " + Request.Url?.Host, sb, ConfigSite.Email, Email, Email, Password, "Đặt Hàng Online", model.Order.CustomerInfo.Email, port: SmtpPort));
 
